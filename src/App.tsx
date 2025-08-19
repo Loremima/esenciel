@@ -9,6 +9,7 @@ import ServiceDetailPage from './pages/ServiceDetailPage';
 import ProgramsPage from './pages/ProgramsPage';
 import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
+import InfosPratiquesPage from './pages/InfosPratiquesPage';
 import ScrollToTop from './components/ScrollToTop';
 import './styles/globals.css';
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/jeu-du-tao" element={<ServiceDetailPage service="tao" />} />
             <Route path="/programmes-mbsr-mbct" element={<ProgramsPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/infos-pratiques" element={<InfosPratiquesPage />} />
             <Route path="/contact-reservation" element={<ContactPage />} />
           </Routes>
         </main>

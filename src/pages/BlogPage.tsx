@@ -9,7 +9,7 @@ const BlogPage: React.FC = () => {
       title: 'Les bienfaits de la pleine conscience sur le stress',
       excerpt: 'Découvrez comment la pratique de la mindfulness peut transformer votre relation au stress au quotidien.',
       date: '15 Mars 2024',
-      author: 'Véronique Carrie',
+      author: 'Véronique Carrié',
       category: 'Pleine Conscience',
       image: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg',
       tags: ['mindfulness', 'stress', 'bien-être']
@@ -19,7 +19,7 @@ const BlogPage: React.FC = () => {
       title: 'Comment devenir acteur de sa santé ?',
       excerpt: 'Explorez les clés pour reprendre le contrôle de votre bien-être et développer votre autonomie en santé.',
       date: '8 Mars 2024',
-      author: 'Véronique Carrie',
+      author: 'Véronique Carrié',
       category: 'Santé',
       image: 'https://images.pexels.com/photos/3760259/pexels-photo-3760259.jpeg',
       tags: ['santé', 'autonomie', 'prévention']
@@ -29,7 +29,7 @@ const BlogPage: React.FC = () => {
       title: 'Le Jeu du Tao : explorer son potentiel par le jeu',
       excerpt: 'Une approche ludique du développement personnel qui révèle vos ressources cachées.',
       date: '1er Mars 2024',
-      author: 'Véronique Carrie',
+      author: 'Véronique Carrié',
       category: 'Développement Personnel',
       image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
       tags: ['créativité', 'jeu', 'potentiel']
@@ -39,7 +39,7 @@ const BlogPage: React.FC = () => {
       title: 'MBSR : 8 semaines pour transformer sa vie',
       excerpt: 'Retour d\'expérience sur les programmes MBSR et leurs effets durables sur le bien-être.',
       date: '22 Février 2024',
-      author: 'Véronique Carrie',
+      author: 'Véronique Carrié',
       category: 'MBSR',
       image: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg',
       tags: ['MBSR', 'programme', 'transformation']
@@ -49,7 +49,7 @@ const BlogPage: React.FC = () => {
       title: 'Neuroplasticité et méditation : ce que dit la science',
       excerpt: 'Les découvertes neuroscientifiques sur les effets de la méditation sur notre cerveau.',
       date: '14 Février 2024',
-      author: 'Véronique Carrie',
+      author: 'Véronique Carrié',
       category: 'Neurosciences',
       image: 'https://images.pexels.com/photos/3760627/pexels-photo-3760627.jpeg',
       tags: ['neurosciences', 'méditation', 'recherche']
@@ -59,7 +59,7 @@ const BlogPage: React.FC = () => {
       title: 'Cultiver la bienveillance envers soi-même',
       excerpt: 'Apprenez à développer une relation plus douce et compassionnelle avec vous-même.',
       date: '7 Février 2024',
-      author: 'Véronique Carrie',
+      author: 'Véronique Carrié',
       category: 'Bien-être',
       image: 'https://images.pexels.com/photos/3823495/pexels-photo-3823495.jpeg',
       tags: ['bienveillance', 'estime de soi', 'compassion']
@@ -69,21 +69,35 @@ const BlogPage: React.FC = () => {
   const categories = ['Tous', 'Pleine Conscience', 'Santé', 'Développement Personnel', 'MBSR', 'Neurosciences', 'Bien-être'];
   const [selectedCategory, setSelectedCategory] = React.useState('Tous');
 
-  const filteredPosts = selectedCategory === 'Tous' 
-    ? blogPosts 
+  const filteredPosts = selectedCategory === 'Tous'
+    ? blogPosts
     : blogPosts.filter(post => post.category === selectedCategory);
 
   return (
     <div className="blog-page">
-      {/* Hero Section */}
+      {/* Hero Section avec vidéo de fond */}
       <section className="hero-blog">
-        <div className="container">
-          <div className="hero-content">
-            <h1>Blog</h1>
-            <p className="hero-subtitle">
-              Conseils, réflexions et actualités autour du bien-être et de la pleine conscience
-            </p>
-          </div>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="hero-video"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            alt="Paysage serein - MindWayLife"
+          />
+        </video>
+
+        <div className="hero-overlay" aria-hidden="true"></div>
+
+        <div className="hero-content">
+          <h1>Blog</h1>
+          <p className="hero-subtitle">
+            Conseils, réflexions et actualités autour du bien-être et de la pleine conscience
+          </p>
         </div>
       </section>
 
@@ -114,7 +128,7 @@ const BlogPage: React.FC = () => {
                   <img src={post.image} alt={post.title} loading="lazy" />
                   <div className="article-category">{post.category}</div>
                 </div>
-                
+
                 <div className="article-content">
                   <div className="article-meta">
                     <div className="meta-item">
@@ -126,10 +140,10 @@ const BlogPage: React.FC = () => {
                       <span>{post.author}</span>
                     </div>
                   </div>
-                  
+
                   <h3 className="article-title">{post.title}</h3>
                   <p className="article-excerpt">{post.excerpt}</p>
-                  
+
                   <div className="article-tags">
                     {post.tags.map((tag) => (
                       <span key={tag} className="tag">
@@ -138,7 +152,7 @@ const BlogPage: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                  
+
                   <Link to={`/blog/${post.id}`} className="article-link">
                     Lire l'article
                     <ArrowRight size={16} />
@@ -150,57 +164,91 @@ const BlogPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="section newsletter-section">
-        <div className="container">
-          <div className="newsletter-card">
-            <h2>Restez informé(e)</h2>
-            <p>
-              Recevez mes derniers articles et conseils bien-être directement dans votre boîte mail
-            </p>
-            <form className="newsletter-form">
-              <input
-                type="email"
-                placeholder="Votre adresse email"
-                className="newsletter-input"
-                required
-              />
-              <button type="submit" className="btn btn-primary">
-                S'abonner
-              </button>
-            </form>
-            <p className="newsletter-note">
-              Pas de spam, désinscription à tout moment. Conformité RGPD garantie.
-            </p>
-          </div>
-        </div>
-      </section>
+
 
       <style jsx>{`
         .blog-page {
-          padding-top: 80px;
+          padding-top: 0;
         }
 
+        /* === HERO SECTION AVEC VIDÉO === */
         .hero-blog {
-          background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-          padding: var(--spacing-16) 0;
+          position: relative;
+          min-height: 100vh;
+          width: 100%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          z-index: -2;
+        }
+
+        .hero-video img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          );
+          z-index: -1;
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 2;
           text-align: center;
+          color: #fffcea;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 0 2rem;
         }
 
         .hero-content h1 {
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-4);
+          font-size: clamp(3rem, 8vw, 5rem);
+          line-height: 1.1;
+          color: #fffcea;
+          font-weight: 700;
+          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+          margin: 0 0 var(--spacing-6) 0;
         }
 
         .hero-subtitle {
-          font-size: 1.3rem;
-          color: var(--color-gray-600);
-          max-width: 600px;
+          font-size: clamp(1.2rem, 3vw, 1.6rem);
+          color: rgba(255, 252, 234, 0.9);
+          max-width: 700px;
           margin: 0 auto;
+          line-height: 1.6;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          letter-spacing: 0.025em;
+        }
+
+        /* Container défini dans globals.css */
+
+        .section {
+          padding: var(--spacing-16) 0;
         }
 
         .filters-section {
-          background: var(--color-white);
+          background: #fffcea;
           padding: var(--spacing-8) 0;
         }
 
@@ -230,7 +278,7 @@ const BlogPage: React.FC = () => {
         .filter-btn.active {
           background: var(--color-primary);
           border-color: var(--color-primary);
-          color: var(--color-white);
+          color: #fffcea;
         }
 
         .articles-section {
@@ -239,12 +287,12 @@ const BlogPage: React.FC = () => {
 
         .articles-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: var(--spacing-8);
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--spacing-6);
         }
 
         .article-card {
-          background: var(--color-white);
+          background: #fffcea;
           border-radius: var(--radius-xl);
           overflow: hidden;
           box-shadow: var(--shadow-md);
@@ -278,7 +326,7 @@ const BlogPage: React.FC = () => {
           top: var(--spacing-3);
           left: var(--spacing-3);
           background: var(--color-secondary);
-          color: var(--color-white);
+          color: #fffcea;
           padding: var(--spacing-1) var(--spacing-3);
           border-radius: var(--radius-md);
           font-size: 0.8rem;
@@ -348,69 +396,16 @@ const BlogPage: React.FC = () => {
           gap: var(--spacing-3);
         }
 
-        .newsletter-section {
-          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-          color: var(--color-white);
-        }
-
-        .newsletter-card {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: var(--radius-2xl);
-          padding: var(--spacing-10);
-          text-align: center;
-          backdrop-filter: blur(10px);
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .newsletter-card h2 {
-          color: var(--color-secondary);
-          margin-bottom: var(--spacing-4);
-        }
-
-        .newsletter-card p {
-          color: rgba(255, 255, 255, 0.9);
-          margin-bottom: var(--spacing-6);
-          font-size: 1.1rem;
-        }
-
-        .newsletter-form {
-          display: flex;
-          gap: var(--spacing-3);
-          margin-bottom: var(--spacing-4);
-        }
-
-        .newsletter-input {
-          flex: 1;
-          padding: var(--spacing-3);
-          border: none;
-          border-radius: var(--radius-lg);
-          font-size: 1rem;
-          background: var(--color-white);
-          color: var(--color-gray-800);
-        }
-
-        .newsletter-input:focus {
-          outline: 2px solid var(--color-secondary);
-        }
-
-        .newsletter-note {
-          font-size: 0.85rem;
-          color: rgba(255, 255, 255, 0.7);
-          margin: 0;
+        @media (max-width: 1024px) {
+          .articles-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-4);
+          }
         }
 
         @media (max-width: 768px) {
           .articles-grid {
             grid-template-columns: 1fr;
-          }
-
-          .newsletter-form {
-            flex-direction: column;
-          }
-
-          .newsletter-card {
-            padding: var(--spacing-6);
           }
 
           .filters {

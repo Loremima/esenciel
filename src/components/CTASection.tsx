@@ -10,10 +10,10 @@ const CTASection: React.FC = () => {
           <div className="cta-text">
             <h2>Prêt(e) à commencer votre transformation ?</h2>
             <p className="cta-description">
-              Prenez rendez-vous pour un premier entretien personnalisé. 
+              Prenez rendez-vous pour un premier entretien personnalisé.
               Ensemble, nous définirons l'accompagnement le plus adapté à vos besoins et objectifs.
             </p>
-            
+
             <div className="cta-features">
               <div className="cta-feature">
                 <Calendar className="feature-icon" />
@@ -31,14 +31,14 @@ const CTASection: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="cta-actions">
             <Link to="/contact-reservation" className="btn btn-primary cta-primary">
               Prendre rendez-vous
               <ArrowRight size={18} />
             </Link>
             <p className="cta-note">
-              Consultations en présentiel à Cransac-les-Thermes ou en distanciel
+              Consultations en présentiel à Vaureilles ou en distanciel
             </p>
           </div>
         </div>
@@ -46,21 +46,13 @@ const CTASection: React.FC = () => {
 
       <style jsx>{`
         .cta-section {
-          background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+          background: #fffcea;
           position: relative;
           overflow: hidden;
+          z-index: 1;
         }
 
-        .cta-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23556B2F' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
-          z-index: 0;
-        }
+        .cta-section::before { display: none; }
 
         .cta-content {
           position: relative;
@@ -74,6 +66,7 @@ const CTASection: React.FC = () => {
         .cta-text h2 {
           margin-bottom: var(--spacing-6);
           color: var(--color-primary);
+          font-size: clamp(2rem, 4vw, 2.5rem);
         }
 
         .cta-description {
@@ -102,7 +95,6 @@ const CTASection: React.FC = () => {
 
         .cta-feature:hover {
           box-shadow: var(--shadow-md);
-          transform: translateY(-2px);
         }
 
         .feature-icon {
@@ -140,7 +132,6 @@ const CTASection: React.FC = () => {
         }
 
         .cta-primary:hover {
-          transform: translateY(-4px);
           box-shadow: 0 25px 50px -12px rgba(85, 107, 47, 0.5);
         }
 

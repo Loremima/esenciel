@@ -13,7 +13,7 @@ const ProgramsPage: React.FC = () => {
       frequency: '1 séance / semaine',
       sessionDuration: '2h30 par séance',
       groupSize: '5 à 10 personnes',
-      price: '350€ le programme complet',
+      price: "Tarif communiqué lors de l'inscription",
       includes: [
         '8 séances de groupe de 2h30',
         'Journée de retraite en silence',
@@ -37,8 +37,8 @@ const ProgramsPage: React.FC = () => {
       duration: '8 semaines',
       frequency: '1 séance / semaine',
       sessionDuration: '2h par séance',
-      groupSize: '5 à 8 personnes',
-      price: '380€ le programme complet',
+      groupSize: '5 à 10 personnes',
+      price: "Tarif communiqué lors de l'inscription",
       includes: [
         '8 séances de groupe de 2h',
         'Exercices de thérapie cognitive',
@@ -68,8 +68,8 @@ const ProgramsPage: React.FC = () => {
                 Programmes de 8 semaines basés sur la pleine conscience, scientifiquement validés
               </p>
               <p className="hero-description">
-                Développés dans les universités américaines, ces programmes ont fait leurs preuves 
-                dans l'amélioration du bien-être et la gestion du stress. Je suis instructrice certifiée 
+                Développés dans les universités américaines, ces programmes ont fait leurs preuves
+                dans l'amélioration du bien-être et la gestion du stress. Je suis instructrice certifiée
                 pour vous accompagner dans cette transformation en profondeur.
               </p>
             </div>
@@ -184,14 +184,14 @@ const ProgramsPage: React.FC = () => {
             <div className="info-card">
               <h3>Modalités pratiques</h3>
               <ul className="info-list">
-                <li>Sessions en présentiel à Cransac-les-Thermes</li>
+                <li>Sessions en présentiel à Vaureilles</li>
                 <li>Possibilité de sessions en distanciel</li>
                 <li>Groupes limités pour un suivi optimal</li>
                 <li>Matériel et supports fournis</li>
                 <li>Accompagnement entre les séances</li>
               </ul>
             </div>
-            
+
             <div className="info-card">
               <h3>À qui s'adressent ces programmes ?</h3>
               <ul className="info-list">
@@ -212,7 +212,7 @@ const ProgramsPage: React.FC = () => {
           <div className="cta-content">
             <h2>Prochaines sessions</h2>
             <p>
-              Les programmes MBSR et MBCT démarrent plusieurs fois par an. 
+              Les programmes MBSR et MBCT démarrent plusieurs fois par an.
               Contactez-moi pour connaître les prochaines dates disponibles.
             </p>
             <Link to="/contact-reservation" className="btn btn-secondary">
@@ -231,7 +231,7 @@ const ProgramsPage: React.FC = () => {
         .hero-programs {
           background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
           color: var(--color-white);
-          padding: var(--spacing-16) 0;
+          padding: var(--spacing-20) 0;
         }
 
         .hero-content {
@@ -243,19 +243,23 @@ const ProgramsPage: React.FC = () => {
 
         .hero-text h1 {
           color: var(--color-secondary);
-          margin-bottom: var(--spacing-4);
+          margin-bottom: var(--spacing-6);
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-weight: 700;
         }
 
         .hero-subtitle {
-          font-size: 1.4rem;
+          font-size: clamp(1.2rem, 2.5vw, 1.8rem);
           color: rgba(255, 255, 255, 0.9);
-          margin-bottom: var(--spacing-4);
+          margin-bottom: var(--spacing-6);
+          line-height: 1.5;
         }
 
         .hero-description {
-          font-size: 1.1rem;
+          font-size: clamp(1rem, 2vw, 1.1rem);
           line-height: 1.6;
           color: rgba(255, 255, 255, 0.8);
+          max-width: 800px;
         }
 
         .hero-stats {

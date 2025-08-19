@@ -1,156 +1,119 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Logo from './Logo';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const location = useLocation();
+
+  const navLinks = [
+    { path: '/qui-suis-je', label: 'Qui suis-je' },
+    {
+      label: 'Services',
+      submenu: [
+        { path: '/services', label: 'Tous les services' },
+        { path: '/services#individuels', label: 'Accompagnements individuels' },
+        { path: '/services#groupes', label: 'Accompagnements groupe' },
+        { path: '/services#programmes', label: 'Programmes MBSR/MBCT' },
+        { path: '/services#autres', label: 'Autres formats' },
+      ]
+    },
+    { path: '/blog', label: 'Blog' },
+    { path: '/infos-pratiques', label: 'Infos pratiques' },
+    { path: '/contact-reservation', label: 'Contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
-    setIsServicesOpen(false);
+    setOpenSubmenu(null);
   }, [location]);
 
-  const navItems = [
-    { path: '/', label: 'Accueil' },
-    { path: '/qui-suis-je', label: 'Qui suis-je' },
-    {
-      label: 'Services',
-      submenu: [
-        { path: '/services', label: 'Tous les services' },
-        { path: '/sante-qualite-vie', label: 'Santé & Qualité de Vie' },
-        { path: '/pleine-conscience', label: 'Pleine Conscience' },
-        { path: '/jeu-du-tao', label: 'Jeu du Tao' },
-      ]
-    },
-    { path: '/programmes-mbsr-mbct', label: 'Programmes MBSR/MBCT' },
-    { path: '/blog', label: 'Blog' },
-    { path: '/contact-reservation', label: 'Contact & Réservation' },
-  ];
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
-        <div className="header-content">
-          <Link to="/" className="logo-link" aria-label="Retour à l'accueil">
-            <Logo />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="desktop-nav" aria-label="Navigation principale">
-            <ul className="nav-list">
-              {navItems.map((item, index) => (
-                <li key={index} className="nav-item">
-                  {item.submenu ? (
-                    <div 
-                      className="nav-dropdown"
-                      onMouseEnter={() => setIsServicesOpen(true)}
-                      onMouseLeave={() => setIsServicesOpen(false)}
-                    >
-                      <button 
-                        className="nav-link dropdown-trigger"
-                        aria-expanded={isServicesOpen}
-                        aria-haspopup="true"
-                      >
-                        {item.label}
-                        <ChevronDown size={16} />
-                      </button>
-                      {isServicesOpen && (
-                        <ul className="dropdown-menu">
-                          {item.submenu.map((subItem, subIndex) => (
-                            <li key={subIndex}>
-                              <Link
-                                to={subItem.path}
-                                className={`dropdown-link ${location.pathname === subItem.path ? 'active' : ''}`}
-                              >
-                                {subItem.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ) : (
-                    <Link
-                      to={item.path}
-                      className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
-                    >
-                      {item.label}
+        <Link to="/" className="logo-link">
+          <Logo variant="navbar" />
+        </Link>
+        <nav className="desktop-nav">
+          {navLinks.map((link, index) => (
+            <div
+              key={index}
+              className="nav-item"
+              onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
+              onMouseLeave={() => link.submenu && setOpenSubmenu(null)}
+            >
+              {link.submenu ? (
+                <NavLink to="/services" className="nav-link with-submenu">
+                  <span>{link.label}</span>
+                  <ChevronDown size={16} />
+                </NavLink>
+              ) : (
+                <NavLink to={link.path!} className="nav-link">
+                  {link.label}
+                </NavLink>
+              )}
+              {link.submenu && openSubmenu === link.label && (
+                <div className="submenu">
+                  {link.submenu.map((sublink, subIndex) => (
+                    <Link key={subIndex} to={sublink.path} className="submenu-link">
+                      {sublink.label}
                     </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Mobile menu button */}
-          <button
-            className="mobile-menu-btn"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Ouvrir le menu de navigation"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <nav className="mobile-nav" aria-label="Navigation mobile">
-            <ul className="mobile-nav-list">
-              {navItems.map((item, index) => (
-                <li key={index} className="mobile-nav-item">
-                  {item.submenu ? (
-                    <>
-                      <button
-                        className="mobile-nav-link dropdown-trigger"
-                        onClick={() => setIsServicesOpen(!isServicesOpen)}
-                        aria-expanded={isServicesOpen}
-                      >
-                        {item.label}
-                        <ChevronDown size={16} />
-                      </button>
-                      {isServicesOpen && (
-                        <ul className="mobile-dropdown">
-                          {item.submenu.map((subItem, subIndex) => (
-                            <li key={subIndex}>
-                              <Link
-                                to={subItem.path}
-                                className={`mobile-dropdown-link ${location.pathname === subItem.path ? 'active' : ''}`}
-                              >
-                                {subItem.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      to={item.path}
-                      className={`mobile-nav-link ${location.pathname === item.path ? 'active' : ''}`}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+        <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+          {isMenuOpen ? <X /> : <Menu />}
+        </button>
       </div>
+
+      {isMenuOpen && (
+        <nav className="mobile-nav">
+          {navLinks.map((link, index) => (
+            <div key={index} className="mobile-nav-item">
+              {link.submenu ? (
+                <>
+                  <div
+                    className="mobile-nav-link with-submenu"
+                    onClick={() => setOpenSubmenu(openSubmenu === link.label ? null : link.label)}
+                  >
+                    <span>{link.label}</span>
+                    <ChevronDown size={16} className={openSubmenu === link.label ? 'open' : ''} />
+                  </div>
+                  {openSubmenu === link.label && (
+                    <div className="mobile-submenu">
+                      {link.submenu.map((sublink, subIndex) => (
+                        <Link key={subIndex} to={sublink.path} className="mobile-submenu-link">
+                          {sublink.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <NavLink to={link.path!} className="mobile-nav-link">
+                  {link.label}
+                </NavLink>
+              )}
+            </div>
+          ))}
+        </nav>
+      )}
 
       <style jsx>{`
         .header {
@@ -159,37 +122,29 @@ const Header: React.FC = () => {
           left: 0;
           right: 0;
           z-index: 1000;
-          background: rgba(245, 245, 220, 0.95);
-          backdrop-filter: blur(10px);
-          border-bottom: 1px solid rgba(85, 107, 47, 0.1);
-          transition: all var(--transition-normal);
+          background: #fffcea;
+          transition: all 0.3s ease;
+          padding: 1.25rem 0;
         }
 
         .header.scrolled {
-          background: rgba(245, 245, 220, 0.98);
-          box-shadow: var(--shadow-md);
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+          padding: 1rem 0;
         }
 
-        .header-content {
+        .container {
           display: flex;
-          align-items: center;
           justify-content: space-between;
-          padding: var(--spacing-4) 0;
-        }
-
-        .logo-link {
-          text-decoration: none;
+          align-items: center;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 var(--spacing-6);
         }
 
         .desktop-nav {
-          display: none;
-        }
-
-        .nav-list {
           display: flex;
-          list-style: none;
-          gap: var(--spacing-8);
           align-items: center;
+          gap: var(--spacing-8);
         }
 
         .nav-item {
@@ -197,142 +152,145 @@ const Header: React.FC = () => {
         }
 
         .nav-link {
+          color: var(--color-gray-700);
           text-decoration: none;
-          color: var(--color-primary);
           font-weight: 500;
-          padding: var(--spacing-2) var(--spacing-3);
-          border-radius: var(--radius-md);
-          transition: all var(--transition-normal);
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-1);
+          font-size: 0.95rem;
+          padding: 0.5rem 0;
+          position: relative;
+          transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--color-primary);
+          transition: width 0.3s ease;
         }
 
         .nav-link:hover,
         .nav-link.active {
-          color: var(--color-secondary);
-          background: rgba(218, 165, 32, 0.1);
-        }
-
-        .dropdown-trigger {
-          background: none;
-          border: none;
-          cursor: pointer;
-          font-family: var(--font-body);
-          font-size: 1rem;
-        }
-
-        .nav-dropdown {
-          position: relative;
-        }
-
-        .dropdown-menu {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          background: var(--color-white);
-          border-radius: var(--radius-lg);
-          box-shadow: var(--shadow-xl);
-          padding: var(--spacing-2);
-          min-width: 220px;
-          list-style: none;
-          z-index: 100;
-          animation: fadeInUp 0.2s ease-out;
-        }
-
-        .dropdown-link {
-          display: block;
-          padding: var(--spacing-3) var(--spacing-4);
-          color: var(--color-gray-700);
-          text-decoration: none;
-          border-radius: var(--radius-md);
-          transition: all var(--transition-fast);
-        }
-
-        .dropdown-link:hover,
-        .dropdown-link.active {
-          background: var(--color-accent);
           color: var(--color-primary);
         }
-
-        .mobile-menu-btn {
-          background: none;
-          border: none;
-          color: var(--color-primary);
-          cursor: pointer;
-          padding: var(--spacing-2);
-          border-radius: var(--radius-md);
-          transition: all var(--transition-fast);
+        
+        .nav-link.active::after,
+        .nav-link:hover::after {
+          width: 100%;
         }
 
-        .mobile-menu-btn:hover {
-          background: rgba(85, 107, 47, 0.1);
-        }
-
-        .mobile-nav {
-          background: var(--color-white);
-          border-radius: var(--radius-xl);
-          margin-top: var(--spacing-4);
-          box-shadow: var(--shadow-lg);
-          animation: fadeInUp 0.3s ease-out;
-        }
-
-        .mobile-nav-list {
-          list-style: none;
-          padding: var(--spacing-4);
-        }
-
-        .mobile-nav-item {
-          border-bottom: 1px solid var(--color-gray-100);
-        }
-
-        .mobile-nav-item:last-child {
-          border-bottom: none;
-        }
-
-        .mobile-nav-link {
+        .with-submenu {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding: var(--spacing-4) 0;
-          text-decoration: none;
-          color: var(--color-gray-700);
-          font-weight: 500;
-          transition: color var(--transition-fast);
+          gap: 0.25rem;
+          cursor: pointer;
         }
 
-        .mobile-nav-link:hover,
-        .mobile-nav-link.active {
+        .submenu {
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #fffcea;
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-lg);
+          padding: var(--spacing-2);
+          margin-top: var(--spacing-4);
+          min-width: 220px;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          pointer-events: none;
+        }
+        
+        .nav-item:hover .submenu {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translate(-50%, -10px); }
+          to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        .submenu-link {
+          display: block;
+          padding: 0.75rem 1rem;
+          color: var(--color-gray-700);
+          text-decoration: none;
+          border-radius: var(--radius-md);
+          transition: all 0.2s ease;
+        }
+
+        .submenu-link:hover {
+          background: var(--color-gray-100);
           color: var(--color-primary);
         }
 
-        .mobile-dropdown {
-          list-style: none;
-          padding-left: var(--spacing-4);
-          margin-top: var(--spacing-2);
-        }
+        .mobile-menu-toggle { display: none; }
+        .mobile-nav { display: none; }
 
-        .mobile-dropdown-link {
-          display: block;
-          padding: var(--spacing-2) 0;
-          color: var(--color-gray-600);
-          text-decoration: none;
-          font-size: 0.9rem;
-          transition: color var(--transition-fast);
-        }
-
-        .mobile-dropdown-link:hover,
-        .mobile-dropdown-link.active {
-          color: var(--color-secondary);
-        }
-
-        @media (min-width: 1024px) {
-          .desktop-nav {
+        @media (max-width: 768px) {
+          .desktop-nav { display: none; }
+          .mobile-menu-toggle {
             display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-primary);
           }
 
-          .mobile-menu-btn {
-            display: none;
+          .mobile-nav {
+            display: block;
+            background: #fffcea;
+            padding: var(--spacing-4) var(--spacing-6);
+            border-top: 1px solid var(--color-gray-200);
+          }
+
+          .mobile-nav-item {
+            border-bottom: 1px solid var(--color-gray-200);
+          }
+          
+          .mobile-nav-item:last-child {
+            border-bottom: none;
+          }
+
+          .mobile-nav-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: var(--color-gray-700);
+            font-weight: 500;
+          }
+          
+          .mobile-nav-link.active {
+            color: var(--color-primary);
+          }
+
+          .mobile-submenu {
+            padding-left: 1rem;
+            padding-bottom: 0.5rem;
+          }
+
+          .mobile-submenu-link {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--color-gray-600);
+            text-decoration: none;
+          }
+
+          .with-submenu .chevron {
+            transition: transform 0.3s ease;
+          }
+          
+          .with-submenu .chevron.open {
+            transform: rotate(180deg);
           }
         }
       `}</style>

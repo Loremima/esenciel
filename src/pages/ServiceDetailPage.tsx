@@ -38,9 +38,9 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
         'Autonomie dans la gestion de votre bien-être'
       ],
       duration: '1h à 1h30 par séance',
-      price: 'À partir de 80€',
+      price: 'Sur devis',
       frequency: 'Selon vos besoins',
-      modalities: ['Cabinet à Cransac-les-Thermes', 'Visioconférence']
+      modalities: ['Cabinet à Vaureilles', 'Visioconférence']
     },
     mindfulness: {
       icon: Brain,
@@ -71,7 +71,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
         'Développement de la compassion envers soi'
       ],
       duration: '45min à 1h par séance',
-      price: 'À partir de 60€',
+      price: 'Sur devis',
       frequency: 'Hebdomadaire puis adaptée',
       modalities: ['Séances individuelles', 'Groupes', 'En ligne']
     },
@@ -106,7 +106,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
       duration: '4 heures (avec pause)',
       price: '60€ par personne',
       frequency: 'Séances ponctuelles',
-      modalities: ['Groupe de 3 à 8 personnes', 'Présentiel uniquement']
+      modalities: ['Groupe de 4 à 5 personnes', 'Minimum 3 participants', 'Présentiel uniquement']
     }
   };
 
@@ -177,7 +177,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
             <aside className="sidebar">
               <div className="info-card">
                 <h3>Informations pratiques</h3>
-                
+
                 <div className="info-item">
                   <Clock size={20} />
                   <div>
@@ -207,7 +207,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
                     Prendre rendez-vous
                     <ArrowRight size={16} />
                   </Link>
-                  <a href="tel:+33XXXXXXXXX" className="btn btn-outline">
+                  <a href="tel:+336 25 13 72 50" className="btn btn-outline">
                     <Phone size={16} />
                     Appeler
                   </a>
@@ -279,8 +279,8 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
           bottom: 0;
           background: linear-gradient(
             135deg,
-            rgba(85, 107, 47, 0.8) 0%,
-            rgba(85, 107, 47, 0.6) 100%
+            rgba(44, 62, 80, 0.9) 0%,
+            rgba(26, 43, 60, 0.8) 100%
           );
           z-index: -1;
         }
@@ -306,20 +306,23 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
 
         .hero-text h1 {
           color: var(--color-secondary);
-          margin-bottom: var(--spacing-3);
+          margin-bottom: var(--spacing-6);
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-weight: 700;
         }
 
         .hero-subtitle {
-          font-size: 1.4rem;
+          font-size: clamp(1.2rem, 2.5vw, 1.6rem);
           color: rgba(255, 255, 255, 0.9);
-          margin-bottom: var(--spacing-4);
+          margin-bottom: var(--spacing-6);
+          line-height: 1.5;
         }
 
         .hero-description {
-          font-size: 1.2rem;
+          font-size: clamp(1rem, 2vw, 1.1rem);
           line-height: 1.6;
           color: rgba(255, 255, 255, 0.8);
-          margin-bottom: var(--spacing-6);
+          margin-bottom: var(--spacing-8);
         }
 
         .service-content {

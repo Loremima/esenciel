@@ -1,44 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Brain, Sparkles, ArrowRight, Clock, Users, Euro } from 'lucide-react';
+import { Heart, Brain, Sparkles, ArrowRight, Users } from 'lucide-react';
 
 const ServicesPreview: React.FC = () => {
   const services = [
     {
-      id: 'sante',
+      id: 'individuels',
       icon: Heart,
-      title: 'Santé & Qualité de Vie',
-      description: 'Accompagnement personnalisé pour devenir acteur de votre santé. Approche intégrative corps-esprit.',
-      features: ['Bilan de santé global', 'Plan personnalisé', 'Suivi régulier'],
-      link: '/sante-qualite-vie',
-      color: 'primary'
+      title: 'Accompagnements individuels',
+      description: 'Un suivi personnalisé pour explorer vos besoins, renforcer votre équilibre et devenir acteur de votre santé.',
+      link: '/services#individuels',
     },
     {
-      id: 'mindfulness',
+      id: 'groupes',
+      icon: Users,
+      title: 'Accompagnements de groupe',
+      description: 'Des expériences collectives enrichissantes pour grandir ensemble, partager et apprendre dans un cadre bienveillant.',
+      link: '/services#groupes',
+    },
+    {
+      id: 'programmes',
       icon: Brain,
-      title: 'Pleine Conscience',
-      description: 'Développez votre présence et votre écoute intérieure grâce aux techniques de mindfulness.',
-      features: ['Méditation guidée', 'Techniques MBSR', 'Gestion du stress'],
-      link: '/pleine-conscience',
-      color: 'secondary'
+      title: 'Programmes MBSR / MBCT',
+      description: 'Des protocoles structurés basés sur la pleine conscience pour la réduction du stress et la prévention de la rechute dépressive.',
+      link: '/services#programmes',
     },
     {
-      id: 'tao',
+      id: 'autres',
       icon: Sparkles,
-      title: 'Jeu du Tao',
-      description: 'Séances de groupe pour explorer votre potentiel à travers une approche ludique et introspective.',
-      features: ['4h en groupe', '60€/personne', 'Min 3 participants'],
-      link: '/jeu-du-tao',
-      color: 'accent',
-      price: '60€',
-      duration: '4h',
-      groupSize: '3-8 personnes'
+      title: 'Autres formats',
+      description: 'Ateliers thématiques, retraites et interventions sur mesure pour explorer la pleine conscience sous différents angles.',
+      link: '/services#autres',
     }
   ];
 
   return (
     <section className="section services-preview">
-      <div className="container">
+      <div className="container section-inner">
         <div className="section-header">
           <h2>Mes Services</h2>
           <p className="section-subtitle">
@@ -50,44 +48,18 @@ const ServicesPreview: React.FC = () => {
           {services.map((service) => {
             const IconComponent = service.icon;
             return (
-              <div key={service.id} className={`service-card ${service.color}`}>
+              <div key={service.id} className="service-card">
                 <div className="service-header">
                   <div className="service-icon">
-                    <IconComponent size={32} />
+                    <IconComponent size={28} />
                   </div>
                   <h3>{service.title}</h3>
                 </div>
-                
-                <p className="service-description">{service.description}</p>
-                
-                <ul className="service-features">
-                  {service.features.map((feature, index) => (
-                    <li key={index} className="feature-item">
-                      <span className="feature-bullet"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
 
-                {service.price && (
-                  <div className="service-details">
-                    <div className="detail-item">
-                      <Euro size={16} />
-                      <span>{service.price}</span>
-                    </div>
-                    <div className="detail-item">
-                      <Clock size={16} />
-                      <span>{service.duration}</span>
-                    </div>
-                    <div className="detail-item">
-                      <Users size={16} />
-                      <span>{service.groupSize}</span>
-                    </div>
-                  </div>
-                )}
-                
+                <p className="service-description">{service.description}</p>
+
                 <Link to={service.link} className="service-link">
-                  En savoir plus
+                  Découvrir
                   <ArrowRight size={16} />
                 </Link>
               </div>
@@ -105,7 +77,13 @@ const ServicesPreview: React.FC = () => {
 
       <style jsx>{`
         .services-preview {
-          background: linear-gradient(135deg, var(--color-white) 0%, var(--color-gray-50) 100%);
+          background: transparent;
+        }
+
+        .section-inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .section-header {
@@ -115,58 +93,52 @@ const ServicesPreview: React.FC = () => {
 
         .section-header h2 {
           margin-bottom: var(--spacing-4);
+          font-size: clamp(2rem, 4vw, 2.5rem);
+          letter-spacing: -0.01em;
+          color: var(--color-white);
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .section-subtitle {
           font-size: 1.2rem;
-          color: var(--color-gray-600);
+          color: rgba(255, 255, 255, 0.9);
           max-width: 600px;
           margin: 0 auto;
+          text-shadow: 0 1px 5px rgba(0,0,0,0.3);
         }
 
         .services-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: var(--spacing-8);
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-6);
           margin-bottom: var(--spacing-12);
+          max-width: 900px;
+          margin: 0 auto;
+          justify-items: center;
         }
 
         .service-card {
-          background: var(--color-white);
-          border-radius: var(--radius-2xl);
-          padding: var(--spacing-8);
-          box-shadow: var(--shadow-lg);
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(12px);
+          border-radius: var(--radius-xl);
+          padding: var(--spacing-6);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
           transition: all var(--transition-normal);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .service-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-        }
-
-        .service-card.secondary::before {
-          background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
-        }
-
-        .service-card.accent::before {
-          background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          max-width: 350px;
         }
 
         .service-card:hover {
-          transform: translateY(-8px);
-          box-shadow: var(--shadow-xl);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
         }
 
         .service-header {
           display: flex;
+          flex-direction: column;
           align-items: center;
+          text-align: center;
           gap: var(--spacing-4);
           margin-bottom: var(--spacing-6);
         }
@@ -174,74 +146,33 @@ const ServicesPreview: React.FC = () => {
         .service-icon {
           width: 60px;
           height: 60px;
-          border-radius: var(--radius-xl);
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(85, 107, 47, 0.1);
-          color: var(--color-primary);
+          background: var(--color-primary);
+          color: var(--color-white);
           flex-shrink: 0;
-        }
-
-        .secondary .service-icon {
-          background: rgba(218, 165, 32, 0.1);
-          color: var(--color-secondary);
         }
 
         .service-header h3 {
           margin: 0;
           flex: 1;
+          font-size: 1.25rem;
         }
 
         .service-description {
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-6);
           line-height: 1.6;
-        }
-
-        .service-features {
-          list-style: none;
-          margin-bottom: var(--spacing-6);
-        }
-
-        .feature-item {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-3);
-          padding: var(--spacing-2) 0;
-          color: var(--color-gray-700);
-        }
-
-        .feature-bullet {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: var(--color-secondary);
-          flex-shrink: 0;
-        }
-
-        .service-details {
-          display: flex;
-          justify-content: space-between;
-          gap: var(--spacing-2);
-          margin-bottom: var(--spacing-6);
-          padding: var(--spacing-4);
-          background: rgba(85, 107, 47, 0.05);
-          border-radius: var(--radius-lg);
-        }
-
-        .detail-item {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-1);
-          font-size: 0.9rem;
-          color: var(--color-gray-600);
-          font-weight: 500;
+          text-align: center;
+          flex-grow: 1;
         }
 
         .service-link {
           display: inline-flex;
           align-items: center;
+          justify-content: center;
           gap: var(--spacing-2);
           color: var(--color-primary);
           text-decoration: none;
@@ -250,29 +181,37 @@ const ServicesPreview: React.FC = () => {
           border-radius: var(--radius-lg);
           background: rgba(85, 107, 47, 0.1);
           transition: all var(--transition-normal);
+          margin-top: auto;
         }
 
         .service-link:hover {
           background: var(--color-primary);
           color: var(--color-white);
-          transform: translateX(4px);
         }
 
         .section-cta {
           text-align: center;
+          width: 100%;
+          margin-top: var(--spacing-8);
+        }
+        
+        .section-cta .btn {
+          background: rgba(255, 255, 255, 0.95);
+          color: var(--color-primary);
+          border: 1px solid transparent;
+          font-weight: 600;
+          padding: 1rem 2.5rem;
+          border-radius: 8px;
+          backdrop-filter: blur(10px);
+          transition: all 0.3s ease;
+        }
+        
+        .section-cta .btn:hover {
+          background: var(--color-white);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 768px) {
-          .hero-content {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
-            text-align: center;
-          }
-
-          .hero-visual {
-            order: -1;
-          }
-
           .services-grid {
             grid-template-columns: 1fr;
             gap: var(--spacing-6);
@@ -280,15 +219,6 @@ const ServicesPreview: React.FC = () => {
 
           .service-card {
             padding: var(--spacing-6);
-          }
-
-          .service-details {
-            flex-direction: column;
-            gap: var(--spacing-2);
-          }
-
-          .detail-item {
-            justify-content: center;
           }
         }
       `}</style>

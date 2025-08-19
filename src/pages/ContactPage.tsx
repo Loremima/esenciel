@@ -25,24 +25,59 @@ const ContactPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Ici, on traiterait l'envoi du formulaire
     console.log('Données du formulaire:', formData);
     setIsSubmitted(true);
   };
 
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: 'Adresse',
+      content: 'Cabinet de consultation\nVaureilles\n12110 Aveyron'
+    },
+    {
+      icon: Phone,
+      title: 'Téléphone',
+      content: '06 25 13 72 50'
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      content: 'veroniquecarrie27@gmail.com'
+    },
+    {
+      icon: Clock,
+      title: 'Horaires',
+      content: 'Lundi - Vendredi: 9h - 18h\nSur rendez-vous'
+    }
+  ];
+
+  const consultationTypes = [
+    {
+      icon: Calendar,
+      title: 'Présentiel',
+      description: 'Consultations au cabinet à Vaureilles dans un cadre chaleureux et confidentiel'
+    },
+    {
+      icon: Mail,
+      title: 'Distanciel',
+      description: 'Séances par visioconférence sécurisée depuis le confort de votre domicile'
+    }
+  ];
+
   if (isSubmitted) {
     return (
       <div className="contact-page">
-        <section className="section success-section">
+        <section className="success-section">
           <div className="container">
             <div className="success-card">
               <CheckCircle size={60} className="success-icon" />
               <h1>Merci pour votre message !</h1>
               <p>
-                Votre demande a bien été envoyée. Je vous recontacterai dans les plus brefs délais 
+                Votre demande a bien été envoyée. Je vous recontacterai dans les plus brefs délais
                 pour planifier notre première rencontre.
               </p>
-              <button 
+              <button
                 className="btn btn-primary"
                 onClick={() => setIsSubmitted(false)}
               >
@@ -58,28 +93,67 @@ const ContactPage: React.FC = () => {
   return (
     <div className="contact-page">
       {/* Hero Section */}
-      <section className="hero-contact">
-        <div className="container">
-          <div className="hero-content">
-            <h1>Contact & Réservation</h1>
-            <p className="hero-subtitle">
-              Prenons le temps d'échanger sur vos besoins et objectifs
-            </p>
-          </div>
+      <section className="hero-section">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="hero-video"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            alt="Paysage serein - MindWayLife"
+          />
+        </video>
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <h1>Contact</h1>
+          <p className="hero-subtitle">
+            Prenons le temps d'échanger sur vos besoins et objectifs
+          </p>
         </div>
       </section>
 
-      {/* Contenu principal */}
-      <section className="section contact-content">
-        <div className="container">
-          <div className="content-grid">
-            {/* Formulaire */}
-            <div className="form-section">
-              <h2>Prendre rendez-vous</h2>
-              <p className="form-intro">
-                Remplissez ce formulaire pour me faire part de votre demande. 
-                Je vous recontacterai rapidement pour planifier notre première rencontre.
-              </p>
+      {/* Main Content */}
+      <main className="main-content">
+        {/* Contact Information */}
+        <section className="contact-info-section">
+          <div className="container">
+            <div className="section-header">
+              <h1>Informations de contact</h1>
+            </div>
+            <div className="contact-grid">
+              {contactInfo.map((info, index) => {
+                const IconComponent = info.icon;
+                return (
+                  <div key={index} className="contact-item">
+                    <IconComponent size={24} />
+                    <div>
+                      <h2>{info.title}</h2>
+                      <p>{info.content.split('\n').map((line, i) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          {i < info.content.split('\n').length - 1 && <br />}
+                        </React.Fragment>
+                      ))}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form */}
+        <section className="form-section">
+          <div className="container">
+            <div className="section-header">
+              <h1>Prendre rendez-vous</h1>
+              <p>Remplissez ce formulaire pour me faire part de votre demande. Je vous recontacterai rapidement pour planifier notre première rencontre.</p>
+            </div>
+            <div className="form-wrapper">
 
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-row">
@@ -182,7 +256,7 @@ const ContactPage: React.FC = () => {
                   ></textarea>
                 </div>
 
-                <div className="form-group consent">
+                <div className="form-group consent-group">
                   <label className="consent-label">
                     <input
                       type="checkbox"
@@ -203,115 +277,222 @@ const ContactPage: React.FC = () => {
                 </button>
               </form>
             </div>
+          </div>
+        </section>
 
-            {/* Informations de contact */}
-            <div className="info-section">
-              <div className="contact-info">
-                <h3>Informations de contact</h3>
-                
-                <div className="contact-item">
-                  <MapPin size={24} />
-                  <div>
-                    <h4>Adresse</h4>
-                    <p>Cabinet de consultation<br />Cransac-les-Thermes<br />12110 Aveyron</p>
+        {/* Consultation Types */}
+        <section className="consultation-section">
+          <div className="container">
+            <div className="section-header">
+              <h1>Types de consultation</h1>
+            </div>
+            <div className="consultation-grid">
+              {consultationTypes.map((type, index) => {
+                const IconComponent = type.icon;
+                return (
+                  <div key={index} className="consultation-card">
+                    <IconComponent size={32} />
+                    <h2>{type.title}</h2>
+                    <p>{type.description}</p>
                   </div>
-                </div>
-
-                <div className="contact-item">
-                  <Phone size={24} />
-                  <div>
-                    <h4>Téléphone</h4>
-                    <p>06 XX XX XX XX</p>
-                  </div>
-                </div>
-
-                <div className="contact-item">
-                  <Mail size={24} />
-                  <div>
-                    <h4>Email</h4>
-                    <p>contact@veronique-carrie.fr</p>
-                  </div>
-                </div>
-
-                <div className="contact-item">
-                  <Clock size={24} />
-                  <div>
-                    <h4>Horaires</h4>
-                    <p>Lundi - Vendredi: 9h - 18h<br />Sur rendez-vous</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="consultation-info">
-                <h3>Types de consultation</h3>
-                <div className="consultation-types">
-                  <div className="consultation-type">
-                    <h4>Présentiel</h4>
-                    <p>Au cabinet à Cransac-les-Thermes</p>
-                  </div>
-                  <div className="consultation-type">
-                    <h4>Distanciel</h4>
-                    <p>Par visioconférence sécurisée</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="urgency-info">
-                <h4>En cas d'urgence</h4>
-                <p>
-                  Pour toute situation d'urgence psychologique, contactez le 
-                  <strong> 3114</strong> (numéro national de prévention du suicide) 
-                  ou rendez-vous aux urgences de votre hôpital le plus proche.
-                </p>
-              </div>
+                );
+              })}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <style jsx>{`
+        {/* Emergency Information */}
+        <section className="urgency-section">
+          <div className="container">
+            <div className="section-header">
+              <h1>En cas d'urgence</h1>
+            </div>
+            <div className="urgency-card">
+              <p>
+                Pour toute situation d'urgence psychologique, contactez le
+                <strong> 3114</strong> (numéro national de prévention du suicide)
+                ou rendez-vous aux urgences de votre hôpital le plus proche.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <style>{`
         .contact-page {
-          padding-top: 80px;
+          padding-top: 0;
         }
 
-        .hero-contact {
-          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-          color: var(--color-white);
-          padding: var(--spacing-16) 0;
+        /* === HERO SECTION === */
+        .hero-section {
+          position: relative;
+          min-height: 100vh;
+          width: 100%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          z-index: 1;
+        }
+
+        .hero-video img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          );
+          z-index: 2;
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 3;
           text-align: center;
+          color: #fffcea;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 0 2rem;
         }
 
         .hero-content h1 {
-          color: var(--color-secondary);
-          margin-bottom: var(--spacing-4);
+          font-size: clamp(3rem, 8vw, 5rem);
+          line-height: 1.1;
+          color: #fffcea;
+          font-weight: 700;
+          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+          margin: 0 0 var(--spacing-6) 0;
         }
 
         .hero-subtitle {
-          font-size: 1.3rem;
-          color: rgba(255, 255, 255, 0.9);
-          max-width: 500px;
+          font-size: clamp(1.2rem, 3vw, 1.6rem);
+          color: rgba(255, 252, 234, 0.9);
+          max-width: 700px;
+          margin: 0 auto;
+          line-height: 1.6;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          letter-spacing: 0.025em;
+        }
+
+        /* === MAIN CONTENT === */
+        .main-content {
+          background: #fffcea;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        /* === SECTION HEADERS === */
+        .section-header {
+          text-align: center;
+          margin-bottom: var(--spacing-8);
+          width: 100%;
+          display: block;
+        }
+
+        .section-header h1 {
+          font-size: clamp(2rem, 4vw, 2.5rem);
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+        }
+
+        .section-header p {
+          font-size: 1.2rem;
+          color: var(--color-gray-600);
+          max-width: 700px;
+          margin: 0 auto;
+          line-height: 1.6;
+        }
+
+        /* === CONTACT INFO SECTION === */
+        .contact-info-section {
+          padding: var(--spacing-16) 0;
+        }
+
+        /* Forcer le flux vertical (titre au-dessus, contenu dessous) */
+        .contact-info-section .container,
+        .form-section .container,
+        .consultation-section .container,
+        .urgency-section .container {
+          display: block;
+        }
+
+        .contact-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: var(--spacing-6);
+          max-width: 1000px;
           margin: 0 auto;
         }
 
-        .contact-content {
-          background: var(--color-white);
+        .contact-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding: var(--spacing-6);
+          background: linear-gradient(135deg, #fffcea 0%, var(--color-gray-50) 100%);
+          border-radius: var(--radius-xl);
+          border: 1px solid rgba(85, 107, 47, 0.1);
+          transition: all 0.3s ease;
         }
 
-        .content-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: var(--spacing-12);
+        .contact-item:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          border-color: var(--color-secondary);
         }
 
-        .form-section h2 {
-          margin-bottom: var(--spacing-4);
+        .contact-item svg {
+          color: var(--color-secondary);
+          margin-bottom: var(--spacing-3);
+        }
+
+        .contact-item h2 {
+          margin: 0 0 var(--spacing-2);
           color: var(--color-primary);
+          font-size: 1.1rem;
+          font-weight: 600;
         }
 
-        .form-intro {
+        .contact-item p {
+          margin: 0;
           color: var(--color-gray-700);
-          margin-bottom: var(--spacing-8);
-          line-height: 1.6;
+          line-height: 1.5;
+          font-size: 0.95rem;
+        }
+
+        /* === FORM SECTION === */
+        .form-section {
+          padding: var(--spacing-16) 0;
+          background: var(--color-gray-50);
+        }
+
+        .form-wrapper {
+          max-width: 800px;
+          margin: 0 auto;
         }
 
         .contact-form {
@@ -346,7 +527,7 @@ const ContactPage: React.FC = () => {
           font-size: 1rem;
           font-family: var(--font-body);
           transition: all var(--transition-fast);
-          background: var(--color-white);
+          background: #fffcea;
         }
 
         .form-input:focus,
@@ -362,7 +543,7 @@ const ContactPage: React.FC = () => {
           min-height: 120px;
         }
 
-        .consent {
+        .consent-group {
           margin-top: var(--spacing-4);
         }
 
@@ -397,7 +578,7 @@ const ContactPage: React.FC = () => {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          color: var(--color-white);
+          color: #fffcea;
           font-size: 14px;
           font-weight: bold;
         }
@@ -406,109 +587,94 @@ const ContactPage: React.FC = () => {
           margin-top: var(--spacing-4);
           padding: var(--spacing-4) var(--spacing-8);
           font-size: 1.1rem;
+          align-self: center;
         }
 
-        .info-section {
-          display: flex;
-          flex-direction: column;
+        /* === CONSULTATION SECTION === */
+        .consultation-section {
+          padding: var(--spacing-16) 0;
+        }
+
+        .consultation-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
           gap: var(--spacing-8);
+          max-width: 600px;
+          margin: 0 auto;
         }
 
-        .contact-info,
-        .consultation-info,
-        .urgency-info {
-          background: var(--color-gray-50);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-6);
-        }
-
-        .contact-info h3,
-        .consultation-info h3 {
-          margin-bottom: var(--spacing-6);
-          color: var(--color-primary);
-          text-align: center;
-        }
-
-        .contact-item {
-          display: flex;
-          gap: var(--spacing-4);
-          margin-bottom: var(--spacing-6);
-          align-items: flex-start;
-        }
-
-        .contact-item:last-child {
-          margin-bottom: 0;
-        }
-
-        .contact-item svg {
-          color: var(--color-secondary);
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-
-        .contact-item h4 {
-          margin: 0 0 var(--spacing-1);
-          color: var(--color-primary);
-          font-size: 1rem;
-        }
-
-        .contact-item p {
-          margin: 0;
-          color: var(--color-gray-700);
-          line-height: 1.5;
-        }
-
-        .consultation-types {
+        .consultation-card {
           display: flex;
           flex-direction: column;
-          gap: var(--spacing-4);
+          align-items: center;
+          text-align: center;
+          padding: var(--spacing-8);
+          background: linear-gradient(135deg, var(--color-white) 0%, #fffcea 100%);
+          border-radius: var(--radius-xl);
+          border: 1px solid rgba(85, 107, 47, 0.1);
+          transition: all 0.3s ease;
         }
 
-        .consultation-type {
-          padding: var(--spacing-4);
-          background: var(--color-white);
-          border-radius: var(--radius-lg);
-          border-left: 4px solid var(--color-secondary);
+        .consultation-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+          border-color: var(--color-secondary);
         }
 
-        .consultation-type h4 {
-          margin: 0 0 var(--spacing-1);
+        .consultation-card svg {
+          color: var(--color-secondary);
+          margin-bottom: var(--spacing-4);
+        }
+
+        .consultation-card h2 {
+          margin: 0 0 var(--spacing-3);
           color: var(--color-primary);
+          font-size: 1.3rem;
+          font-weight: 600;
         }
 
-        .consultation-type p {
-          margin: 0;
-          color: var(--color-gray-700);
-          font-size: 0.95rem;
-        }
-
-        .urgency-info {
-          background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(218, 165, 32, 0.05));
-          border: 1px solid rgba(218, 165, 32, 0.2);
-        }
-
-        .urgency-info h4 {
-          margin-bottom: var(--spacing-3);
-          color: var(--color-secondary-dark);
-        }
-
-        .urgency-info p {
+        .consultation-card p {
           margin: 0;
           color: var(--color-gray-700);
           line-height: 1.6;
-          font-size: 0.95rem;
         }
 
-        .urgency-info strong {
+        /* === URGENCY SECTION === */
+        .urgency-section {
+          padding: var(--spacing-16) 0;
+          background: var(--color-gray-50);
+        }
+
+        .urgency-card {
+          max-width: 700px;
+          margin: 0 auto;
+          padding: var(--spacing-8);
+          background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(218, 165, 32, 0.05));
+          border-radius: var(--radius-xl);
+          border: 1px solid rgba(218, 165, 32, 0.2);
+        }
+
+
+
+        .urgency-card p {
+          margin: 0;
+          color: var(--color-gray-700);
+          line-height: 1.6;
+          font-size: 1rem;
+        }
+
+        .urgency-card strong {
           color: var(--color-secondary-dark);
           font-weight: 700;
         }
 
+        /* === SUCCESS SECTION === */
         .success-section {
-          background: var(--color-white);
+          background: #fffcea;
           min-height: 60vh;
           display: flex;
           align-items: center;
+          padding: var(--spacing-16) 0;
         }
 
         .success-card {
@@ -537,26 +703,66 @@ const ContactPage: React.FC = () => {
           line-height: 1.6;
         }
 
+        /* === BUTTONS === */
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--spacing-2);
+          padding: var(--spacing-3) var(--spacing-6);
+          border-radius: var(--radius-lg);
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          border: none;
+          cursor: pointer;
+          font-size: 1rem;
+        }
+
+        .btn-primary {
+          background: var(--color-primary);
+          color: #fffcea;
+        }
+
+        .btn-primary:hover {
+          background: var(--color-primary-dark);
+          transform: translateY(-1px);
+        }
+
+        /* === RESPONSIVE === */
         @media (max-width: 1024px) {
-          .content-grid {
+          .contact-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-4);
+          }
+
+          .consultation-grid {
             grid-template-columns: 1fr;
-            gap: var(--spacing-8);
+            gap: var(--spacing-6);
           }
         }
 
         @media (max-width: 768px) {
+          .contact-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-4);
+          }
+
           .form-row {
             grid-template-columns: 1fr;
           }
 
-          .success-card {
-            padding: var(--spacing-8);
+
+
+          .consultation-card {
+            padding: var(--spacing-6);
           }
 
-          .contact-info,
-          .consultation-info,
-          .urgency-info {
-            padding: var(--spacing-4);
+          .urgency-card {
+            padding: var(--spacing-6);
+          }
+
+          .success-card {
+            padding: var(--spacing-8);
           }
         }
       `}</style>

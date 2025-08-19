@@ -1,296 +1,281 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
+  const [visibleWords, setVisibleWords] = useState(0);
+  const words = ['Ralenti,', 'Respire,', 'Ressens'];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setVisibleWords(prev => {
+        if (prev < words.length) {
+          return prev + 1;
+        }
+        return prev;
+      });
+    }, 800); // Chaque mot apparaît après 800ms
+
+    return () => clearInterval(timer);
+  }, [words.length]);
+
   return (
     <section className="hero">
-      <div className="hero-background">
-        <div className="hero-overlay"></div>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="hero-video"
+      >
+        <source src="/background.mp4" type="video/mp4" />
+        {/* Fallback image si la vidéo ne charge pas */}
         <img
-          src="https://images.pexels.com/photos/3823495/pexels-photo-3823495.jpeg"
-          alt="Séance de méditation en pleine nature"
-          className="hero-image"
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+          alt="Paysage serein - MindWayLife"
         />
+      </video>
+
+      <div className="overlay" aria-hidden="true"></div>
+
+      <div className="hero-top">
+        <img src="/logo.png" alt="MindWayLife" className="brand-mark" />
+        <h1 className="animated-slogan">
+          {words.map((word, index) => (
+            <span
+              key={index}
+              className={`word ${index < visibleWords ? 'visible' : ''}`}
+            >
+              {word}
+            </span>
+          ))}
+        </h1>
       </div>
-      
-      <div className="container">
-        <div className="hero-content">
-          <div className="hero-text">
-            <div className="hero-badge">
-              <Sparkles size={16} />
-              <span>Accompagnement personnalisé</span>
-            </div>
-            
-            <h1 className="hero-title">
-              Devenez acteur de votre 
-              <span className="highlight"> santé et bien-être</span>
-            </h1>
-            
-            <p className="hero-description">
-              Psychologue clinicienne et instructrice certifiée en programmes de 
-              pleine conscience MBSR/MBCT. Une approche intégrative pour votre 
-              épanouissement personnel et votre autonomie en santé.
-            </p>
-            
-            <div className="hero-actions">
-              <Link to="/contact-reservation" className="btn btn-primary">
-                Prendre rendez-vous
-                <ArrowRight size={18} />
-              </Link>
-              <Link to="/qui-suis-je" className="btn btn-outline">
-                Découvrir mon approche
-              </Link>
-            </div>
-            
-            <div className="hero-stats">
-              <div className="stat">
-                <span className="stat-number">15+</span>
-                <span className="stat-label">Années d'expérience</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">200+</span>
-                <span className="stat-label">Personnes accompagnées</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">MBSR</span>
-                <span className="stat-label">Instructrice certifiée</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="hero-visual">
-            <div className="hero-card">
-              <img
-                src="https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg"
-                alt="Véronique Carrié, psychologue et coach bien-être"
-                className="hero-portrait"
-              />
-              <div className="card-content">
-                <h3>Véronique Carrié</h3>
-                <p>Psychologue clinicienne<br />Spécialisée en neuropsychologie</p>
-                <div className="credentials">
-                  <span className="credential">Instructrice MBSR</span>
-                  <span className="credential">Coach certifiée</span>
-                </div>
-              </div>
-            </div>
-          </div>
+
+      <div className="hero-bottom">
+        <div className="actions">
+          <Link to="/contact-reservation" className="btn btn-primary">
+            <span>Réserver</span>
+          </Link>
+          <Link to="/qui-suis-je" className="btn btn-secondary">
+            <span>En savoir plus</span>
+          </Link>
         </div>
+
       </div>
 
       <style jsx>{`
         .hero {
           position: relative;
           min-height: 100vh;
-          display: flex;
-          align-items: center;
+          width: 100%;
           overflow: hidden;
         }
 
-        .hero-background {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: -2;
-        }
-
-        .hero-image {
+        .hero-video {
+          position: fixed;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0.3;
+          object-position: center;
+          z-index: -2;
         }
 
-        .hero-overlay {
+        .hero-video img {
           position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(
-            135deg,
-            rgba(245, 245, 220, 0.9) 0%,
-            rgba(245, 245, 220, 0.8) 50%,
-            rgba(218, 165, 32, 0.1) 100%
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        /* voile subtil pour la lisibilité sans masquer l'image */
+        .overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.4) 100%
           );
           z-index: -1;
         }
 
-        .hero-content {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--spacing-12);
-          align-items: center;
-          padding: var(--spacing-8) 0;
-        }
-
-        .hero-text {
-          animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: var(--spacing-2);
-          background: rgba(218, 165, 32, 0.1);
-          color: var(--color-secondary-dark);
-          padding: var(--spacing-2) var(--spacing-4);
-          border-radius: var(--radius-xl);
-          font-size: 0.9rem;
-          font-weight: 500;
-          margin-bottom: var(--spacing-6);
-          border: 1px solid rgba(218, 165, 32, 0.2);
-        }
-
-        .hero-title {
-          margin-bottom: var(--spacing-6);
-          line-height: 1.1;
-        }
-
-        .highlight {
-          background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .hero-description {
-          font-size: 1.25rem;
-          line-height: 1.6;
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-8);
-        }
-
-        .hero-actions {
-          display: flex;
-          gap: var(--spacing-4);
-          margin-bottom: var(--spacing-10);
-        }
-
-        .hero-stats {
-          display: flex;
-          gap: var(--spacing-8);
-          padding-top: var(--spacing-6);
-          border-top: 1px solid rgba(85, 107, 47, 0.2);
-        }
-
-        .stat {
-          text-align: center;
-        }
-
-        .stat-number {
-          display: block;
-          font-family: var(--font-heading);
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: var(--color-primary);
-        }
-
-        .stat-label {
-          font-size: 0.9rem;
-          color: var(--color-gray-600);
-          font-weight: 500;
-        }
-
-        .hero-visual {
-          display: flex;
-          justify-content: center;
-          animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .hero-card {
-          background: var(--color-white);
-          border-radius: var(--radius-2xl);
-          box-shadow: var(--shadow-xl);
-          overflow: hidden;
-          max-width: 350px;
-          transition: all var(--transition-normal);
-        }
-
-        .hero-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .hero-portrait {
-          width: 100%;
-          height: 300px;
-          object-fit: cover;
-        }
-
-        .card-content {
-          padding: var(--spacing-6);
-        }
-
-        .card-content h3 {
-          margin-bottom: var(--spacing-2);
-          color: var(--color-primary);
-        }
-
-        .card-content p {
-          color: var(--color-gray-600);
-          margin-bottom: var(--spacing-4);
-          line-height: 1.5;
-        }
-
-        .credentials {
+        .hero-top {
+          position: absolute;
+          top: 25%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 2;
           display: flex;
           flex-direction: column;
-          gap: var(--spacing-2);
+          align-items: center;
+          gap: var(--spacing-6);
         }
 
-        .credential {
-          background: rgba(85, 107, 47, 0.1);
-          color: var(--color-primary);
-          padding: var(--spacing-1) var(--spacing-3);
-          border-radius: var(--radius-md);
-          font-size: 0.85rem;
+        .hero-bottom {
+          position: absolute;
+          bottom: var(--spacing-8);
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--spacing-6);
+          width: 100%;
+        }
+
+        .brand-mark {
+          width: 120px;
+          height: auto;
+          filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3));
+        }
+
+        .hero-main-title {
+          font-size: clamp(3rem, 8vw, 5rem);
+          line-height: 1.1;
+          color: var(--color-white);
+          font-weight: 700;
+          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+          margin: 0;
+          max-width: 800px;
+        }
+
+        .animated-slogan {
+          font-size: clamp(1.8rem, 5vw, 2.5rem);
+          line-height: 1.2;
+          color: var(--color-white);
+          letter-spacing: 0.05em;
+          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+          font-weight: 300;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          gap: var(--spacing-4);
+          margin: 0;
+        }
+
+        .word {
+          opacity: 0;
+          transform: scale(0.8);
+          filter: blur(8px);
+          transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          display: inline-block;
+        }
+
+        .word.visible {
+          opacity: 1;
+          transform: scale(1);
+          filter: blur(0px);
+        }
+
+        .actions {
+          display: flex;
+          gap: var(--spacing-4);
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .actions .btn {
+          position: relative;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: var(--color-white);
           font-weight: 500;
+          font-size: 1rem;
+          padding: 1rem 2.5rem;
+          border-radius: 8px;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          text-decoration: none;
+          min-width: 180px;
           text-align: center;
+          backdrop-filter: blur(10px);
+          letter-spacing: 0.025em;
         }
 
-        @media (max-width: 1024px) {
-          .hero-content {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
-            text-align: center;
-          }
+        .actions .btn:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .actions .btn span {
+          position: relative;
+          z-index: 1;
+        }
+        
+        .actions .btn-primary {
+          background: rgba(255, 255, 255, 0.95);
+          border-color: rgba(255, 255, 255, 0.95);
+          color: var(--color-primary);
+          font-weight: 600;
+        }
 
-          .hero-visual {
-            order: -1;
-          }
+        .actions .btn-primary:hover {
+          background: var(--color-white);
+          border-color: var(--color-white);
+          color: var(--color-primary);
+          box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
 
-          .hero-actions {
-            justify-content: center;
-          }
+        .actions .btn-secondary {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.3);
+          color: var(--color-white);
+        }
 
-          .hero-stats {
-            justify-content: center;
+        .actions .btn-secondary:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .scroll-indicator {
+          color: rgba(255, 255, 255, 0.7);
+          animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+          }
+          40% {
+            transform: translateY(-15px);
+          }
+          60% {
+            transform: translateY(-10px);
           }
         }
 
         @media (max-width: 768px) {
-          .hero {
-            min-height: 90vh;
-          }
-
-          .hero-actions {
+          .brand-mark { width: 60px; }
+          
+          .animated-slogan {
             flex-direction: column;
-            align-items: center;
+            gap: var(--spacing-2);
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
           }
 
-          .hero-stats {
+          .hero-main-title {
+            font-size: clamp(2rem, 8vw, 3rem);
+          }
+
+          .hero-top {
+            top: var(--spacing-6);
+          }
+
+          .actions {
             flex-direction: column;
-            gap: var(--spacing-4);
+            gap: var(--spacing-3);
+            width: 100%;
+            max-width: 280px;
           }
 
-          .stat {
-            padding: var(--spacing-3);
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: var(--radius-lg);
+          .actions .btn {
+            width: 100%;
           }
         }
       `}</style>

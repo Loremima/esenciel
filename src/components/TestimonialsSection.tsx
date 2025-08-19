@@ -24,7 +24,7 @@ const TestimonialsSection: React.FC = () => {
     {
       id: 3,
       name: 'Sophie D.',
-      location: 'Cransac-les-Thermes',
+      location: 'Vaureilles',
       rating: 5,
       text: 'L\'accompagnement en santé et qualité de vie m\'a aidée à reprendre le contrôle de mon bien-être. Véronique allie parfaitement expertise scientifique et approche humaine. Je recommande vivement.',
       service: 'Coaching Santé'
@@ -48,7 +48,7 @@ const TestimonialsSection: React.FC = () => {
   }, [testimonials.length]);
 
   const goToPrevious = () => {
-    setActiveTestimonial((prev) => 
+    setActiveTestimonial((prev) =>
       prev === 0 ? testimonials.length - 1 : prev - 1
     );
   };
@@ -59,7 +59,7 @@ const TestimonialsSection: React.FC = () => {
 
   return (
     <section className="section testimonials-section">
-      <div className="container">
+      <div className="container testimonials-inner">
         <div className="section-header">
           <h2>Témoignages</h2>
           <p className="section-subtitle">
@@ -68,7 +68,7 @@ const TestimonialsSection: React.FC = () => {
         </div>
 
         <div className="testimonials-container">
-          <button 
+          <button
             className="nav-button prev"
             onClick={goToPrevious}
             aria-label="Témoignage précédent"
@@ -78,17 +78,17 @@ const TestimonialsSection: React.FC = () => {
 
           <div className="testimonial-card">
             <Quote className="quote-icon" />
-            
+
             <div className="stars">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={20} className="star" />
               ))}
             </div>
-            
+
             <blockquote className="testimonial-text">
               "{testimonials[activeTestimonial].text}"
             </blockquote>
-            
+
             <div className="testimonial-author">
               <div className="author-info">
                 <h4>{testimonials[activeTestimonial].name}</h4>
@@ -98,7 +98,7 @@ const TestimonialsSection: React.FC = () => {
             </div>
           </div>
 
-          <button 
+          <button
             className="nav-button next"
             onClick={goToNext}
             aria-label="Témoignage suivant"
@@ -121,26 +121,23 @@ const TestimonialsSection: React.FC = () => {
 
       <style jsx>{`
         .testimonials-section {
-          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-          color: var(--color-white);
+          background: transparent;
+          color: var(--color-primary);
           position: relative;
           overflow: hidden;
         }
 
-        .testimonials-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.02'%3E%3Cpath d='M40 40c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
-          z-index: 0;
-        }
+        .testimonials-section::before { display: none; }
 
         .container {
           position: relative;
           z-index: 1;
+        }
+
+        .testimonials-inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .section-header {
@@ -149,12 +146,15 @@ const TestimonialsSection: React.FC = () => {
         }
 
         .section-header h2 {
-          color: var(--color-secondary);
+          color: var(--color-white);
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
           margin-bottom: var(--spacing-4);
+          font-size: clamp(2rem, 4vw, 2.5rem);
         }
 
         .section-subtitle {
           color: rgba(255, 255, 255, 0.9);
+          text-shadow: 0 1px 5px rgba(0,0,0,0.3);
           font-size: 1.2rem;
           max-width: 600px;
           margin: 0 auto;
@@ -163,8 +163,12 @@ const TestimonialsSection: React.FC = () => {
         .testimonials-container {
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: var(--spacing-6);
           margin-bottom: var(--spacing-8);
+          max-width: 1000px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .testimonial-card {
@@ -202,11 +206,11 @@ const TestimonialsSection: React.FC = () => {
 
         .testimonial-text {
           font-family: var(--font-heading);
-          font-size: 1.3rem;
+          font-size: clamp(1.25rem, 3vw, 1.75rem);
           font-style: italic;
-          line-height: 1.5;
+          line-height: 1.6;
           margin-bottom: var(--spacing-6);
-          color: var(--color-gray-700);
+          color: var(--color-primary);
         }
 
         .testimonial-author {
@@ -237,9 +241,9 @@ const TestimonialsSection: React.FC = () => {
         }
 
         .nav-button {
-          background: rgba(255, 255, 255, 0.2);
-          border: none;
-          color: var(--color-white);
+          background: var(--color-white);
+          border: 1px solid var(--color-gray-200);
+          color: var(--color-primary);
           border-radius: 50%;
           width: 50px;
           height: 50px;
@@ -253,7 +257,6 @@ const TestimonialsSection: React.FC = () => {
 
         .nav-button:hover {
           background: var(--color-secondary);
-          transform: scale(1.1);
         }
 
         .testimonial-indicators {

@@ -1,464 +1,594 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Brain, Sparkles, ArrowRight, Clock, Users, Euro, CheckCircle } from 'lucide-react';
+import { Heart, Brain, Sparkles, ArrowRight, Clock, Users, Euro, CheckCircle, Award, BookOpen, Presentation, CalendarDays } from 'lucide-react';
 
 const ServicesPage: React.FC = () => {
-  const services = [
+  const individualServices = [
     {
-      id: 'sante',
+      id: 'coaching-sante',
       icon: Heart,
-      title: 'Santé & Qualité de Vie',
-      subtitle: 'Accompagnement personnalisé pour votre bien-être global',
-      description: 'Devenez acteur de votre santé grâce à une approche intégrative qui prend en compte votre globalité : corps, esprit, émotions et environnement.',
+      title: 'Coaching Santé & Qualité de vie',
+      description: 'Accompagnement personnalisé pour devenir acteur de votre bien-être global.',
+      duration: '1h à 1h30',
+      price: 'Sur devis',
+      modalities: ['Présentiel', 'Distanciel'],
       features: [
         'Bilan de santé holistique',
         'Plan personnalisé d\'actions',
         'Suivi régulier et ajustements',
-        'Éducation thérapeutique',
-        'Prévention et promotion de la santé'
-      ],
-      benefits: [
-        'Amélioration de votre vitalité',
-        'Gestion optimale du stress',
-        'Meilleur équilibre de vie',
-        'Prévention des troubles'
-      ],
-      duration: '1h à 1h30',
-      price: 'Sur devis',
-      modalities: ['Présentiel', 'Distanciel'],
-      link: '/sante-qualite-vie'
+        'Éducation thérapeutique'
+      ]
     },
     {
-      id: 'mindfulness',
+      id: 'coaching-pleine-conscience',
       icon: Brain,
-      title: 'Pleine Conscience',
-      subtitle: 'Développez votre présence et votre écoute intérieure',
-      description: 'Inspiré de la citation de Jung "Qui regarde dehors rêve, qui regarde en soi s\'éveille", cet accompagnement vous guide vers une meilleure connaissance de vous-même.',
+      title: 'Coaching Pleine conscience & qualité de présence',
+      description: 'Développez votre présence et votre écoute intérieure pour une meilleure qualité de vie.',
+      duration: '45min à 1h',
+      price: 'Sur devis',
+      modalities: ['Présentiel', 'Distanciel'],
       features: [
         'Méditation guidée',
         'Techniques de mindfulness',
         'Exercices de respiration',
-        'Gestion des émotions',
-        'Développement de la présence'
-      ],
-      benefits: [
-        'Réduction du stress et anxiété',
-        'Amélioration de la concentration',
-        'Meilleure régulation émotionnelle',
-        'Qualité de sommeil améliorée'
-      ],
-      duration: '45min à 1h',
-      price: 'À partir de 60€',
-      modalities: ['Individuel', 'Groupe', 'Distanciel'],
-      link: '/pleine-conscience'
-    },
+        'Gestion des émotions'
+      ]
+    }
+  ];
+
+  const groupServices = [
     {
-      id: 'tao',
+      id: 'jeu-du-tao',
       icon: Sparkles,
-      title: 'Jeu du Tao',
-      subtitle: 'Exploration ludique de votre potentiel en groupe',
-      description: 'Une approche créative et introspective qui utilise le jeu comme vecteur de développement personnel et de découverte de soi.',
+      title: 'Le Jeu du Tao',
+      description: 'Une approche ludique du développement personnel qui révèle vos ressources cachées.',
+      duration: '4 heures',
+      price: '60€ par participant',
+      modalities: ['Groupe de 4 à 5 personnes (min 3)'],
       features: [
-        'Séances de groupe interactives',
-        'Approche ludique et bienveillante',
-        'Exploration des potentiels',
-        'Dynamique de groupe enrichissante',
+        'Exploration créative de soi',
+        'Révélation des potentiels',
+        'Dynamique de groupe bienveillante',
         'Outils concrets à emporter'
       ],
-      benefits: [
-        'Meilleure connaissance de soi',
-        'Développement de la confiance',
-        'Créativité stimulée',
-        'Liens sociaux renforcés'
-      ],
-      duration: '4 heures',
-      price: '60€ par personne',
-      modalities: ['Groupe de 3 à 8 personnes'],
-      link: '/jeu-du-tao',
       highlight: true
     }
   ];
 
+  const collectivePrograms = [
+    {
+      id: 'mbsr',
+      icon: Award,
+      title: 'MBSR - Gestion du stress',
+      subtitle: 'Mindfulness-Based Stress Reduction',
+      description: 'Programme de 8 semaines pour apprendre à gérer le stress par la pleine conscience.',
+      duration: '8 semaines',
+      sessionDuration: '2h30 par séance',
+      groupSize: '5 à 10 personnes',
+      price: 'Tarif communiqué lors de l\'inscription',
+      includes: [
+        '8 séances de groupe',
+        'Journée de retraite en silence',
+        'Supports audio pour la pratique',
+        'Manuel du participant'
+      ]
+    },
+    {
+      id: 'mbct',
+      icon: Brain,
+      title: 'MBCT - Prévention des rechutes dépressives',
+      subtitle: 'Mindfulness-Based Cognitive Therapy',
+      description: 'Programme combinant pleine conscience et thérapie cognitive pour prévenir les rechutes dépressives.',
+      duration: '8 semaines',
+      sessionDuration: '2h par séance',
+      groupSize: '5 à 10 personnes',
+      price: 'Tarif communiqué lors de l\'inscription',
+      includes: [
+        '8 séances de groupe',
+        'Exercices de thérapie cognitive',
+        'Pratiques de pleine conscience',
+        'Suivi personnalisé'
+      ]
+    },
+    {
+      id: 'mbcas',
+      icon: Users,
+      title: 'MBCAS - Accompagnement seniors',
+      subtitle: 'Mindfulness-Based Compassionate Aging Support',
+      description: 'Programme adapté aux seniors pour un vieillissement en pleine conscience et bienveillance.',
+      duration: '6 semaines',
+      sessionDuration: '1h30 par séance',
+      groupSize: '4 à 8 personnes',
+      price: 'Tarif communiqué lors de l\'inscription',
+      includes: [
+        '6 séances adaptées',
+        'Pratiques douces',
+        'Accompagnement bienveillant',
+        'Soutien de groupe'
+      ]
+    }
+  ];
+
+  const otherFormats = [
+    {
+      id: 'ateliers-education',
+      icon: BookOpen,
+      title: 'Ateliers en éducation à la santé',
+      description: 'Ateliers thématiques pour apprendre à prendre soin de sa santé au quotidien.',
+      duration: '2h à 3h',
+      price: 'Sur devis selon le format',
+      modalities: ['Entreprises', 'Associations', 'Particuliers']
+    },
+    {
+      id: 'conferences',
+      icon: Presentation,
+      title: 'Conférences & événements publics',
+      description: 'Interventions sur la pleine conscience, la santé et le bien-être.',
+      duration: '1h à 2h',
+      price: 'Sur devis',
+      modalities: ['Conférences', 'Tables rondes', 'Événements']
+    }
+  ];
+
+  const ServiceCard = ({ service, isHighlight = false }: { service: any, isHighlight?: boolean }) => {
+    const IconComponent = service.icon;
+
+    return (
+      <div className={`service-card ${isHighlight ? 'highlight' : ''}`}>
+        <div className="service-header">
+          <div className="service-icon">
+            <IconComponent size={32} />
+          </div>
+          <div>
+            <h3>{service.title}</h3>
+            {service.subtitle && <p className="service-subtitle">{service.subtitle}</p>}
+          </div>
+        </div>
+
+        <p className="service-description">{service.description}</p>
+
+        {service.features && (
+          <ul className="service-features">
+            {service.features.map((feature: string, index: number) => (
+              <li key={index}>
+                <CheckCircle size={16} />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {service.includes && (
+          <ul className="service-features">
+            {service.includes.map((item: string, index: number) => (
+              <li key={index}>
+                <CheckCircle size={16} />
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="service-info">
+          {service.duration && (
+            <div className="info-item">
+              <Clock size={16} />
+              <span>{service.duration}</span>
+            </div>
+          )}
+          {service.sessionDuration && (
+            <div className="info-item">
+              <Clock size={16} />
+              <span>{service.sessionDuration}</span>
+            </div>
+          )}
+          {service.groupSize && (
+            <div className="info-item">
+              <Users size={16} />
+              <span>{service.groupSize}</span>
+            </div>
+          )}
+          <div className="info-item">
+            <Euro size={16} />
+            <span>{service.price}</span>
+          </div>
+        </div>
+
+        {service.modalities && (
+          <div className="service-modalities">
+            {service.modalities.map((modality: string, index: number) => (
+              <span key={index} className="modality-tag">{modality}</span>
+            ))}
+          </div>
+        )}
+
+        <Link to="/contact-reservation" className="btn btn-primary">
+          Réserver
+          <ArrowRight size={16} />
+        </Link>
+      </div>
+    );
+  };
+
   return (
     <div className="services-page">
-      {/* Hero Section */}
+      {/* Hero Section avec vidéo de fond (aligné sur Blog/Infos) */}
       <section className="hero-services">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="hero-video"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            alt="Paysage serein - MindWayLife"
+          />
+        </video>
+        <div className="hero-overlay" aria-hidden="true"></div>
+        <div className="hero-content">
+          <h1>Mes services</h1>
+          <p className="hero-subtitle">
+            Une approche personnalisée pour votre épanouissement et votre bien-être
+          </p>
+        </div>
+      </section>
+
+      {/* Accompagnements individuels */}
+      <section id="individuels" className="section services-section">
         <div className="container">
-          <div className="hero-content">
-            <h1>Mes Services</h1>
-            <p className="hero-subtitle">
-              Une approche personnalisée pour votre épanouissement et votre bien-être
-            </p>
+          <div className="section-header">
+            <h1>1. Accompagnements individuels</h1>
+            <p>Coaching personnalisé pour votre développement</p>
+          </div>
+          <div className="services-grid">
+            {individualServices.map(service => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Services détaillés */}
-      <section className="section services-detailed">
+      {/* Accompagnements groupe */}
+      <section id="groupes" className="section services-section alt">
         <div className="container">
-          <div className="services-list">
-            {services.map((service, index) => {
-              const IconComponent = service.icon;
-              return (
-                <div key={service.id} className={`service-detail-card ${service.highlight ? 'highlight' : ''}`}>
-                  <div className="service-main">
-                    <div className="service-header">
-                      <div className="service-icon">
-                        <IconComponent size={40} />
-                      </div>
-                      <div className="service-title-group">
-                        <h2>{service.title}</h2>
-                        <p className="service-subtitle">{service.subtitle}</p>
-                      </div>
-                    </div>
-                    
-                    <p className="service-description">{service.description}</p>
-                    
-                    <div className="service-details-grid">
-                      <div className="details-column">
-                        <h4>Ce qui est inclus</h4>
-                        <ul className="features-list">
-                          {service.features.map((feature, i) => (
-                            <li key={i} className="feature-item">
-                              <CheckCircle size={16} />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
-                      <div className="details-column">
-                        <h4>Bénéfices</h4>
-                        <ul className="benefits-list">
-                          {service.benefits.map((benefit, i) => (
-                            <li key={i} className="benefit-item">
-                              <span className="benefit-bullet"></span>
-                              {benefit}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="service-sidebar">
-                    <div className="pricing-card">
-                      <h4>Informations pratiques</h4>
-                      
-                      <div className="pricing-detail">
-                        <Clock size={18} />
-                        <div>
-                          <span className="detail-label">Durée</span>
-                          <span className="detail-value">{service.duration}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="pricing-detail">
-                        <Euro size={18} />
-                        <div>
-                          <span className="detail-label">Tarif</span>
-                          <span className="detail-value">{service.price}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="pricing-detail">
-                        <Users size={18} />
-                        <div>
-                          <span className="detail-label">Modalités</span>
-                          <span className="detail-value">{service.modalities.join(', ')}</span>
-                        </div>
-                      </div>
-                      
-                      <Link to={service.link} className="btn btn-primary service-cta">
-                        En savoir plus
-                        <ArrowRight size={16} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="section-header">
+            <h1>2. Accompagnements groupe</h1>
+            <p>Expérience collective enrichissante</p>
+          </div>
+          <div className="services-grid">
+            {groupServices.map(service => (
+              <ServiceCard key={service.id} service={service} isHighlight={service.highlight} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Programmes collectifs */}
+      <section id="programmes" className="section services-section">
+        <div className="container">
+          <div className="section-header">
+            <h1>3. Programmes collectifs de pleine conscience</h1>
+            <p>Programmes structurés et scientifiquement validés</p>
+          </div>
+          <div className="services-grid">
+            {collectivePrograms.map(service => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Autres formats */}
+      <section id="autres" className="section services-section alt">
+        <div className="container">
+          <div className="section-header">
+            <h1>4. Autres formats</h1>
+            <p>Interventions et ateliers sur mesure</p>
+          </div>
+          <div className="services-grid">
+            {otherFormats.map(service => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section cta-services">
+      <section className="section cta-section">
         <div className="container">
           <div className="cta-content">
-            <h2>Besoin d'un accompagnement sur mesure ?</h2>
+            <h2>Prêt(e) à commencer votre parcours ?</h2>
             <p>
-              Contactez-moi pour discuter de vos besoins spécifiques. 
-              Nous définirons ensemble l'approche la plus adaptée à votre situation.
+              Contactez-moi pour discuter de vos besoins et trouver l'accompagnement
+              qui vous correspond le mieux.
             </p>
-            <Link to="/contact-reservation" className="btn btn-secondary">
+            <Link to="/contact-reservation" className="btn btn-primary">
               Prendre rendez-vous
-              <ArrowRight size={18} />
+              <CalendarDays size={18} />
             </Link>
           </div>
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         .services-page {
-          padding-top: 80px;
+          padding-top: 0;
         }
 
+        /* === HERO SECTION AVEC VIDÉO (cohérent Blog/Infos) === */
         .hero-services {
-          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-          color: var(--color-white);
-          padding: var(--spacing-16) 0;
+          position: relative;
+          min-height: 100vh;
+          width: 100%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          z-index: -2;
+        }
+
+        .hero-video img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          );
+          z-index: -1;
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 2;
           text-align: center;
+          color: #fffcea;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 0 2rem;
         }
 
         .hero-content h1 {
-          color: var(--color-secondary);
-          margin-bottom: var(--spacing-4);
+          font-size: clamp(3rem, 8vw, 5rem);
+          line-height: 1.1;
+          color: #fffcea;
+          font-weight: 700;
+          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+          margin: 0 0 var(--spacing-6) 0;
         }
 
         .hero-subtitle {
-          font-size: 1.3rem;
-          color: rgba(255, 255, 255, 0.9);
+          font-size: clamp(1.2rem, 3vw, 1.6rem);
+          color: rgba(255, 252, 234, 0.9);
+          max-width: 700px;
+          margin: 0 auto;
+          line-height: 1.6;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          letter-spacing: 0.025em;
+        }
+
+        .services-section {
+          padding: var(--spacing-20) 0;
+        }
+
+        .services-section.alt {
+          background: var(--color-gray-50);
+        }
+
+        .section-header {
+          text-align: center;
+          margin-bottom: var(--spacing-12);
+          width: 100%;
+          display: block;
+        }
+
+        /* Forcer le flux vertical: titre au-dessus, contenu en dessous */
+        .services-section .container,
+        .cta-section .container {
+          display: block;
+        }
+
+        .section-header h1 {
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+          font-size: clamp(2rem, 4vw, 2.5rem);
+        }
+
+        .section-header p {
+          font-size: 1.2rem;
+          color: var(--color-gray-600);
           max-width: 600px;
           margin: 0 auto;
         }
 
-        .services-detailed {
-          background: var(--color-white);
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: var(--spacing-8);
         }
 
-        .services-list {
+        .service-card {
+          background: var(--color-white);
+          border-radius: var(--radius-2xl);
+          padding: var(--spacing-8);
+          box-shadow: var(--shadow-md);
+          transition: all var(--transition-normal);
+          border: 2px solid transparent;
           display: flex;
           flex-direction: column;
-          gap: var(--spacing-12);
+          gap: var(--spacing-6);
         }
 
-        .service-detail-card {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: var(--spacing-10);
-          padding: var(--spacing-10);
-          background: var(--color-gray-50);
-          border-radius: var(--radius-2xl);
-          transition: all var(--transition-normal);
-          position: relative;
-        }
-
-        .service-detail-card.highlight {
-          background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(245, 245, 220, 0.8) 100%);
-          border: 2px solid rgba(218, 165, 32, 0.3);
-        }
-
-        .service-detail-card.highlight::before {
-          content: 'Populaire';
-          position: absolute;
-          top: var(--spacing-4);
-          right: var(--spacing-4);
-          background: var(--color-secondary);
-          color: var(--color-white);
-          padding: var(--spacing-1) var(--spacing-3);
-          border-radius: var(--radius-md);
-          font-size: 0.8rem;
-          font-weight: 600;
-        }
-
-        .service-detail-card:hover {
+        .service-card:hover {
           transform: translateY(-4px);
           box-shadow: var(--shadow-xl);
+          border-color: var(--color-secondary);
+        }
+
+        .service-card.highlight {
+          border-color: var(--color-secondary);
+          background: linear-gradient(135deg, var(--color-white) 0%, rgba(230, 126, 34, 0.05) 100%);
         }
 
         .service-header {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           gap: var(--spacing-4);
-          margin-bottom: var(--spacing-6);
         }
 
         .service-icon {
-          background: rgba(85, 107, 47, 0.1);
-          color: var(--color-primary);
-          padding: var(--spacing-4);
-          border-radius: var(--radius-xl);
+          background: rgba(230, 126, 34, 0.1);
+          color: var(--color-secondary);
+          padding: var(--spacing-3);
+          border-radius: var(--radius-lg);
           flex-shrink: 0;
         }
 
-        .service-title-group h2 {
-          margin: 0 0 var(--spacing-1);
+        .service-header h3 {
+          margin: 0 0 var(--spacing-1) 0;
           color: var(--color-primary);
+          font-size: 1.25rem;
         }
 
         .service-subtitle {
-          color: var(--color-gray-600);
-          font-size: 1.1rem;
           margin: 0;
+          font-size: 0.9rem;
+          color: var(--color-secondary);
+          font-weight: 600;
         }
 
         .service-description {
-          font-size: 1.1rem;
-          line-height: 1.7;
           color: var(--color-gray-700);
-          margin-bottom: var(--spacing-8);
+          line-height: 1.6;
+          margin: 0;
         }
 
-        .service-details-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--spacing-8);
-        }
-
-        .details-column h4 {
-          margin-bottom: var(--spacing-4);
-          color: var(--color-primary);
-          font-size: 1.1rem;
-        }
-
-        .features-list,
-        .benefits-list {
+        .service-features {
           list-style: none;
+          padding: 0;
+          margin: 0;
           display: flex;
           flex-direction: column;
           gap: var(--spacing-2);
         }
 
-        .feature-item {
+        .service-features li {
           display: flex;
           align-items: center;
-          gap: var(--spacing-3);
+          gap: var(--spacing-2);
+          font-size: 0.9rem;
           color: var(--color-gray-700);
-          font-size: 0.95rem;
         }
 
-        .feature-item svg {
-          color: var(--color-primary);
-          flex-shrink: 0;
-        }
-
-        .benefit-item {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-3);
-          color: var(--color-gray-700);
-          font-size: 0.95rem;
-        }
-
-        .benefit-bullet {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: var(--color-secondary);
-          flex-shrink: 0;
-        }
-
-        .service-sidebar {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .pricing-card {
-          background: var(--color-white);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-6);
-          box-shadow: var(--shadow-md);
-          position: sticky;
-          top: 100px;
-        }
-
-        .pricing-card h4 {
-          margin-bottom: var(--spacing-6);
-          color: var(--color-primary);
-          text-align: center;
-        }
-
-        .pricing-detail {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-3);
-          margin-bottom: var(--spacing-4);
-          padding-bottom: var(--spacing-4);
-          border-bottom: 1px solid var(--color-gray-200);
-        }
-
-        .pricing-detail:last-of-type {
-          border-bottom: none;
-          margin-bottom: var(--spacing-6);
-        }
-
-        .pricing-detail svg {
+        .service-features svg {
           color: var(--color-secondary);
           flex-shrink: 0;
         }
 
-        .detail-label {
-          display: block;
-          font-size: 0.85rem;
-          color: var(--color-gray-600);
+        .service-info {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--spacing-4);
+          padding: var(--spacing-4);
+          background: var(--color-gray-50);
+          border-radius: var(--radius-lg);
+        }
+
+        .info-item {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-2);
+          font-size: 0.9rem;
+          color: var(--color-gray-700);
           font-weight: 500;
         }
 
-        .detail-value {
-          display: block;
-          font-size: 1rem;
-          color: var(--color-gray-800);
-          font-weight: 600;
+        .info-item svg {
+          color: var(--color-primary);
         }
 
-        .service-cta {
-          width: 100%;
-          justify-content: center;
+        .service-modalities {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--spacing-2);
         }
 
-        .cta-services {
-          background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+        .modality-tag {
+          background: rgba(44, 62, 80, 0.1);
+          color: var(--color-primary);
+          padding: var(--spacing-1) var(--spacing-3);
+          border-radius: var(--radius-md);
+          font-size: 0.8rem;
+          font-weight: 500;
+        }
+
+        .service-card .btn {
+          margin-top: auto;
+          align-self: flex-start;
+        }
+
+        .cta-section {
+          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+          color: var(--color-white);
+        }
+
+        .cta-content {
           text-align: center;
+          max-width: 600px;
+          margin: 0 auto;
         }
 
         .cta-content h2 {
+          color: var(--color-secondary);
           margin-bottom: var(--spacing-4);
-          color: var(--color-primary);
+          font-size: clamp(2rem, 4vw, 2.5rem);
         }
 
         .cta-content p {
           font-size: 1.2rem;
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-6);
-          max-width: 500px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        @media (max-width: 1024px) {
-          .service-detail-card {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-6);
-          }
-
-          .service-details-grid {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-6);
-          }
-
-          .pricing-card {
-            position: static;
-          }
+          color: rgba(255, 255, 255, 0.9);
+          margin-bottom: var(--spacing-8);
+          line-height: 1.6;
         }
 
         @media (max-width: 768px) {
-          .service-detail-card {
-            padding: var(--spacing-6);
+          .services-grid {
+            grid-template-columns: 1fr;
           }
 
           .service-header {
             flex-direction: column;
+            align-items: center;
             text-align: center;
-            gap: var(--spacing-3);
           }
 
-          .pricing-card {
-            padding: var(--spacing-4);
+          .service-info {
+            justify-content: center;
           }
 
-          .service-details-grid {
-            gap: var(--spacing-4);
+          .service-modalities {
+            justify-content: center;
           }
         }
       `}</style>
