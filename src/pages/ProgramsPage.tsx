@@ -101,7 +101,7 @@ const ProgramsPage: React.FC = () => {
       </section>
 
       {/* Programmes détaillés */}
-      <section className="section programs-detailed">
+      <section className="section programs-detailed parallax-surface">
         <div className="container">
           <div className="programs-list">
             {programs.map((program, index) => (
@@ -178,7 +178,7 @@ const ProgramsPage: React.FC = () => {
       </section>
 
       {/* Informations complémentaires */}
-      <section className="section info-section">
+      <section className="section info-section parallax-surface">
         <div className="container">
           <div className="info-grid">
             <div className="info-card">

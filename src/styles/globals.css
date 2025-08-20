@@ -173,6 +173,14 @@ p {
   place-items: center;
 }
 
+/* Parallax subtle for light sections */
+.parallax-surface {
+  position: relative;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;

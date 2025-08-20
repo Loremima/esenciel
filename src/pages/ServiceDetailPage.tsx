@@ -140,7 +140,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
       </section>
 
       {/* Contenu détaillé */}
-      <section className="section service-content">
+      <section className="section service-content parallax-surface">
         <div className="container">
           <div className="content-grid">
             <div className="main-content">

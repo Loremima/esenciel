@@ -118,7 +118,7 @@ const InfosPratiquesPage: React.FC = () => {
       </section>
 
       {/* Ressources */}
-      <section className="section resources-section">
+      <section className="section resources-section parallax-surface">
         <div className="container">
           <div className="section-header">
             <h1>Ressources pour approfondir</h1>

@@ -119,7 +119,7 @@ const BlogPage: React.FC = () => {
       </section>
 
       {/* Articles */}
-      <section className="section articles-section">
+      <section className="section articles-section parallax-surface">
         <div className="container">
           <div className="articles-grid">
             {filteredPosts.map((post) => (

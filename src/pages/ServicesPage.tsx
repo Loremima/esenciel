@@ -252,7 +252,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Accompagnements groupe */}
-      <section id="groupes" className="section services-section alt">
+      <section id="groupes" className="section services-section alt parallax-surface">
         <div className="container">
           <div className="section-header">
             <h1>2. Accompagnements groupe</h1>
@@ -267,7 +267,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Programmes collectifs */}
-      <section id="programmes" className="section services-section">
+      <section id="programmes" className="section services-section parallax-surface">
         <div className="container">
           <div className="section-header">
             <h1>3. Programmes collectifs de pleine conscience</h1>
@@ -282,7 +282,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Autres formats */}
-      <section id="autres" className="section services-section alt">
+      <section id="autres" className="section services-section alt parallax-surface">
         <div className="container">
           <div className="section-header">
             <h1>4. Autres formats</h1>

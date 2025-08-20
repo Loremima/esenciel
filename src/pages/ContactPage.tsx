@@ -488,6 +488,7 @@ const ContactPage: React.FC = () => {
         .form-section {
           padding: var(--spacing-16) 0;
           background: var(--color-gray-50);
+          background-image: linear-gradient(rgba(255,255,255,0.0), rgba(255,255,255,0.0));
         }
 
         .form-wrapper {
@@ -643,6 +644,7 @@ const ContactPage: React.FC = () => {
         .urgency-section {
           padding: var(--spacing-16) 0;
           background: var(--color-gray-50);
+          background-image: linear-gradient(rgba(255,255,255,0.0), rgba(255,255,255,0.0));
         }
 
         .urgency-card {
