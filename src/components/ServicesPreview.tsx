@@ -15,20 +15,20 @@ const ServicesPreview: React.FC = () => {
       id: 'groupes',
       icon: Users,
       title: 'Accompagnements de groupe',
-      description: 'Des expériences collectives enrichissantes pour grandir ensemble, partager et apprendre dans un cadre bienveillant.',
+      description: 'Accompagnement collectif avec le jeu du Tao, santé et mieux-être.',
       link: '/services#groupes',
     },
     {
       id: 'programmes',
       icon: Brain,
-      title: 'Programmes MBSR / MBCT',
-      description: 'Des protocoles structurés basés sur la pleine conscience pour la réduction du stress et la prévention de la rechute dépressive.',
+      title: 'Programmes de pleine conscience',
+      description: 'Des protocoles structurés basés sur la pleine conscience pour la réduction du stress, la prévention de la rechute dépressive et pour bien vivre son avancée en age.',
       link: '/services#programmes',
     },
     {
       id: 'autres',
       icon: Sparkles,
-      title: 'Autres formats',
+      title: 'Interventions en Entreprises',
       description: 'Ateliers thématiques, retraites et interventions sur mesure pour explorer la pleine conscience sous différents angles.',
       link: '/services#autres',
     }
@@ -40,7 +40,7 @@ const ServicesPreview: React.FC = () => {
         <div className="section-header">
           <h2>Mes Services</h2>
           <p className="section-subtitle">
-            Une approche holistique pour votre bien-être et votre développement personnel
+            Une approche holistique pour votre acteur de votre santé et de votre bien-être.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ const ServicesPreview: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .services-preview {
           background: transparent;
         }
@@ -93,41 +93,40 @@ const ServicesPreview: React.FC = () => {
 
         .section-header h2 {
           margin-bottom: var(--spacing-4);
-          font-size: clamp(2rem, 4vw, 2.5rem);
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-family: var(--font-heading);
           letter-spacing: -0.01em;
-          color: var(--color-white);
-          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          color: #fffcea !important;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .section-subtitle {
-          font-size: 1.2rem;
-          color: rgba(255, 255, 255, 0.9);
-          max-width: 600px;
+          font-size: 1.25rem;
+          color: #fffcea;
+          max-width: 550px;
           margin: 0 auto;
           text-shadow: 0 1px 5px rgba(0,0,0,0.3);
         }
 
         .services-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: var(--spacing-6);
+          grid-template-columns: repeat(4, 1fr);
+          gap: var(--spacing-8);
           margin-bottom: var(--spacing-12);
-          max-width: 900px;
-          margin: 0 auto;
-          justify-items: center;
+          justify-items: stretch;
         }
 
         .service-card {
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(12px);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-6);
+          background: rgba(255, 252, 234, 0.95);
+          backdrop-filter: blur(10px);
+          border-radius: var(--radius-2xl);
+          padding: var(--spacing-8);
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
           transition: all var(--transition-normal);
           display: flex;
           flex-direction: column;
           width: 100%;
-          max-width: 350px;
+          min-height: 420px;
         }
 
         .service-card:hover {
@@ -196,29 +195,36 @@ const ServicesPreview: React.FC = () => {
         }
         
         .section-cta .btn {
-          background: rgba(255, 255, 255, 0.95);
+          background: #fffcea;
           color: var(--color-primary);
-          border: 1px solid transparent;
+          border: 1px solid #fffcea;
           font-weight: 600;
-          padding: 1rem 2.5rem;
-          border-radius: 8px;
+          padding: 0.8rem 2.2rem;
+          border-radius: var(--radius-lg);
           backdrop-filter: blur(10px);
           transition: all 0.3s ease;
         }
         
         .section-cta .btn:hover {
-          background: var(--color-white);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          background: transparent;
+          color: #fffcea;
+          border-color: #fffcea;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .services-grid {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-6);
+            grid-template-columns: repeat(2, minmax(300px, 1fr));
           }
 
           .service-card {
             padding: var(--spacing-6);
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .services-grid {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

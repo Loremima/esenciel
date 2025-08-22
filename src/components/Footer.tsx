@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
                 <li><Link to="/services#individuels">Santé & Qualité de Vie</Link></li>
                 <li><Link to="/services#individuels">Pleine Conscience</Link></li>
                 <li><Link to="/services#groupes">Jeu du Tao</Link></li>
-                <li><Link to="/services#programmes">Programmes MBSR/MBCT</Link></li>
+                <li><Link to="/services#programmes">Programmes de pleine conscience </Link></li>
               </ul>
             </div>
 
@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         /* Footer principal */
         .footer {
           background: var(--color-primary);
@@ -135,15 +135,15 @@ const Footer: React.FC = () => {
         }
 
         .newsletter__title {
-          font-size: 2rem;
+          font-size: 3.2rem;
           margin-bottom: 1rem;
-          color: var(--color-white);
-          font-weight: 300;
+          color: #fffcea;
+          font-weight: 400;
           margin: 0 0 1rem 0;
         }
 
         .newsletter__description {
-          color: rgba(255, 255, 255, 0.8);
+          color: #fffcea;
           margin-bottom: 2rem;
           font-size: 1rem;
           margin: 0 0 2rem 0;
@@ -164,6 +164,7 @@ const Footer: React.FC = () => {
           font-size: 0.9rem;
           outline: none;
           color: var(--color-gray-700);
+          background-color: #fffcea;
         }
 
         .newsletter__input::placeholder {
@@ -173,7 +174,7 @@ const Footer: React.FC = () => {
 
         .newsletter__button {
           background: var(--color-secondary);
-          color: var(--color-white);
+          color: #fffcea;
           border: none;
           padding: 1rem 1.5rem;
           border-radius: 0 50px 50px 0;
@@ -205,7 +206,7 @@ const Footer: React.FC = () => {
         }
 
         .footer__description {
-          color: rgba(255, 255, 255, 0.8);
+          color: #fffcea;
           line-height: 1.6;
           font-size: 0.9rem;
           margin-top: 1.5rem;
@@ -220,7 +221,7 @@ const Footer: React.FC = () => {
         .footer__section-title {
           font-size: 0.875rem;
           font-weight: 600;
-          color: var(--color-white);
+          color: #fffcea;
           margin: 0 0 1.5rem 0;
           text-transform: uppercase;
           letter-spacing: 0.05em;
@@ -236,7 +237,7 @@ const Footer: React.FC = () => {
         }
 
         .footer__links a {
-          color: rgba(255, 255, 255, 0.7);
+          color: #fffcea;
           text-decoration: none;
           transition: color 0.2s ease;
           font-size: 0.875rem;
@@ -259,7 +260,7 @@ const Footer: React.FC = () => {
           display: flex;
           align-items: center;
           gap: 0.75rem;
-          color: rgba(255, 255, 255, 0.8);
+          color: #fffcea;
           font-size: 0.875rem;
         }
 
@@ -291,7 +292,7 @@ const Footer: React.FC = () => {
         }
 
         .footer__legal-links a {
-          color: rgba(255, 255, 255, 0.6);
+          color: #fffcea;
           text-decoration: none;
           font-size: 0.8rem;
           transition: color 0.2s ease;
@@ -310,7 +311,7 @@ const Footer: React.FC = () => {
         }
 
         .footer__copyright {
-          color: rgba(255, 255, 255, 0.6);
+          color: #fffcea;
           font-size: 0.8rem;
           margin: 0;
         }
@@ -320,7 +321,7 @@ const Footer: React.FC = () => {
           align-items: center;
           gap: 0.5rem;
           font-size: 0.8rem;
-          color: rgba(255, 255, 255, 0.6);
+          color: #fffcea;
           margin: 0;
         }
 

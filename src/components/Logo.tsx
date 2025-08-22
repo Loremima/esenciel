@@ -2,11 +2,12 @@ import React from 'react';
 
 interface LogoProps {
   variant?: 'navbar' | 'footer';
+  isScrolled?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ variant = 'navbar' }) => {
+const Logo: React.FC<LogoProps> = ({ variant = 'navbar', isScrolled = false }) => {
   return (
-    <div className={`logo logo--${variant}`}>
+    <div className={`logo logo--${variant} ${isScrolled ? 'logo--scrolled' : ''}`}>
       <img
         src="/logo.png"
         alt="MindWayLife Logo"
@@ -14,7 +15,7 @@ const Logo: React.FC<LogoProps> = ({ variant = 'navbar' }) => {
       />
 
       <div className="logo__text">
-        <h1 className="logo__name">MindWayLife</h1>
+        <h1 className="logo__name">Véronique Carrié</h1>
       </div>
 
       <style jsx>{`
@@ -45,14 +46,22 @@ const Logo: React.FC<LogoProps> = ({ variant = 'navbar' }) => {
           line-height: 1.2;
         }
 
-        /* Navbar variant - Logo noir */
+        /* Navbar variant - Logo blanc par défaut */
         .logo--navbar .logo__name {
+          color: #fffcea !important;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+          transition: all 0.3s ease;
+        }
+
+        /* Navbar variant - Logo noir quand scrollé */
+        .logo--navbar.logo--scrolled .logo__name {
           color: #1F2937 !important;
+          text-shadow: none;
         }
 
         /* Footer variant - Logo blanc */
         .logo--footer .logo__name {
-          color: #FFFFFF !important;
+          color: #fffcea !important;
         }
 
         @media (max-width: 768px) {

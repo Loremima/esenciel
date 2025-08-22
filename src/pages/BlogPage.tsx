@@ -120,10 +120,19 @@ const BlogPage: React.FC = () => {
 
       {/* Articles */}
       <section className="section articles-section parallax-surface">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="parallax-video"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
         <div className="container">
           <div className="articles-grid">
             {filteredPosts.map((post) => (
-              <article key={post.id} className="article-card">
+              <article key={post.id} className="blog-card article-card">
                 <div className="article-image">
                   <img src={post.image} alt={post.title} loading="lazy" />
                   <div className="article-category">{post.category}</div>
@@ -174,7 +183,7 @@ const BlogPage: React.FC = () => {
         /* === HERO SECTION AVEC VIDÉO === */
         .hero-blog {
           position: relative;
-          min-height: 100vh;
+          min-height: 60vh;
           width: 100%;
           overflow: hidden;
           display: flex;
@@ -292,16 +301,35 @@ const BlogPage: React.FC = () => {
         }
 
         .article-card {
-          background: #fffcea;
-          border-radius: var(--radius-xl);
+          /* Le style transparent est géré par .card global */
           overflow: hidden;
-          box-shadow: var(--shadow-md);
-          transition: all var(--transition-normal);
+        }
+
+        /* Améliorer la lisibilité du contenu des articles sur fond transparent */
+        .article-content h3 {
+          color: var(--color-primary-dark) !important;
+          font-weight: 600 !important;
+          margin-bottom: var(--spacing-3);
+          text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
+        }
+
+        .article-excerpt {
+          color: var(--color-gray-900) !important;
+          text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+          line-height: 1.6;
+          margin-bottom: var(--spacing-4);
+          font-weight: 500;
+        }
+
+        .article-meta {
+          color: var(--color-gray-700) !important;
+          font-size: 0.9rem;
+          text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+          font-weight: 500;
         }
 
         .article-card:hover {
-          transform: translateY(-4px);
-          box-shadow: var(--shadow-xl);
+          box-shadow: var(--shadow-lg);
         }
 
         .article-image {
@@ -318,7 +346,7 @@ const BlogPage: React.FC = () => {
         }
 
         .article-card:hover .article-image img {
-          transform: scale(1.05);
+          /* Pas d'effet de zoom */
         }
 
         .article-category {

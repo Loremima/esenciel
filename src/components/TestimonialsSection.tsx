@@ -146,14 +146,14 @@ const TestimonialsSection: React.FC = () => {
         }
 
         .section-header h2 {
-          color: var(--color-white);
+          color: #fffcea;
           text-shadow: 0 2px 10px rgba(0,0,0,0.3);
           margin-bottom: var(--spacing-4);
           font-size: clamp(2rem, 4vw, 2.5rem);
         }
 
         .section-subtitle {
-          color: rgba(255, 255, 255, 0.9);
+          color: #fffcea;
           text-shadow: 0 1px 5px rgba(0,0,0,0.3);
           font-size: 1.2rem;
           max-width: 600px;
@@ -173,7 +173,7 @@ const TestimonialsSection: React.FC = () => {
 
         .testimonial-card {
           flex: 1;
-          background: rgba(255, 255, 255, 0.95);
+          background: #fffcea;
           color: var(--color-gray-800);
           border-radius: var(--radius-2xl);
           padding: var(--spacing-10);
@@ -241,7 +241,7 @@ const TestimonialsSection: React.FC = () => {
         }
 
         .nav-button {
-          background: var(--color-white);
+          background: #fffcea;
           border: 1px solid var(--color-gray-200);
           color: var(--color-primary);
           border-radius: 50%;
@@ -270,7 +270,7 @@ const TestimonialsSection: React.FC = () => {
           height: 12px;
           border-radius: 50%;
           border: none;
-          background: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 252, 234, 0.3);
           cursor: pointer;
           transition: all var(--transition-fast);
         }
@@ -281,7 +281,7 @@ const TestimonialsSection: React.FC = () => {
         }
 
         .indicator:hover {
-          background: rgba(255, 255, 255, 0.6);
+          background: rgba(255, 252, 234, 0.6);
         }
 
         @media (max-width: 1024px) {

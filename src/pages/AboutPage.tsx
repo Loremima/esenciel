@@ -1,33 +1,27 @@
 import React from 'react';
-import { Brain, Heart, Award, Sparkles, ArrowRight } from 'lucide-react';
+import { Sparkles, Heart, Award, ArrowRight, CalendarDays } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
   const credentials = [
     {
-      icon: Brain,
-      title: 'Psychologue Clinicienne',
-      description: 'Spécialisée en neuropsychologie',
-      details: 'Formation universitaire approfondie en sciences psychologiques'
-    },
-    {
       icon: Sparkles,
       title: 'Instructrice MBSR',
       description: 'Mindfulness-Based Stress Reduction',
-      details: 'Certification internationale en programmes de pleine conscience'
+      details: 'Certification internationale en programmes de pleine conscience',
     },
     {
       icon: Heart,
       title: 'Coach Santé',
       description: 'Approche intégrative',
-      details: 'Accompagnement holistique corps-esprit'
+      details: 'Accompagnement holistique corps-esprit',
     },
     {
       icon: Award,
       title: 'Formation Continue',
       description: 'Expertise en développement',
-      details: 'Perfectionnement constant des pratiques'
-    }
+      details: 'Perfectionnement constant des pratiques',
+    },
   ];
 
   const values = [
@@ -80,51 +74,59 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Présentation détaillée */}
-      <section className="section presentation">
+      {/* Intro Section */}
+      <section className="section intro-section">
+        <div className="container intro-container">
+          <div className="intro-image">
+            <img src="/vero.jpg" alt="Véronique Carrié" />
+          </div>
+          <div className="intro-text">
+            <h2>Véronique Carrié</h2>
+            <p className="intro-subtitle">Instructrice MBSR & Coach Santé</p>
+            <p> Je m'appelle Véronique Carrié, et ma passion pour l'humain m'a naturellement conduite vers des études en psychologie clinique, avec une spécialité en neuropsychologie, pour explorer les mécanismes cognitifs et émotionnels qui influencent notre comportement, et favoriser une meilleure qualité de vie.
+            </p>
+            <p>
+              Au fil de mon parcours professionnel en clinique, j'ai constaté que la prévention, l'éducation à la santé et l'accompagnement vers une meilleure connaissance de soi pouvaient transformer profondément les trajectoires de vie. Comprendre le fonctionnement, c'est comme disposer d'une notice, un outil précieux pour faire des choix éclairés.
+            </p>
+            <p>
+              C'est pourquoi, depuis quelques années, je propose des programmes d'accompagnement intégratifs, alliant les sciences psychologiques, la pleine conscience et l'éducation à la santé, pour encourager des comportements durables et bénéfiques. Mon rôle est de fournir des outils adaptés afin que chacun puisse trouver ses propres solutions, dans un esprit de co‑création et d'exploration. Mon objectif est d'aider les individus à mieux comprendre leurs propres mécanismes et à s'adapter aux changements de la vie.
+            </p>
+            <div className="intro-signature">
+              Véronique
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section combinée Approche, Qualifications, Valeurs */}
+      <section className="section combined-details parallax-surface">
+        <video autoPlay muted loop playsInline className="parallax-video">
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
         <div className="container">
-          <div className="presentation-content">
-            <div className="text-content">
-              <h2>Qui suis‑je ?</h2>
-              <p className="lead-text">
-                Je m'appelle Véronique Carrié, et ma passion pour l'humain m'a naturellement conduite vers des études en psychologie clinique, avec une spécialité en neuropsychologie, pour explorer les mécanismes cognitifs et émotionnels qui influencent notre comportement, et favoriser une meilleure qualité de vie.
-              </p>
-
-              <p>
-                Au fil de mon parcours professionnel en clinique, j’ai constaté que la prévention, l’éducation à la santé et l’accompagnement vers une meilleure connaissance de soi pouvaient transformer profondément les trajectoires de vie. Comprendre le fonctionnement, c’est comme disposer d’une notice, un outil précieux pour faire des choix éclairés.
-              </p>
-
-              <p>
-                C’est pourquoi, depuis quelques années, je propose des programmes d’accompagnement intégratifs, alliant les sciences psychologiques, la pleine conscience et l’éducation à la santé, pour encourager des comportements durables et bénéfiques. Mon rôle est de fournir des outils adaptés afin que chacun puisse trouver ses propres solutions, dans un esprit de co‑création et d’exploration.
-              </p>
-
-              <div className="philosophy">
-                <h3>Mon approche</h3>
-                <blockquote>
-                  J'ai développé une vision globale de la santé et de la qualité de vie, alliant une perspective à la fois holistique et systémique. Plutôt que d'appliquer des solutions toutes faites, je crois fermement que chaque personne porte en elle ses propres ressources. Mon rôle est de remettre l'humain au cœur de ses décisions, en l’aidant à se reconnecter à ce qui fait sens pour lui.
-                </blockquote>
-                <blockquote>
-                  Cette approche repose sur un processus de maturation continue, permettant à chacun d'assimiler ses expériences à son propre rythme. C'est un chemin d'apprentissage et de croissance, où l'autonomie et la responsabilisation sont au cœur du processus.
-                </blockquote>
-              </div>
-
-              <div className="philosophy">
-                <h3>Une citation qui m'accompagne</h3>
-                <blockquote>
-                  « Celui qui regarde l'extérieur rêve, celui qui regarde à l'intérieur s'éveille. » – Carl Jung
-                </blockquote>
+          <div className="details-wrapper">
+            {/* Colonne 1: Approche */}
+            <div className="full-width-values">
+              <h2 className="col-title">Ma philosophie</h2>
+              <div className="philosophy-cards">
+                <div className="philosophy-card">
+                  <p>J'ai développé une vision globale de la santé et de la qualité de vie, alliant une perspective à la fois holistique et systémique. Plutôt que d'appliquer des solutions toutes faites, je crois fermement que chaque personne porte en elle ses propres ressources. Mon rôle est de remettre l'humain au cœur de ses décisions, en l'aidant à se reconnecter à ce qui fait sens pour lui.</p>
+                  <p>Cette approche repose sur un processus de maturation continue, permettant à chacun d'assimiler ses expériences à son propre rythme. C'est un chemin d'apprentissage et de croissance, où l'autonomie et la responsabilisation sont au cœur du processus. Chacun devient acteur de sa santé et de son bien-être, en apprenant à mieux se connaître et à développer une écoute bienveillante envers soi-même.</p>
+                  <p>Je privilégie une alliance bienveillante, respectueuse de la singularité de chacun, et j'intègre des pratiques alternatives non médicamenteuses, qui permettent d'observer et de dépasser les croyances limitantes.</p>
+                </div>
               </div>
             </div>
 
-            <div className="credentials-sidebar">
-              <h3>Mes Qualifications</h3>
-              <div className="credentials-list">
+            {/* Colonne 2: Qualifications */}
+            <div className="full-width-values">
+              <h2 className="col-title">Mes Qualifications</h2>
+              <div className="credentials-grid">
                 {credentials.map((credential, index) => {
                   const IconComponent = credential.icon;
                   return (
-                    <div key={index} className="credential-item">
+                    <div key={index} className="credential-card">
                       <div className="credential-icon">
-                        <IconComponent size={24} />
+                        <IconComponent size={28} />
                       </div>
                       <div className="credential-content">
                         <h4>{credential.title}</h4>
@@ -136,27 +138,32 @@ const AboutPage: React.FC = () => {
                 })}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Valeurs */}
-      <section className="section values">
-        <div className="container">
-          <div className="section-header">
-            <h2>Mes Valeurs</h2>
-            <p className="section-subtitle">
-              Les principes qui guident mon accompagnement au quotidien
-            </p>
-          </div>
-
-          <div className="values-grid">
-            {values.map((value, index) => (
-              <div key={index} className="value-card">
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
+            {/* Section Valeurs en pleine largeur */}
+            <div className="full-width-values">
+              <div className="values-header">
+                <h2 className="col-title">Mes Valeurs</h2>
+                <p className="col-subtitle oneline">Les principes qui guident mon accompagnement au quotidien</p>
               </div>
-            ))}
+              <div className="values-grid">
+                {values.map((value, index) => (
+                  <div key={index} className="value-card">
+                    <h3>{value.title}</h3>
+                    <p>{value.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Section Citation en pleine largeur */}
+            <div className="full-width-quote">
+              <div className="quote-section">
+                <blockquote>
+                  « Celui qui regarde l'extérieur rêve, celui qui regarde à l'intérieur s'éveille. »
+                  <footer>– Carl Jung</footer>
+                </blockquote>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -173,17 +180,87 @@ const AboutPage: React.FC = () => {
             <div className="cta-actions">
               <Link to="/contact-reservation" className="btn btn-primary">
                 Prendre rendez-vous
-                <ArrowRight size={18} />
+                <CalendarDays size={16} />
               </Link>
               <Link to="/services" className="btn btn-outline">
                 Découvrir mes services
+                <ArrowRight size={18} />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <style jsx>{`
+      {/* Disclaimer */}
+      <section className="section disclaimer-section">
+        <div className="container">
+          <p>
+            <strong>Avis de non-responsabilité :</strong> Je ne suis pas médecin. Mes accompagnements et conseils visent au bien-être et au développement personnel, mais ne se substituent en aucun cas à un avis médical, un diagnostic ou un traitement prescrit par un professionnel de la santé. Pour toute question d'ordre médical, veuillez consulter votre médecin.
+          </p>
+        </div>
+      </section>
+
+      <style>{`
+        .invitation-text {
+          font-style: italic;
+          color: var(--color-gray-700);
+          margin-bottom: var(--spacing-6);
+          font-size: 1.1rem;
+        }
+
+        /* === INTRO SECTION === */
+        .intro-section {
+          background: #fffcea;
+          padding: var(--spacing-20) 0;
+        }
+        .intro-container {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: var(--spacing-12);
+          align-items: center;
+        }
+        .intro-image img {
+          width: 100%;
+          height: auto;
+          border-radius: 50%;
+          box-shadow: var(--shadow-xl);
+          border: 6px solid var(--color-white);
+        }
+        .intro-text h2 {
+          color: var(--color-primary);
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          margin-bottom: var(--spacing-2);
+        }
+        .intro-subtitle {
+          font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+          font-weight: 600;
+          color: var(--color-secondary-dark);
+          margin-bottom: var(--spacing-6);
+        }
+        .intro-text p {
+          font-size: 1.1rem;
+          line-height: 1.8;
+          color: var(--color-gray-700);
+          margin-bottom: var(--spacing-4); /* Ajout d'espacement */
+        }
+        .intro-signature {
+          font-family: 'Playfair Display', serif;
+          font-style: italic;
+          font-size: 2rem;
+          color: var(--color-secondary-dark);
+          margin-top: var(--spacing-6);
+        }
+        @media (max-width: 768px) {
+          .intro-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
+          .intro-image {
+            max-width: 250px;
+            margin: 0 auto var(--spacing-8) auto;
+          }
+        }
+
         .about-page {
           padding-top: 0;
         }
@@ -191,7 +268,7 @@ const AboutPage: React.FC = () => {
         /* === HERO SECTION AVEC VIDÉO === */
         .hero-about {
           position: relative;
-          min-height: 100vh;
+          min-height: 60vh;
           width: 100%;
           overflow: hidden;
           display: flex;
@@ -258,225 +335,264 @@ const AboutPage: React.FC = () => {
           letter-spacing: 0.025em;
         }
 
-        /* === SECTION PRÉSENTATION === */
-        .presentation {
-          background: linear-gradient(135deg, #fffcea 0%, var(--color-gray-50) 100%);
+        /* === SECTION COMBINÉE === */
+        .combined-details {
           padding: var(--spacing-20) 0;
         }
 
-        /* Container défini dans globals.css */
-
-        .presentation-content {
+        .details-wrapper {
           display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: var(--spacing-12);
+          grid-template-columns: 1fr 1fr;
+          gap: var(--spacing-10);
           align-items: start;
         }
-
-        .text-content h2 {
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
-          font-weight: 700;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-8);
-          line-height: 1.2;
+        @media (max-width: 1024px) {
+          .details-wrapper {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-12);
+          }
+        }
+        
+        .philo-col {
+          grid-column: 1 / 2;
+        }
+        .quali-col {
+          grid-column: 2 / 3;
+        }
+        @media (max-width: 1024px) {
+          .philo-col, .quali-col {
+            grid-column: 1 / -1;
+          }
         }
 
-        .lead-text {
-          font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-          font-weight: 500;
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-8);
-          line-height: 1.7;
-          padding: var(--spacing-6);
-          background: rgba(85, 107, 47, 0.05);
-          border-radius: var(--radius-xl);
-          border-left: 4px solid var(--color-secondary);
+        .full-width-values,
+        .full-width-quote {
+          grid-column: 1 / -1;
         }
 
-        .text-content p {
-          color: var(--color-gray-700);
-          line-height: 1.8;
-          margin-bottom: var(--spacing-6);
-          font-size: 1.1rem;
-        }
-
-        .philosophy {
-          margin-top: var(--spacing-10);
-          padding: var(--spacing-8);
-          background: linear-gradient(135deg, rgba(85, 107, 47, 0.08) 0%, rgba(85, 107, 47, 0.03) 100%);
-          border-radius: var(--radius-2xl);
-          border: 1px solid rgba(85, 107, 47, 0.1);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .philosophy h3 {
-          font-size: 1.5rem;
-          margin-bottom: var(--spacing-6);
-          color: var(--color-primary);
-          font-weight: 600;
-        }
-
-        .philosophy blockquote {
+        .col-title {
           font-family: var(--font-heading);
-          font-style: italic;
-          font-size: 1.2rem;
-          color: var(--color-gray-700);
-          margin: 0 0 var(--spacing-4) 0;
-          line-height: 1.7;
-          padding: var(--spacing-4) 0;
-          border-bottom: 1px solid rgba(85, 107, 47, 0.1);
-        }
-
-        .philosophy blockquote:last-child {
-          border-bottom: none;
-          margin-bottom: 0;
-        }
-
-        /* === SIDEBAR QUALIFICATIONS === */
-        .credentials-sidebar {
-          background: linear-gradient(135deg, #fffcea 0%, var(--color-gray-50) 100%);
-          border-radius: var(--radius-2xl);
-          padding: var(--spacing-8);
-          height: fit-content;
-          position: sticky;
-          top: 120px;
-          border: 1px solid rgba(85, 107, 47, 0.1);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-        }
-
-        .credentials-sidebar h3 {
-          font-size: 1.5rem;
-          margin-bottom: var(--spacing-8);
-          color: var(--color-primary);
+          font-size: 2.2rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: white;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
           text-align: center;
-          font-weight: 600;
+          margin-bottom: var(--spacing-10);
+        }
+        
+        .col-subtitle {
+          color: rgba(255, 255, 255, 0.8);
+          text-align: center;
+          max-width: 300px;
+          margin: -1rem auto 2rem;
+          font-size: 0.95rem;
+          line-height: 1.6;
         }
 
-        .credentials-list {
+        .philosophy-cards {
           display: flex;
           flex-direction: column;
-          gap: var(--spacing-8);
+          gap: var(--spacing-12);
+          max-width: 760px;
+          margin: 0 auto;
         }
 
-        .credential-item {
-          display: flex;
-          gap: var(--spacing-4);
-          align-items: flex-start;
-          padding: var(--spacing-4);
-          border-radius: var(--radius-xl);
-          transition: all 0.3s ease;
-          border: 1px solid transparent;
+        .philosophy-card {
+            padding: var(--spacing-10);
         }
 
-        .credential-item:hover {
-          background: rgba(85, 107, 47, 0.03);
-          border-color: rgba(85, 107, 47, 0.1);
-          transform: translateY(-2px);
+        .philosophy-card p {
+            margin: 0;
+            font-size: 1.12rem;
+            line-height: 2;
+            text-align: left;
         }
+        .philosophy-card p + p { margin-top: var(--spacing-6); }
+        
+        .quote-section {
+            margin-top: 0;
+            padding: var(--spacing-6);
+        }
+
+        .quote-section blockquote {
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+            line-height: 1.7;
+            margin: 0;
+            text-align: center;
+        }
+
+        .quote-section footer {
+            margin-top: var(--spacing-4);
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
+        .values-header { text-align: center; margin-bottom: var(--spacing-8); }
+        .col-subtitle.oneline { max-width: 800px; margin: 0.5rem auto 0; font-size: 1.15rem; }
+
+        .credentials-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: var(--spacing-6);
+        }
+
+        .credential-card {
+            padding: var(--spacing-5);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-5);
+            transition: all 0.3s ease;
+        }
+
+        .credential-card:hover { }
 
         .credential-icon {
-          background: linear-gradient(135deg, rgba(218, 165, 32, 0.15) 0%, rgba(218, 165, 32, 0.05) 100%);
-          color: var(--color-secondary);
-          padding: var(--spacing-3);
-          border-radius: var(--radius-lg);
-          flex-shrink: 0;
-          border: 1px solid rgba(218, 165, 32, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
-
+        
+        .credential-content {
+          text-align: left;
+        }
+        
         .credential-content h4 {
-          margin: 0 0 var(--spacing-2);
-          color: var(--color-primary);
-          font-size: 1.1rem;
-          font-weight: 600;
+            margin: 0 0 var(--spacing-1);
+            font-size: 1.1rem;
+            font-weight: 600;
         }
-
+        
         .credential-description {
-          color: var(--color-secondary);
-          font-weight: 600;
-          margin: 0 0 var(--spacing-2);
-          font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0 0 var(--spacing-1);
+            font-size: 0.9rem;
         }
 
         .credential-details {
-          color: var(--color-gray-600);
-          font-size: 0.9rem;
-          margin: 0;
-          line-height: 1.5;
+            font-size: 0.85rem;
+            margin: 0;
+            line-height: 1.5;
+            opacity: 0.9;
         }
 
-        /* === SECTION VALEURS === */
-        .values {
-          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-          padding: var(--spacing-20) 0;
-          color: var(--color-white);
+        .full-width-values {
+          margin-top: var(--spacing-12);
         }
-
-        .section {
-          padding: var(--spacing-20) 0;
-        }
-
-        .section-header {
-          text-align: center;
-          margin-bottom: var(--spacing-16);
-        }
-
-        .section-header h2 {
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
-          font-weight: 700;
-          margin-bottom: var(--spacing-6);
-          color: #fffcea;
-        }
-
-        .section-subtitle {
-          font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-          color: rgba(255, 252, 234, 0.8);
-          max-width: 700px;
-          margin: 0 auto;
-          line-height: 1.6;
+        .full-width-quote {
+          margin-top: var(--spacing-8);
         }
 
         .values-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: var(--spacing-8);
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: var(--spacing-6);
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
         .value-card {
-          background: rgba(255, 252, 234, 0.1);
-          backdrop-filter: blur(10px);
-          padding: var(--spacing-8);
-          border-radius: var(--radius-2xl);
+          padding: var(--spacing-6);
           text-align: center;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          border: 1px solid rgba(255, 252, 234, 0.2);
+          transition: all 0.4s ease;
         }
 
-        .value-card:hover {
-          transform: translateY(-8px);
-          background: rgba(255, 252, 234, 0.15);
-          border-color: rgba(255, 252, 234, 0.3);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
+        .value-card:hover { }
 
         .value-card h3 {
-          font-size: 1.5rem;
-          margin-bottom: var(--spacing-4);
-          color: #fffcea;
+          font-size: 1.1rem;
+          margin-bottom: var(--spacing-2);
           font-weight: 600;
         }
 
         .value-card p {
-          color: rgba(255, 252, 234, 0.8);
-          line-height: 1.7;
+          line-height: 1.6;
           margin: 0;
-          font-size: 1.1rem;
+          font-size: 0.9rem;
         }
+
+        /* Styles for cards on parallax */
+        .parallax-surface .philosophy-card,
+        .parallax-surface .credential-card,
+        .parallax-surface .value-card {
+            background: linear-gradient(135deg,
+              rgba(255, 255, 255, 0.8) 0%,
+              rgba(255, 255, 255, 0.5) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-xl);
+        }
+
+        .parallax-surface .philosophy-card:hover,
+        .parallax-surface .credential-card:hover,
+        .parallax-surface .value-card:hover {
+            background: linear-gradient(135deg,
+              rgba(255, 255, 255, 0.9) 0%,
+              rgba(255, 255, 255, 0.6) 100%);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .parallax-surface .philosophy-card p,
+        .parallax-surface .credential-card h4,
+        .parallax-surface .credential-card p,
+        .parallax-surface .value-card h3,
+        .parallax-surface .value-card p {
+            color: var(--color-primary-dark) !important;
+            text-shadow: none !important;
+        }
+        .parallax-surface .credential-icon {
+          color: var(--color-primary-dark);
+        }
+
+        .parallax-surface .credential-card .credential-description {
+            color: var(--color-secondary-dark) !important;
+        }
+        
+        /* === DISCLAIMER SECTION === */
+        .disclaimer-section {
+          background: #fffcea;
+          padding: var(--spacing-10) 0 var(--spacing-16);
+          text-align: center;
+          border-top: 1px solid rgba(0,0,0,0.06);
+        }
+        .disclaimer-section .container {
+          max-width: 900px;
+        }
+        .disclaimer-section p {
+          font-size: 1rem;
+          color: var(--color-gray-700);
+          margin: 0;
+          line-height: 1.9;
+          font-style: italic;
+        }
+        .disclaimer-section strong {
+          color: var(--color-primary);
+          font-style: normal;
+          display: block;
+          margin-bottom: var(--spacing-2);
+          font-size: 1.2rem;
+          font-weight: 650;
+        }
+
 
         /* === SECTION CTA === */
         .cta-about {
-          background: linear-gradient(135deg, #fffcea 0%, var(--color-gray-50) 100%);
+          background: #fffcea;
           color: var(--color-primary);
           padding: var(--spacing-20) 0;
+          border-bottom: 1px solid rgba(0,0,0,0.06);
         }
 
         .cta-content {
@@ -493,9 +609,9 @@ const AboutPage: React.FC = () => {
         }
 
         .cta-content p {
-          font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+          font-size: clamp(1.2rem, 2.5vw, 1.45rem);
           color: var(--color-gray-700);
-          margin-bottom: var(--spacing-10);
+          margin-bottom: var(--spacing-8);
           line-height: 1.6;
         }
 
@@ -510,13 +626,13 @@ const AboutPage: React.FC = () => {
           display: inline-flex;
           align-items: center;
           gap: var(--spacing-2);
-          padding: 1rem 2.5rem;
+          padding: 1rem 2.25rem;
           border-radius: var(--radius-xl);
           font-weight: 600;
           font-size: 1.1rem;
           text-decoration: none;
           transition: all 0.3s ease;
-          min-width: 200px;
+          min-width: 210px;
           justify-content: center;
         }
 
@@ -529,7 +645,6 @@ const AboutPage: React.FC = () => {
         .btn-primary:hover {
           background: var(--color-primary-dark);
           border-color: var(--color-primary-dark);
-          transform: translateY(-2px);
           box-shadow: 0 8px 25px rgba(85, 107, 47, 0.3);
         }
 
@@ -542,30 +657,29 @@ const AboutPage: React.FC = () => {
         .btn-outline:hover {
           background: var(--color-primary);
           color: #fffcea;
-          transform: translateY(-2px);
           box-shadow: 0 8px 25px rgba(85, 107, 47, 0.2);
         }
 
         /* === RESPONSIVE === */
         @media (max-width: 1024px) {
-          .presentation-content {
+          .presentation-grid {
             grid-template-columns: 1fr;
             gap: var(--spacing-10);
           }
-
-          .credentials-sidebar {
+          .sidebar-content {
             position: static;
-            order: -1;
           }
-
-          .values-grid {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-6);
+          .values-header {
+            flex-direction: column;
+            gap: var(--spacing-2);
           }
         }
-
+        
         @media (max-width: 768px) {
-
+          .values-grid {
+            grid-template-columns: 1fr;
+          }
+          
           .hero-text h1 {
             font-size: clamp(2.5rem, 8vw, 3.5rem);
           }

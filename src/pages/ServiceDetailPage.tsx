@@ -1,7 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Heart, Brain, Sparkles, ArrowRight, Clock, Users, Euro, CheckCircle, Phone, Calendar } from 'lucide-react';
+import { ArrowRight, Clock, Users, Euro, CheckCircle, Phone, Calendar } from 'lucide-react';
 
 interface ServiceDetailPageProps {
   service: 'sante' | 'mindfulness' | 'tao';
@@ -10,123 +9,97 @@ interface ServiceDetailPageProps {
 const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
   const serviceData = {
     sante: {
-      icon: Heart,
       title: 'Santé & Qualité de Vie',
-      subtitle: 'Accompagnement personnalisé pour devenir acteur de votre santé',
-      hero: 'https://images.pexels.com/photos/3760259/pexels-photo-3760259.jpeg',
-      description: 'Une approche intégrative qui vous accompagne vers une meilleure qualité de vie en prenant en compte votre globalité : physique, émotionnelle, mentale et environnementale.',
-      longDescription: `
-        Cet accompagnement s'adresse à toute personne souhaitant prendre en main sa santé de manière proactive et éclairée. 
-        Basé sur les dernières recherches en psychologie de la santé et neurosciences, il combine évaluation personnalisée, 
-        éducation thérapeutique et mise en place d'actions concrètes.
-        
-        L'objectif est de vous rendre autonome dans la gestion de votre bien-être, en développant vos ressources personnelles 
-        et en identifiant les leviers d'action les plus efficaces pour votre situation unique.
-      `,
+      subtitle: 'Acteur de sa santé : vers un bien-être durable',
+      description:
+        "Ces accompagnements sont conçus pour vous aider à identifier et à mettre en place des habitudes de vie favorables à votre bien‑être global. Grâce à un suivi personnalisé, nous explorerons vos ressources internes et lèverons les obstacles qui freinent vos intentions afin d'ancrer des pratiques durables.",
+      longDescription: `L’accompagnement vise à vous offrir un soutien continu pour instaurer et maintenir de nouvelles habitudes de vie. Par un travail conjoint, nous clarifierons vos objectifs, identifierons les leviers de motivation et construirons des actions alignées à vos valeurs pour une amélioration durable de votre qualité de vie.`,
       process: [
-        'Bilan de santé holistique approfondi',
-        'Identification de vos objectifs et priorités',
-        'Élaboration d\'un plan d\'action personnalisé',
-        'Accompagnement dans la mise en œuvre',
-        'Suivi régulier et ajustements'
+        "Première rencontre : clarification des objectifs et plan d'action personnalisé",
+        'Séances régulières : actions concrètes et ajustements selon vos besoins',
+        'Suivi personnalisé : mobilisation des ressources et consolidation des acquis',
+        'Bilan final : synthèse et pérennisation des changements'
       ],
       benefits: [
-        'Amélioration durable de votre vitalité',
-        'Gestion optimisée du stress et des émotions',
-        'Développement de saines habitudes de vie',
-        'Prévention des troubles de santé',
-        'Autonomie dans la gestion de votre bien-être'
+        "Prise de conscience des habitudes impactant le bien‑être",
+        'Identification des freins et des blocages',
+        'Mobilisation des ressources personnelles',
+        'Mise en place d’actions adaptées et alignées',
+        'Motivation soutenue sur le long terme'
       ],
       duration: '1h à 1h30 par séance',
       price: 'Sur devis',
       frequency: 'Selon vos besoins',
-      modalities: ['Cabinet à Vaureilles', 'Visioconférence']
+      modalities: ['Cabinet', 'Visioconférence']
     },
     mindfulness: {
-      icon: Brain,
       title: 'Pleine Conscience',
-      subtitle: 'Développez votre présence et votre écoute intérieure',
-      hero: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg',
-      description: 'Inspiré de la sagesse de Jung "Qui regarde dehors rêve, qui regarde en soi s\'éveille", cet accompagnement vous guide vers une meilleure connaissance de vous-même.',
-      longDescription: `
-        La pleine conscience (mindfulness) est une pratique millénaire validée scientifiquement qui consiste à porter 
-        attention au moment présent avec bienveillance. Cette approche vous permet de développer une relation différente 
-        avec vos pensées, émotions et sensations.
-        
-        Que vous souhaitiez gérer le stress, améliorer votre concentration, ou simplement cultiver plus de paix intérieure, 
-        ces techniques s'adaptent à votre rythme et vos objectifs personnels.
-      `,
+      subtitle: 'Ralentir pour mieux se retrouver',
+      description:
+        "Cet accompagnement vous invite à ralentir, à vous poser et à respirer pour cultiver une présence plus profonde. Les outils de pleine conscience vous aident à clarifier vos pensées, apaiser le cœur et vous aligner avec votre essence.",
+      longDescription:
+        "Processus progressif et flexible pour devenir plus autonome dans la gestion de votre bien‑être : pratiques guidées, exercices expérientiels et réflexions personnelles pour observer pensées, émotions et réponses automatisées avec bienveillance et transformer vos modes d’action.",
       process: [
-        'Découverte des fondements de la pleine conscience',
-        'Pratiques de méditation guidée adaptées',
-        'Techniques de respiration consciente',
-        'Exercices d\'observation bienveillante',
-        'Intégration dans votre quotidien'
+        'Découverte des fondements et pratiques guidées adaptées',
+        'Observation bienveillante et clarification mentale',
+        'Intégration dans le quotidien et consolidation',
+        'Suivi pour ancrer la pratique dans la durée'
       ],
       benefits: [
-        'Réduction significative du stress et de l\'anxiété',
-        'Amélioration de la concentration et clarté mentale',
-        'Meilleure régulation émotionnelle',
-        'Qualité de sommeil améliorée',
-        'Développement de la compassion envers soi'
+        'Écoute plus attentive de soi',
+        "Reconnexion à l’instant présent et aux besoins profonds",
+        'Libération de l’espace mental et émotionnel',
+        'Autonomie et meilleure qualité de vie',
+        'Choix de vie plus éclairés et alignés'
       ],
-      duration: '45min à 1h par séance',
+      duration: '45 min à 1h par séance',
       price: 'Sur devis',
-      frequency: 'Hebdomadaire puis adaptée',
-      modalities: ['Séances individuelles', 'Groupes', 'En ligne']
+      frequency: 'À définir ensemble',
+      modalities: ['Individuel', 'Groupe', 'En ligne']
     },
     tao: {
-      icon: Sparkles,
-      title: 'Jeu du Tao',
-      subtitle: 'Exploration ludique et créative de votre potentiel',
-      hero: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
-      description: 'Une approche unique qui utilise le jeu comme vecteur de développement personnel et de découverte de soi, dans un cadre de groupe bienveillant.',
-      longDescription: `
-        Le Jeu du Tao est une méthode innovante qui combine ludisme et introspection pour révéler votre potentiel unique. 
-        Dans un cadre de groupe sécurisant, vous explorez différentes facettes de votre personnalité à travers des activités 
-        créatives et des exercices de développement personnel.
-        
-        Cette approche favorise la spontanéité, la créativité et les échanges enrichissants avec les autres participants, 
-        tout en respectant le rythme et les limites de chacun.
-      `,
+      title: 'Jeu du Tao du Mieux‑Être',
+      subtitle: 'Devenez le héros de votre propre légende – Jeu collectif',
+      description:
+        "Expérience interactive et immersive invitant à clarifier sa quête personnelle, avec l’appui du collectif. Un chemin d’introspection vers un équilibre de vie durable.",
+      longDescription:
+        "Dans un cadre bienveillant, chaque participant explore quatre mondes symboliques (Terre, Eau, Feu, Air) au travers de questions et d’échanges pour mettre au jour ses ressources, ses freins et ses aspirations, et ajuster ses choix de vie de manière plus éclairée.",
       process: [
-        'Accueil et présentation du cadre bienveillant',
+        'Accueil et présentation du cadre',
         'Échauffement créatif et mise en confiance',
-        'Exploration guidée à travers différents jeux',
-        'Temps de partage et d\'échanges',
+        'Exploration guidée à travers les 4 mondes',
+        "Temps de partage et d'échanges",
         'Synthèse et ancrage des découvertes'
       ],
       benefits: [
-        'Meilleure connaissance de vos ressources',
-        'Développement de la confiance en soi',
-        'Stimulation de votre créativité naturelle',
-        'Renforcement des liens sociaux',
-        'Outils concrets pour votre quotidien'
+        'Clarification des aspirations personnelles',
+        'Introspection facilitée et harmonisation',
+        'Ressources activées et décisions plus alignées',
+        'Intelligence et entraide collective',
+        'Outils concrets pour le quotidien'
       ],
-      duration: '4 heures (avec pause)',
-      price: '60€ par personne',
-      frequency: 'Séances ponctuelles',
-      modalities: ['Groupe de 4 à 5 personnes', 'Minimum 3 participants', 'Présentiel uniquement']
+      duration: '4 à 5 heures',
+      price: '70€ par personne',
+      frequency: 'Sessions ponctuelles',
+      modalities: ['Jusqu’à 4 participants', 'Présentiel ou en ligne']
     }
-  };
+  } as const;
 
   const currentService = serviceData[service];
-  const IconComponent = currentService.icon;
 
   return (
     <div className="service-detail-page">
       {/* Hero Section */}
-      <section className="hero-service-detail">
+      <section className="hero-service-detail hero-services">
         <div className="hero-background">
-          <img src={currentService.hero} alt={currentService.title} />
+          <video autoPlay muted loop playsInline className="hero-video">
+            <source src="/background.mp4" type="video/mp4" />
+          </video>
           <div className="hero-overlay"></div>
         </div>
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
-              <div className="service-icon-large">
-                <IconComponent size={60} />
-              </div>
               <h1>{currentService.title}</h1>
               <p className="hero-subtitle">{currentService.subtitle}</p>
               <p className="hero-description">{currentService.description}</p>
@@ -140,7 +113,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
       </section>
 
       {/* Contenu détaillé */}
-      <section className="section service-content parallax-surface">
+      <section className="section service-content">
         <div className="container">
           <div className="content-grid">
             <div className="main-content">
@@ -234,7 +207,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
                     </Link>
                   )}
                   <Link to="/programmes-mbsr-mbct" className="related-link">
-                    Programmes MBSR/MBCT
+                    Programmes de pleine conscience
                   </Link>
                 </div>
               </div>
@@ -242,299 +215,6 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
           </div>
         </div>
       </section>
-
-      <style jsx>{`
-        .service-detail-page {
-          padding-top: 80px;
-        }
-
-        .hero-service-detail {
-          position: relative;
-          min-height: 60vh;
-          display: flex;
-          align-items: center;
-          overflow: hidden;
-        }
-
-        .hero-background {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: -2;
-        }
-
-        .hero-background img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .hero-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(
-            135deg,
-            rgba(44, 62, 80, 0.9) 0%,
-            rgba(26, 43, 60, 0.8) 100%
-          );
-          z-index: -1;
-        }
-
-        .hero-content {
-          position: relative;
-          z-index: 1;
-        }
-
-        .hero-text {
-          max-width: 600px;
-          color: var(--color-white);
-        }
-
-        .service-icon-large {
-          background: rgba(218, 165, 32, 0.2);
-          color: var(--color-secondary);
-          padding: var(--spacing-4);
-          border-radius: var(--radius-xl);
-          width: fit-content;
-          margin-bottom: var(--spacing-4);
-        }
-
-        .hero-text h1 {
-          color: var(--color-secondary);
-          margin-bottom: var(--spacing-6);
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
-          font-weight: 700;
-        }
-
-        .hero-subtitle {
-          font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-          color: rgba(255, 255, 255, 0.9);
-          margin-bottom: var(--spacing-6);
-          line-height: 1.5;
-        }
-
-        .hero-description {
-          font-size: clamp(1rem, 2vw, 1.1rem);
-          line-height: 1.6;
-          color: rgba(255, 255, 255, 0.8);
-          margin-bottom: var(--spacing-8);
-        }
-
-        .service-content {
-          background: var(--color-white);
-        }
-
-        .content-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: var(--spacing-12);
-        }
-
-        .main-content h2 {
-          margin-bottom: var(--spacing-6);
-          color: var(--color-primary);
-        }
-
-        .main-content h3 {
-          margin: var(--spacing-8) 0 var(--spacing-4);
-          color: var(--color-primary);
-        }
-
-        .text-content p {
-          line-height: 1.7;
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-4);
-        }
-
-        .process-list {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-4);
-          margin-bottom: var(--spacing-8);
-        }
-
-        .process-step {
-          display: flex;
-          gap: var(--spacing-4);
-          align-items: flex-start;
-        }
-
-        .step-number {
-          background: var(--color-secondary);
-          color: var(--color-white);
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 600;
-          flex-shrink: 0;
-        }
-
-        .step-content p {
-          margin: 0;
-          color: var(--color-gray-700);
-          line-height: 1.5;
-        }
-
-        .benefits-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: var(--spacing-3);
-        }
-
-        .benefit-card {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-3);
-          padding: var(--spacing-3);
-          background: rgba(85, 107, 47, 0.05);
-          border-radius: var(--radius-lg);
-          color: var(--color-gray-700);
-          transition: all var(--transition-normal);
-        }
-
-        .benefit-card:hover {
-          background: rgba(85, 107, 47, 0.1);
-          transform: translateX(4px);
-        }
-
-        .benefit-card svg {
-          color: var(--color-primary);
-          flex-shrink: 0;
-        }
-
-        .sidebar {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-6);
-        }
-
-        .info-card {
-          background: var(--color-gray-50);
-          border-radius: var(--radius-2xl);
-          padding: var(--spacing-8);
-          position: sticky;
-          top: 100px;
-        }
-
-        .info-card h3 {
-          margin-bottom: var(--spacing-6);
-          color: var(--color-primary);
-          text-align: center;
-        }
-
-        .info-item {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-4);
-          margin-bottom: var(--spacing-6);
-          padding-bottom: var(--spacing-4);
-          border-bottom: 1px solid var(--color-gray-200);
-        }
-
-        .info-item:last-of-type {
-          border-bottom: none;
-          margin-bottom: var(--spacing-8);
-        }
-
-        .info-item svg {
-          color: var(--color-secondary);
-          flex-shrink: 0;
-        }
-
-        .info-label {
-          display: block;
-          font-size: 0.9rem;
-          color: var(--color-gray-600);
-          font-weight: 500;
-        }
-
-        .info-value {
-          display: block;
-          font-size: 1rem;
-          color: var(--color-gray-800);
-          font-weight: 600;
-        }
-
-        .cta-buttons {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-3);
-        }
-
-        .related-services {
-          background: var(--color-white);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-6);
-          box-shadow: var(--shadow-md);
-        }
-
-        .related-services h4 {
-          margin-bottom: var(--spacing-4);
-          color: var(--color-primary);
-          text-align: center;
-        }
-
-        .related-links {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-2);
-        }
-
-        .related-link {
-          padding: var(--spacing-3);
-          color: var(--color-gray-700);
-          text-decoration: none;
-          border-radius: var(--radius-md);
-          transition: all var(--transition-fast);
-          text-align: center;
-        }
-
-        .related-link:hover {
-          background: rgba(85, 107, 47, 0.1);
-          color: var(--color-primary);
-        }
-
-        @media (max-width: 1024px) {
-          .content-grid {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
-          }
-
-          .info-card {
-            position: static;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .hero-text {
-            text-align: center;
-          }
-
-          .info-card {
-            padding: var(--spacing-6);
-          }
-
-          .cta-buttons {
-            gap: var(--spacing-2);
-          }
-
-          .benefits-grid {
-            gap: var(--spacing-2);
-          }
-
-          .benefit-card {
-            padding: var(--spacing-2);
-          }
-        }
-      `}</style>
     </div>
   );
 };

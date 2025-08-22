@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const [visibleWords, setVisibleWords] = useState(0);
@@ -14,7 +13,7 @@ const HeroSection: React.FC = () => {
         }
         return prev;
       });
-    }, 800); // Chaque mot apparaît après 800ms
+    }, 1000); // Apparition plus posée
 
     return () => clearInterval(timer);
   }, [words.length]);
@@ -38,8 +37,8 @@ const HeroSection: React.FC = () => {
 
       <div className="overlay" aria-hidden="true"></div>
 
-      <div className="hero-top">
-        <img src="/logo.png" alt="MindWayLife" className="brand-mark" />
+      <div className="hero-center">
+        <div className="brand-title">Véronique Carrié</div>
         <h1 className="animated-slogan">
           {words.map((word, index) => (
             <span
@@ -50,9 +49,6 @@ const HeroSection: React.FC = () => {
             </span>
           ))}
         </h1>
-      </div>
-
-      <div className="hero-bottom">
         <div className="actions">
           <Link to="/contact-reservation" className="btn btn-primary">
             <span>Réserver</span>
@@ -61,10 +57,9 @@ const HeroSection: React.FC = () => {
             <span>En savoir plus</span>
           </Link>
         </div>
-
       </div>
 
-      <style jsx>{`
+      <style>{`
         .hero {
           position: relative;
           min-height: 100vh;
@@ -103,9 +98,9 @@ const HeroSection: React.FC = () => {
           z-index: -1;
         }
 
-        .hero-top {
+        .hero-center {
           position: absolute;
-          top: 25%;
+          top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
           z-index: 2;
@@ -113,25 +108,19 @@ const HeroSection: React.FC = () => {
           flex-direction: column;
           align-items: center;
           gap: var(--spacing-6);
+          text-align: center;
         }
 
-        .hero-bottom {
-          position: absolute;
-          bottom: var(--spacing-8);
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 2;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: var(--spacing-6);
-          width: 100%;
-        }
-
-        .brand-mark {
-          width: 120px;
-          height: auto;
-          filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3));
+        .brand-title {
+          font-family: var(--font-heading);
+          font-variant-caps: small-caps;
+          font-size: clamp(2.2rem, 4vw, 3rem);
+          font-weight: 500;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #fffcea;
+          margin: 0; /* espacement géré par gap du conteneur */
+          text-shadow: 0 1px 4px rgba(0,0,0,0.5);
         }
 
         .hero-main-title {
@@ -140,37 +129,46 @@ const HeroSection: React.FC = () => {
           color: var(--color-white);
           font-weight: 700;
           text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-          margin: 0;
+          margin: 0; /* espacement géré par gap */
           max-width: 800px;
         }
 
         .animated-slogan {
-          font-size: clamp(1.8rem, 5vw, 2.5rem);
+          font-size: clamp(1.2rem, 3.2vw, 1.8rem); /* plus petit que le brand-title */
           line-height: 1.2;
-          color: var(--color-white);
+          color: #fffcea;
           letter-spacing: 0.05em;
-          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-          font-weight: 300;
+          text-shadow: 0 3px 12px rgba(0,0,0,0.35);
+          font-weight: 400;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: center;
           gap: var(--spacing-4);
-          margin: 0;
+          margin: 0; /* espacement géré par gap */
         }
 
-        .word {
-          opacity: 0;
-          transform: scale(0.8);
-          filter: blur(8px);
-          transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .animated-slogan .word {
           display: inline-block;
+          opacity: 0;
+          transform: translateY(10px) scale(0.98);
+          filter: blur(8px);
+          transition:
+            opacity 1200ms ease,
+            transform 1200ms cubic-bezier(0.22, 1, 0.36, 1),
+            filter 1200ms ease;
+          font-size: inherit; /* hérite de .animated-slogan */
+          font-family: var(--font-heading);
+          color: #fffcea;
+          text-shadow: 0 3px 12px rgba(0,0,0,0.35);
+          line-height: 1.15;
+          font-weight: 600;
         }
 
-        .word.visible {
+        .animated-slogan .word.visible {
           opacity: 1;
-          transform: scale(1);
-          filter: blur(0px);
+          transform: translateY(0) scale(1);
+          filter: blur(0);
         }
 
         .actions {
@@ -178,13 +176,14 @@ const HeroSection: React.FC = () => {
           gap: var(--spacing-4);
           flex-wrap: wrap;
           justify-content: center;
+          margin: 0; /* espacement géré par gap */
         }
 
         .actions .btn {
           position: relative;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          color: var(--color-white);
+          background: rgba(255, 252, 234, 0.1);
+          border: 1px solid rgba(255, 252, 234, 0.35);
+          color: #fffcea;
           font-weight: 500;
           font-size: 1rem;
           padding: 1rem 2.5rem;
@@ -198,8 +197,8 @@ const HeroSection: React.FC = () => {
         }
 
         .actions .btn:hover {
-          background: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.5);
+          background: rgba(255, 252, 234, 0.22);
+          border-color: rgba(255, 252, 234, 0.6);
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         
@@ -209,32 +208,32 @@ const HeroSection: React.FC = () => {
         }
         
         .actions .btn-primary {
-          background: rgba(255, 255, 255, 0.95);
-          border-color: rgba(255, 255, 255, 0.95);
+          background: #fffcea;
+          border-color: #fffcea;
           color: var(--color-primary);
           font-weight: 600;
         }
 
         .actions .btn-primary:hover {
-          background: var(--color-white);
-          border-color: var(--color-white);
-          color: var(--color-primary);
-          box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+          background: transparent;
+          border-color: #fffcea;
+          color: #fffcea;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         .actions .btn-secondary {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.3);
-          color: var(--color-white);
+          background: rgba(255, 252, 234, 0.1);
+          border-color: rgba(255, 252, 234, 0.35);
+          color: #fffcea;
         }
 
         .actions .btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.5);
+          background: rgba(255, 252, 234, 0.22);
+          border-color: rgba(255, 252, 234, 0.6);
         }
 
         .scroll-indicator {
-          color: rgba(255, 255, 255, 0.7);
+          color: #fffcea;
           animation: bounce 2s infinite ease-in-out;
         }
 
@@ -251,20 +250,20 @@ const HeroSection: React.FC = () => {
         }
 
         @media (max-width: 768px) {
-          .brand-mark { width: 60px; }
+          .brand-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
           
           .animated-slogan {
             flex-direction: column;
             gap: var(--spacing-2);
-            font-size: clamp(1.2rem, 5vw, 1.5rem);
+            font-size: clamp(1rem, 4.5vw, 1.4rem);
           }
 
           .hero-main-title {
             font-size: clamp(2rem, 8vw, 3rem);
           }
 
-          .hero-top {
-            top: var(--spacing-6);
+          .hero-center {
+            gap: var(--spacing-4);
           }
 
           .actions {

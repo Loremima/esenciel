@@ -147,7 +147,16 @@ const ContactPage: React.FC = () => {
         </section>
 
         {/* Contact Form */}
-        <section className="form-section">
+        <section className="form-section parallax-surface">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="parallax-video"
+          >
+            <source src="/background.mp4" type="video/mp4" />
+          </video>
           <div className="container">
             <div className="section-header">
               <h1>Prendre rendez-vous</h1>
@@ -229,18 +238,6 @@ const ContactPage: React.FC = () => {
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="preferredTime">Créneaux préférés</label>
-                  <input
-                    type="text"
-                    id="preferredTime"
-                    name="preferredTime"
-                    value={formData.preferredTime}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="Ex: Mardis après-midi, jeudis matin..."
-                  />
-                </div>
 
                 <div className="form-group">
                   <label htmlFor="message">Message *</label>
@@ -300,22 +297,6 @@ const ContactPage: React.FC = () => {
             </div>
           </div>
         </section>
-
-        {/* Emergency Information */}
-        <section className="urgency-section">
-          <div className="container">
-            <div className="section-header">
-              <h1>En cas d'urgence</h1>
-            </div>
-            <div className="urgency-card">
-              <p>
-                Pour toute situation d'urgence psychologique, contactez le
-                <strong> 3114</strong> (numéro national de prévention du suicide)
-                ou rendez-vous aux urgences de votre hôpital le plus proche.
-              </p>
-            </div>
-          </div>
-        </section>
       </main>
 
       <style>{`
@@ -326,7 +307,7 @@ const ContactPage: React.FC = () => {
         /* === HERO SECTION === */
         .hero-section {
           position: relative;
-          min-height: 100vh;
+          min-height: 60vh;
           width: 100%;
           overflow: hidden;
           display: flex;
@@ -434,8 +415,7 @@ const ContactPage: React.FC = () => {
         /* Forcer le flux vertical (titre au-dessus, contenu dessous) */
         .contact-info-section .container,
         .form-section .container,
-        .consultation-section .container,
-        .urgency-section .container {
+        .consultation-section .container {
           display: block;
         }
 
@@ -460,7 +440,6 @@ const ContactPage: React.FC = () => {
         }
 
         .contact-item:hover {
-          transform: translateY(-4px);
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
           border-color: var(--color-secondary);
         }
@@ -617,7 +596,6 @@ const ContactPage: React.FC = () => {
         }
 
         .consultation-card:hover {
-          transform: translateY(-4px);
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
           border-color: var(--color-secondary);
         }
@@ -640,35 +618,7 @@ const ContactPage: React.FC = () => {
           line-height: 1.6;
         }
 
-        /* === URGENCY SECTION === */
-        .urgency-section {
-          padding: var(--spacing-16) 0;
-          background: var(--color-gray-50);
-          background-image: linear-gradient(rgba(255,255,255,0.0), rgba(255,255,255,0.0));
-        }
 
-        .urgency-card {
-          max-width: 700px;
-          margin: 0 auto;
-          padding: var(--spacing-8);
-          background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(218, 165, 32, 0.05));
-          border-radius: var(--radius-xl);
-          border: 1px solid rgba(218, 165, 32, 0.2);
-        }
-
-
-
-        .urgency-card p {
-          margin: 0;
-          color: var(--color-gray-700);
-          line-height: 1.6;
-          font-size: 1rem;
-        }
-
-        .urgency-card strong {
-          color: var(--color-secondary-dark);
-          font-weight: 700;
-        }
 
         /* === SUCCESS SECTION === */
         .success-section {
@@ -727,7 +677,6 @@ const ContactPage: React.FC = () => {
 
         .btn-primary:hover {
           background: var(--color-primary-dark);
-          transform: translateY(-1px);
         }
 
         /* === RESPONSIVE === */

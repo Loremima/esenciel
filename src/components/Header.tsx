@@ -15,10 +15,10 @@ const Header: React.FC = () => {
       label: 'Services',
       submenu: [
         { path: '/services', label: 'Tous les services' },
-        { path: '/services#individuels', label: 'Accompagnements individuels' },
-        { path: '/services#groupes', label: 'Accompagnements groupe' },
-        { path: '/services#programmes', label: 'Programmes MBSR/MBCT' },
-        { path: '/services#autres', label: 'Autres formats' },
+        { path: '/accompagnements-individuels', label: 'Accompagnements individuels' },
+        { path: '/accompagnements-groupe', label: 'Accompagnements groupe' },
+        { path: '/programmes-mbsr-mbct', label: 'Programmes de pleine conscience' },
+        { path: '/interventions-entreprises', label: 'Interventions en Entreprises' },
       ]
     },
     { path: '/blog', label: 'Blog' },
@@ -45,7 +45,7 @@ const Header: React.FC = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <Link to="/" className="logo-link">
-          <Logo variant="navbar" />
+          <Logo variant="navbar" isScrolled={isScrolled} />
         </Link>
         <nav className="desktop-nav">
           {navLinks.map((link, index) => (
@@ -53,7 +53,13 @@ const Header: React.FC = () => {
               key={index}
               className="nav-item"
               onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
-              onMouseLeave={() => link.submenu && setOpenSubmenu(null)}
+              onMouseLeave={(e) => {
+                // Ne fermer que si on ne va pas vers le submenu
+                const relatedTarget = e.relatedTarget as HTMLElement;
+                if (link.submenu && relatedTarget && !relatedTarget.closest('.submenu')) {
+                  setTimeout(() => setOpenSubmenu(null), 150);
+                }
+              }}
             >
               {link.submenu ? (
                 <NavLink to="/services" className="nav-link with-submenu">
@@ -66,7 +72,11 @@ const Header: React.FC = () => {
                 </NavLink>
               )}
               {link.submenu && openSubmenu === link.label && (
-                <div className="submenu">
+                <div
+                  className="submenu"
+                  onMouseEnter={() => setOpenSubmenu(link.label)}
+                  onMouseLeave={() => setTimeout(() => setOpenSubmenu(null), 150)}
+                >
                   {link.submenu.map((sublink, subIndex) => (
                     <Link key={subIndex} to={sublink.path} className="submenu-link">
                       {sublink.label}
@@ -122,13 +132,24 @@ const Header: React.FC = () => {
           left: 0;
           right: 0;
           z-index: 1000;
-          background: #fffcea;
+          background: linear-gradient(135deg, 
+            rgba(255, 252, 234, 0.3) 0%, 
+            rgba(255, 252, 234, 0.1) 50%, 
+            rgba(255, 252, 234, 0.0) 100%
+          );
+          backdrop-filter: blur(5px);
           transition: all 0.3s ease;
           padding: 1.25rem 0;
         }
 
         .header.scrolled {
-          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+          background: linear-gradient(135deg, 
+            rgba(255, 252, 234, 0.9) 0%, 
+            rgba(255, 252, 234, 0.6) 50%, 
+            rgba(255, 252, 234, 0.3) 100%
+          );
+          backdrop-filter: blur(15px);
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
           padding: 1rem 0;
         }
 
@@ -152,13 +173,19 @@ const Header: React.FC = () => {
         }
 
         .nav-link {
-          color: var(--color-gray-700);
+          color: #fffcea;
           text-decoration: none;
           font-weight: 500;
           font-size: 0.95rem;
           padding: 0.5rem 0;
           position: relative;
           transition: color 0.3s ease;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .header.scrolled .nav-link {
+          color: var(--color-gray-700);
+          text-shadow: none;
         }
         
         .nav-link::after {
@@ -191,14 +218,14 @@ const Header: React.FC = () => {
 
         .submenu {
           position: absolute;
-          top: 100%;
+          top: calc(100% - 5px);
           left: 50%;
           transform: translateX(-50%);
           background: #fffcea;
           border-radius: var(--radius-lg);
           box-shadow: var(--shadow-lg);
           padding: var(--spacing-2);
-          margin-top: var(--spacing-4);
+          padding-top: calc(var(--spacing-2) + 5px);
           min-width: 220px;
           opacity: 0;
           visibility: hidden;
@@ -206,7 +233,8 @@ const Header: React.FC = () => {
           pointer-events: none;
         }
         
-        .nav-item:hover .submenu {
+        .nav-item:hover .submenu,
+        .submenu:hover {
           opacity: 1;
           visibility: visible;
           pointer-events: auto;

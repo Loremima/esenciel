@@ -119,6 +119,15 @@ const InfosPratiquesPage: React.FC = () => {
 
       {/* Ressources */}
       <section className="section resources-section parallax-surface">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="parallax-video"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
         <div className="container">
           <div className="section-header">
             <h1>Ressources pour approfondir</h1>
@@ -129,7 +138,7 @@ const InfosPratiquesPage: React.FC = () => {
             {resources.map((resource, index) => {
               const IconComponent = resource.icon;
               return (
-                <div key={index} className="resource-card">
+                <div key={index} className="resource-card beige-highlight">
                   <div className="resource-header">
                     <div className="resource-icon">
                       <IconComponent size={24} />
@@ -153,22 +162,42 @@ const InfosPratiquesPage: React.FC = () => {
         <div className="container">
           <div className="tips-content">
             <h1>Pour bien commencer</h1>
-            <div className="tips-grid">
-              <div className="tip-card">
-                <h2>🧘‍♀️ Première séance</h2>
-                <p>Venez comme vous êtes, aucune expérience préalable n'est nécessaire. Nous prendrons le temps d'échanger sur vos attentes et besoins.</p>
+            <div className="timeline">
+              <div className="timeline-item">
+                <div className="timeline-marker">
+                  <div className="timeline-icon">🧘‍♀️</div>
+                </div>
+                <div className="timeline-content">
+                  <h2>Première séance</h2>
+                  <p>Venez comme vous êtes, aucune expérience préalable n'est nécessaire. Nous prendrons le temps d'échanger sur vos attentes et besoins.</p>
+                </div>
               </div>
-              <div className="tip-card">
-                <h2>📅 Fréquence</h2>
-                <p>La régularité est plus importante que la durée. Mieux vaut 10 minutes par jour qu'une heure par semaine.</p>
+              <div className="timeline-item">
+                <div className="timeline-marker">
+                  <div className="timeline-icon">📅</div>
+                </div>
+                <div className="timeline-content">
+                  <h2>Fréquence</h2>
+                  <p>La régularité est plus importante que la durée. Mieux vaut 10 minutes par jour qu'une heure par semaine.</p>
+                </div>
               </div>
-              <div className="tip-card">
-                <h2>🎯 Objectifs</h2>
-                <p>Fixons ensemble des objectifs réalistes et adaptés à votre rythme de vie. Chaque petit pas compte.</p>
+              <div className="timeline-item">
+                <div className="timeline-marker">
+                  <div className="timeline-icon">🎯</div>
+                </div>
+                <div className="timeline-content">
+                  <h2>Objectifs</h2>
+                  <p>Fixons ensemble des objectifs réalistes et adaptés à votre rythme de vie. Chaque petit pas compte.</p>
+                </div>
               </div>
-              <div className="tip-card">
-                <h2>💝 Bienveillance</h2>
-                <p>Soyez patient et bienveillant avec vous-même. Il n'y a pas de "mauvaise" méditation, seulement de l'expérience.</p>
+              <div className="timeline-item">
+                <div className="timeline-marker">
+                  <div className="timeline-icon">💝</div>
+                </div>
+                <div className="timeline-content">
+                  <h2>Bienveillance</h2>
+                  <p>Soyez patient et bienveillant avec vous-même. Il n'y a pas de "mauvaise" méditation, seulement de l'expérience.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -183,7 +212,7 @@ const InfosPratiquesPage: React.FC = () => {
         /* === HERO SECTION AVEC VIDÉO === */
         .hero-infos {
           position: relative;
-          min-height: 100vh;
+          min-height: 60vh;
           width: 100%;
           overflow: hidden;
           display: flex;
@@ -316,8 +345,7 @@ const InfosPratiquesPage: React.FC = () => {
         }
 
         .definition-card:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-lg);
+          box-shadow: var(--shadow-md);
           border-color: var(--color-secondary);
         }
 
@@ -370,8 +398,7 @@ const InfosPratiquesPage: React.FC = () => {
         }
 
         .resource-card:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-lg);
+          box-shadow: var(--shadow-md);
         }
 
         .resource-header {
@@ -438,31 +465,142 @@ const InfosPratiquesPage: React.FC = () => {
           gap: var(--spacing-6);
         }
 
-        .tip-card {
-          background: linear-gradient(135deg, var(--color-gray-50) 0%, #fffcea 100%);
+        /* Timeline stylisée */
+        .timeline {
+          position: relative;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: var(--spacing-8) 0;
+        }
+
+        .timeline::before {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary-light) 50%, var(--color-secondary) 100%);
+          transform: translateX(-50%);
+          border-radius: 2px;
+        }
+
+        .timeline-item {
+          position: relative;
+          margin-bottom: var(--spacing-12);
+          display: flex;
+          align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+          flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+          flex-direction: row-reverse;
+        }
+
+        .timeline-marker {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 2;
+        }
+
+        .timeline-icon {
+          width: 60px;
+          height: 60px;
+          background: linear-gradient(135deg, var(--color-white) 0%, #fffcea 100%);
+          border: 3px solid var(--color-secondary);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content {
+          width: calc(50% - 50px);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 252, 234, 0.9) 100%);
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(255, 255, 255, 0.3);
           border-radius: var(--radius-xl);
           padding: var(--spacing-6);
-          text-align: left;
-          border: 1px solid var(--color-gray-200);
-          transition: all var(--transition-normal);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          position: relative;
         }
 
-        .tip-card:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-md);
-          border-color: var(--color-secondary);
+        .timeline-item:nth-child(odd) .timeline-content {
+          margin-left: auto;
+          margin-right: var(--spacing-8);
         }
 
-        .tip-card h2 {
-          color: var(--color-primary);
+        .timeline-item:nth-child(even) .timeline-content {
+          margin-right: auto;
+          margin-left: var(--spacing-8);
+        }
+
+        .timeline-content::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          width: 0;
+          height: 0;
+          border: 12px solid transparent;
+          transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+          left: -24px;
+          border-right-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+          right: -24px;
+          border-left-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .timeline-content h2 {
+          color: var(--color-primary-dark);
           margin: 0 0 var(--spacing-3) 0;
-          font-size: 1.1rem;
+          font-size: 1.25rem;
+          font-weight: 600;
         }
 
-        .tip-card p {
-          color: var(--color-gray-700);
+        .timeline-content p {
+          color: var(--color-gray-800);
           line-height: 1.6;
           margin: 0;
+        }
+
+        /* Responsive timeline */
+        @media (max-width: 768px) {
+          .timeline::before {
+            left: 30px;
+          }
+
+          .timeline-marker {
+            left: 30px;
+          }
+
+          .timeline-item,
+          .timeline-item:nth-child(even) {
+            flex-direction: row;
+          }
+
+          .timeline-content {
+            width: calc(100% - 80px);
+            margin-left: var(--spacing-8) !important;
+            margin-right: 0 !important;
+          }
+
+          .timeline-content::before {
+            left: -24px !important;
+            right: auto !important;
+            border-right-color: rgba(255, 255, 255, 0.9) !important;
+            border-left-color: transparent !important;
+          }
         }
 
         @media (max-width: 1024px) {
