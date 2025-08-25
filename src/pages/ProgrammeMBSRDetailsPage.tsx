@@ -3,69 +3,69 @@ import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const ProgrammeMBSRDetailsPage: React.FC = () => {
-  const benefits = [
-    {
-      icon: Target,
-      title: 'Réduction du stress',
-      description: 'Diminuez significativement votre niveau de stress grâce aux techniques validées scientifiquement.'
-    },
-    {
-      icon: Heart,
-      title: 'Bien-être physique',
-      description: 'Améliorez votre relation au corps et développez une meilleure conscience corporelle.'
-    },
-    {
-      icon: Sparkles,
-      title: 'Équilibre mental',
-      description: 'Cultivez la sérénité et la clarté mentale dans votre quotidien.'
-    }
-  ];
+    const benefits = [
+        {
+            icon: Target,
+            title: 'Réduction du stress',
+            description: 'Diminuez significativement votre niveau de stress grâce aux techniques validées scientifiquement.'
+        },
+        {
+            icon: Heart,
+            title: 'Bien-être physique',
+            description: 'Améliorez votre relation au corps et développez une meilleure conscience corporelle.'
+        },
+        {
+            icon: Sparkles,
+            title: 'Équilibre mental',
+            description: 'Cultivez la sérénité et la clarté mentale dans votre quotidien.'
+        }
+    ];
 
-  const processSteps = [
-    {
-      number: '01',
-      title: 'Introduction à la mindfulness',
-      description: 'Découverte des fondamentaux de la pleine conscience et première expérience du scan corporel.'
-    },
-    {
-      number: '02',
-      title: 'Perception et réactivité',
-      description: 'Exploration de nos perceptions automatiques et de nos réactions face au stress.'
-    },
-    {
-      number: '03',
-      title: 'Pleine conscience du corps',
-      description: 'Approfondissement de la conscience corporelle par le yoga doux et le mouvement conscient.'
-    },
-    {
-      number: '04',
-      title: 'Pleine conscience du souffle',
-      description: 'Développement de la respiration consciente comme ancrage dans le moment présent.'
-    },
-    {
-      number: '05',
-      title: 'Acceptation et lâcher-prise',
-      description: 'Apprentissage de l\'accueil bienveillant de l\'expérience telle qu\'elle est.'
-    },
-    {
-      number: '06',
-      title: 'Pensées et émotions',
-      description: 'Observation des patterns mentaux et développement d\'une relation saine aux émotions.'
-    },
-    {
-      number: '07',
-      title: 'Communication consciente',
-      description: 'Application de la mindfulness dans les relations interpersonnelles.'
-    },
-    {
-      number: '08',
-      title: 'Maintien de la pratique',
-      description: 'Intégration durable de la pleine conscience dans la vie quotidienne.'
-    }
-  ];
+    const processSteps = [
+        {
+            number: '01',
+            title: 'Introduction à la mindfulness',
+            description: 'Découverte des fondamentaux de la pleine conscience et première expérience du scan corporel.'
+        },
+        {
+            number: '02',
+            title: 'Perception et réactivité',
+            description: 'Exploration de nos perceptions automatiques et de nos réactions face au stress.'
+        },
+        {
+            number: '03',
+            title: 'Pleine conscience du corps',
+            description: 'Approfondissement de la conscience corporelle par le yoga doux et le mouvement conscient.'
+        },
+        {
+            number: '04',
+            title: 'Pleine conscience du souffle',
+            description: 'Développement de la respiration consciente comme ancrage dans le moment présent.'
+        },
+        {
+            number: '05',
+            title: 'Acceptation et lâcher-prise',
+            description: 'Apprentissage de l\'accueil bienveillant de l\'expérience telle qu\'elle est.'
+        },
+        {
+            number: '06',
+            title: 'Pensées et émotions',
+            description: 'Observation des patterns mentaux et développement d\'une relation saine aux émotions.'
+        },
+        {
+            number: '07',
+            title: 'Communication consciente',
+            description: 'Application de la mindfulness dans les relations interpersonnelles.'
+        },
+        {
+            number: '08',
+            title: 'Maintien de la pratique',
+            description: 'Intégration durable de la pleine conscience dans la vie quotidienne.'
+        }
+    ];
 
-  return (
-    <div className="mbsr-details-page service-detail-page">
+    return (
+        <div className="mbsr-details-page service-detail-page">
       {/* Hero Section Élégant avec vidéo surf */}
       <section className="hero-mbsr">
         <div className="container">
@@ -98,20 +98,20 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
               </div>
             </div>
             <div className="hero-video-mbsr">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                 className="hero-video-element"
-              >
+                >
                 <source src="/surf_MBCR.mp4" type="video/mp4" />
-              </video>
+                </video>
               <div className="video-overlay-mbsr"></div>
             </div>
           </div>
-        </div>
-      </section>
+                </div>
+            </section>
 
       {/* Section des bénéfices avec vidéo de fond */}
       <section className="section benefits-section-mbsr parallax-surface">
@@ -123,25 +123,25 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
         >
           <source src="/background.mp4" type="video/mp4" />
         </video>
-        <div className="container">
+                <div className="container">
           <div className="section-header">
             <h2>Les bénéfices du programme</h2>
             <p>Une approche scientifiquement validée pour réduire le stress et cultiver le bien-être</p>
-          </div>
+                        </div>
           <div className="benefits-grid-simplified">
-            {benefits.map((benefit, index) => {
-              const IconComponent = benefit.icon;
-              return (
+                            {benefits.map((benefit, index) => {
+                                const IconComponent = benefit.icon;
+                                return (
                 <div key={index} className="benefit-card-simplified">
                   <IconComponent size={28} className="benefit-icon-simplified" />
-                  <h3>{benefit.title}</h3>
-                  <p>{benefit.description}</p>
+                                            <h3>{benefit.title}</h3>
+                                        <p>{benefit.description}</p>
+                                    </div>
+                                );
+                            })}
+                    </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+            </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
       <section className="section journey-section">
@@ -176,20 +176,20 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
                     <div>
                       <h4>Clarté mentale</h4>
                       <p>Observez vos pensées avec recul et développez la stabilité mentale.</p>
-                    </div>
-                  </div>
+                                </div>
+                            </div>
                   <div className="outcome-item">
                     <div className="outcome-icon">💝</div>
                     <div>
                       <h4>Bienveillance</h4>
                       <p>Intégrez l'autocompassion et la bienveillance dans votre quotidien.</p>
                     </div>
-                  </div>
+                    </div>
                 </div>
               </div>
 
               <div className="program-format">
-                <h3>Organisation pratique</h3>
+                <h3>Modalités pratiques</h3>
                 <div className="format-highlights">
                   <div className="format-item">
                     <strong>8 séances hebdomadaires</strong> de 2h30 chacune
@@ -206,12 +206,12 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
                   Vous expérimenterez progressivement des méditations formelles et informelles pour une intégration optimale dans votre quotidien.
                 </p>
               </div>
-            </div>
+                        </div>
 
             <div className="journey-aside">
-              <div className="info-card-merged">
+                            <div className="info-card-merged">
                 <h2>Informations pratiques</h2>
-                <div className="info-section">
+                                <div className="info-section">
                   <div className="detail-item-revisited">
                     <span>📅</span>
                     <div>
@@ -233,29 +233,29 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
                       <span>Exercices guidés entre les séances</span>
                     </div>
                   </div>
-                </div>
-                <div className="pricing-section">
-                  <div className="price-row">
-                    <div className="price-amount">330€</div>
-                    <div className="price-label">Programme complet</div>
-                  </div>
+                                </div>
+                                <div className="pricing-section">
+                                    <div className="price-row">
+                                        <div className="price-amount">330€</div>
+                                        <div className="price-label">Programme complet</div>
+                                    </div>
                   <p className="small-text">Entretien préalable obligatoire. Acompte de 30% demandé. Possibilité de régler en plusieurs fois.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* CTA Section */}
-      <VideoCTA
-        title="Prêt(e) à transformer votre quotidien ?"
-        subtitle="Contactez-moi pour obtenir des informations détaillées sur les dates, les horaires, le lieu et les modalités d’inscription."
-        buttonText="M'inscrire au programme MBSR"
-        buttonLink="/contact-reservation"
-      />
+            {/* CTA Section */}
+            <VideoCTA
+                title="Prêt(e) à transformer votre quotidien ?"
+                subtitle="Contactez-moi pour obtenir des informations détaillées sur les dates, les horaires, le lieu et les modalités d’inscription."
+                buttonText="M'inscrire au programme MBSR"
+                buttonLink="/contact-reservation"
+            />
 
-      <style>{`
+            <style>{`
         /* === HERO SECTION MBSR === */
         .hero-mbsr {
           padding: var(--spacing-20) 0;
@@ -712,8 +712,8 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
           .timeline-number-revisited { position: static; margin-bottom: var(--spacing-4); width: 45px; height: 45px; }
         }
       `}</style>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default ProgrammeMBSRDetailsPage;

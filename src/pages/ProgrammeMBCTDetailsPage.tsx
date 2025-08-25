@@ -3,26 +3,26 @@ import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const ProgrammeMBCTDetailsPage: React.FC = () => {
-  const benefits = [
-    {
-      icon: Target,
-      title: 'Prévention des rechutes',
-      description: 'Réduisez significativement les risques de rechute dépressive grâce aux outils de la pleine conscience.'
-    },
-    {
-      icon: Heart,
-      title: 'Gestion des ruminations',
-      description: 'Apprenez à vous libérer des cycles de pensées négatives et répétitives.'
-    },
-    {
-      icon: Sparkles,
-      title: 'Bien-être émotionnel',
-      description: 'Développez une relation plus saine et bienveillante avec vos émotions.'
-    }
-  ];
+    const benefits = [
+        {
+            icon: Target,
+            title: 'Prévention des rechutes',
+            description: 'Réduisez significativement les risques de rechute dépressive grâce aux outils de la pleine conscience.'
+        },
+        {
+            icon: Heart,
+            title: 'Gestion des ruminations',
+            description: 'Apprenez à vous libérer des cycles de pensées négatives et répétitives.'
+        },
+        {
+            icon: Sparkles,
+            title: 'Bien-être émotionnel',
+            description: 'Développez une relation plus saine et bienveillante avec vos émotions.'
+        }
+    ];
 
-  return (
-    <div className="mbct-details-page service-detail-page">
+    return (
+        <div className="mbct-details-page service-detail-page">
       {/* Hero Section Élégant avec vidéo sunrise */}
       <section className="hero-mbct">
         <div className="container">
@@ -54,20 +54,20 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
               </div>
             </div>
             <div className="hero-video-mbct">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                 className="hero-video-element"
-              >
+                >
                 <source src="/sunrise_MBCT.mp4" type="video/mp4" />
-              </video>
+                </video>
               <div className="video-overlay-mbct"></div>
             </div>
           </div>
-        </div>
-      </section>
+                </div>
+            </section>
 
       {/* Section des bénéfices avec vidéo de fond */}
       <section className="section benefits-section-mbct parallax-surface">
@@ -79,25 +79,25 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
         >
           <source src="/background.mp4" type="video/mp4" />
         </video>
-        <div className="container">
+                <div className="container">
           <div className="section-header">
             <h2>Les bénéfices du programme</h2>
             <p>Une approche intégrative pour prévenir les rechutes et cultiver le bien-être émotionnel</p>
-          </div>
+                        </div>
           <div className="benefits-grid-simplified">
-            {benefits.map((benefit, index) => {
-              const IconComponent = benefit.icon;
-              return (
+                            {benefits.map((benefit, index) => {
+                                const IconComponent = benefit.icon;
+                                return (
                 <div key={index} className="benefit-card-simplified">
                   <IconComponent size={28} className="benefit-icon-simplified" />
-                  <h3>{benefit.title}</h3>
-                  <p>{benefit.description}</p>
+                                            <h3>{benefit.title}</h3>
+                                        <p>{benefit.description}</p>
+                                    </div>
+                                );
+                            })}
+                    </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+            </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
       <section className="section journey-section">
@@ -132,20 +132,20 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
                     <div>
                       <h4>Perspective sur les pensées</h4>
                       <p>Découvrez que les pensées ne sont pas des faits et développez la décentration cognitive.</p>
-                    </div>
-                  </div>
+                                </div>
+                            </div>
                   <div className="outcome-item">
                     <div className="outcome-icon">🤗</div>
                     <div>
                       <h4>Autocompassion</h4>
                       <p>Cultivez la bienveillance envers vous-même et des stratégies de bien-être durable.</p>
                     </div>
-                  </div>
+                    </div>
                 </div>
               </div>
 
               <div className="program-format">
-                <h3>Organisation pratique</h3>
+                <h3>Modalités pratiques</h3>
                 <div className="format-highlights">
                   <div className="format-item">
                     <strong>8 séances hebdomadaires</strong> de 2h à 2h30 chacune
@@ -160,14 +160,14 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
                 <p>
                   Chaque séance combine méditation de pleine conscience et techniques issues des thérapies cognitives et comportementales.
                   Vous apprendrez à observer vos pensées et émotions avec recul, développant une relation plus saine avec votre mental.
-                </p>
-              </div>
-            </div>
+                                </p>
+                            </div>
+                        </div>
 
             <div className="journey-aside">
-              <div className="info-card-merged">
+                            <div className="info-card-merged">
                 <h2>Informations pratiques</h2>
-                <div className="info-section">
+                                <div className="info-section">
                   <div className="detail-item-revisited">
                     <span>🎯</span>
                     <div>
@@ -189,29 +189,29 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
                       <span>Techniques validées scientifiquement</span>
                     </div>
                   </div>
-                </div>
-                <div className="pricing-section">
-                  <div className="price-row">
-                    <div className="price-amount">330€</div>
-                    <div className="price-label">Programme complet</div>
-                  </div>
+                                </div>
+                                <div className="pricing-section">
+                                    <div className="price-row">
+                                        <div className="price-amount">330€</div>
+                                        <div className="price-label">Programme complet</div>
+                                    </div>
                   <p className="small-text">Entretien préalable recommandé. Possibilité de régler en plusieurs fois.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* CTA Section */}
-      <VideoCTA
-        title="Prêt(e) à transformer votre quotidien ?"
-        subtitle="Contactez-moi pour connaître les prochaines sessions MBCT et réserver votre place."
-        buttonText="M'inscrire au programme MBCT"
-        buttonLink="/contact-reservation"
-      />
+            {/* CTA Section */}
+            <VideoCTA
+                title="Prêt(e) à transformer votre quotidien ?"
+                subtitle="Contactez-moi pour connaître les prochaines sessions MBCT et réserver votre place."
+                buttonText="M'inscrire au programme MBCT"
+                buttonLink="/contact-reservation"
+            />
 
-      <style>{`
+            <style>{`
         /* === HERO SECTION MBCT === */
         .hero-mbct {
           padding: var(--spacing-20) 0;
@@ -651,8 +651,8 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           }
         }
       `}</style>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default ProgrammeMBCTDetailsPage;

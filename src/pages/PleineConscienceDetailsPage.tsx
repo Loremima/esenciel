@@ -55,15 +55,15 @@ const PleineConscienceDetailsPage: React.FC = () => {
                             </div>
                         </div>
                         <div className="hero-video-pleine-conscience">
-                            <video
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                                 className="hero-video-element"
-                            >
+                >
                                 <source src="/sand_conscience.mp4" type="video/mp4" />
-                            </video>
+                </video>
                             <div className="video-overlay-pleine-conscience"></div>
                         </div>
                     </div>
@@ -145,8 +145,8 @@ const PleineConscienceDetailsPage: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="program-format">
-                                <h3>Organisation pratique</h3>
+                                          <div className="program-format">
+                <h3>Modalités pratiques</h3>
                                 <div className="format-highlights">
                                     <div className="format-item">
                                         <strong>Accompagnement individuel</strong> personnalisé à votre rythme
