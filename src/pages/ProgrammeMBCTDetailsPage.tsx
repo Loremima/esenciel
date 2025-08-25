@@ -3,26 +3,26 @@ import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const ProgrammeMBCTDetailsPage: React.FC = () => {
-    const benefits = [
-        {
-            icon: Target,
-            title: 'Prévention des rechutes',
-            description: 'Réduisez significativement les risques de rechute dépressive grâce aux outils de la pleine conscience.'
-        },
-        {
-            icon: Heart,
-            title: 'Gestion des ruminations',
-            description: 'Apprenez à vous libérer des cycles de pensées négatives et répétitives.'
-        },
-        {
-            icon: Sparkles,
-            title: 'Bien-être émotionnel',
-            description: 'Développez une relation plus saine et bienveillante avec vos émotions.'
-        }
-    ];
+  const benefits = [
+    {
+      icon: Target,
+      title: 'Prévention des rechutes',
+      description: 'Réduisez significativement les risques de rechute dépressive grâce aux outils de la pleine conscience.'
+    },
+    {
+      icon: Heart,
+      title: 'Gestion des ruminations',
+      description: 'Apprenez à vous libérer des cycles de pensées négatives et répétitives.'
+    },
+    {
+      icon: Sparkles,
+      title: 'Bien-être émotionnel',
+      description: 'Développez une relation plus saine et bienveillante avec vos émotions.'
+    }
+  ];
 
-    return (
-        <div className="mbct-details-page service-detail-page">
+  return (
+    <div className="mbct-details-page service-detail-page">
       {/* Hero Section Élégant avec vidéo sunrise */}
       <section className="hero-mbct">
         <div className="container">
@@ -54,20 +54,20 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
               </div>
             </div>
             <div className="hero-video-mbct">
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
                 className="hero-video-element"
-                >
+              >
                 <source src="/sunrise_MBCT.mp4" type="video/mp4" />
-                </video>
+              </video>
               <div className="video-overlay-mbct"></div>
             </div>
           </div>
-                </div>
-            </section>
+        </div>
+      </section>
 
       {/* Section des bénéfices avec vidéo de fond */}
       <section className="section benefits-section-mbct parallax-surface">
@@ -79,25 +79,25 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
         >
           <source src="/background.mp4" type="video/mp4" />
         </video>
-                <div className="container">
+        <div className="container">
           <div className="section-header">
             <h2>Les bénéfices du programme</h2>
             <p>Une approche intégrative pour prévenir les rechutes et cultiver le bien-être émotionnel</p>
-                        </div>
+          </div>
           <div className="benefits-grid-simplified">
-                            {benefits.map((benefit, index) => {
-                                const IconComponent = benefit.icon;
-                                return (
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon;
+              return (
                 <div key={index} className="benefit-card-simplified">
                   <IconComponent size={28} className="benefit-icon-simplified" />
-                                            <h3>{benefit.title}</h3>
-                                        <p>{benefit.description}</p>
-                                    </div>
-                                );
-                            })}
-                    </div>
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.description}</p>
                 </div>
-            </section>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
       <section className="section journey-section">
@@ -132,86 +132,91 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
                     <div>
                       <h4>Perspective sur les pensées</h4>
                       <p>Découvrez que les pensées ne sont pas des faits et développez la décentration cognitive.</p>
-                                </div>
-                            </div>
+                    </div>
+                  </div>
                   <div className="outcome-item">
                     <div className="outcome-icon">🤗</div>
                     <div>
                       <h4>Autocompassion</h4>
                       <p>Cultivez la bienveillance envers vous-même et des stratégies de bien-être durable.</p>
                     </div>
-                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="program-format">
-                <h3>Modalités pratiques</h3>
-                <div className="format-highlights">
-                  <div className="format-item">
+            </div>
+          </div>
+
+          <div className="journey-aside">
+            <div className="info-card-merged">
+              <h2>Informations pratiques</h2>
+
+              {/* Section modalités */}
+              <div className="info-section">
+                <h3 className="section-subtitle">Modalités</h3>
+                <div className="format-highlights-merged">
+                  <div className="format-item-merged">
                     <strong>8 séances hebdomadaires</strong> de 2h à 2h30 chacune
                   </div>
-                  <div className="format-item">
+                  <div className="format-item-merged">
                     <strong>Approche intégrative</strong> alliant pleine conscience et thérapie cognitive
                   </div>
-                  <div className="format-item">
+                  <div className="format-item-merged">
                     <strong>Petit groupe</strong> de 5 à 10 participants maximum
                   </div>
                 </div>
-                <p>
+                <p className="format-description">
                   Chaque séance combine méditation de pleine conscience et techniques issues des thérapies cognitives et comportementales.
                   Vous apprendrez à observer vos pensées et émotions avec recul, développant une relation plus saine avec votre mental.
-                                </p>
-                            </div>
-                        </div>
+                </p>
+              </div>
 
-            <div className="journey-aside">
-                            <div className="info-card-merged">
-                <h2>Informations pratiques</h2>
-                                <div className="info-section">
-                  <div className="detail-item-revisited">
-                    <span>🎯</span>
-                    <div>
-                      <strong>Public spécialisé</strong>
-                      <span>Personnes ayant vécu des épisodes dépressifs ou anxieux</span>
-                    </div>
+              {/* Section accompagnement */}
+              <div className="info-section">
+                <h3 className="section-subtitle">Accompagnement</h3>
+                <div className="detail-item-revisited">
+                  <span>🎯</span>
+                  <div>
+                    <strong>Public spécialisé</strong>
+                    <span>Personnes ayant vécu des épisodes dépressifs ou anxieux</span>
                   </div>
-                  <div className="detail-item-revisited">
-                    <span>📚</span>
-                    <div>
-                      <strong>Supports complets fournis</strong>
-                      <span>Livrets, exercices et méditations guidées</span>
-                    </div>
-                  </div>
-                  <div className="detail-item-revisited">
-                    <span>🧠</span>
-                    <div>
-                      <strong>Outils cognitifs</strong>
-                      <span>Techniques validées scientifiquement</span>
-                    </div>
-                  </div>
-                                </div>
-                                <div className="pricing-section">
-                                    <div className="price-row">
-                                        <div className="price-amount">330€</div>
-                                        <div className="price-label">Programme complet</div>
-                                    </div>
-                  <p className="small-text">Entretien préalable recommandé. Possibilité de régler en plusieurs fois.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </section>
+                <div className="detail-item-revisited">
+                  <span>📚</span>
+                  <div>
+                    <strong>Supports complets fournis</strong>
+                    <span>Livrets, exercices et méditations guidées</span>
+                  </div>
+                </div>
+                <div className="detail-item-revisited">
+                  <span>🧠</span>
+                  <div>
+                    <strong>Outils cognitifs</strong>
+                    <span>Techniques validées scientifiquement</span>
+                  </div>
+                </div>
+              </div>
+              <div className="pricing-section">
+                <div className="price-row">
+                  <div className="price-amount">330€</div>
+                  <div className="price-label">Programme complet</div>
+                </div>
+                <p className="small-text">Entretien préalable recommandé. Possibilité de régler en plusieurs fois.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* CTA Section */}
-            <VideoCTA
-                title="Prêt(e) à transformer votre quotidien ?"
-                subtitle="Contactez-moi pour connaître les prochaines sessions MBCT et réserver votre place."
-                buttonText="M'inscrire au programme MBCT"
-                buttonLink="/contact-reservation"
-            />
+      {/* CTA Section */}
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Contactez-moi pour connaître les prochaines sessions MBCT et réserver votre place."
+        buttonText="M'inscrire au programme MBCT"
+        buttonLink="/contact-reservation"
+      />
 
-            <style>{`
+      <style>{`
         /* === HERO SECTION MBCT === */
         .hero-mbct {
           padding: var(--spacing-20) 0;
@@ -380,8 +385,8 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
 
         .journey-layout {
           display: grid;
-          grid-template-columns: 1.5fr 1fr;
-          gap: var(--spacing-12);
+          grid-template-columns: 2fr 1fr;
+          gap: var(--spacing-6);
           align-items: start;
         }
 
@@ -397,7 +402,7 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           line-height: 1.7;
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-10);
-          max-width: 60ch;
+          max-width: 85ch;
         }
 
         .learning-outcomes {
@@ -490,6 +495,39 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           margin-bottom: var(--spacing-6);
         }
 
+        .section-subtitle {
+          font-size: 1.2rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+          font-weight: 600;
+          border-bottom: 1px solid var(--color-gray-200);
+          padding-bottom: var(--spacing-2);
+        }
+
+        .format-highlights-merged {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-2);
+          margin-bottom: var(--spacing-4);
+        }
+
+        .format-item-merged {
+          color: var(--color-primary);
+          font-size: 1rem;
+          padding: var(--spacing-2) 0;
+        }
+
+        .format-item-merged strong {
+          font-weight: 700;
+        }
+
+        .format-description {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: var(--color-gray-700);
+          margin-bottom: 0;
+        }
+
         .info-section {
           margin-bottom: var(--spacing-6);
           padding-bottom: var(--spacing-6);
@@ -549,6 +587,13 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
         }
 
         /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+          .journey-layout {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-8);
+          }
+        }
+
         @media (max-width: 1024px) {
           .hero-mbct-layout {
             grid-template-columns: 1fr;
@@ -563,11 +608,6 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           
           .hero-description-mbct p {
             margin: 0 auto var(--spacing-8);
-          }
-
-          .journey-layout {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
           }
         }
 
@@ -651,8 +691,8 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           }
         }
       `}</style>
-        </div>
-    );
+    </div >
+  );
 };
 
 export default ProgrammeMBCTDetailsPage;

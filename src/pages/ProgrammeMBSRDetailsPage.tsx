@@ -3,69 +3,69 @@ import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const ProgrammeMBSRDetailsPage: React.FC = () => {
-    const benefits = [
-        {
-            icon: Target,
-            title: 'Réduction du stress',
-            description: 'Diminuez significativement votre niveau de stress grâce aux techniques validées scientifiquement.'
-        },
-        {
-            icon: Heart,
-            title: 'Bien-être physique',
-            description: 'Améliorez votre relation au corps et développez une meilleure conscience corporelle.'
-        },
-        {
-            icon: Sparkles,
-            title: 'Équilibre mental',
-            description: 'Cultivez la sérénité et la clarté mentale dans votre quotidien.'
-        }
-    ];
+  const benefits = [
+    {
+      icon: Target,
+      title: 'Réduction du stress',
+      description: 'Diminuez significativement votre niveau de stress grâce aux techniques validées scientifiquement.'
+    },
+    {
+      icon: Heart,
+      title: 'Bien-être physique',
+      description: 'Améliorez votre relation au corps et développez une meilleure conscience corporelle.'
+    },
+    {
+      icon: Sparkles,
+      title: 'Équilibre mental',
+      description: 'Cultivez la sérénité et la clarté mentale dans votre quotidien.'
+    }
+  ];
 
-    const processSteps = [
-        {
-            number: '01',
-            title: 'Introduction à la mindfulness',
-            description: 'Découverte des fondamentaux de la pleine conscience et première expérience du scan corporel.'
-        },
-        {
-            number: '02',
-            title: 'Perception et réactivité',
-            description: 'Exploration de nos perceptions automatiques et de nos réactions face au stress.'
-        },
-        {
-            number: '03',
-            title: 'Pleine conscience du corps',
-            description: 'Approfondissement de la conscience corporelle par le yoga doux et le mouvement conscient.'
-        },
-        {
-            number: '04',
-            title: 'Pleine conscience du souffle',
-            description: 'Développement de la respiration consciente comme ancrage dans le moment présent.'
-        },
-        {
-            number: '05',
-            title: 'Acceptation et lâcher-prise',
-            description: 'Apprentissage de l\'accueil bienveillant de l\'expérience telle qu\'elle est.'
-        },
-        {
-            number: '06',
-            title: 'Pensées et émotions',
-            description: 'Observation des patterns mentaux et développement d\'une relation saine aux émotions.'
-        },
-        {
-            number: '07',
-            title: 'Communication consciente',
-            description: 'Application de la mindfulness dans les relations interpersonnelles.'
-        },
-        {
-            number: '08',
-            title: 'Maintien de la pratique',
-            description: 'Intégration durable de la pleine conscience dans la vie quotidienne.'
-        }
-    ];
+  const processSteps = [
+    {
+      number: '01',
+      title: 'Introduction à la mindfulness',
+      description: 'Découverte des fondamentaux de la pleine conscience et première expérience du scan corporel.'
+    },
+    {
+      number: '02',
+      title: 'Perception et réactivité',
+      description: 'Exploration de nos perceptions automatiques et de nos réactions face au stress.'
+    },
+    {
+      number: '03',
+      title: 'Pleine conscience du corps',
+      description: 'Approfondissement de la conscience corporelle par le yoga doux et le mouvement conscient.'
+    },
+    {
+      number: '04',
+      title: 'Pleine conscience du souffle',
+      description: 'Développement de la respiration consciente comme ancrage dans le moment présent.'
+    },
+    {
+      number: '05',
+      title: 'Acceptation et lâcher-prise',
+      description: 'Apprentissage de l\'accueil bienveillant de l\'expérience telle qu\'elle est.'
+    },
+    {
+      number: '06',
+      title: 'Pensées et émotions',
+      description: 'Observation des patterns mentaux et développement d\'une relation saine aux émotions.'
+    },
+    {
+      number: '07',
+      title: 'Communication consciente',
+      description: 'Application de la mindfulness dans les relations interpersonnelles.'
+    },
+    {
+      number: '08',
+      title: 'Maintien de la pratique',
+      description: 'Intégration durable de la pleine conscience dans la vie quotidienne.'
+    }
+  ];
 
-    return (
-        <div className="mbsr-details-page service-detail-page">
+  return (
+    <div className="mbsr-details-page service-detail-page">
       {/* Hero Section Élégant avec vidéo surf */}
       <section className="hero-mbsr">
         <div className="container">
@@ -98,20 +98,20 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
               </div>
             </div>
             <div className="hero-video-mbsr">
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
                 className="hero-video-element"
-                >
+              >
                 <source src="/surf_MBCR.mp4" type="video/mp4" />
-                </video>
+              </video>
               <div className="video-overlay-mbsr"></div>
             </div>
           </div>
-                </div>
-            </section>
+        </div>
+      </section>
 
       {/* Section des bénéfices avec vidéo de fond */}
       <section className="section benefits-section-mbsr parallax-surface">
@@ -123,25 +123,25 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
         >
           <source src="/background.mp4" type="video/mp4" />
         </video>
-                <div className="container">
+        <div className="container">
           <div className="section-header">
             <h2>Les bénéfices du programme</h2>
             <p>Une approche scientifiquement validée pour réduire le stress et cultiver le bien-être</p>
-                        </div>
+          </div>
           <div className="benefits-grid-simplified">
-                            {benefits.map((benefit, index) => {
-                                const IconComponent = benefit.icon;
-                                return (
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon;
+              return (
                 <div key={index} className="benefit-card-simplified">
                   <IconComponent size={28} className="benefit-icon-simplified" />
-                                            <h3>{benefit.title}</h3>
-                                        <p>{benefit.description}</p>
-                                    </div>
-                                );
-                            })}
-                    </div>
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.description}</p>
                 </div>
-            </section>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
       <section className="section journey-section">
@@ -176,86 +176,103 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
                     <div>
                       <h4>Clarté mentale</h4>
                       <p>Observez vos pensées avec recul et développez la stabilité mentale.</p>
-                                </div>
-                            </div>
+                    </div>
+                  </div>
                   <div className="outcome-item">
                     <div className="outcome-icon">💝</div>
                     <div>
                       <h4>Bienveillance</h4>
                       <p>Intégrez l'autocompassion et la bienveillance dans votre quotidien.</p>
                     </div>
-                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="program-format">
-                <h3>Modalités pratiques</h3>
-                <div className="format-highlights">
-                  <div className="format-item">
-                    <strong>8 séances hebdomadaires</strong> de 2h30 chacune
+            </div>
+          </div>
+
+          <div className="journey-aside">
+            <div className="info-card-enhanced">
+              <h2>Informations pratiques</h2>
+
+              {/* Section modalités restructurée */}
+              <div className="info-section-enhanced">
+                <h3 className="section-subtitle-enhanced">Modalités</h3>
+                <div className="modalities-grid">
+                  <div className="modality-card">
+                    <div className="modality-label">Durée</div>
+                    <div className="modality-value">8 séances hebdomadaires</div>
+                    <div className="modality-detail">2h30 chacune</div>
                   </div>
-                  <div className="format-item">
-                    <strong>Présentiel ou distanciel</strong> selon vos préférences
+                  <div className="modality-card">
+                    <div className="modality-label">Format</div>
+                    <div className="modality-value">Approche intégrative</div>
+                    <div className="modality-detail">Pleine conscience et thérapie cognitive</div>
                   </div>
-                  <div className="format-item">
-                    <strong>Petit groupe</strong> de 5 à 10 participants maximum
+                  <div className="modality-card">
+                    <div className="modality-label">Participation</div>
+                    <div className="modality-value">Petit groupe</div>
+                    <div className="modality-detail">5 à 10 participants maximum</div>
                   </div>
                 </div>
-                <p>
-                  Chaque séance combine pratiques guidées de méditation, temps de partage d'expérience et apports informatifs.
-                  Vous expérimenterez progressivement des méditations formelles et informelles pour une intégration optimale dans votre quotidien.
-                </p>
+                <div className="format-description-enhanced">
+                  Chaque séance combine méditation, partage d'expérience et apports théoriques.
+                  Vous développerez progressivement votre pratique pour une intégration optimale.
+                </div>
               </div>
-                        </div>
 
-            <div className="journey-aside">
-                            <div className="info-card-merged">
-                <h2>Informations pratiques</h2>
-                                <div className="info-section">
-                  <div className="detail-item-revisited">
-                    <span>📅</span>
-                    <div>
-                      <strong>Réunion d'information incluse</strong>
-                      <span>Pour découvrir le programme avant de vous engager</span>
+              {/* Section accompagnement optimisée */}
+              <div className="info-section-enhanced">
+                <h3 className="section-subtitle-enhanced">Accompagnement</h3>
+                <div className="support-items">
+                  <div className="support-item">
+                    <span className="support-icon">📅</span>
+                    <div className="support-content">
+                      <div className="support-title">Réunion d'information incluse</div>
+                      <div className="support-desc">Découvrez le programme avant de vous engager</div>
                     </div>
                   </div>
-                  <div className="detail-item-revisited">
-                    <span>📚</span>
-                    <div>
-                      <strong>Supports complets fournis</strong>
-                      <span>Livrets, fichiers audios et exercices pratiques</span>
+                  <div className="support-item">
+                    <span className="support-icon">📚</span>
+                    <div className="support-content">
+                      <div className="support-title">Supports complets fournis</div>
+                      <div className="support-desc">Livrets, audios et exercices pratiques</div>
                     </div>
                   </div>
-                  <div className="detail-item-revisited">
-                    <span>🏠</span>
-                    <div>
-                      <strong>Pratique quotidienne</strong>
-                      <span>Exercices guidés entre les séances</span>
+                  <div className="support-item">
+                    <span className="support-icon">🏠</span>
+                    <div className="support-content">
+                      <div className="support-title">Pratique quotidienne</div>
+                      <div className="support-desc">Exercices guidés entre les séances</div>
                     </div>
                   </div>
-                                </div>
-                                <div className="pricing-section">
-                                    <div className="price-row">
-                                        <div className="price-amount">330€</div>
-                                        <div className="price-label">Programme complet</div>
-                                    </div>
-                  <p className="small-text">Entretien préalable obligatoire. Acompte de 30% demandé. Possibilité de régler en plusieurs fois.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </section>
+              </div>
 
-            {/* CTA Section */}
-            <VideoCTA
-                title="Prêt(e) à transformer votre quotidien ?"
-                subtitle="Contactez-moi pour obtenir des informations détaillées sur les dates, les horaires, le lieu et les modalités d’inscription."
-                buttonText="M'inscrire au programme MBSR"
-                buttonLink="/contact-reservation"
-            />
+              {/* Pricing optimisé */}
+              <div className="pricing-section-enhanced">
+                <div className="price-display">
+                  <div className="price-amount">330€</div>
+                  <div className="price-label">Programme complet</div>
+                </div>
+                <div className="pricing-details">
+                  Entretien préalable obligatoire • Acompte de 30% • Paiement fractionné possible
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <style>{`
+      {/* CTA Section */}
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Contactez-moi pour obtenir des informations détaillées sur les dates, les horaires, le lieu et les modalités d'inscription."
+        buttonText="M'inscrire au programme MBSR"
+        buttonLink="/contact-reservation"
+      />
+
+      <style>{`
         /* === HERO SECTION MBSR === */
         .hero-mbsr {
           padding: var(--spacing-20) 0;
@@ -424,8 +441,8 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
 
         .journey-layout {
           display: grid;
-          grid-template-columns: 1.5fr 1fr;
-          gap: var(--spacing-12);
+          grid-template-columns: 1.8fr 1.2fr;
+          gap: var(--spacing-8);
           align-items: start;
         }
 
@@ -441,7 +458,7 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
           line-height: 1.7;
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-10);
-          max-width: 60ch;
+          max-width: 85ch;
         }
 
         .learning-outcomes {
@@ -465,6 +482,31 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
           display: flex;
           gap: var(--spacing-4);
           align-items: flex-start;
+        }
+
+        /* Enhanced outcomes grid pour une meilleure utilisation de l'espace */
+        .outcomes-grid-enhanced {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-5);
+          margin-top: var(--spacing-6);
+        }
+
+        .outcome-item-enhanced {
+          display: flex;
+          gap: var(--spacing-3);
+          align-items: flex-start;
+          padding: var(--spacing-4);
+          background: rgba(255, 255, 255, 0.7);
+          border-radius: 12px;
+          border: 1px solid rgba(139, 134, 98, 0.1);
+          transition: all 0.3s ease;
+        }
+
+        .outcome-item-enhanced:hover {
+          background: rgba(255, 255, 255, 0.9);
+          border-color: rgba(139, 134, 98, 0.2);
+          transform: translateY(-2px);
         }
 
         .outcome-icon {
@@ -520,6 +562,13 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
         }
 
         /* === RESPONSIVE === */
+        @media (max-width: 1200px) {
+          .journey-layout {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-8);
+          }
+        }
+
         @media (max-width: 1024px) {
           .hero-mbsr-layout {
             grid-template-columns: 1fr;
@@ -534,11 +583,6 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
           
           .hero-description-mbsr p {
             margin: 0 auto var(--spacing-8);
-          }
-
-          .journey-layout {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
           }
         }
 
@@ -576,6 +620,18 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
 
           .outcomes-grid {
             grid-template-columns: 1fr;
+          }
+
+          .outcomes-grid-enhanced {
+            grid-template-columns: 1fr;
+          }
+
+          .modalities-grid {
+            gap: var(--spacing-3);
+          }
+
+          .modality-card {
+            padding: var(--spacing-3);
           }
 
           .journey-content h2 {
@@ -692,6 +748,39 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
           color: var(--color-primary);
           margin-bottom: var(--spacing-6);
         }
+
+        .section-subtitle {
+          font-size: 1.2rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+          font-weight: 600;
+          border-bottom: 1px solid var(--color-gray-200);
+          padding-bottom: var(--spacing-2);
+        }
+
+        .format-highlights-merged {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-2);
+          margin-bottom: var(--spacing-4);
+        }
+
+        .format-item-merged {
+          color: var(--color-primary);
+          font-size: 1rem;
+          padding: var(--spacing-2) 0;
+        }
+
+        .format-item-merged strong {
+          font-weight: 700;
+        }
+
+        .format-description {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: var(--color-gray-700);
+          margin-bottom: 0;
+        }
         .info-section { margin-bottom: var(--spacing-6); padding-bottom: var(--spacing-6); border-bottom: 1px solid var(--color-gray-200); }
         .detail-item-revisited { display: flex; align-items: flex-start; gap: var(--spacing-4); color: var(--color-primary); }
         .detail-item-revisited:not(:last-child) { margin-bottom: var(--spacing-5); }
@@ -699,6 +788,159 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
         .detail-item-revisited span { font-size: 1rem; color: var(--color-text-secondary); }
         .pricing-section { display: grid; gap: var(--spacing-4); }
         .price-row { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-3) 0; }
+
+        /* Enhanced info card styles */
+        .info-card-enhanced {
+          background: var(--color-white);
+          border-radius: var(--radius-xl);
+          padding: var(--spacing-8);
+          box-shadow: var(--shadow-lg);
+          border: 1px solid var(--color-gray-200);
+        }
+
+        .info-card-enhanced h2 {
+          font-size: 1.8rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-6);
+        }
+
+        .info-section-enhanced {
+          margin-bottom: var(--spacing-7);
+          padding-bottom: var(--spacing-6);
+          border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .info-section-enhanced:last-of-type {
+          border-bottom: none;
+          margin-bottom: 0;
+        }
+
+        .section-subtitle-enhanced {
+          font-size: 1.3rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-5);
+          font-weight: 600;
+        }
+
+        /* Modalities grid pour une présentation plus claire */
+        .modalities-grid {
+          display: grid;
+          gap: var(--spacing-4);
+          margin-bottom: var(--spacing-5);
+        }
+
+        .modality-card {
+          padding: var(--spacing-3) 0;
+          background: transparent;
+          border-radius: 0;
+          border-left: none;
+          border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .modality-label {
+          font-size: 0.85rem;
+          color: var(--color-text-secondary);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 4px;
+        }
+
+        .modality-value {
+          font-weight: 600;
+          color: var(--color-primary);
+          font-size: 1.1rem;
+          margin-bottom: 2px;
+        }
+
+        .modality-detail {
+          font-size: 0.95rem;
+          color: var(--color-text-secondary);
+        }
+
+        .format-description-enhanced {
+          font-size: 0.95rem;
+          color: var(--color-text-secondary);
+          line-height: 1.6;
+          padding: 0;
+          background: transparent;
+          border-radius: 0;
+          border: none;
+        }
+
+        /* Support items pour l'accompagnement */
+        .support-items {
+          display: grid;
+          gap: var(--spacing-4);
+        }
+
+        .support-item {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--spacing-3);
+          padding: var(--spacing-3);
+          border-radius: 8px;
+          transition: background-color 0.2s ease;
+        }
+
+        .support-item:hover {
+          background: rgba(249, 247, 234, 0.3);
+        }
+
+        .support-icon {
+          font-size: 1.2rem;
+          margin-top: 2px;
+        }
+
+        .support-content {
+          flex: 1;
+        }
+
+        .support-title {
+          font-weight: 600;
+          color: var(--color-primary);
+          font-size: 1rem;
+          margin-bottom: 2px;
+        }
+
+        .support-desc {
+          font-size: 0.9rem;
+          color: var(--color-text-secondary);
+          line-height: 1.4;
+        }
+
+        /* Enhanced pricing */
+        .pricing-section-enhanced {
+          margin-top: var(--spacing-6);
+          padding: 0;
+          background: transparent;
+          border-radius: 0;
+          border: none;
+        }
+
+        .price-display {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          margin-bottom: var(--spacing-2);
+        }
+
+        .price-display .price-amount {
+          font-size: 2.2rem;
+          font-weight: 700;
+          color: var(--color-primary);
+        }
+
+        .price-display .price-label {
+          font-size: 1rem;
+          color: var(--color-text-secondary);
+          font-weight: 500;
+        }
+
+        .pricing-details {
+          font-size: 0.9rem;
+          color: var(--color-text-secondary);
+          line-height: 1.5;
+        }
         .price-amount { font-size: 2.5rem; font-weight: 700; color: var(--color-primary); }
         .price-label { font-size: 1.1rem; color: var(--color-text-secondary); font-weight: 500; }
         
@@ -712,8 +954,9 @@ const ProgrammeMBSRDetailsPage: React.FC = () => {
           .timeline-number-revisited { position: static; margin-bottom: var(--spacing-4); width: 45px; height: 45px; }
         }
       `}</style>
-        </div>
-    );
+    </div >
+  );
 };
 
 export default ProgrammeMBSRDetailsPage;
+

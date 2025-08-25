@@ -3,69 +3,69 @@ import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const ProgrammeMBCASDetailsPage: React.FC = () => {
-    const benefits = [
-        {
-            icon: Target,
-            title: 'Gestion de l\'anxiété',
-            description: 'Développez des stratégies efficaces pour faire face à l\'anxiété et aux préoccupations.'
-        },
-        {
-            icon: Heart,
-            title: 'Équilibre émotionnel',
-            description: 'Cultivez la stabilité émotionnelle et la résilience face aux défis.'
-        },
-        {
-            icon: Sparkles,
-            title: 'Bien-être durable',
-            description: 'Intégrez des pratiques qui nourrissent votre bien-être à long terme.'
-        }
-    ];
+  const benefits = [
+    {
+      icon: Target,
+      title: 'Gestion de l\'anxiété',
+      description: 'Développez des stratégies efficaces pour faire face à l\'anxiété et aux préoccupations.'
+    },
+    {
+      icon: Heart,
+      title: 'Équilibre émotionnel',
+      description: 'Cultivez la stabilité émotionnelle et la résilience face aux défis.'
+    },
+    {
+      icon: Sparkles,
+      title: 'Bien-être durable',
+      description: 'Intégrez des pratiques qui nourrissent votre bien-être à long terme.'
+    }
+  ];
 
-    const processSteps = [
-        {
-            number: '01',
-            title: 'Comprendre l\'anxiété',
-            description: 'Exploration des mécanismes de l\'anxiété et reconnaissance des patterns personnels.'
-        },
-        {
-            number: '02',
-            title: 'Pleine conscience des pensées',
-            description: 'Apprentissage de l\'observation bienveillante des pensées anxieuses et ruminations.'
-        },
-        {
-            number: '03',
-            title: 'Ancrage corporel',
-            description: 'Techniques de connexion au corps pour gérer l\'activation physiologique de l\'anxiété.'
-        },
-        {
-            number: '04',
-            title: 'Respiration consciente',
-            description: 'Pratiques respiratoires pour réguler le système nerveux et apaiser l\'esprit.'
-        },
-        {
-            number: '05',
-            title: 'Pleine conscience des émotions',
-            description: 'Accueil et régulation des émotions difficiles avec bienveillance et sagesse.'
-        },
-        {
-            number: '06',
-            title: 'Gestion des préoccupations',
-            description: 'Outils pratiques pour transformer la relation aux pensées inquiètes et projections.'
-        },
-        {
-            number: '07',
-            title: 'Compassion et auto-bienveillance',
-            description: 'Développement de la compassion envers soi-même face aux difficultés.'
-        },
-        {
-            number: '08',
-            title: 'Maintien et intégration',
-            description: 'Consolidation de la pratique et stratégies pour maintenir l\'équilibre au quotidien.'
-        }
-    ];
+  const processSteps = [
+    {
+      number: '01',
+      title: 'Comprendre l\'anxiété',
+      description: 'Exploration des mécanismes de l\'anxiété et reconnaissance des patterns personnels.'
+    },
+    {
+      number: '02',
+      title: 'Pleine conscience des pensées',
+      description: 'Apprentissage de l\'observation bienveillante des pensées anxieuses et ruminations.'
+    },
+    {
+      number: '03',
+      title: 'Ancrage corporel',
+      description: 'Techniques de connexion au corps pour gérer l\'activation physiologique de l\'anxiété.'
+    },
+    {
+      number: '04',
+      title: 'Respiration consciente',
+      description: 'Pratiques respiratoires pour réguler le système nerveux et apaiser l\'esprit.'
+    },
+    {
+      number: '05',
+      title: 'Pleine conscience des émotions',
+      description: 'Accueil et régulation des émotions difficiles avec bienveillance et sagesse.'
+    },
+    {
+      number: '06',
+      title: 'Gestion des préoccupations',
+      description: 'Outils pratiques pour transformer la relation aux pensées inquiètes et projections.'
+    },
+    {
+      number: '07',
+      title: 'Compassion et auto-bienveillance',
+      description: 'Développement de la compassion envers soi-même face aux difficultés.'
+    },
+    {
+      number: '08',
+      title: 'Maintien et intégration',
+      description: 'Consolidation de la pratique et stratégies pour maintenir l\'équilibre au quotidien.'
+    }
+  ];
 
-    return (
-        <div className="mbcas-details-page service-detail-page">
+  return (
+    <div className="mbcas-details-page service-detail-page">
       {/* Hero Section Élégant avec image de l'arbre */}
       <section className="hero-mbcas">
         <div className="container">
@@ -106,33 +106,33 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
 
       {/* Section des bénéfices avec vidéo de fond */}
       <section className="section benefits-section-mbcas parallax-surface">
-                <video
-                    muted
-                    loop
-                    playsInline
+        <video
+          muted
+          loop
+          playsInline
           className="parallax-video-static"
-                >
-                    <source src="/background.mp4" type="video/mp4" />
-                </video>
-                <div className="container">
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
+        <div className="container">
           <div className="section-header">
             <h2>Les bénéfices du programme</h2>
             <p>Une approche douce et progressive pour cultiver le bien-être à chaque étape de la vie</p>
-                        </div>
+          </div>
           <div className="benefits-grid-simplified">
-                            {benefits.map((benefit, index) => {
-                                const IconComponent = benefit.icon;
-                                return (
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon;
+              return (
                 <div key={index} className="benefit-card-simplified">
                   <IconComponent size={28} className="benefit-icon-simplified" />
-                                            <h3>{benefit.title}</h3>
-                                        <p>{benefit.description}</p>
-                                    </div>
-                                );
-                            })}
-                    </div>
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.description}</p>
                 </div>
-            </section>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
       <section className="section journey-section">
@@ -167,86 +167,91 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
                     <div>
                       <h4>Présence consciente</h4>
                       <p>Cultivez l'art d'être pleinement présent à chaque instant de votre vie.</p>
-                                </div>
-                            </div>
+                    </div>
+                  </div>
                   <div className="outcome-item">
                     <div className="outcome-icon">💭</div>
                     <div>
                       <h4>Liberté mentale</h4>
                       <p>Prenez de la distance par rapport aux pensées négatives et aux ruminations.</p>
                     </div>
-                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="program-format">
-                <h3>Modalités pratiques</h3>
-                <div className="format-highlights">
-                  <div className="format-item">
+            </div>
+          </div>
+
+          <div className="journey-aside">
+            <div className="info-card-merged">
+              <h2>Informations pratiques</h2>
+
+              {/* Section modalités */}
+              <div className="info-section">
+                <h3 className="section-subtitle">Modalités</h3>
+                <div className="format-highlights-merged">
+                  <div className="format-item-merged">
                     <strong>15 séances</strong> réparties sur 8 mois
                   </div>
-                  <div className="format-item">
+                  <div className="format-item-merged">
                     <strong>2 rencontres par mois</strong> : une principale + une intermédiaire
                   </div>
-                  <div className="format-item">
+                  <div className="format-item-merged">
                     <strong>Petit groupe</strong> de 5 à 10 participants maximum
                   </div>
                 </div>
-                <p>
+                <p className="format-description">
                   Chaque séance combine pratiques guidées, moments d'apprentissage et temps d'échange,
                   abordant des thèmes profonds comme la compassion, la spiritualité et l'acceptation de sa propre finitude.
-                                </p>
-                            </div>
-                        </div>
+                </p>
+              </div>
 
-            <div className="journey-aside">
-                            <div className="info-card-merged">
-                <h2>Informations pratiques</h2>
-                                <div className="info-section">
-                  <div className="detail-item-revisited">
-                    <span>📋</span>
-                    <div>
-                      <strong>Entretien préalable inclus</strong>
-                      <span>Pour personnaliser votre accompagnement</span>
-                    </div>
+              {/* Section accompagnement */}
+              <div className="info-section">
+                <h3 className="section-subtitle">Accompagnement</h3>
+                <div className="detail-item-revisited">
+                  <span>📋</span>
+                  <div>
+                    <strong>Entretien préalable inclus</strong>
+                    <span>Pour personnaliser votre accompagnement</span>
                   </div>
-                  <div className="detail-item-revisited">
-                    <span>📚</span>
-                    <div>
-                      <strong>Supports fournis</strong>
-                      <span>Livrets, fichiers audios et exercices</span>
-                    </div>
-                  </div>
-                  <div className="detail-item-revisited">
-                    <span>🏠</span>
-                    <div>
-                      <strong>Pratique à domicile</strong>
-                      <span>Exercices guidés entre les séances</span>
-                    </div>
-                  </div>
-                                </div>
-                                <div className="pricing-section">
-                                    <div className="price-row">
-                                        <div className="price-amount">380€</div>
-                                        <div className="price-label">Programme complet</div>
-                                    </div>
-                  <p className="small-text">Règlement possible en 3 ou 4 versements. En cas de difficulté financière, n'hésitez pas à me contacter.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </section>
+                <div className="detail-item-revisited">
+                  <span>📚</span>
+                  <div>
+                    <strong>Supports fournis</strong>
+                    <span>Livrets, fichiers audios et exercices</span>
+                  </div>
+                </div>
+                <div className="detail-item-revisited">
+                  <span>🏠</span>
+                  <div>
+                    <strong>Pratique à domicile</strong>
+                    <span>Exercices guidés entre les séances</span>
+                  </div>
+                </div>
+              </div>
+              <div className="pricing-section">
+                <div className="price-row">
+                  <div className="price-amount">380€</div>
+                  <div className="price-label">Programme complet</div>
+                </div>
+                <p className="small-text">Règlement possible en 3 ou 4 versements. En cas de difficulté financière, n'hésitez pas à me contacter.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* CTA Section */}
-            <VideoCTA
-                title="Prêt(e) à transformer votre quotidien ?"
-                subtitle="Contactez-moi pour en savoir plus sur le programme MBCAS et réserver votre place."
-                buttonText="M'inscrire"
-                buttonLink="/contact-reservation"
-            />
+      {/* CTA Section */}
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Contactez-moi pour en savoir plus sur le programme MBCAS et réserver votre place."
+        buttonText="M'inscrire"
+        buttonLink="/contact-reservation"
+      />
 
-            <style>{`
+      <style>{`
         /* === HERO SECTION MBCAS === */
         .hero-mbcas {
           padding: var(--spacing-20) 0;
@@ -405,8 +410,8 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
 
         .journey-layout {
           display: grid;
-          grid-template-columns: 1.5fr 1fr;
-          gap: var(--spacing-12);
+          grid-template-columns: 2fr 1fr;
+          gap: var(--spacing-6);
           align-items: start;
         }
 
@@ -422,7 +427,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           line-height: 1.7;
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-10);
-          max-width: 60ch;
+          max-width: 85ch;
         }
 
         .learning-outcomes {
@@ -529,7 +534,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           }
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
           .journey-layout {
             grid-template-columns: 1fr;
             gap: var(--spacing-8);
@@ -686,6 +691,39 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           color: var(--color-primary);
           margin-bottom: var(--spacing-6);
         }
+
+        .section-subtitle {
+          font-size: 1.2rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+          font-weight: 600;
+          border-bottom: 1px solid var(--color-gray-200);
+          padding-bottom: var(--spacing-2);
+        }
+
+        .format-highlights-merged {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-2);
+          margin-bottom: var(--spacing-4);
+        }
+
+        .format-item-merged {
+          color: var(--color-primary);
+          font-size: 1rem;
+          padding: var(--spacing-2) 0;
+        }
+
+        .format-item-merged strong {
+          font-weight: 700;
+        }
+
+        .format-description {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: var(--color-gray-700);
+          margin-bottom: 0;
+        }
         .info-section { margin-bottom: var(--spacing-6); padding-bottom: var(--spacing-6); border-bottom: 1px solid var(--color-gray-200); }
         .detail-item-revisited { display: flex; align-items: flex-start; gap: var(--spacing-4); color: var(--color-primary); }
         .detail-item-revisited:not(:last-child) { margin-bottom: var(--spacing-5); }
@@ -706,8 +744,8 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           .timeline-number-revisited { position: static; margin-bottom: var(--spacing-4); width: 45px; height: 45px; }
         }
       `}</style>
-        </div>
-    );
+    </div >
+  );
 };
 
 export default ProgrammeMBCASDetailsPage;
