@@ -10,7 +10,7 @@ const BlogPage: React.FC = () => {
       excerpt: 'Découvrez comment la pratique de la mindfulness peut transformer votre relation au stress au quotidien.',
       date: '15 Mars 2024',
       author: 'Véronique Carrié',
-      category: 'Pleine Conscience',
+      category: 'Pleine conscience et présence attentive.',
       image: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg',
       tags: ['mindfulness', 'stress', 'bien-être']
     },
@@ -66,7 +66,7 @@ const BlogPage: React.FC = () => {
     }
   ];
 
-  const categories = ['Tous', 'Pleine Conscience', 'Santé', 'Développement Personnel', 'MBSR', 'Neurosciences', 'Bien-être'];
+  const categories = ['Tous', 'Pleine conscience et présence attentive.', 'Santé', 'Développement Personnel', 'MBSR', 'Neurosciences', 'Bien-être'];
   const [selectedCategory, setSelectedCategory] = React.useState('Tous');
 
   const filteredPosts = selectedCategory === 'Tous'
@@ -175,7 +175,7 @@ const BlogPage: React.FC = () => {
 
 
 
-      <style jsx>{`
+      <style>{`
         .blog-page {
           padding-top: 0;
         }

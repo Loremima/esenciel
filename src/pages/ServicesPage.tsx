@@ -36,7 +36,7 @@ const ServicesPage: React.FC = () => {
         <div className="container">
           <div className="section-header">
             <h1>1. Accompagnements individuels</h1>
-            <p>Coaching personnalisé pour votre développement</p>
+            <p>Un accompagnement sur mesure pour une santé de qualité, une vie optimisée et une pleine conscience au quotidien. </p>
           </div>
           <div className="services-grid">
             {individualServices.map(service => (
@@ -85,7 +85,7 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Interventions en Entreprises */}
+      {/* Offres pour entreprises & collectivités */}
       <section id="autres" className="section services-section alt parallax-surface">
         <video
           autoPlay
@@ -98,8 +98,8 @@ const ServicesPage: React.FC = () => {
         </video>
         <div className="container">
           <div className="section-header">
-            <h1>4. Interventions en Entreprises</h1>
-            <p>Interventions et ateliers sur mesure</p>
+            <h1>4. Offres pour entreprises & collectivités</h1>
+            <p>Ateliers éducation à la santé /conférences pour entreprises et collectivités.</p>
           </div>
           <div className="services-grid">
             {otherFormats.map(service => (

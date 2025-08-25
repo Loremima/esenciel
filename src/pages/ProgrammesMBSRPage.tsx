@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, Euro, CheckCircle, Users, Calendar, CalendarDays } from 'lucide-react';
+import { ArrowRight, Euro, CheckCircle, Users, Calendar } from 'lucide-react';
+import VideoCTA from '../components/VideoCTA';
 
 const ProgrammesMBSRPage: React.FC = () => {
   const mbsrPrograms = [
@@ -139,21 +140,12 @@ const ProgrammesMBSRPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section cta-section">
-        <div className="container">
-          <div className="cta-content">
-            <h2>Prêt(e) à vous engager dans un programme complet ?</h2>
-            <p>
-              Contactez-moi pour connaître les prochaines sessions et réserver votre place
-              dans nos programmes MBSR ou MBCT.
-            </p>
-            <Link to="/contact-reservation" className="btn btn-primary">
-              M'inscrire
-              <CalendarDays size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Contactez-moi pour connaître les prochaines sessions et réserver votre place dans nos programmes MBSR ou MBCT."
+        buttonText="M'inscrire"
+        buttonLink="/contact-reservation"
+      />
     </div>
   );
 };

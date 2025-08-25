@@ -35,7 +35,7 @@ const TestimonialsSection: React.FC = () => {
       location: 'Decazeville',
       rating: 5,
       text: 'Les séances de pleine conscience m\'ont appris à gérer mon stress autrement. L\'approche de Véronique est à la fois professionnelle et chaleureuse. Un vrai plus dans ma vie quotidienne.',
-      service: 'Pleine Conscience'
+      service: 'Pleine conscience et présence attentive'
     }
   ];
 

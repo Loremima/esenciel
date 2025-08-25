@@ -4,11 +4,11 @@ export const individualServices = [
     {
         id: 'sante-qualite-vie',
         icon: Heart,
-        title: 'Santé et Qualité de Vie',
-        subtitle: 'Devenez acteur de votre santé et de votre qualité de vie au quotidien grâce à un accompagnement personnalisé.',
+        title: 'Santé et qualité de vie',
         description: 'Cet accompagnement est conçu pour vous aider à devenir acteur de votre santé et à adopter des habitudes de vie favorables à votre bien-être.',
-        duration: '1h30 à 2h (première séance) / 1h (séances suivantes)',
-        price: '90€ (première séance) / 60€ (séances suivantes)',
+        duration: '1h30-2h (1ère séance) / 1h (suivantes)',
+        price: '90€ (1ère séance) / 60€ (suivantes)',
+        sessionType: 'Individuel',
         modalities: ['Présentiel', 'Distanciel'],
         features: [
             'Bilan personnalisé pour prendre conscience de vos habitudes de vie',
@@ -23,11 +23,11 @@ export const individualServices = [
     {
         id: 'pleine-conscience-presence',
         icon: Brain,
-        title: 'Pleine conscience et présence',
-        subtitle: 'Découvrez le héros qui sommeille en vous.',
+        title: 'Pleine conscience et présence attentive',
         description: 'Cet accompagnement vous invite à ralentir, à vous poser et à respirer pour cultiver une présence plus profonde et authentique avec vous-même.',
-        duration: '1h',
+        duration: '45min-1h',
         price: 'Sur devis',
+        sessionType: 'Individuel',
         modalities: ['Présentiel', 'Distanciel'],
         features: [
             'Développer une écoute plus attentive à soi-même',
@@ -44,12 +44,12 @@ export const groupServices = [
     {
         id: 'jeu-du-tao',
         icon: Sparkles,
-        title: 'Le Jeu du Tao Santé et Mieux-Être',
-        subtitle: 'Devenez le héros de votre propre légende',
+        title: 'Jeux du Tao santé et mieux-être',
         description: 'Une expérience interactive et immersive destinée à des petits groupes de 4 personnes maximum. En 4/5 heures, chaque participant explore quatre mondes symboliques (terre, eau, feu, air) pour clarifier ses objectifs de bien-être et d\'équilibre de vie.',
-        duration: '4/5 heures',
-        price: '70€ par participant',
-        modalities: ['Groupe de 4 personnes maximum', 'Minimum 3 participants'],
+        duration: '4-5h par session',
+        price: '50€ par participant',
+        sessionType: 'Groupe (3-4 pers.)',
+        modalities: ['Minimum 3 participants'],
         features: [
             'L\'animation complète par un instructeur certifié',
             'Le jeu du tao',
@@ -67,52 +67,35 @@ export const collectivePrograms = [
     {
         id: 'mbsr',
         icon: Award,
-        title: 'Gestion du stress - MBSR',
-        description: 'Programme pour apprendre à gérer le stress par la pleine conscience.',
+        title: 'MBSR pour apprendre à gérer le stress',
+        description: 'Offrez-vous l\'opportunité de mieux gérer votre stress et vos émotions avec ce programme en 8 semaines. Idéal pour celles et ceux qui cherchent à retrouver le calme et la sérénité dans leur quotidien.',
         duration: '8 semaines',
         sessionDuration: '2h30 par séance',
-        groupSize: '5 à 10 personnes',
         price: '330€',
-        includes: [
-            '8 séances de groupe',
-            'Supports audio pour la pratique',
-            'Manuel du participant'
-        ],
+        sessionType: 'Groupe (5-10 pers.)',
         detailPage: '/programmes-mbsr'
     },
     {
         id: 'mbct',
         icon: Brain,
-        title: 'Prévention des rechutes dépressives - MBCT',
-        description: 'Programme combinant pleine conscience et thérapie cognitive pour prévenir les rechutes dépressives.',
-        duration: '8 mois',
-        sessionDuration: '2h par séance',
-        groupSize: '5 à 10 personnes',
-        price: '400€',
-        includes: [
-            '15 séances de groupe',
-            'Exercices de thérapie cognitive',
-            'Pratiques de pleine conscience',
-            'Suivi personnalisé'
-        ],
-        detailPage: '/programmes-mbsr-mbct'
+        title: 'MBCT pour prévenir la dépression',
+        description: "Issu de la combinaison de la pleine conscience et des outils de la thérapie cognitive, ce protocole est particulièrement adapté à celles et ceux ayant traversé des épisodes de dépression ou d'anxiété.",
+        duration: '8 semaines',
+        sessionDuration: '2h-2h30 par séance',
+        price: '330€',
+        sessionType: 'Groupe (5-10 pers.)',
+        detailPage: '/programmes-mbct'
     },
     {
         id: 'mbcas',
         icon: Users,
-        title: 'Accompagnement seniors - MBCAS',
-        description: 'Programme adapté aux seniors pour bien vivre son avancé en age.',
-        duration: '6 semaines',
-        sessionDuration: '1h30 par séance',
-        groupSize: '4 à 8 personnes',
-        price: '330€',
-        includes: [
-            '6 séances adaptées',
-            'Pratiques douces',
-            'Accompagnement bienveillant',
-            'Soutien de groupe'
-        ],
-        detailPage: '/programmes-mbsr-mbct'
+        title: 'MBCAS pour bien vivre son avancée en âge',
+        description: "Ce programme s'adresse aux seniors ou à toute personne s'intéressant à l'avancée en âge.Il propose une progression plus douce sur plusieurs mois qui intègre des pratiques centrées sur le corps, les émotions et les pensées.",
+        duration: '8 mois (15 séances)',
+        sessionDuration: '2h (princ.) + 1h30 (inter.)',
+        price: '380€',
+        sessionType: 'Groupe (5-10 pers.)',
+        detailPage: '/programme-mbcas'
     }
 ];
 
@@ -121,22 +104,24 @@ export const otherFormats = [
         id: 'ateliers-education',
         icon: BookOpen,
         title: 'Ateliers en éducation à la santé',
-        description: 'Ateliers thématiques pour apprendre à prendre soin de sa santé au quotidien.',
-        duration: '2h à 3h',
-        price: 'Sur devis selon le format',
-        modalities: ['Entreprises', 'Associations', 'Particuliers'],
+        description: 'Ateliers personnalisés pour les structures, adaptés à vos besoins et à votre public. Chaque séance est conçue pour être interactive et pratique.',
+        duration: 'Sur commande',
+        price: 'Sur devis',
+        sessionType: 'Groupe/Structure',
+        modalities: ['Entreprises', 'Associations'],
         highlight: true,
-        detailPage: '/interventions-entreprises'
+        detailPage: '/ateliers-education-sante'
     },
     {
         id: 'conferences',
         icon: Presentation,
         title: 'Conférences & événements publics',
-        description: 'Interventions sur la pleine conscience, la santé et le bien-être.',
-        duration: '1h à 2h',
+        description: 'Conférences sur mesure pour les structures, destinées à sensibiliser et informer votre public sur le stress, la pleine conscience, la santé cognitive, etc.',
+        duration: 'Sur commande',
         price: 'Sur devis',
+        sessionType: 'Groupe/Structure',
         modalities: ['Conférences', 'Tables rondes', 'Événements'],
-        highlight: true,
-        detailPage: '/interventions-entreprises'
+        highlight: false, // Moins mis en avant que les ateliers
+        detailPage: '/conferences-evenements'
     }
 ];

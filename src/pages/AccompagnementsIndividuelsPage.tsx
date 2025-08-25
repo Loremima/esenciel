@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CalendarDays } from 'lucide-react';
 import { individualServices } from './servicesData';
 import ServiceCard from '../components/ServiceCard';
+import VideoCTA from '../components/VideoCTA';
 
 const AccompagnementsIndividuelsPage: React.FC = () => {
   return (
@@ -14,7 +15,6 @@ const AccompagnementsIndividuelsPage: React.FC = () => {
         <div className="hero-overlay" aria-hidden="true"></div>
         <div className="hero-content">
           <h1>Accompagnements individuels</h1>
-          <p className="hero-subtitle">Coaching personnalisé pour votre développement</p>
         </div>
       </section>
 
@@ -22,7 +22,7 @@ const AccompagnementsIndividuelsPage: React.FC = () => {
         <div className="container">
           <div className="section-header">
             <h1>1. Accompagnements individuels</h1>
-            <p>Coaching personnalisé pour votre développement</p>
+            <p>Un accompagnement sur mesure pour une santé de qualité, une vie optimisée et une pleine conscience au quotidien. </p>
           </div>
           <div className="services-grid">
             {individualServices.map(service => (
@@ -32,21 +32,12 @@ const AccompagnementsIndividuelsPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="section cta-section">
-        <div className="container">
-          <div className="cta-content">
-            <h2>Prêt(e) à commencer votre parcours ?</h2>
-            <p>
-              Contactez-moi pour discuter de vos besoins et trouver l'accompagnement
-              qui vous correspond le mieux.
-            </p>
-            <Link to="/contact-reservation" className="btn btn-primary">
-              Prendre rendez-vous
-              <CalendarDays size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Contactez-moi pour discuter de vos besoins et trouver l'accompagnement qui vous correspond le mieux."
+        buttonText="Prendre rendez-vous"
+        buttonLink="/contact-reservation"
+      />
     </div>
   );
 };

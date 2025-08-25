@@ -9,11 +9,11 @@ interface ServiceDetailPageProps {
 const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
   const serviceData = {
     sante: {
-      title: 'Santé & Qualité de Vie',
+      title: 'Santé & qualité de vie',
       subtitle: 'Acteur de sa santé : vers un bien-être durable',
       description:
         "Ces accompagnements sont conçus pour vous aider à identifier et à mettre en place des habitudes de vie favorables à votre bien‑être global. Grâce à un suivi personnalisé, nous explorerons vos ressources internes et lèverons les obstacles qui freinent vos intentions afin d'ancrer des pratiques durables.",
-      longDescription: `L’accompagnement vise à vous offrir un soutien continu pour instaurer et maintenir de nouvelles habitudes de vie. Par un travail conjoint, nous clarifierons vos objectifs, identifierons les leviers de motivation et construirons des actions alignées à vos valeurs pour une amélioration durable de votre qualité de vie.`,
+      longDescription: `L’accompagnement vise à vous offrir un soutien continu pour instaurer et maintenir de nouvelles habitudes de vie. Par un travail conjoint, nous clarifierons vos objectifs, identifierons les leviers de motivation et construirons des actions alignées à vos valeurs pour une amélioration durable de présence.`,
       process: [
         "Première rencontre : clarification des objectifs et plan d'action personnalisé",
         'Séances régulières : actions concrètes et ajustements selon vos besoins',
@@ -33,7 +33,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
       modalities: ['Cabinet', 'Visioconférence']
     },
     mindfulness: {
-      title: 'Pleine Conscience',
+      title: 'Pleine conscience et présence attentive.',
       subtitle: 'Ralentir pour mieux se retrouver',
       description:
         "Cet accompagnement vous invite à ralentir, à vous poser et à respirer pour cultiver une présence plus profonde. Les outils de pleine conscience vous aident à clarifier vos pensées, apaiser le cœur et vous aligner avec votre essence.",
@@ -58,7 +58,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
       modalities: ['Individuel', 'Groupe', 'En ligne']
     },
     tao: {
-      title: 'Jeu du Tao du Mieux‑Être',
+      title: 'Jeux du Tao santé et mieux-être',
       subtitle: 'Devenez le héros de votre propre légende – Jeu collectif',
       description:
         "Expérience interactive et immersive invitant à clarifier sa quête personnelle, avec l’appui du collectif. Un chemin d’introspection vers un équilibre de vie durable.",
@@ -193,12 +193,12 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
                 <div className="related-links">
                   {service !== 'sante' && (
                     <Link to="/sante-qualite-vie" className="related-link">
-                      Santé & Qualité de Vie
+                      Santé & qualité de vie
                     </Link>
                   )}
                   {service !== 'mindfulness' && (
                     <Link to="/pleine-conscience" className="related-link">
-                      Pleine Conscience
+                      Pleine conscience et présence attentive.
                     </Link>
                   )}
                   {service !== 'tao' && (

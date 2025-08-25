@@ -380,7 +380,7 @@ const InfosPratiquesPage: React.FC = () => {
           line-height: 1.7;
           margin: 0;
           font-size: 1.05rem;
-          text-align: center;
+          text-align: justify;
         }
 
         .resources-grid {
@@ -568,11 +568,7 @@ const InfosPratiquesPage: React.FC = () => {
           font-weight: 600;
         }
 
-        .timeline-content p {
-          color: var(--color-gray-800);
-          line-height: 1.6;
-          margin: 0;
-        }
+        .timeline-content p { color: var(--color-gray-800); line-height: 1.6; margin: 0; }
 
         /* Responsive timeline */
         @media (max-width: 768px) {

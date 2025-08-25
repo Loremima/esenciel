@@ -1,45 +1,88 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Sparkles, Heart, Award, ArrowRight, CalendarDays } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
-  const credentials = [
+  const quotes = [
     {
-      icon: Sparkles,
-      title: 'Instructrice MBSR',
-      description: 'Mindfulness-Based Stress Reduction',
-      details: 'Certification internationale en programmes de pleine conscience',
+      text: 'Celui qui regarde l\'extérieur rêve, celui qui regarde à l\'intérieur s\'éveille.',
+      author: 'Carl Jung',
     },
     {
+      text: 'Connais-toi toi-même et tu connaîtras l\'univers et les dieux.',
+      author: 'Socrate',
+    },
+    {
+      text: 'Entre le stimulus et la réponse, il y a un espace. Dans cet espace se trouve notre pouvoir de choisir notre réponse. Dans notre réponse résident notre croissance et notre liberté.',
+      author: 'Viktor Frankl',
+    },
+  ];
+
+  const [currentQuote, setCurrentQuote] = useState(0);
+  const [visibleQuote, setVisibleQuote] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisibleQuote(false);
+      setTimeout(() => {
+        setCurrentQuote(prev => (prev + 1) % quotes.length);
+        setVisibleQuote(true);
+      }, 600); // durée du fade-out
+    }, 6000); // temps d\'affichage par citation
+
+    return () => clearInterval(interval);
+  }, [quotes.length]);
+  const credentials = [
+    {
       icon: Heart,
-      title: 'Coach Santé',
-      description: 'Approche intégrative',
-      details: 'Accompagnement holistique corps-esprit',
+      title: 'Master en psychologie clinique',
+      description: 'Spécialité en neuropsychologie',
+      details: 'Approche intégrative',
     },
     {
       icon: Award,
-      title: 'Formation Continue',
-      description: 'Expertise en développement',
-      details: 'Perfectionnement constant des pratiques',
+      title: 'Coach prévention santé - Qualité de vie',
+      description: 'Accompagnement holistique',
+      details: 'Santé- Sérénité - Energie'
     },
+    {
+      icon: Sparkles,
+      title: 'Instructrice de programmes basés sur la pleine conscience',
+      description: 'Mindfulness-Based Interventions - MBIs',
+      details: 'Certification des programmes MBCT-MBAS'
+    },
+    {
+      icon: Sparkles,
+      title: 'Formatrice en éducation à la santé',
+      description: 'Formation - Prévention - Education',
+      details: 'Certification en Promotion et éducation à la santé'
+    }
   ];
 
   const values = [
     {
       title: 'Bienveillance',
-      description: 'Un accompagnement dans le respect et l\'écoute de votre rythme personnel'
+      description: 'Agir avec empathie et attention pour soutenir chacun dans son parcours.'
     },
     {
-      title: 'Autonomisation',
-      description: 'Vous rendre acteur de votre bien-être et de votre développement'
+      title: "Respect de l'individualité",
+      description: 'Accompagner chaque personne à son rythme, en tenant compte de ses besoins et de sa singularité.'
     },
     {
-      title: 'Approche Intégrative',
-      description: 'Allier sciences psychologiques, pleine conscience et éducation santé'
+      title: 'Ouverture et curiosité',
+      description: 'Explorer différentes approches et outils pour s\'adapter aux besoins uniques de chaque personne.'
     },
     {
-      title: 'Vision Holistique',
-      description: 'Prendre en compte la globalité de votre être : corps, esprit, émotions'
+      title: 'Authenticité',
+      description: 'Être vrai et sincère dans mes interactions pour créer une relation de confiance.'
+    },
+    {
+      title: 'Responsabilité',
+      description: 'Assurer pleinement mon rôle et mon engagement envers ceux que j\'accompagne.'
+    },
+    {
+      title: 'Honnêteté et intégrité',
+      description: 'Agir avec transparence et éthique dans toutes mes pratiques.'
     }
   ];
 
@@ -67,8 +110,8 @@ const AboutPage: React.FC = () => {
           <div className="hero-text">
             <h1>Qui suis-je ?</h1>
             <p className="hero-subtitle">
-              Psychologue clinicienne spécialisée en neuropsychologie<br />
-              Approche intégrative, bienveillante et centrée sur l'autonomie
+              Coach & formatrice Santé et qualité de vie<br />
+              Intructrice de programmes basés sur la pleine conscience.<br />
             </p>
           </div>
         </div>
@@ -82,24 +125,23 @@ const AboutPage: React.FC = () => {
           </div>
           <div className="intro-text">
             <h2>Véronique Carrié</h2>
-            <p className="intro-subtitle">Instructrice MBSR & Coach Santé</p>
-            <p> Je m'appelle Véronique Carrié, et ma passion pour l'humain m'a naturellement conduite vers des études en psychologie clinique, avec une spécialité en neuropsychologie, pour explorer les mécanismes cognitifs et émotionnels qui influencent notre comportement, et favoriser une meilleure qualité de vie.
+            <p> Je m'appelle Véronique Carrié. Ma passion pour l'humain m'a naturellement conduite vers des études en psychologie clinique, avec une spécialité en neuropsychologie. J'ai choisi cette voie afin d'explorer les mécanismes cognitifs et émotionnels qui influencent notre comportement dans le but de favoriser une meilleure qualité de vie.
             </p>
             <p>
-              Au fil de mon parcours professionnel en clinique, j'ai constaté que la prévention, l'éducation à la santé et l'accompagnement vers une meilleure connaissance de soi pouvaient transformer profondément les trajectoires de vie. Comprendre le fonctionnement, c'est comme disposer d'une notice, un outil précieux pour faire des choix éclairés.
-            </p>
+              Au fil de mon parcours professionnel en clinique, j'ai constaté que la prévention, l'éducation à la santé et l'accompagnement vers une meilleure connaissance de soi pouvaient transformer profondément les trajectoires de vie. </p>
+            <p><strong>Comprendre le fonctionnement de notre cerveau, c'est comme disposer d'une notice qui nous permet de faire des choix éclairés et d'aligner nos comportements.</strong></p>
             <p>
-              C'est pourquoi, depuis quelques années, je propose des programmes d'accompagnement intégratifs, alliant les sciences psychologiques, la pleine conscience et l'éducation à la santé, pour encourager des comportements durables et bénéfiques. Mon rôle est de fournir des outils adaptés afin que chacun puisse trouver ses propres solutions, dans un esprit de co‑création et d'exploration. Mon objectif est d'aider les individus à mieux comprendre leurs propres mécanismes et à s'adapter aux changements de la vie.
+              C'est pourquoi, depuis quelques années, je propose des programmes d'accompagnement intégratifs, alliant les sciences psychologiques, la pleine conscience et l'éducation à la santé, pour encourager des comportements durables et bénéfiques. Mon rôle est de fournir des outils adaptés afin que chacun puisse trouver ses propres solutions, dans un esprit de co‑création et d'exploration. Mon objectif est d'aider les individus à mieux comprendre leurs propres mécanismes et à s'adapter aux changements de la vie. Je suis convaincue que chaque personne porte en elle ses propres ressources. Mon rôle est de remettre l'humain au cœur de ses décisions, en l'aidant à se reconnecter à ce qui fait sens pour lui.
             </p>
             <div className="intro-signature">
               Véronique
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Section combinée Approche, Qualifications, Valeurs */}
-      <section className="section combined-details parallax-surface">
+      < section className="section combined-details parallax-surface" >
         <video autoPlay muted loop playsInline className="parallax-video">
           <source src="/background.mp4" type="video/mp4" />
         </video>
@@ -107,10 +149,10 @@ const AboutPage: React.FC = () => {
           <div className="details-wrapper">
             {/* Colonne 1: Approche */}
             <div className="full-width-values">
-              <h2 className="col-title">Ma philosophie</h2>
+              <h2 className="col-title">Mon approche</h2>
               <div className="philosophy-cards">
                 <div className="philosophy-card">
-                  <p>J'ai développé une vision globale de la santé et de la qualité de vie, alliant une perspective à la fois holistique et systémique. Plutôt que d'appliquer des solutions toutes faites, je crois fermement que chaque personne porte en elle ses propres ressources. Mon rôle est de remettre l'humain au cœur de ses décisions, en l'aidant à se reconnecter à ce qui fait sens pour lui.</p>
+                  <p>J'ai développé une vision de la santé et de la qualité de vie, alliant une perspective à la fois holistique et systémique. Plutôt que d'appliquer des solutions toutes faites, je crois fermement que chaque personne porte en elle ses propres ressources. Mon rôle est de remettre l'humain au cœur de ses décisions, en l'aidant à se reconnecter à ce qui fait sens pour lui.</p>
                   <p>Cette approche repose sur un processus de maturation continue, permettant à chacun d'assimiler ses expériences à son propre rythme. C'est un chemin d'apprentissage et de croissance, où l'autonomie et la responsabilisation sont au cœur du processus. Chacun devient acteur de sa santé et de son bien-être, en apprenant à mieux se connaître et à développer une écoute bienveillante envers soi-même.</p>
                   <p>Je privilégie une alliance bienveillante, respectueuse de la singularité de chacun, et j'intègre des pratiques alternatives non médicamenteuses, qui permettent d'observer et de dépasser les croyances limitantes.</p>
                 </div>
@@ -120,7 +162,7 @@ const AboutPage: React.FC = () => {
             {/* Colonne 2: Qualifications */}
             <div className="full-width-values">
               <h2 className="col-title">Mes Qualifications</h2>
-              <div className="credentials-grid">
+              <div className="credentials-grid four-cols">
                 {credentials.map((credential, index) => {
                   const IconComponent = credential.icon;
                   return (
@@ -145,7 +187,7 @@ const AboutPage: React.FC = () => {
                 <h2 className="col-title">Mes Valeurs</h2>
                 <p className="col-subtitle oneline">Les principes qui guident mon accompagnement au quotidien</p>
               </div>
-              <div className="values-grid">
+              <div className="values-grid values-4-2">
                 {values.map((value, index) => (
                   <div key={index} className="value-card">
                     <h3>{value.title}</h3>
@@ -157,19 +199,19 @@ const AboutPage: React.FC = () => {
 
             {/* Section Citation en pleine largeur */}
             <div className="full-width-quote">
-              <div className="quote-section">
-                <blockquote>
-                  « Celui qui regarde l'extérieur rêve, celui qui regarde à l'intérieur s'éveille. »
-                  <footer>– Carl Jung</footer>
+              <div className="quote-section rotating">
+                <blockquote className={`quote-rotating ${visibleQuote ? 'visible' : ''}`}>
+                  « {quotes[currentQuote].text} »
+                  <footer>– {quotes[currentQuote].author}</footer>
                 </blockquote>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* CTA */}
-      <section className="section cta-about">
+      < section className="section cta-about" >
         <div className="container">
           <div className="cta-content">
             <h2>Commençons ensemble</h2>
@@ -189,16 +231,16 @@ const AboutPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Disclaimer */}
-      <section className="section disclaimer-section">
+      < section className="section disclaimer-section" >
         <div className="container">
           <p>
-            <strong>Avis de non-responsabilité :</strong> Je ne suis pas médecin. Mes accompagnements et conseils visent au bien-être et au développement personnel, mais ne se substituent en aucun cas à un avis médical, un diagnostic ou un traitement prescrit par un professionnel de la santé. Pour toute question d'ordre médical, veuillez consulter votre médecin.
+            <strong>Information importante :</strong> Mes programmes de pleine conscience et accompagnements offrent un appui précieux pour vivre pleinement chaque étape de votre vie, pour soutenir votre santé et votre bien-être. Ils ne remplacent en aucun cas un avis et suivi médical ou traitement prescrit par un professionnel de santé. Pour toute question d'ordre médical, veuillez consulter votre médecin.
           </p>
         </div>
-      </section>
+      </section >
 
       <style>{`
         .invitation-text {
@@ -242,13 +284,17 @@ const AboutPage: React.FC = () => {
           line-height: 1.8;
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-4); /* Ajout d'espacement */
+          text-align: justify;
         }
         .intro-signature {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Brush Script MT', cursive, 'Playfair Display', serif;
           font-style: italic;
-          font-size: 2rem;
+          font-size: 2.2rem;
           color: var(--color-secondary-dark);
-          margin-top: var(--spacing-6);
+          text-align: right;
+          margin-top: var(--spacing-8);
+          position: relative;
+          transform: rotate(-2deg);
         }
         @media (max-width: 768px) {
           .intro-container {
@@ -376,14 +422,14 @@ const AboutPage: React.FC = () => {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: white;
+          color: #fffcea;
           text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
           text-align: center;
           margin-bottom: var(--spacing-10);
         }
         
         .col-subtitle {
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(255, 252, 234, 0.9);
           text-align: center;
           max-width: 300px;
           margin: -1rem auto 2rem;
@@ -407,7 +453,7 @@ const AboutPage: React.FC = () => {
             margin: 0;
             font-size: 1.12rem;
             line-height: 2;
-            text-align: left;
+            text-align: justify;
         }
         .philosophy-card p + p { margin-top: var(--spacing-6); }
         
@@ -426,6 +472,18 @@ const AboutPage: React.FC = () => {
             margin: 0;
             text-align: center;
         }
+        .quote-section.rotating .quote-rotating {
+          opacity: 0;
+          transform: translateY(8px);
+          transition: opacity 600ms ease, transform 600ms ease;
+          min-height: 110px;
+          display: grid;
+          place-items: center;
+        }
+        .quote-section.rotating .quote-rotating.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
 
         .quote-section footer {
             margin-top: var(--spacing-4);
@@ -442,27 +500,31 @@ const AboutPage: React.FC = () => {
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: var(--spacing-6);
         }
-
+        .credentials-grid.four-cols { grid-template-columns: repeat(4, 1fr); }
+        @media (max-width: 1024px) { .credentials-grid.four-cols { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .credentials-grid.four-cols { grid-template-columns: 1fr; } }
+        
         .credential-card {
+            position: relative;
             padding: var(--spacing-5);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-5);
+            padding-left: calc(var(--spacing-6) + 44px);
+            display: block;
             transition: all 0.3s ease;
         }
 
         .credential-card:hover { }
 
         .credential-icon {
-            background: rgba(255, 255, 255, 0.2);
-            width: 50px;
-            height: 50px;
+            position: absolute;
+            top: var(--spacing-5);
+            left: var(--spacing-5);
+            background: rgba(255, 255, 255, 0.15);
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
         }
         
         .credential-content {
@@ -470,22 +532,24 @@ const AboutPage: React.FC = () => {
         }
         
         .credential-content h4 {
-            margin: 0 0 var(--spacing-1);
-            font-size: 1.1rem;
-            font-weight: 600;
+            margin: 0 0 2px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.3;
         }
         
         .credential-description {
-            font-weight: 600;
-            margin: 0 0 var(--spacing-1);
-            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 0 0 2px;
+            font-size: 0.92rem;
+            color: var(--color-secondary-dark);
         }
 
         .credential-details {
             font-size: 0.85rem;
             margin: 0;
             line-height: 1.5;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         .full-width-values {
@@ -501,6 +565,17 @@ const AboutPage: React.FC = () => {
           gap: var(--spacing-6);
           max-width: 1200px;
           margin: 0 auto;
+        }
+        .values-grid.values-4-2 { grid-template-columns: repeat(4, 1fr); }
+        .values-grid.values-4-2 .value-card:nth-last-child(2),
+        .values-grid.values-4-2 .value-card:last-child { grid-column: span 2; }
+        @media (max-width: 1024px) {
+          .values-grid.values-4-2 { grid-template-columns: repeat(2, 1fr); }
+          .values-grid.values-4-2 .value-card:nth-last-child(2),
+          .values-grid.values-4-2 .value-card:last-child { grid-column: auto; }
+        }
+        @media (max-width: 640px) {
+          .values-grid.values-4-2 { grid-template-columns: 1fr; }
         }
 
         .value-card {
@@ -528,10 +603,10 @@ const AboutPage: React.FC = () => {
         .parallax-surface .credential-card,
         .parallax-surface .value-card {
             background: linear-gradient(135deg,
-              rgba(255, 255, 255, 0.8) 0%,
-              rgba(255, 255, 255, 0.5) 100%);
+              rgba(255, 252, 234, 0.9) 0%,
+              rgba(255, 252, 234, 0.7) 100%);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 252, 234, 0.4);
             border-radius: var(--radius-xl);
         }
 
@@ -539,9 +614,9 @@ const AboutPage: React.FC = () => {
         .parallax-surface .credential-card:hover,
         .parallax-surface .value-card:hover {
             background: linear-gradient(135deg,
-              rgba(255, 255, 255, 0.9) 0%,
-              rgba(255, 255, 255, 0.6) 100%);
-            border-color: rgba(255, 255, 255, 0.5);
+              rgba(255, 252, 234, 0.95) 0%,
+              rgba(255, 252, 234, 0.8) 100%);
+            border-color: rgba(255, 252, 234, 0.6);
         }
 
         .parallax-surface .philosophy-card p,
@@ -613,6 +688,7 @@ const AboutPage: React.FC = () => {
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-8);
           line-height: 1.6;
+          text-align: left;
         }
 
         .cta-actions {
@@ -747,7 +823,7 @@ const AboutPage: React.FC = () => {
           }
         }
       `}</style>
-    </div>
+    </div >
   );
 };
 

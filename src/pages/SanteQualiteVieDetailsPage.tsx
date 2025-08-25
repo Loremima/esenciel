@@ -1,23 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Clock, Euro, CalendarDays, Users, Target, Heart, Sparkles } from 'lucide-react';
+import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
+import VideoCTA from '../components/VideoCTA';
 
 const SanteQualiteVieDetailsPage: React.FC = () => {
   const benefits = [
     {
       icon: Target,
       title: 'Clarté sur vos objectifs',
-      description: 'Identifiez précisément ce qui compte vraiment pour votre bien-être'
+      description: 'Identifiez précisément ce qui compte vraiment pour votre bien-être.'
     },
     {
       icon: Heart,
       title: 'Équilibre retrouvé',
-      description: 'Harmonisez tous les aspects de votre vie pour un épanouissement global'
+      description: 'Harmonisez tous les aspects de votre vie pour un épanouissement global.'
     },
     {
       icon: Sparkles,
       title: 'Transformation durable',
-      description: 'Instaurez des changements qui perdurent dans le temps'
+      description: 'Instaurez des changements qui perdurent dans le temps.'
     }
   ];
 
@@ -35,7 +35,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
     {
       number: '03',
       title: 'Accompagnement actif',
-      description: 'Mise en œuvre progressive avec ajustements réguliers et soutien continu.'
+      description: 'Mise en œuvre progressive avec plusieurs séances pour des ajustements réguliers et un soutien continu.'
     },
     {
       number: '04',
@@ -59,10 +59,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         </video>
         <div className="hero-overlay" aria-hidden="true"></div>
         <div className="hero-content">
-          <h1>Santé et Qualité de Vie</h1>
-          <p className="hero-subtitle">
-            Devenez acteur de votre santé et de votre qualité de vie au quotidien grâce à un accompagnement personnalisé.
-          </p>
+          <h1>Santé et qualité de vie</h1>
         </div>
       </section>
 
@@ -71,10 +68,12 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         <div className="container">
           <div className="value-layout">
             <div className="value-left">
-              <h2>Transformez votre quotidien</h2>
+              <h2>Acteur de sa santé : vers un bien-être durable</h2>
               <p className="lead">
-                Un accompagnement sur-mesure pour développer des habitudes de vie durables
-                et retrouver un équilibre qui vous ressemble vraiment.
+                Ces accompagnements sont conçus pour vous aider à identifier et à mettre en
+                place des habitudes de vie favorables à votre bien-être global. Grâce à un suivi
+                personnalisé, nous explorerons ensemble les ressources internes qui vous
+                permettrons d’adopter des pratiques quotidiennes bénéfiques pour votre santé.
               </p>
             </div>
             <div className="benefits-grid-refined">
@@ -108,8 +107,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         </video>
         <div className="container process-container-revisited">
           <div className="process-intro-revisited">
-            <h2>Comment ça marche ?</h2>
-            <p>Un parcours en 4 étapes pour des résultats durables.</p>
+            <h2>Un parcours en 4 étapes pour des résultats durables.</h2>
           </div>
           <div className="timeline-revisited">
             {processSteps.map((step, index) => (
@@ -130,32 +128,28 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         <div className="container">
           <div className="coaching-details-grid">
             <div className="coaching-text">
-              <h2>Santé & Qualité de Vie</h2>
-              <p>
-                Acteur de votre santé : vers un bien‑être durable. Cet accompagnement vous aide à
-                identifier vos habitudes, lever les freins, mobiliser vos ressources et installer des
-                actions adaptées et alignées à vos besoins.
-              </p>
-              <h3>Objectifs</h3>
+              <h2>Les objectifs de l’accompagnement</h2>
               <ul className="objectives-list-large">
-                <li>Prendre conscience des habitudes impactant votre bien‑être</li>
-                <li>Identifier les freins et blocages</li>
-                <li>Mobiliser vos ressources personnelles</li>
-                <li>Mettre en place des actions concrètes et alignées</li>
-                <li>Soutenir votre motivation sur la durée</li>
+                <li>Prendre conscience de vos habitudes de vie impactant votre bien-être.</li>
+                <li>Identifier les freins et les blocages qui limitent votre épanouissement.</li>
+                <li>Découvrir et mobiliser les ressources personnelles pour une vie équilibrée.</li>
+                <li>Mettre en place des actions adaptées et alignées avec vos besoins.</li>
+                <li>Soutenir et maintenir votre motivation et votre engagement à long terme.</li>
               </ul>
-              <h3>Déroulement</h3>
+
+              <h3>Déroulement de l’accompagnement</h3>
               <div className="process-text-large">
                 <p>
-                  L'accompagnement débute par une première rencontre pour discuter de vos objectifs et définir
-                  ensemble un plan d'action personnalisé. À partir de là nous explorerons vos habitudes de vie
-                  et identifierons les freins qui limitent votre bien-être.
+                  L’accompagnement débute par une première rencontre pour discuter de vos
+                  objectifs et définir ensemble un plan d’action personnalisé. A partir de là nous
+                  explorerons vos habitudes de vie et identifierons les freins qui limitent votre bien-être.
+                  Chaque séance vous aidera à mobiliser vos ressources internes et à mettre ne place
+                  des actions concrètes pour améliorer votre qualité de vie.
                 </p>
                 <p>
-                  Chaque séance vous aidera à mobiliser vos ressources internes et à mettre en place des actions
-                  concrètes pour améliorer votre qualité de vie. Au fil des séances, le suivi régulier vous
-                  permettra d'ajuster vos actions en fonction de l'évolution de vos besoins afin de maintenir
-                  votre motivation.
+                  Au fil des séances, le suivi régulier vous permettra d’ajuster vos actions en fonction de l’évolution de vos besoins
+                  afin de maintenir votre motivation. Je vous accompagne tout au long du processus
+                  pour instaurer des changements durables alignés à vos valeurs.
                 </p>
               </div>
             </div>
@@ -174,7 +168,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
                     <Users size={22} />
                     <div>
                       <strong>Modalités</strong>
-                      <span>En cabinet à Toulouse ou en visio</span>
+                      <span>En cabinet à Vaureilles ou en visio</span>
                     </div>
                   </div>
                 </div>
@@ -195,25 +189,12 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
       </section>
 
       {/* CTA Section (video background, texte blanc) */}
-      <section className="section cta-section parallax-surface">
-        <video autoPlay muted loop playsInline className="parallax-video">
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container">
-          <div className="cta-content">
-            <div className="cta-text">
-              <h2>Prêt(e) à transformer votre quotidien ?</h2>
-              <p>Commencez dès aujourd'hui votre parcours vers une vie plus équilibrée et épanouissante.</p>
-            </div>
-            <div className="cta-actions">
-              <Link to="/contact-reservation" className="btn btn-primary cta-primary">
-                Réserver ma première séance
-                <CalendarDays size={20} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <VideoCTA
+        title="Alors ? Prêt(e) à prendre en main votre santé et votre bien-être ?"
+        subtitle="Réservez dès maintenant votre premier rendez-vous et engagez-vous dans un accompagnement sur mesure pour créer des changements durables."
+        buttonText="Réserver ma première séance"
+        buttonLink="/contact-reservation"
+      />
 
       <style>{`
         /* Reset and simplify previous styles */
@@ -224,7 +205,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         /* Value Section refined */
         .value-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--spacing-12); align-items: center; }
         .value-left h2 { font-size: clamp(2.2rem, 4.2vw, 3rem); color: var(--color-primary); margin-bottom: var(--spacing-4); }
-        .value-left .lead { font-size: 1.15rem; color: var(--color-text-secondary); line-height: 1.7; max-width: 48ch; }
+        .value-left .lead { font-size: 1.15rem; color: var(--color-text-secondary); line-height: 1.7; max-width: 48ch; text-align: justify; }
 
         .benefits-grid-refined { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--spacing-6); }
         .benefit-card-refined { background: var(--color-white); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); padding: var(--spacing-5) var(--spacing-6); }
@@ -320,7 +301,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         /* Larger objectives and process text */
         .objectives-list-large { padding-left: var(--spacing-6); margin: var(--spacing-6) 0 var(--spacing-10); }
         .objectives-list-large li { list-style: disc; margin-bottom: var(--spacing-4); font-size: 1.25rem; line-height: 1.9; }
-        .process-text-large p { font-size: 1.25rem; line-height: 1.9; margin-bottom: var(--spacing-6); }
+        .process-text-large p { font-size: 1.25rem; line-height: 1.9; margin-bottom: var(--spacing-6); text-align: justify; }
         
         /* Merged info card */
         .info-card-merged {

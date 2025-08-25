@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import HeroSection from '../components/HeroSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import ServicesPreview from '../components/ServicesPreview';
-import CTASection from '../components/CTASection';
+import VideoCTA from '../components/VideoCTA';
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -35,14 +35,14 @@ const HomePage: React.FC = () => {
         <div className="container">
           <div className="welcome-content">
             <div className="welcome-text">
-              <h2 className="welcome-title">Bienvenue sur une terre d'apaisement... 🌄</h2>
+              <h2 className="welcome-title">Bienvenue sur mon site</h2>
               <p className="welcome-description">
                 Un espace dédié à la pleine conscience au service de votre bien-être authentique.
               </p>
               <p className="welcome-description">
                 Ici, je vous propose des accompagnements et des ressources pour vous aider à cultiver l'équilibre, l'harmonie et la sérénité au quotidien.
               </p>
-              <p className="welcome-invitation">
+              <p className="welcome-description">
                 Prenez le temps de découvrir, de vous recentrer et d'avancer à votre rythme, afin de vous rapprocher d'un mode de vie plus conscient et plus épanouissant.
               </p>
               <Link to="/qui-suis-je" className="btn btn-outline">
@@ -68,10 +68,17 @@ const HomePage: React.FC = () => {
       <ServicesPreview />
 
       {/* Testimonials */}
-      <TestimonialsSection />
+      <div className="testimonials-homepage-wrapper">
+        <TestimonialsSection />
+      </div>
 
       {/* CTA Section */}
-      <CTASection />
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Prenez rendez-vous pour un premier entretien personnalisé. Ensemble, nous définirons l'accompagnement le plus adapté à vos besoins et objectifs."
+        buttonText="Prendre rendez-vous"
+        buttonLink="/contact-reservation"
+      />
 
       <style>{`
                  /* GENERAL */
@@ -151,6 +158,7 @@ const HomePage: React.FC = () => {
            color: var(--color-gray-700);
            margin-bottom: 1.5rem;
          }
+         .welcome-description { text-align: justify; }
          .welcome-invitation {
            font-style: italic;
            margin-bottom: 2.5rem;
@@ -178,6 +186,19 @@ const HomePage: React.FC = () => {
          }
 
                  /* RESPONSIVE */
+         /* TESTIMONIALS HOMEPAGE SPECIFIC */
+         .testimonials-homepage-wrapper {
+           background: #fffcea;
+         }
+         .testimonials-homepage-wrapper .section-header h2 {
+           color: var(--color-primary) !important;
+           text-shadow: none !important;
+         }
+         .testimonials-homepage-wrapper .section-subtitle {
+           color: var(--color-gray-700) !important;
+           text-shadow: none !important;
+         }
+
          @media (max-width: 768px) {
            .welcome-content {
              grid-template-columns: 1fr;

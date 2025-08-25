@@ -17,8 +17,8 @@ const Header: React.FC = () => {
         { path: '/services', label: 'Tous les services' },
         { path: '/accompagnements-individuels', label: 'Accompagnements individuels' },
         { path: '/accompagnements-groupe', label: 'Accompagnements groupe' },
-        { path: '/programmes-mbsr-mbct', label: 'Programmes de pleine conscience' },
-        { path: '/interventions-entreprises', label: 'Interventions en Entreprises' },
+        { path: '/programmes-pleine-conscience', label: 'Programmes de pleine conscience' },
+        { path: '/interventions-entreprises', label: 'Entreprises & collectivités' },
       ]
     },
     { path: '/blog', label: 'Blog' },
@@ -53,11 +53,10 @@ const Header: React.FC = () => {
               key={index}
               className="nav-item"
               onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
-              onMouseLeave={(e) => {
-                // Ne fermer que si on ne va pas vers le submenu
-                const relatedTarget = e.relatedTarget as HTMLElement;
-                if (link.submenu && relatedTarget && !relatedTarget.closest('.submenu')) {
-                  setTimeout(() => setOpenSubmenu(null), 150);
+              onMouseLeave={() => {
+                // Délai plus long pour laisser le temps à l'utilisateur
+                if (link.submenu) {
+                  setTimeout(() => setOpenSubmenu(null), 300);
                 }
               }}
             >
@@ -75,7 +74,10 @@ const Header: React.FC = () => {
                 <div
                   className="submenu"
                   onMouseEnter={() => setOpenSubmenu(link.label)}
-                  onMouseLeave={() => setTimeout(() => setOpenSubmenu(null), 150)}
+                  onMouseLeave={() => {
+                    // Délai plus long pour laisser le temps à l'utilisateur
+                    setTimeout(() => setOpenSubmenu(null), 300);
+                  }}
                 >
                   {link.submenu.map((sublink, subIndex) => (
                     <Link key={subIndex} to={sublink.path} className="submenu-link">
@@ -125,7 +127,7 @@ const Header: React.FC = () => {
         </nav>
       )}
 
-      <style jsx>{`
+      <style>{`
         .header {
           position: fixed;
           top: 0;
@@ -161,6 +163,10 @@ const Header: React.FC = () => {
           margin: 0 auto;
           padding: 0 var(--spacing-6);
         }
+
+        .logo-link { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .brand-name { color: var(--color-primary); font-weight: 600; }
+        .header:not(.scrolled) .brand-name { color: #fffcea; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
 
         .desktop-nav {
           display: flex;
@@ -218,27 +224,19 @@ const Header: React.FC = () => {
 
         .submenu {
           position: absolute;
-          top: calc(100% - 5px);
+          top: 100%;
           left: 50%;
           transform: translateX(-50%);
           background: #fffcea;
           border-radius: var(--radius-lg);
           box-shadow: var(--shadow-lg);
-          padding: var(--spacing-2);
-          padding-top: calc(var(--spacing-2) + 5px);
-          min-width: 220px;
-          opacity: 0;
-          visibility: hidden;
-          transition: all 0.3s ease;
-          pointer-events: none;
+          padding: var(--spacing-3);
+          min-width: 260px;
+          z-index: 1001;
+          border: 1px solid rgba(0,0,0,0.08);
         }
         
-        .nav-item:hover .submenu,
-        .submenu:hover {
-          opacity: 1;
-          visibility: visible;
-          pointer-events: auto;
-        }
+        /* Suppression de ces règles CSS obsolètes car on gère maintenant avec React state */
 
         @keyframes fadeIn {
           from { opacity: 0; transform: translate(-50%, -10px); }

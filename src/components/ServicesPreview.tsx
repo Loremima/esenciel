@@ -8,7 +8,7 @@ const ServicesPreview: React.FC = () => {
       id: 'individuels',
       icon: Heart,
       title: 'Accompagnements individuels',
-      description: 'Un suivi personnalisé pour explorer vos besoins, renforcer votre équilibre et devenir acteur de votre santé.',
+      description: 'Un accompagnement sur mesure pour une santé de qualité, une vie optimisée et une pleine conscience au quotidien.',
       link: '/services#individuels',
     },
     {
@@ -28,7 +28,7 @@ const ServicesPreview: React.FC = () => {
     {
       id: 'autres',
       icon: Sparkles,
-      title: 'Interventions en Entreprises',
+      title: 'Offres pour entreprises & collectivités',
       description: 'Ateliers thématiques, retraites et interventions sur mesure pour explorer la pleine conscience sous différents angles.',
       link: '/services#autres',
     }
@@ -40,7 +40,7 @@ const ServicesPreview: React.FC = () => {
         <div className="section-header">
           <h2>Mes Services</h2>
           <p className="section-subtitle">
-            Une approche holistique pour votre acteur de votre santé et de votre bien-être.
+            Une approche holistique pour devenir acteur de votre santé et de votre bien-être.
           </p>
         </div>
 
@@ -164,7 +164,6 @@ const ServicesPreview: React.FC = () => {
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-6);
           line-height: 1.6;
-          text-align: center;
           flex-grow: 1;
         }
 

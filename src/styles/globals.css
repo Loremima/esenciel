@@ -159,6 +159,12 @@ p {
   text-align: center;
 }
 
+/* Justification utilitaire */
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 /* Centrage amélioré */
 .center-content {
   display: flex;
@@ -203,26 +209,33 @@ p {
   z-index: 3;
 }
 
-/* Titres blancs sur sections parallax pour lisibilité */
-.parallax-surface h1,
-.parallax-surface h2,
-.parallax-surface h3,
-.parallax-surface h4 {
-  color: white !important;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
+/* Titres beiges sur sections parallax pour lisibilité */
 .parallax-surface .section-header h1,
-.parallax-surface .section-header h2 {
-  color: white !important;
+.parallax-surface .section-header h2,
+.parallax-surface .section-header h3,
+.parallax-surface .section-header h4 {
+  color: #fffcea !important;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Améliorer lisibilité du texte sur parallax */
-.parallax-surface p,
-.parallax-surface label {
-  color: white !important;
+/* Sous-titres/paragraphes du header uniquement */
+.parallax-surface .section-header p,
+.parallax-surface .section-header .subtitle,
+.parallax-surface>.container>.section-header p {
+  color: rgba(255, 252, 234, 0.9) !important;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Ne pas altérer les cartes dans les sections parallax */
+.parallax-surface .service-card *,
+.parallax-surface .service-card h1,
+.parallax-surface .service-card h2,
+.parallax-surface .service-card h3,
+.parallax-surface .service-card h4,
+.parallax-surface .service-card p,
+.parallax-surface .service-card label {
+  color: inherit !important;
+  text-shadow: none !important;
 }
 
 /* Formulaire plus lisible sur parallax */
@@ -327,7 +340,9 @@ p {
   transition: all var(--transition-normal);
 }
 
-.card:hover {}
+.card:hover {
+  transform: translateY(-1px);
+}
 
 .card-content {
   padding: var(--spacing-6);
@@ -735,134 +750,17 @@ a[href*="bolt.build"],
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: var(--spacing-8);
+  margin-top: var(--spacing-8);
 }
 
-/* Service Card */
-.service-card {
-  background: var(--color-white);
-  border-radius: var(--radius-2xl);
-  padding: var(--spacing-8);
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-normal);
-  border: 2px solid transparent;
-  display: flex;
-  flex-direction: column;
+/* Forcer les 3 cartes de la section programmes sur la même ligne */
+#programmes .services-grid {
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-6);
 }
 
-.service-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: transparent;
-}
-
-.service-card.highlight {
-  border-color: var(--color-secondary);
-  background: linear-gradient(135deg, var(--color-white) 0%, rgba(230, 126, 34, 0.05) 100%);
-}
-
-.service-header {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-4);
-}
-
-.service-icon {
-  background: rgba(230, 126, 34, 0.1);
-  color: var(--color-secondary);
-  padding: var(--spacing-3);
-  border-radius: var(--radius-lg);
-  flex-shrink: 0;
-}
-
-.service-header h3 {
-  margin: 0 0 var(--spacing-1) 0;
-  color: var(--color-primary);
-  font-size: 1.25rem;
-}
-
-.service-subtitle {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--color-secondary);
-  font-weight: 600;
-}
-
-.service-description {
-  color: var(--color-gray-700);
-  line-height: 1.6;
-  margin: 0;
-}
-
-.service-features {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.service-features li {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  font-size: 0.9rem;
-  color: var(--color-gray-700);
-}
-
-.service-features svg {
-  color: var(--color-secondary);
-  flex-shrink: 0;
-}
-
-.service-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4);
-  background: var(--color-gray-50);
-  border-radius: var(--radius-lg);
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  font-size: 0.9rem;
-  color: var(--color-gray-700);
-  font-weight: 500;
-}
-
-.info-item svg {
-  color: var(--color-primary);
-}
-
-.service-modalities {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-2);
-}
-
-.modality-tag {
-  background: rgba(44, 62, 80, 0.1);
-  color: var(--color-primary);
-  padding: var(--spacing-1) var(--spacing-3);
-  border-radius: var(--radius-md);
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.service-actions {
-  display: flex;
-  gap: var(--spacing-4);
-  margin-top: auto;
-}
-
-.service-card .btn {
-  margin-top: 0;
-}
 
 /* CTA Section */
 .cta-section {
@@ -918,6 +816,9 @@ a[href*="bolt.build"],
   max-width: 70ch;
 }
 
+/* Programmes/Blog excerpts */
+/* (prog/blog) justification retirée par défaut; appliquer au cas par cas */
+
 .service-detail-page .process-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -937,9 +838,23 @@ a[href*="bolt.build"],
   gap: var(--spacing-3);
 }
 
+@media (max-width: 1200px) {
+
+  /* Sur écrans moyens, on garde les 3 cartes mais avec moins d'espacement */
+  #programmes .services-grid {
+    gap: var(--spacing-4);
+  }
+}
+
 @media (max-width: 768px) {
   .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Sur mobile, on remet une colonne pour les programmes aussi */
+  #programmes .services-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
   }
 
   .service-header {

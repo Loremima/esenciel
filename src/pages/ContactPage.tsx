@@ -214,8 +214,8 @@ const ContactPage: React.FC = () => {
                       className="form-select"
                     >
                       <option value="">Choisir un service</option>
-                      <option value="sante">Santé & Qualité de Vie</option>
-                      <option value="mindfulness">Pleine Conscience</option>
+                      <option value="sante">Santé & qualité de vie</option>
+                      <option value="mindfulness">Pleine conscience et présence attentive.</option>
                       <option value="tao">Jeu du Tao</option>
                       <option value="mbsr">Programme MBSR</option>
                       <option value="mbct">Programme MBCT</option>
@@ -495,7 +495,8 @@ const ContactPage: React.FC = () => {
 
         .form-group label {
           font-weight: 600;
-          color: var(--color-gray-800);
+          color: #fffcea;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .form-input,
@@ -533,6 +534,8 @@ const ContactPage: React.FC = () => {
           gap: var(--spacing-3);
           cursor: pointer;
           font-size: 0.95rem;
+          color: #fffcea !important;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
           line-height: 1.5;
         }
 

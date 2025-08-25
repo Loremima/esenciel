@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { CalendarDays } from 'lucide-react';
 import { collectivePrograms } from './servicesData';
 import ServiceCard from '../components/ServiceCard';
+import VideoCTA from '../components/VideoCTA';
 
 const ProgramsPage: React.FC = () => {
   return (
@@ -32,21 +31,12 @@ const ProgramsPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="section cta-section">
-        <div className="container">
-          <div className="cta-content">
-            <h2>Prêt(e) à commencer votre parcours ?</h2>
-            <p>
-              Contactez-moi pour discuter de vos besoins et trouver l'accompagnement
-              qui vous correspond le mieux.
-            </p>
-            <Link to="/contact-reservation" className="btn btn-primary">
-              Prendre rendez-vous
-              <CalendarDays size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Contactez-moi pour discuter de vos besoins et trouver l'accompagnement qui vous correspond le mieux."
+        buttonText="Prendre rendez-vous"
+        buttonLink="/contact-reservation"
+      />
     </div>
   );
 };

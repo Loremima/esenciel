@@ -6,6 +6,23 @@ const HeroSection: React.FC = () => {
   const words = ['Ralenti,', 'Respire,', 'Ressens'];
 
   useEffect(() => {
+    const audio = document.getElementById('site-bgm') as HTMLAudioElement | null;
+    if (!audio) return;
+    const armPlay = () => {
+      audio.muted = false;
+      audio.play().catch(() => { });
+      window.removeEventListener('pointerdown', armPlay);
+      window.removeEventListener('keydown', armPlay);
+    };
+    window.addEventListener('pointerdown', armPlay, { once: true });
+    window.addEventListener('keydown', armPlay, { once: true });
+    return () => {
+      window.removeEventListener('pointerdown', armPlay);
+      window.removeEventListener('keydown', armPlay);
+    };
+  }, []);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setVisibleWords(prev => {
         if (prev < words.length) {
@@ -145,7 +162,7 @@ const HeroSection: React.FC = () => {
           align-items: center;
           justify-content: center;
           gap: var(--spacing-4);
-          margin: 0; /* espacement géré par gap */
+          margin: var(--spacing-4) 0; /* espacement géré par gap */
         }
 
         .animated-slogan .word {
