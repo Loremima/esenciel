@@ -8,6 +8,10 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const location = useLocation();
+  
+  // Détermine si on est sur la home page ET si on n'a pas scrollé
+  const isHomePage = location.pathname === '/';
+  const shouldUseLightText = isHomePage && !isScrolled;
 
   const navLinks = [
     { path: '/qui-suis-je', label: 'Qui suis-je' },
@@ -42,7 +46,7 @@ const Header: React.FC = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${shouldUseLightText ? 'light-text' : 'dark-text'}`}>
       <div className="container">
         <Link to="/" className="logo-link">
           <Logo variant="navbar" isScrolled={isScrolled} />
@@ -165,8 +169,22 @@ const Header: React.FC = () => {
         }
 
         .logo-link { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-        .brand-name { color: var(--color-primary); font-weight: 600; }
-        .header:not(.scrolled) .brand-name { color: #fffcea; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .brand-name { 
+          font-weight: 600;
+          transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        
+        /* Logo beige sur la home page quand on n'a pas scrollé */
+        .header.light-text .brand-name { 
+          color: #fffcea; 
+          text-shadow: 0 1px 3px rgba(0,0,0,0.4); 
+        }
+        
+        /* Logo couleur primaire partout ailleurs */
+        .header.dark-text .brand-name { 
+          color: var(--color-primary); 
+          text-shadow: none; 
+        }
 
         .desktop-nav {
           display: flex;
@@ -179,17 +197,22 @@ const Header: React.FC = () => {
         }
 
         .nav-link {
-          color: #fffcea;
           text-decoration: none;
           font-weight: 500;
           font-size: 0.95rem;
           padding: 0.5rem 0;
           position: relative;
-          transition: color 0.3s ease;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+          transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
-        .header.scrolled .nav-link {
+        /* Texte beige sur la home page quand on n'a pas scrollé */
+        .header.light-text .nav-link {
+          color: #fffcea;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Texte noir partout ailleurs (autres pages ou après scroll) */
+        .header.dark-text .nav-link {
           color: var(--color-gray-700);
           text-shadow: none;
         }
@@ -267,6 +290,16 @@ const Header: React.FC = () => {
             background: none;
             border: none;
             cursor: pointer;
+            transition: color 0.3s ease;
+          }
+          
+          /* Bouton mobile beige sur la home page quand on n'a pas scrollé */
+          .header.light-text .mobile-menu-toggle {
+            color: #fffcea;
+          }
+          
+          /* Bouton mobile couleur primaire partout ailleurs */
+          .header.dark-text .mobile-menu-toggle {
             color: var(--color-primary);
           }
 

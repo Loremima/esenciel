@@ -3,196 +3,620 @@ import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const ProgrammeMBCASDetailsPage: React.FC = () => {
-    const benefits = [
-        {
-            icon: Target,
-            title: 'Gestion de l\'anxiété',
-            description: 'Développez des stratégies efficaces pour faire face à l\'anxiété et aux préoccupations.'
-        },
-        {
-            icon: Heart,
-            title: 'Équilibre émotionnel',
-            description: 'Cultivez la stabilité émotionnelle et la résilience face aux défis.'
-        },
-        {
-            icon: Sparkles,
-            title: 'Bien-être durable',
-            description: 'Intégrez des pratiques qui nourrissent votre bien-être à long terme.'
+  const benefits = [
+    {
+      icon: Target,
+      title: 'Gestion de l\'anxiété',
+      description: 'Développez des stratégies efficaces pour faire face à l\'anxiété et aux préoccupations.'
+    },
+    {
+      icon: Heart,
+      title: 'Équilibre émotionnel',
+      description: 'Cultivez la stabilité émotionnelle et la résilience face aux défis.'
+    },
+    {
+      icon: Sparkles,
+      title: 'Bien-être durable',
+      description: 'Intégrez des pratiques qui nourrissent votre bien-être à long terme.'
+    }
+  ];
+
+  const processSteps = [
+    {
+      number: '01',
+      title: 'Comprendre l\'anxiété',
+      description: 'Exploration des mécanismes de l\'anxiété et reconnaissance des patterns personnels.'
+    },
+    {
+      number: '02',
+      title: 'Pleine conscience des pensées',
+      description: 'Apprentissage de l\'observation bienveillante des pensées anxieuses et ruminations.'
+    },
+    {
+      number: '03',
+      title: 'Ancrage corporel',
+      description: 'Techniques de connexion au corps pour gérer l\'activation physiologique de l\'anxiété.'
+    },
+    {
+      number: '04',
+      title: 'Respiration consciente',
+      description: 'Pratiques respiratoires pour réguler le système nerveux et apaiser l\'esprit.'
+    },
+    {
+      number: '05',
+      title: 'Pleine conscience des émotions',
+      description: 'Accueil et régulation des émotions difficiles avec bienveillance et sagesse.'
+    },
+    {
+      number: '06',
+      title: 'Gestion des préoccupations',
+      description: 'Outils pratiques pour transformer la relation aux pensées inquiètes et projections.'
+    },
+    {
+      number: '07',
+      title: 'Compassion et auto-bienveillance',
+      description: 'Développement de la compassion envers soi-même face aux difficultés.'
+    },
+    {
+      number: '08',
+      title: 'Maintien et intégration',
+      description: 'Consolidation de la pratique et stratégies pour maintenir l\'équilibre au quotidien.'
+    }
+  ];
+
+  return (
+    <div className="mbcas-details-page service-detail-page">
+      {/* Hero Section Élégant avec image de l'arbre */}
+      <section className="hero-mbcas">
+        <div className="container">
+          <div className="hero-mbcas-layout">
+            <div className="hero-content-mbcas">
+              <h1>Programme MBCAS</h1>
+              <p className="hero-subtitle-mbcas">
+                Bien vivre son avancée en âge avec la pleine conscience
+              </p>
+              <div className="hero-description-mbcas">
+                <p>
+                  Le programme MBCAS est spécifiquement destiné aux séniors ou à toute personne
+                  intéressée par l'avancée en âge. Développé par Brigitte Zellner Keller, il a été conçu comme un programme de
+                  prévention pour aider les personnes à faire face aux défis liés au vieillissement.
+                </p>
+              </div>
+              <div className="hero-highlights-mbcas">
+                <div className="highlight-item">
+                  <Clock size={20} />
+                  <span><strong>8 mois</strong> • 15 séances</span>
+                </div>
+                <div className="highlight-item">
+                  <Users size={20} />
+                  <span><strong>5-10 pers.</strong> • Groupe</span>
+                </div>
+                <div className="highlight-item">
+                  <span className="price-highlight"><strong>380€</strong> • Programme complet</span>
+                </div>
+              </div>
+            </div>
+            <div className="hero-image-mbcas">
+              <img src="/arbre_MBCAS.jpg" alt="Arbre symbolisant la sagesse et l'enracinement pour le programme MBCAS" />
+              <div className="image-overlay-mbcas"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section des bénéfices avec vidéo de fond */}
+      <section className="section benefits-section-mbcas parallax-surface">
+        <video
+          muted
+          loop
+          playsInline
+          className="parallax-video-static"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
+        <div className="container">
+          <div className="section-header">
+            <h2>Les bénéfices du programme</h2>
+            <p>Une approche douce et progressive pour cultiver le bien-être à chaque étape de la vie</p>
+          </div>
+          <div className="benefits-grid-simplified">
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon;
+              return (
+                <div key={index} className="benefit-card-simplified">
+                  <IconComponent size={28} className="benefit-icon-simplified" />
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Section unifiée : Parcours et apprentissages */}
+      <section className="section journey-section">
+        <div className="container">
+          <div className="journey-layout">
+            <div className="journey-content">
+              <h2>Un parcours de 8 mois vers l'épanouissement</h2>
+              <p className="journey-intro">
+                Ce programme vous accompagne pas à pas dans la découverte de vos ressources intérieures
+                et dans l'apprentissage d'outils concrets pour naviguer avec sérénité les défis de l'avancée en âge.
+              </p>
+
+              <div className="learning-outcomes">
+                <h3>Ce que vous allez développer</h3>
+                <div className="outcomes-grid">
+                  <div className="outcome-item">
+                    <div className="outcome-icon">🌱</div>
+                    <div>
+                      <h4>Résilience face aux changements</h4>
+                      <p>Apprenez à faire face aux épreuves et défis avec bienveillance et sagesse.</p>
+                    </div>
+                  </div>
+                  <div className="outcome-item">
+                    <div className="outcome-icon">🎯</div>
+                    <div>
+                      <h4>Connexion à vos valeurs</h4>
+                      <p>Réalisez vos potentialités présentes et agissez selon ce qui vous tient à cœur.</p>
+                    </div>
+                  </div>
+                  <div className="outcome-item">
+                    <div className="outcome-icon">🧘</div>
+                    <div>
+                      <h4>Présence consciente</h4>
+                      <p>Cultivez l'art d'être pleinement présent à chaque instant de votre vie.</p>
+                    </div>
+                  </div>
+                  <div className="outcome-item">
+                    <div className="outcome-icon">💭</div>
+                    <div>
+                      <h4>Liberté mentale</h4>
+                      <p>Prenez de la distance par rapport aux pensées négatives et aux ruminations.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="program-format">
+                <h3>Organisation pratique</h3>
+                <div className="format-highlights">
+                  <div className="format-item">
+                    <strong>15 séances</strong> réparties sur 8 mois
+                  </div>
+                  <div className="format-item">
+                    <strong>2 rencontres par mois</strong> : une principale + une intermédiaire
+                  </div>
+                  <div className="format-item">
+                    <strong>Petit groupe</strong> de 5 à 10 participants maximum
+                  </div>
+                </div>
+                <p>
+                  Chaque séance combine pratiques guidées, moments d'apprentissage et temps d'échange,
+                  abordant des thèmes profonds comme la compassion, la spiritualité et l'acceptation de sa propre finitude.
+                </p>
+              </div>
+            </div>
+
+            <div className="journey-aside">
+              <div className="info-card-merged">
+                <h2>Informations pratiques</h2>
+                <div className="info-section">
+                  <div className="detail-item-revisited">
+                    <span>📋</span>
+                    <div>
+                      <strong>Entretien préalable inclus</strong>
+                      <span>Pour personnaliser votre accompagnement</span>
+                    </div>
+                  </div>
+                  <div className="detail-item-revisited">
+                    <span>📚</span>
+                    <div>
+                      <strong>Supports fournis</strong>
+                      <span>Livrets, fichiers audios et exercices</span>
+                    </div>
+                  </div>
+                  <div className="detail-item-revisited">
+                    <span>🏠</span>
+                    <div>
+                      <strong>Pratique à domicile</strong>
+                      <span>Exercices guidés entre les séances</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pricing-section">
+                  <div className="price-row">
+                    <div className="price-amount">380€</div>
+                    <div className="price-label">Programme complet</div>
+                  </div>
+                  <p className="small-text">Règlement possible en 3 ou 4 versements. En cas de difficulté financière, n'hésitez pas à me contacter.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Contactez-moi pour en savoir plus sur le programme MBCAS et réserver votre place."
+        buttonText="M'inscrire"
+        buttonLink="/contact-reservation"
+      />
+
+      <style>{`
+        /* === HERO SECTION MBCAS === */
+        .hero-mbcas {
+          padding: var(--spacing-20) 0;
+          background: #fffcea;
+          overflow: hidden;
         }
-    ];
 
-    const processSteps = [
-        {
-            number: '01',
-            title: 'Comprendre l\'anxiété',
-            description: 'Exploration des mécanismes de l\'anxiété et reconnaissance des patterns personnels.'
-        },
-        {
-            number: '02',
-            title: 'Pleine conscience des pensées',
-            description: 'Apprentissage de l\'observation bienveillante des pensées anxieuses et ruminations.'
-        },
-        {
-            number: '03',
-            title: 'Ancrage corporel',
-            description: 'Techniques de connexion au corps pour gérer l\'activation physiologique de l\'anxiété.'
-        },
-        {
-            number: '04',
-            title: 'Respiration consciente',
-            description: 'Pratiques respiratoires pour réguler le système nerveux et apaiser l\'esprit.'
-        },
-        {
-            number: '05',
-            title: 'Pleine conscience des émotions',
-            description: 'Accueil et régulation des émotions difficiles avec bienveillance et sagesse.'
-        },
-        {
-            number: '06',
-            title: 'Gestion des préoccupations',
-            description: 'Outils pratiques pour transformer la relation aux pensées inquiètes et projections.'
-        },
-        {
-            number: '07',
-            title: 'Compassion et auto-bienveillance',
-            description: 'Développement de la compassion envers soi-même face aux difficultés.'
-        },
-        {
-            number: '08',
-            title: 'Maintien et intégration',
-            description: 'Consolidation de la pratique et stratégies pour maintenir l\'équilibre au quotidien.'
+        .hero-mbcas-layout {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          gap: var(--spacing-12);
+          align-items: center;
+          min-height: 70vh;
         }
-    ];
 
-    return (
-        <div className="mbcas-details-page service-detail-page">
-            {/* Hero Section */}
-            <section className="hero-details">
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="hero-video"
-                >
-                    <source src="/background.mp4" type="video/mp4" />
-                </video>
-                <div className="hero-overlay" aria-hidden="true"></div>
-                <div className="hero-content">
-                    <h1>Programme MBCAS</h1>
-                </div>
-            </section>
+        .hero-content-mbcas h1 {
+          font-size: clamp(3rem, 6vw, 4.5rem);
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+          line-height: 1.1;
+          font-weight: 700;
+        }
 
-            {/* Value proposition avec bénéfices */}
-            <section className="section value-section">
-                <div className="container">
-                    <div className="value-layout">
-                        <div className="value-left">
-                            <h2>Programme MBCAS en 8 mois</h2>
-                            <p className="lead">
-                                Le programme MBCAS est spécifiquement destiné aux séniors ou à toute personne
-                                intéressée par l’avancée en âge. Développé par Brigitte Zellner Keller, il a été conçu comme un programme de
-                                prévention pour aider les personnes à faire face aux défis liés au vieillissement.
-                            </p>
-                        </div>
-                        <div className="benefits-grid-refined">
-                            {benefits.map((benefit, index) => {
-                                const IconComponent = benefit.icon;
-                                return (
-                                    <div key={index} className="benefit-card-refined">
-                                        <div className="benefit-header">
-                                            <IconComponent size={22} className="benefit-icon-refined" />
-                                            <h3>{benefit.title}</h3>
-                                        </div>
-                                        <p>{benefit.description}</p>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </div>
-            </section>
+        .hero-subtitle-mbcas {
+          font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+          color: var(--color-gray-700);
+          margin-bottom: var(--spacing-6);
+          font-weight: 500;
+          line-height: 1.4;
+        }
 
-            {/* Processus avec timeline moderne */}
-            <section className="section process-section parallax-surface">
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="parallax-video"
-                >
-                    <source src="/background.mp4" type="video/mp4" />
-                </video>
-                <div className="container process-container-revisited">
-                    <div className="process-intro-revisited">
-                        <h2>8 mois pour transformer votre relation à l'anxiété.</h2>
-                    </div>
-                    <div className="timeline-revisited">
-                        {processSteps.map((step, index) => (
-                            <div key={index} className="timeline-item-revisited">
-                                <div className="timeline-number-revisited">{step.number}</div>
-                                <div className="timeline-content-revisited">
-                                    <h3>{step.title}</h3>
-                                    <p>{step.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+        .hero-description-mbcas p {
+          font-size: 1.15rem;
+          line-height: 1.7;
+          color: var(--color-gray-700);
+          margin-bottom: var(--spacing-8);
+          max-width: 55ch;
+        }
 
-            {/* Détails du programme */}
-            <section className="section coaching-details">
-                <div className="container">
-                    <div className="coaching-details-grid">
-                        <div className="coaching-text">
-                            <h2>Qu’est-ce que les participants apprennent ?</h2>
-                            <ul className="objectives-list-large">
-                                <li>Faire face aux épreuves et défis (perte, diminution des capacités, maladie...).</li>
-                                <li>Réaliser leurs potentialités présentes et continuer à agir en fonction de leurs valeurs.</li>
-                                <li>Être plus conscient et plus présent, ici et maintenant.</li>
-                                <li>Savoir prendre de la distance par rapport aux pensées négatives.</li>
-                                <li>Développer de la bienveillance vis-à-vis de soi-même.</li>
-                                <li>Agir selon ses valeurs.</li>
-                            </ul>
-                            <h3>Organisation du programme</h3>
-                            <div className="process-text-large">
-                                <p>
-                                    Le programme se déroule en groupe de 5 à 10 participants sur 15 séances à raison de deux
-                                    séances mensuelles (une principale et une intermédiaire). Chaque séance comprend des pratiques guidées, des temps psycho-éducatifs, des temps d’échange, et aborde des thèmes transversaux comme la compassion, le stress, la spiritualité ou le rapport à sa propre finitude.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="coaching-aside">
-                            <div className="info-card-merged">
-                                <h2>Tarifs et inscription</h2>
-                                <div className="info-section">
-                                    <p>Le coût inclus un entretien préalable, les livrets de formation, les fichiers audios et les exercices.</p>
-                                </div>
-                                <div className="pricing-section">
-                                    <div className="price-row">
-                                        <div className="price-amount">380€</div>
-                                        <div className="price-label">Programme complet</div>
-                                    </div>
-                                    <p className="small-text">Règlement possible en 3 ou 4 versements. En cas de difficulté financière, n’hésitez pas à me contacter.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        .hero-highlights-mbcas {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-4);
+        }
 
-            {/* CTA Section */}
-            <VideoCTA
-                title="Prêt(e) à transformer votre quotidien ?"
-                subtitle="Contactez-moi pour en savoir plus sur le programme MBCAS et réserver votre place."
-                buttonText="M'inscrire"
-                buttonLink="/contact-reservation"
-            />
+        .highlight-item {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-3);
+          font-size: 1.1rem;
+          color: var(--color-primary);
+        }
 
-            <style>{`
-        /* Réutilisation des styles de SanteQualiteVieDetailsPage */
+        .highlight-item svg {
+          color: var(--color-primary);
+          flex-shrink: 0;
+        }
+
+        .price-highlight {
+          color: var(--color-primary) !important;
+          font-size: 1.2rem;
+        }
+
+        .hero-image-mbcas {
+          position: relative;
+          height: 600px;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-image-mbcas img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .image-overlay-mbcas {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(45deg, rgba(31, 41, 55, 0.1) 0%, rgba(31, 41, 55, 0.05) 100%);
+        }
+
+        /* === BENEFITS SECTION AVEC VIDÉO === */
+        .benefits-section-mbcas {
+          padding: var(--spacing-16) 0;
+          position: relative;
+        }
+
+        .benefits-section-mbcas .section-header {
+          text-align: center;
+          margin-bottom: var(--spacing-12);
+        }
+
+        .benefits-section-mbcas .section-header h2 {
+          font-size: clamp(2.2rem, 4vw, 3rem);
+          color: #fffcea;
+          margin-bottom: var(--spacing-4);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .benefits-section-mbcas .section-header p {
+          font-size: 1.2rem;
+          color: rgba(255, 252, 234, 0.9);
+          max-width: 600px;
+          margin: 0 auto;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .benefits-grid-simplified {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: var(--spacing-8);
+        }
+
+        .benefit-card-simplified {
+          background: rgba(255, 252, 234, 0.95);
+          border: 1px solid rgba(255, 252, 234, 0.3);
+          border-radius: var(--radius-xl);
+          padding: var(--spacing-8);
+          text-align: center;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+
+        .benefit-card-simplified:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+          background: rgba(255, 252, 234, 1);
+        }
+
+        .benefit-icon-simplified {
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+        }
+
+        .benefit-card-simplified h3 {
+          font-size: 1.4rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-3);
+          font-weight: 600;
+        }
+
+        .benefit-card-simplified p {
+          color: var(--color-gray-700);
+          line-height: 1.6;
+          font-size: 1rem;
+        }
+
+        /* === JOURNEY SECTION === */
+        .journey-section {
+          padding: var(--spacing-20) 0;
+          background: #fffcea;
+        }
+
+        .journey-layout {
+          display: grid;
+          grid-template-columns: 1.5fr 1fr;
+          gap: var(--spacing-12);
+          align-items: start;
+        }
+
+        .journey-content h2 {
+          font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-6);
+          line-height: 1.2;
+        }
+
+        .journey-intro {
+          font-size: 1.25rem;
+          line-height: 1.7;
+          color: var(--color-gray-700);
+          margin-bottom: var(--spacing-10);
+          max-width: 60ch;
+        }
+
+        .learning-outcomes {
+          margin-bottom: var(--spacing-10);
+        }
+
+        .learning-outcomes h3 {
+          font-size: 1.8rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-6);
+          font-weight: 600;
+        }
+
+        .outcomes-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: var(--spacing-6);
+        }
+
+        .outcome-item {
+          display: flex;
+          gap: var(--spacing-4);
+          align-items: flex-start;
+        }
+
+        .outcome-icon {
+          font-size: 1.5rem;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
+        .outcome-item h4 {
+          font-size: 1.2rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-2);
+          font-weight: 600;
+        }
+
+        .outcome-item p {
+          color: var(--color-gray-700);
+          line-height: 1.6;
+          font-size: 1rem;
+        }
+
+        .program-format h3 {
+          font-size: 1.8rem;
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-6);
+          font-weight: 600;
+        }
+
+        .format-highlights {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-3);
+          margin-bottom: var(--spacing-6);
+          padding: var(--spacing-6);
+          background: var(--color-white);
+          border-radius: var(--radius-lg);
+          border-left: 4px solid var(--color-primary);
+        }
+
+        .format-item {
+          color: var(--color-primary);
+          font-size: 1.1rem;
+        }
+
+        .format-item strong {
+          font-weight: 700;
+        }
+
+        .program-format p {
+          font-size: 1.1rem;
+          line-height: 1.7;
+          color: var(--color-gray-700);
+        }
+
+        /* === VIDÉO STATIQUE === */
+        .parallax-video-static {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 1;
+          /* Suppression de autoPlay pour arrêter le mouvement */
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1024px) {
+          .hero-mbcas-layout {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-8);
+            text-align: center;
+          }
+          
+          .hero-image-mbcas {
+            height: 400px;
+            order: -1;
+          }
+          
+          .hero-description-mbcas p {
+            margin: 0 auto var(--spacing-8);
+          }
+        }
+
+        @media (max-width: 1024px) {
+          .journey-layout {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-8);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-mbcas {
+            padding: var(--spacing-12) 0;
+          }
+          
+          .hero-image-mbcas {
+            height: 300px;
+          }
+          
+          .benefits-grid-simplified {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-6);
+            padding: 0 var(--spacing-4);
+          }
+
+          .benefit-card-simplified {
+            padding: var(--spacing-6);
+            margin: 0;
+            max-width: 100%;
+            box-sizing: border-box;
+          }
+
+          .benefits-section-mbcas .container {
+            padding: 0 var(--spacing-4);
+            max-width: 100%;
+            overflow-x: hidden;
+          }
+          
+          .highlight-item {
+            justify-content: center;
+          }
+
+          .outcomes-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .journey-content h2 {
+            text-align: center;
+          }
+
+          .journey-intro {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .benefits-section-mbcas {
+            padding: var(--spacing-12) 0;
+          }
+
+          .benefits-section-mbcas .section-header h2 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            padding: 0 var(--spacing-2);
+          }
+
+          .benefits-section-mbcas .section-header p {
+            font-size: 1rem;
+            padding: 0 var(--spacing-2);
+          }
+
+          .benefits-grid-simplified {
+            gap: var(--spacing-4);
+            padding: 0 var(--spacing-2);
+          }
+
+          .benefit-card-simplified {
+            padding: var(--spacing-5);
+          }
+
+          .benefit-card-simplified h3 {
+            font-size: 1.2rem;
+          }
+
+          .benefit-card-simplified p {
+            font-size: 0.95rem;
+          }
+        }
+
+        /* Styles existants */
         .value-section, .process-section, .practical-info {
           padding: var(--spacing-16) 0;
         }
@@ -282,8 +706,8 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           .timeline-number-revisited { position: static; margin-bottom: var(--spacing-4); width: 45px; height: 45px; }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ProgrammeMBCASDetailsPage;
