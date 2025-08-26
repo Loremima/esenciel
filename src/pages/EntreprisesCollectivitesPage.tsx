@@ -21,7 +21,7 @@ const EntreprisesCollectivitesPage: React.FC = () => {
             <section id="autres" className="section services-section">
                 <div className="container">
                     <div className="section-header">
-                        <h1>4. Offres pour entreprises & collectivités</h1>
+                        <h1>Offres pour entreprises & collectivités</h1>
                         <p>Ateliers éducation à la santé et conférences pour entreprises et collectivités</p>
                     </div>
                     <div className="services-grid">

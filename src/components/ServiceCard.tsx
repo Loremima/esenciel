@@ -106,7 +106,7 @@ const ServiceCard = ({ service, isHighlight = false }: { service: any, isHighlig
             {/* Actions uniformes */}
             <div className="service-actions">
                 {service.detailPage && (
-                    <Link to={service.detailPage} className="btn btn-outline">
+                    <Link to={service.detailPage} className="btn btn-info">
                         En savoir plus
                         <ArrowRight size={16} />
                     </Link>

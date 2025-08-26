@@ -326,6 +326,18 @@ p {
   color: var(--color-white);
 }
 
+/* Variante info (alignée newsletter, même bleu foncé) */
+.btn-info {
+  background: var(--color-primary);
+  color: #fffcea;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-info:hover {
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-lg);
+}
+
 /* Cards - Style uniforme comme le Jeu du Tao : blanc haut-gauche → transparent bas-droite */
 .card {
   background: linear-gradient(135deg,

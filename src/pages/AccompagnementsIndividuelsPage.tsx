@@ -21,7 +21,7 @@ const AccompagnementsIndividuelsPage: React.FC = () => {
       <section id="individuels" className="section services-section">
         <div className="container">
           <div className="section-header">
-            <h1>1. Accompagnements individuels</h1>
+            <h1>Accompagnements individuels</h1>
             <p>Un accompagnement sur mesure pour une santé de qualité, une vie optimisée et une pleine conscience au quotidien. </p>
           </div>
           <div className="services-grid">

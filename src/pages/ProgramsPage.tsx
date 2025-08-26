@@ -20,7 +20,7 @@ const ProgramsPage: React.FC = () => {
       <section id="programmes" className="section services-section">
         <div className="container">
           <div className="section-header">
-            <h1>3. Programmes de pleine conscience</h1>
+            <h1>Programmes de pleine conscience</h1>
             <p>Programmes structurés et scientifiquement validés</p>
           </div>
           <div className="services-grid">

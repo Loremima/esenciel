@@ -70,7 +70,7 @@ const HeroSection: React.FC = () => {
           <Link to="/contact-reservation" className="btn btn-primary">
             <span>Réserver</span>
           </Link>
-          <Link to="/qui-suis-je" className="btn btn-secondary">
+          <Link to="/qui-suis-je" className="btn btn-info">
             <span>En savoir plus</span>
           </Link>
         </div>

@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Clock, Users, Target, Heart, Sparkles, MapPin } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const PleineConscienceDetailsPage: React.FC = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const journeyRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const benefits = [
     {
       icon: Target,
@@ -129,7 +141,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
       </section>
 
       {/* Section unifiée : Expérience d'accompagnement et déroulement */}
-      <section className="section journey-section">
+      <section ref={journeyRef} className="section journey-section">
         <div className="container">
           <div className="journey-layout">
             <div className="journey-content">
@@ -190,7 +202,13 @@ const PleineConscienceDetailsPage: React.FC = () => {
             </div>
 
             <div className="journey-aside">
-              <div className="info-card-enhanced">
+              <div
+                className="info-card-enhanced"
+                style={{
+                  transform: `translateY(${(scrollY - (journeyRef.current?.offsetTop || 0)) * 0.1
+                    }px)`,
+                }}
+              >
                 <h2>Informations pratiques</h2>
                 <div className="info-section-enhanced">
                   <div className="modalities-grid">
@@ -511,6 +529,10 @@ const PleineConscienceDetailsPage: React.FC = () => {
           padding: var(--spacing-8);
           box-shadow: var(--shadow-lg);
           border: 1px solid var(--color-gray-200);
+          width: 100%;
+          max-width: 400px;
+          z-index: 10;
+          will-change: transform;
         }
 
         .info-card-enhanced h2 {
@@ -537,7 +559,11 @@ const PleineConscienceDetailsPage: React.FC = () => {
 
         .modalities-grid {
           display: grid;
-          gap: var(--spacing-0); /* No gap needed with borders */
+          gap: var(--spacing-0);
+          padding: var(--spacing-4);
+          background: #fffcea;
+          border-radius: var(--radius-lg);
+          margin-bottom: var(--spacing-4);
         }
 
         .modality-card {
@@ -656,6 +682,10 @@ const PleineConscienceDetailsPage: React.FC = () => {
             grid-template-columns: 1fr;
             gap: var(--spacing-8);
           }
+          .journey-aside { margin-top: 0; }
+          .info-card-enhanced { 
+            max-width: none !important;
+          }
         }
 
         @media (max-width: 768px) {
@@ -693,16 +723,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
           .outcomes-grid, .techniques-grid {
             grid-template-columns: 1fr;
           }
-
-          .journey-content h2 {
-            text-align: center;
-          }
-
-          .journey-intro {
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-          }
+          
         }
 
         @media (max-width: 480px) {

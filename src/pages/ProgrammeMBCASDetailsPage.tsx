@@ -1,68 +1,19 @@
-import React from 'react';
-import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Clock, Users, Calendar, MapPin, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const ProgrammeMBCASDetailsPage: React.FC = () => {
-  const benefits = [
-    {
-      icon: Target,
-      title: 'Gestion de l\'anxiété',
-      description: 'Développez des stratégies efficaces pour faire face à l\'anxiété et aux préoccupations.'
-    },
-    {
-      icon: Heart,
-      title: 'Équilibre émotionnel',
-      description: 'Cultivez la stabilité émotionnelle et la résilience face aux défis.'
-    },
-    {
-      icon: Sparkles,
-      title: 'Bien-être durable',
-      description: 'Intégrez des pratiques qui nourrissent votre bien-être à long terme.'
-    }
-  ];
+  const [scrollY, setScrollY] = useState(0);
+  const journeyRef = useRef<HTMLElement>(null);
 
-  const processSteps = [
-    {
-      number: '01',
-      title: 'Comprendre l\'anxiété',
-      description: 'Exploration des mécanismes de l\'anxiété et reconnaissance des patterns personnels.'
-    },
-    {
-      number: '02',
-      title: 'Pleine conscience des pensées',
-      description: 'Apprentissage de l\'observation bienveillante des pensées anxieuses et ruminations.'
-    },
-    {
-      number: '03',
-      title: 'Ancrage corporel',
-      description: 'Techniques de connexion au corps pour gérer l\'activation physiologique de l\'anxiété.'
-    },
-    {
-      number: '04',
-      title: 'Respiration consciente',
-      description: 'Pratiques respiratoires pour réguler le système nerveux et apaiser l\'esprit.'
-    },
-    {
-      number: '05',
-      title: 'Pleine conscience des émotions',
-      description: 'Accueil et régulation des émotions difficiles avec bienveillance et sagesse.'
-    },
-    {
-      number: '06',
-      title: 'Gestion des préoccupations',
-      description: 'Outils pratiques pour transformer la relation aux pensées inquiètes et projections.'
-    },
-    {
-      number: '07',
-      title: 'Compassion et auto-bienveillance',
-      description: 'Développement de la compassion envers soi-même face aux difficultés.'
-    },
-    {
-      number: '08',
-      title: 'Maintien et intégration',
-      description: 'Consolidation de la pratique et stratégies pour maintenir l\'équilibre au quotidien.'
-    }
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="mbcas-details-page service-detail-page">
@@ -135,7 +86,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
       </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
-      <section className="section journey-section">
+      <section ref={journeyRef} className="section journey-section">
         <div className="container">
           <div className="journey-layout">
             <div className="journey-content">
@@ -183,7 +134,13 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           </div>
 
           <div className="journey-aside">
-            <div className="info-card-merged">
+            <div
+              className="info-card-merged"
+              style={{
+                transform: `translateY(${(scrollY - (journeyRef.current?.offsetTop || 0)) * 0.1
+                  }px)`,
+              }}
+            >
               <h2>Informations pratiques</h2>
 
               {/* Section modalités */}
@@ -576,7 +533,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           .outcomes-grid {
             grid-template-columns: 1fr;
           }
-
+          
           .journey-content h2 {
             text-align: center;
           }
@@ -678,14 +635,19 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
         /* Larger process text */
         .process-text-large p { font-size: 1.25rem; line-height: 1.9; margin-bottom: var(--spacing-6); text-align: justify; }
         
-        /* Merged info card */
+        /* Styles pour la carte d'information fusionnée */
         .info-card-merged {
           background: var(--color-white);
           border-radius: var(--radius-xl);
           padding: var(--spacing-8);
           box-shadow: var(--shadow-lg);
           border: 1px solid var(--color-gray-200);
+          width: 100%;
+          max-width: 400px;
+          z-index: 10;
+          will-change: transform;
         }
+        
         .info-card-merged h2 {
           font-size: 1.8rem;
           color: var(--color-primary);
@@ -706,6 +668,9 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           flex-direction: column;
           gap: var(--spacing-2);
           margin-bottom: var(--spacing-4);
+          padding: var(--spacing-4);
+          background: #fffcea;
+          border-radius: var(--radius-lg);
         }
 
         .format-item-merged {

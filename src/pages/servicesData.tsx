@@ -47,7 +47,7 @@ export const groupServices = [
         title: 'Jeux du Tao santé et mieux-être',
         description: 'Une expérience interactive et immersive destinée à des petits groupes de 4 personnes maximum. En 4/5 heures, chaque participant explore quatre mondes symboliques (terre, eau, feu, air) pour clarifier ses objectifs de bien-être et d\'équilibre de vie.',
         duration: '4-5h par session',
-        price: '50€ par participant',
+        price: '70€ par participant',
         sessionType: 'Groupe (3-4 pers.)',
         modalities: ['Minimum 3 participants'],
         features: [

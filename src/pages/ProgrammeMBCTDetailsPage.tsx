@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
@@ -20,6 +20,18 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
       description: 'Développez une relation plus saine et bienveillante avec vos émotions.'
     }
   ];
+
+  const [scrollY, setScrollY] = useState(0);
+  const journeyRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="mbct-details-page service-detail-page">
@@ -100,7 +112,7 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
       </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
-      <section className="section journey-section">
+      <section ref={journeyRef} className="section journey-section">
         <div className="container">
           <div className="journey-layout">
             <div className="journey-content">
@@ -148,7 +160,13 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           </div>
 
           <div className="journey-aside">
-            <div className="info-card-merged">
+            <div
+              className="info-card-merged"
+              style={{
+                transform: `translateY(${(scrollY - (journeyRef.current?.offsetTop || 0)) * 0.1
+                  }px)`,
+              }}
+            >
               <h2>Informations pratiques</h2>
 
               {/* Section modalités */}
@@ -480,13 +498,17 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           color: var(--color-gray-700);
         }
 
-        /* Info card */
+        /* Styles pour la carte d'information fusionnée */
         .info-card-merged {
           background: var(--color-white);
           border-radius: var(--radius-xl);
           padding: var(--spacing-8);
           box-shadow: var(--shadow-lg);
           border: 1px solid var(--color-gray-200);
+          width: 100%;
+          max-width: 400px;
+          z-index: 10;
+          will-change: transform;
         }
 
         .info-card-merged h2 {
@@ -509,6 +531,9 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           flex-direction: column;
           gap: var(--spacing-2);
           margin-bottom: var(--spacing-4);
+          padding: var(--spacing-4);
+          background: #fffcea;
+          border-radius: var(--radius-lg);
         }
 
         .format-item-merged {
@@ -592,6 +617,10 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
             grid-template-columns: 1fr;
             gap: var(--spacing-8);
           }
+          .journey-aside { margin-top: 0; }
+          .info-card-merged { 
+            max-width: none !important;
+          }
         }
 
         @media (max-width: 1024px) {
@@ -645,6 +674,10 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
 
           .outcomes-grid {
             grid-template-columns: 1fr;
+          }
+          
+          .info-card-merged { 
+            max-width: none !important;
           }
 
           .journey-content h2 {

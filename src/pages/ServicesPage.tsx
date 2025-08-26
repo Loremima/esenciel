@@ -35,7 +35,7 @@ const ServicesPage: React.FC = () => {
       <section id="individuels" className="section services-section">
         <div className="container">
           <div className="section-header">
-            <h1>1. Accompagnements individuels</h1>
+            <h1>Accompagnements individuels</h1>
             <p>Un accompagnement sur mesure pour une santé de qualité, une vie optimisée et une pleine conscience au quotidien. </p>
           </div>
           <div className="services-grid">
@@ -59,7 +59,7 @@ const ServicesPage: React.FC = () => {
         </video>
         <div className="container">
           <div className="section-header">
-            <h1>2. Accompagnements groupe</h1>
+            <h1>Accompagnements groupe</h1>
             <p>Expérience collective enrichissante</p>
           </div>
           <div className="services-grid">
@@ -74,7 +74,7 @@ const ServicesPage: React.FC = () => {
       <section id="programmes" className="section services-section">
         <div className="container">
           <div className="section-header">
-            <h1>3. Programmes de pleine conscience</h1>
+            <h1>Programmes de pleine conscience</h1>
             <p>Programmes structurés et scientifiquement validés</p>
           </div>
           <div className="services-grid">
@@ -98,7 +98,7 @@ const ServicesPage: React.FC = () => {
         </video>
         <div className="container">
           <div className="section-header">
-            <h1>4. Offres pour entreprises & collectivités</h1>
+            <h1>Offres pour entreprises & collectivités</h1>
             <p>Ateliers éducation à la santé /conférences pour entreprises et collectivités.</p>
           </div>
           <div className="services-grid">

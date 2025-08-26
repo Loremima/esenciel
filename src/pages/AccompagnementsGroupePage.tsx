@@ -21,7 +21,7 @@ const AccompagnementsGroupePage: React.FC = () => {
       <section id="groupes" className="section services-section">
         <div className="container">
           <div className="section-header">
-            <h1>2. Accompagnements groupe</h1>
+            <h1>Accompagnements groupe</h1>
             <p>Expérience collective enrichissante</p>
           </div>
           <div className="services-grid">

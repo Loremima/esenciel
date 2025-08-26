@@ -6,39 +6,39 @@ import ServiceCard from '../components/ServiceCard';
 import VideoCTA from '../components/VideoCTA';
 
 const ProgrammesPleineConsciencePage: React.FC = () => {
-    return (
-        <div className="services-page">
-            <section className="hero-services">
-                <video autoPlay muted loop playsInline className="hero-video">
-                    <source src="/background.mp4" type="video/mp4" />
-                </video>
-                <div className="hero-overlay" aria-hidden="true"></div>
-                <div className="hero-content">
-                    <h1>Programmes de pleine conscience</h1>
-                </div>
-            </section>
+  return (
+    <div className="services-page">
+      <section className="hero-services">
+        <video autoPlay muted loop playsInline className="hero-video">
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-overlay" aria-hidden="true"></div>
+        <div className="hero-content">
+          <h1>Programmes de pleine conscience</h1>
+        </div>
+      </section>
 
-            <section id="programmes" className="section services-section">
-                <div className="container programmes-container">
-                    <div className="section-header">
-                        <h1>3. Programmes de pleine conscience</h1>
-                        <p>Programmes structurés et scientifiquement validés pour cultiver le bien-être ensemble</p>
-                    </div>
-                    <div className="services-grid three-cols">
-                        {collectivePrograms.map(service => (
-                            <ServiceCard key={service.id} service={service} />
-                        ))}
-                    </div>
-                </div>
-            </section>
+      <section id="programmes" className="section services-section">
+        <div className="container programmes-container">
+          <div className="section-header">
+            <h1>Programmes de pleine conscience</h1>
+            <p>Programmes structurés et scientifiquement validés pour cultiver le bien-être ensemble</p>
+          </div>
+          <div className="services-grid three-cols">
+            {collectivePrograms.map(service => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <VideoCTA
-                title="Prêt(e) à transformer votre quotidien ?"
-                subtitle="Contactez-moi pour connaître les prochaines sessions et réserver votre place."
-                buttonText="M'inscrire à un programme"
-                buttonLink="/contact-reservation"
-            />
-            <style>{`
+      <VideoCTA
+        title="Prêt(e) à transformer votre quotidien ?"
+        subtitle="Contactez-moi pour connaître les prochaines sessions et réserver votre place."
+        buttonText="M'inscrire à un programme"
+        buttonLink="/contact-reservation"
+      />
+      <style>{`
               .programmes-container { 
                 max-width: 1200px; 
                 width: 100%;
@@ -71,8 +71,8 @@ const ProgrammesPleineConsciencePage: React.FC = () => {
                 }
               }
             `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ProgrammesPleineConsciencePage;

@@ -3,6 +3,7 @@ import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 
 const SanteQualiteVieDetailsPage: React.FC = () => {
+
   const benefits = [
     {
       icon: Target,
@@ -46,141 +47,186 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
 
   return (
     <div className="sante-details-page service-detail-page">
-      {/* Hero Section */}
-      <section className="hero-details">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hero-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-overlay" aria-hidden="true"></div>
-        <div className="hero-content">
-          <h1>Santé et qualité de vie</h1>
+      {/* Hero Section alignée aux autres pages */}
+      <section className="hero-sante">
+        <div className="container">
+          <div className="hero-sante-layout">
+            <div className="hero-content-sante">
+              <h1>Santé et qualité de vie</h1>
+              <p className="hero-subtitle-sante">Acteur de sa santé, vers un bien-être durable</p>
+              <div className="hero-description-sante">
+                <p>
+                  Ces accompagnements sont conçus pour vous aider à identifier et à mettre en
+                  place des habitudes de vie favorables à votre bien-être global. Grâce à un suivi
+                  personnalisé, nous explorerons ensemble les ressources internes qui vous
+                  permettront d’adopter des pratiques quotidiennes bénéfiques pour votre santé.
+                </p>
+              </div>
+              <div className="hero-info-grid">
+                <div className="info-item-clean">
+                  <div className="info-label-clean">Format</div>
+                  <div className="info-value-clean">Accompagnement individuel</div>
+                  <div className="info-detail-clean">Présentiel ou en visio</div>
+                </div>
+                <div className="info-item-clean">
+                  <div className="info-label-clean">Durée</div>
+                  <div className="info-value-clean">1h30 à 2h • puis 1h</div>
+                  <div className="info-detail-clean">Première séance + suivis</div>
+                </div>
+                <div className="info-item-clean">
+                  <div className="info-label-clean">Tarifs</div>
+                  <div className="info-value-clean">90€ • 60€</div>
+                  <div className="info-detail-clean">1ère séance • Séances suivantes</div>
+                </div>
+              </div>
+            </div>
+            <div className="hero-video-sante">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="hero-video-element"
+              >
+                <source src="/vitalité_sainté.mp4" type="video/mp4" />
+              </video>
+              <div className="video-overlay-sante"></div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Value proposition avec bénéfices */}
-      <section className="section value-section">
+      {/* Bénéfices - même style parallax que les autres pages */}
+      <section className="section benefits-section-sante parallax-surface">
+        <video
+          muted
+          loop
+          playsInline
+          className="parallax-video-static"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
         <div className="container">
-          <div className="value-layout">
-            <div className="value-left">
-              <h2>Acteur de sa santé : vers un bien-être durable</h2>
-              <p className="lead">
-                Ces accompagnements sont conçus pour vous aider à identifier et à mettre en
-                place des habitudes de vie favorables à votre bien-être global. Grâce à un suivi
-                personnalisé, nous explorerons ensemble les ressources internes qui vous
-                permettrons d’adopter des pratiques quotidiennes bénéfiques pour votre santé.
+          <div className="section-header">
+            <h2>Les bénéfices de l'accompagnement</h2>
+            <p>Un cadre clair et bienveillant pour des changements concrets et durables</p>
+          </div>
+          <div className="benefits-grid-simplified">
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon;
+              return (
+                <div key={index} className="benefit-card-simplified">
+                  <IconComponent size={28} className="benefit-icon-simplified" />
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Section unifiée : Parcours et accompagnement */}
+      <section className="section journey-section">
+        <div className="container">
+          <div className="journey-layout">
+            <div className="journey-content">
+              <h2>Votre parcours vers un bien-être durable</h2>
+              <p className="journey-intro">
+                Un accompagnement personnalisé en 4 étapes pour identifier vos habitudes de vie,
+                mobiliser vos ressources internes et instaurer des changements durables alignés avec vos valeurs.
               </p>
-            </div>
-            <div className="benefits-grid-refined">
-              {benefits.map((benefit, index) => {
-                const IconComponent = benefit.icon;
-                return (
-                  <div key={index} className="benefit-card-refined">
-                    <div className="benefit-header">
-                      <IconComponent size={22} className="benefit-icon-refined" />
-                      <h3>{benefit.title}</h3>
-                    </div>
-                    <p>{benefit.description}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Processus avec timeline moderne */}
-      <section className="section process-section parallax-surface">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="parallax-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container process-container-revisited">
-          <div className="process-intro-revisited">
-            <h2>Un parcours en 4 étapes pour des résultats durables.</h2>
-          </div>
-          <div className="timeline-revisited">
-            {processSteps.map((step, index) => (
-              <div key={index} className="timeline-item-revisited">
-                <div className="timeline-number-revisited">{step.number}</div>
-                <div className="timeline-content-revisited">
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
+              <div className="learning-outcomes">
+                <h3>Déroulement de l'accompagnement</h3>
+                <div className="outcomes-grid">
+                  {processSteps.map((step, index) => (
+                    <div key={index} className="outcome-item">
+                      <div className="outcome-icon">{step.number}</div>
+                      <div>
+                        <h4>{step.title}</h4>
+                        <p>{step.description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Détails Coaching S&QV (fusion infos pratiques + ressources) */}
-      <section className="section coaching-details">
-        <div className="container">
-          <div className="coaching-details-grid">
-            <div className="coaching-text">
-              <h2>Les objectifs de l’accompagnement</h2>
-              <ul className="objectives-list-large">
-                <li>Prendre conscience de vos habitudes de vie impactant votre bien-être.</li>
-                <li>Identifier les freins et les blocages qui limitent votre épanouissement.</li>
-                <li>Découvrir et mobiliser les ressources personnelles pour une vie équilibrée.</li>
-                <li>Mettre en place des actions adaptées et alignées avec vos besoins.</li>
-                <li>Soutenir et maintenir votre motivation et votre engagement à long terme.</li>
-              </ul>
-
-              <h3>Déroulement de l’accompagnement</h3>
-              <div className="process-text-large">
-                <p>
-                  L’accompagnement débute par une première rencontre pour discuter de vos
-                  objectifs et définir ensemble un plan d’action personnalisé. A partir de là nous
-                  explorerons vos habitudes de vie et identifierons les freins qui limitent votre bien-être.
-                  Chaque séance vous aidera à mobiliser vos ressources internes et à mettre ne place
-                  des actions concrètes pour améliorer votre qualité de vie.
-                </p>
-                <p>
-                  Au fil des séances, le suivi régulier vous permettra d’ajuster vos actions en fonction de l’évolution de vos besoins
-                  afin de maintenir votre motivation. Je vous accompagne tout au long du processus
-                  pour instaurer des changements durables alignés à vos valeurs.
-                </p>
-              </div>
-            </div>
-            <div className="coaching-aside">
-              <div className="info-card-merged">
-                <h2>Informations pratiques & Tarifs</h2>
-                <div className="info-section">
-                  <div className="detail-item-revisited">
-                    <Clock size={22} />
+              <div className="objectives-exploration">
+                <h3>Objectifs de l'accompagnement</h3>
+                <div className="objectives-grid">
+                  <div className="objective-item">
+                    <div className="objective-icon">🎯</div>
                     <div>
-                      <strong>Durée des séances</strong>
-                      <span>1h30–2h pour la première, puis 1h</span>
+                      <h4>Conscience et identification</h4>
+                      <p>Prendre conscience de vos habitudes de vie et identifier les freins qui limitent votre épanouissement.</p>
                     </div>
                   </div>
-                  <div className="detail-item-revisited">
-                    <Users size={22} />
+                  <div className="objective-item">
+                    <div className="objective-icon">💎</div>
                     <div>
-                      <strong>Modalités</strong>
-                      <span>En cabinet à Vaureilles ou en visio</span>
+                      <h4>Mobilisation des ressources</h4>
+                      <p>Découvrir et mobiliser vos ressources personnelles pour une vie équilibrée et alignée.</p>
+                    </div>
+                  </div>
+                  <div className="objective-item">
+                    <div className="objective-icon">🚀</div>
+                    <div>
+                      <h4>Actions concrètes</h4>
+                      <p>Mettre en place des actions adaptées à vos besoins pour améliorer durablement votre qualité de vie.</p>
+                    </div>
+                  </div>
+                  <div className="objective-item">
+                    <div className="objective-icon">🌱</div>
+                    <div>
+                      <h4>Motivation et engagement</h4>
+                      <p>Soutenir et maintenir votre motivation pour des changements durables à long terme.</p>
                     </div>
                   </div>
                 </div>
-                <div className="pricing-section">
-                  <div className="price-row">
-                    <div className="price-amount">90€</div>
-                    <div className="price-label">Première séance</div>
+              </div>
+            </div>
+
+            <div className="journey-aside">
+              <div className="info-card-enhanced">
+                <h2>Informations pratiques</h2>
+
+                <div className="format-info-section">
+                  <div className="format-detail">
+                    <Clock size={20} />
+                    <div>
+                      <strong>Durée :</strong> 1h30–2h première séance, puis 1h
+                    </div>
                   </div>
-                  <div className="price-row">
-                    <div className="price-amount">60€</div>
-                    <div className="price-label">Séance de suivi</div>
+                  <div className="format-detail">
+                    <Users size={20} />
+                    <div>
+                      <strong>Format :</strong> Accompagnement individuel
+                    </div>
                   </div>
+                  <div className="format-detail">
+                    <span>📍</span>
+                    <div>
+                      <strong>Lieu :</strong> Cabinet à Vaureilles ou en visio
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pricing-section-clean">
+                  <h3>Tarifs</h3>
+                  <div className="pricing-items">
+                    <div className="pricing-item">
+                      <div className="price-main">90€</div>
+                      <div className="price-desc">Première séance<br /><small>(1h30 à 2h)</small></div>
+                    </div>
+                    <div className="pricing-item">
+                      <div className="price-main">60€</div>
+                      <div className="price-desc">Séances suivantes<br /><small>(1h)</small></div>
+                    </div>
+                  </div>
+                  <p className="pricing-note">
+                    Entretien personnalisé • Règlement en fin de séance
+                  </p>
                 </div>
               </div>
             </div>
@@ -197,6 +243,318 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
       />
 
       <style>{`
+        /* === HERO SECTION SANTÉ === */
+        .hero-sante {
+          padding: var(--spacing-20) 0;
+          background: #fffcea;
+          overflow: hidden;
+        }
+
+        .hero-sante-layout {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          gap: var(--spacing-12);
+          align-items: center;
+          min-height: 70vh;
+        }
+
+        .hero-content-sante h1 {
+          font-size: clamp(3rem, 6vw, 4.5rem);
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+          line-height: 1.1;
+          font-weight: 700;
+        }
+
+        .hero-subtitle-sante {
+          font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+          color: var(--color-gray-700);
+          margin-bottom: var(--spacing-6);
+          font-weight: 500;
+          line-height: 1.4;
+        }
+
+        .hero-description-sante p {
+          font-size: 1.15rem;
+          line-height: 1.7;
+          color: var(--color-gray-700);
+          margin-bottom: var(--spacing-8);
+          max-width: 55ch;
+        }
+
+        .hero-info-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: var(--spacing-6);
+          margin-top: var(--spacing-6);
+        }
+
+        .info-item-clean {
+          padding: var(--spacing-4);
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: var(--radius-lg);
+          border: 1px solid rgba(31, 41, 55, 0.1);
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+
+        /* 
+        .info-item-clean:hover {
+          background: rgba(255, 255, 255, 1);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item-clean.pricing {
+          border-color: var(--color-primary);
+          background: rgba(255, 255, 255, 0.9);
+        } 
+        */
+
+        .info-label-clean {
+          font-size: 0.8rem;
+          color: var(--color-gray-600);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: var(--spacing-1);
+          font-weight: 600;
+        }
+
+        .info-value-clean {
+          font-size: 1.1rem;
+          color: var(--color-primary);
+          font-weight: 700;
+          margin-bottom: var(--spacing-1);
+        }
+
+        .info-detail-clean {
+          font-size: 0.85rem;
+          color: var(--color-gray-600);
+          line-height: 1.4;
+        }
+
+        .hero-video-sante {
+          position: relative;
+          height: 600px;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-video-element {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .video-overlay-sante {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(45deg, rgba(31, 41, 55, 0.1) 0%, rgba(31, 41, 55, 0.05) 100%);
+        }
+
+        /* === BENEFITS SECTION AVEC VIDÉO === */
+        .benefits-section-sante {
+          padding: var(--spacing-16) 0;
+          position: relative;
+        }
+
+        .benefits-section-sante .section-header {
+          text-align: center;
+          margin-bottom: var(--spacing-12);
+        }
+
+        .benefits-section-sante .section-header h2 {
+          font-size: clamp(2.2rem, 4vw, 3rem);
+          color: #fffcea;
+          margin-bottom: var(--spacing-4);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .benefits-section-sante .section-header p {
+          font-size: 1.2rem;
+          color: rgba(255, 252, 234, 0.9);
+          max-width: 600px;
+          margin: 0 auto;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .benefits-section-sante .container {
+            padding: 0;
+        }
+
+        .benefits-grid-simplified { 
+          display: grid; 
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+          gap: var(--spacing-8); 
+        }
+        .benefit-card-simplified { 
+          background: rgba(255, 252, 234, 0.95); 
+          border: 1px solid rgba(255, 252, 234, 0.3); 
+          border-radius: var(--radius-xl); 
+          padding: var(--spacing-8); 
+          text-align: center; 
+          transition: transform 0.3s ease, box-shadow 0.3s ease; 
+          backdrop-filter: blur(10px);
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+        .benefit-card-simplified:hover { 
+          transform: translateY(-4px); 
+          box-shadow: 0 12px 32px rgba(0,0,0,0.25); 
+          background: rgba(255, 252, 234, 1); 
+        }
+        .benefit-icon-simplified { 
+          color: var(--color-primary); 
+          margin-bottom: var(--spacing-4); 
+        }
+        .benefit-card-simplified h3 { 
+          font-size: 1.4rem; 
+          color: var(--color-primary); 
+          margin-bottom: var(--spacing-3); 
+          font-weight: 600; 
+          overflow-wrap: break-word;
+        }
+        .benefit-card-simplified p { 
+          color: var(--color-gray-700); 
+          line-height: 1.6; 
+          font-size: 1rem; 
+          overflow-wrap: break-word;
+        }
+
+        /* Vidéo statique fond parallax */
+        .parallax-video-static { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+
+        /* === JOURNEY SECTION === */
+        .journey-section { padding: var(--spacing-20) 0; background: #fffcea; }
+        .journey-layout { display: grid; grid-template-columns: 2fr 1fr; gap: var(--spacing-6); align-items: start; }
+        .journey-content h2 { font-size: clamp(2.5rem, 4.5vw, 3.5rem); color: var(--color-primary); margin-bottom: var(--spacing-6); line-height: 1.2; }
+        .journey-intro { font-size: 1.25rem; line-height: 1.7; color: var(--color-gray-700); margin-bottom: var(--spacing-10); max-width: 85ch; }
+        .learning-outcomes, .objectives-exploration { margin-bottom: var(--spacing-10); }
+        .learning-outcomes h3, .objectives-exploration h3 { font-size: 1.8rem; color: var(--color-primary); margin-bottom: var(--spacing-6); font-weight: 600; }
+        .outcomes-grid, .objectives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-6); }
+        .outcome-item, .objective-item { display: flex; gap: var(--spacing-4); align-items: flex-start; }
+        .outcome-icon, .objective-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+        .outcome-icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--color-primary); color: white; border-radius: 50%; font-weight: 700; font-size: 0.9rem; }
+        .outcome-item h4, .objective-item h4 { font-size: 1.2rem; color: var(--color-primary); margin-bottom: var(--spacing-2); font-weight: 600; }
+        .outcome-item p, .objective-item p { color: var(--color-gray-700); line-height: 1.6; font-size: 1rem; }
+
+        /* Enhanced info card with sticky behavior */
+        .info-card-enhanced { 
+          background: var(--color-primary); 
+          border-radius: var(--radius-xl); 
+          padding: var(--spacing-8); 
+          box-shadow: var(--shadow-lg); 
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          width: 100%;
+          max-width: 400px;
+          z-index: 10;
+          position: sticky;
+          top: 2rem;
+        }
+        
+        .info-card-enhanced h2 { 
+          font-size: 1.8rem; 
+          color: #fffcea; 
+          margin-bottom: var(--spacing-6);
+          border-bottom: 2px solid #fffcea;
+          padding-bottom: var(--spacing-3);
+        }
+
+        /* Format info section - cleaner layout */
+        .format-info-section {
+          margin-bottom: var(--spacing-8);
+          padding: var(--spacing-6);
+          border-radius: var(--radius-lg);
+        }
+
+        .format-detail {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--spacing-3);
+          margin-bottom: var(--spacing-4);
+          color: rgba(255, 252, 234, 0.9);
+        }
+
+        .format-detail:last-child {
+          margin-bottom: 0;
+        }
+
+        .format-detail svg {
+          color: #fffcea;
+          margin-top: 2px;
+          flex-shrink: 0;
+        }
+
+        .format-detail span {
+          color: #fffcea;
+          font-size: 1.2rem;
+          margin-top: 1px;
+        }
+
+        /* Pricing section - improved clarity */
+        .pricing-section-clean {
+          border-top: 1px solid rgba(255, 252, 234, 0.3);
+          padding-top: var(--spacing-6);
+        }
+
+        .pricing-section-clean h3 {
+          font-size: 1.4rem;
+          color: #fffcea;
+          margin-bottom: var(--spacing-5);
+          font-weight: 600;
+        }
+
+        .pricing-items {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--spacing-4);
+        }
+
+        .pricing-item {
+          text-align: center;
+          padding: var(--spacing-5);
+          background: transparent;
+          border: 2px solid #fffcea;
+          border-radius: var(--radius-lg);
+          color: #fffcea;
+          box-shadow: 0 4px 12px rgba(31, 41, 55, 0.1);
+          transition: all 0.3s ease;
+        }
+
+        .pricing-item:hover {
+          background: #fffcea;
+          color: var(--color-primary);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(31, 41, 55, 0.2);
+        }
+
+        .price-main {
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: var(--spacing-2);
+        }
+
+        .price-desc {
+          font-size: 0.9rem;
+          line-height: 1.4;
+        }
+
+        .price-desc small {
+          font-size: 0.8rem;
+          opacity: 0.8;
+        }
+
+        .pricing-note {
+          font-size: 0.85rem;
+          color: rgba(255, 252, 234, 0.8);
+          text-align: center;
+          line-height: 1.5;
+          margin: 0;
+          font-style: italic;
+        }
+
         /* Reset and simplify previous styles */
         .value-section, .process-section, .practical-info {
           padding: var(--spacing-16) 0;
@@ -336,12 +694,73 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
           opacity: 0.9;
         }
 
+        @media (max-width: 1200px) {
+          .journey-layout { grid-template-columns: 1fr; gap: var(--spacing-8); }
+        }
+
+        @media (max-width: 1024px) {
+          .hero-sante-layout { grid-template-columns: 1fr; gap: var(--spacing-8); text-align: center; }
+          .hero-video-sante { height: 400px; order: -1; }
+          .hero-description-sante p { margin: 0 auto var(--spacing-8); }
+        }
+
         @media (max-width: 768px) {
-          .process-container-revisited { grid-template-columns: 1fr; gap: var(--spacing-8); text-align: center; }
-          .process-intro-revisited p { margin: 0 auto; }
-          .timeline-revisited { border-left: none; padding-left: 0; }
-          .timeline-item-revisited { text-align: left; }
-          .timeline-number-revisited { position: static; margin-bottom: var(--spacing-4); width: 45px; height: 45px; }
+          .hero-sante { padding: var(--spacing-12) 0; }
+          .hero-video-sante { height: 300px; }
+          .hero-info-grid { grid-template-columns: 1fr; gap: var(--spacing-4); }
+          
+          .benefits-section-sante .section-header {
+            margin-bottom: var(--spacing-8);
+          }
+
+          .benefits-grid-simplified { 
+            grid-template-columns: 1fr; 
+            gap: var(--spacing-6); 
+            padding: 0 var(--spacing-8);
+          }
+          .benefit-card-simplified {
+            padding: var(--spacing-6);
+            margin: 0;
+            max-width: 100%;
+            box-sizing: border-box;
+          }
+          .outcomes-grid, .objectives-grid { grid-template-columns: 1fr; }
+          .journey-content h2 { text-align: center; }
+          .journey-intro { text-align: center; margin-left: auto; margin-right: auto; }
+          .pricing-items { grid-template-columns: 1fr 1fr; gap: var(--spacing-3); }
+          .info-card-enhanced { position: static !important; top: auto !important; max-width: none !important; }
+        }
+        @media (max-width: 480px) {
+          .benefits-section-sante {
+            padding: var(--spacing-12) 0;
+          }
+
+          .benefits-section-sante .section-header h2 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            padding: 0 var(--spacing-2);
+          }
+
+          .benefits-section-sante .section-header p {
+            font-size: 1rem;
+            padding: 0 var(--spacing-2);
+          }
+
+          .benefits-grid-simplified {
+            gap: var(--spacing-4);
+            padding: 0 var(--spacing-6);
+          }
+
+          .benefit-card-simplified {
+            padding: var(--spacing-5);
+          }
+
+          .benefit-card-simplified h3 {
+            font-size: 1.2rem;
+          }
+
+          .benefit-card-simplified p {
+            font-size: 0.95rem;
+          }
         }
       `}</style>
     </div>
