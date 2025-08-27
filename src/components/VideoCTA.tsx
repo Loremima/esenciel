@@ -7,10 +7,9 @@ interface VideoCTAProps {
   subtitle: string;
   buttonText: string;
   buttonLink: string;
-  buttonIcon?: React.ReactNode;
 }
 
-const VideoCTA: React.FC<VideoCTAProps> = ({ title, subtitle, buttonText, buttonLink, buttonIcon }) => {
+const VideoCTA: React.FC<VideoCTAProps> = ({ title, subtitle, buttonText, buttonLink }) => {
   return (
     <section className="section cta-section parallax-surface">
       <video autoPlay muted loop playsInline className="parallax-video">
@@ -23,9 +22,8 @@ const VideoCTA: React.FC<VideoCTAProps> = ({ title, subtitle, buttonText, button
             <p>{subtitle}</p>
           </div>
           <div className="cta-actions">
-            <Link to={buttonLink} className="btn btn-primary cta-primary">
-              {buttonText}
-              {buttonIcon || <CalendarDays size={20} />}
+            <Link to={buttonLink} className="btn btn-glass cta-primary">
+              {buttonText} <CalendarDays size={20} />
             </Link>
           </div>
         </div>
@@ -59,14 +57,7 @@ const VideoCTA: React.FC<VideoCTAProps> = ({ title, subtitle, buttonText, button
           justify-content: center;
         }
         .cta-section .cta-primary {
-          background: #fffcea;
-          color: var(--color-primary);
-          font-weight: 600;
-        }
-        .cta-section .cta-primary:hover {
-          background: transparent;
-          border-color: #fffcea;
-          color: #fffcea;
+          padding: 0.8rem 2.2rem;
         }
       `}</style>
     </section>

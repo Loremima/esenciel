@@ -4,7 +4,7 @@ export const individualServices = [
     {
         id: 'sante-qualite-vie',
         icon: Heart,
-        title: 'Santé et qualité de vie',
+        title: 'Santé et énergie',
         description: 'Cet accompagnement est conçu pour vous aider à devenir acteur de votre santé et à adopter des habitudes de vie favorables à votre bien-être.',
         duration: '1h30-2h (1ère séance) / 1h (suivantes)',
         price: '90€ (1ère séance) / 60€ (suivantes)',

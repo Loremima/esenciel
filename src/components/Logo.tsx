@@ -1,16 +1,15 @@
 import React from 'react';
 
 interface LogoProps {
-  variant?: 'navbar' | 'footer';
   isScrolled?: boolean;
   theme?: 'light' | 'dark';
 }
 
-const Logo: React.FC<LogoProps> = ({ variant = 'navbar', isScrolled = false, theme = 'dark' }) => {
+const Logo: React.FC<LogoProps> = ({ isScrolled = false, theme = 'dark' }) => {
   const logoSrc = theme === 'dark' ? '/logo_black.png' : '/logo.png';
 
   return (
-    <div className={`logo logo--${variant} ${isScrolled ? 'logo--scrolled' : ''}`}>
+    <div className={`logo ${isScrolled ? 'logo--scrolled' : ''} logo--theme-${theme}`}>
       <img
         src={logoSrc}
         alt="MindWayLife Logo"
@@ -47,16 +46,15 @@ const Logo: React.FC<LogoProps> = ({ variant = 'navbar', isScrolled = false, the
           font-weight: 600;
           margin: 0;
           line-height: 1.2;
+          transition: color 0.3s ease;
         }
 
-        /* Navbar variant - La couleur est maintenant gérée par le Header.tsx */
-        .logo--navbar .logo__name {
-          /* La couleur est définie par .brand-name dans Header.tsx */
-          transition: all 0.3s ease;
+        /* Gestion de la couleur du texte en fonction du thème */
+        .logo--theme-dark .logo__name {
+          color: var(--color-primary);
         }
 
-        /* Footer variant - Logo blanc */
-        .logo--footer .logo__name {
+        .logo--theme-light .logo__name {
           color: #fffcea !important;
         }
 

@@ -113,7 +113,7 @@ const AboutPage: React.FC = () => {
           <div className="hero-text">
             <h1>Qui suis-je ?</h1>
             <p className="hero-subtitle">
-              Coach & formatrice Santé et qualité de vie<br />
+              Coach & formatrice Santé et énergie<br />
               Intructrice de programmes basés sur la pleine conscience.<br />
             </p>
           </div>

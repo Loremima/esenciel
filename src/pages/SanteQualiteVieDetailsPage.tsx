@@ -54,7 +54,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         <div className="container">
           <div className="hero-sante-layout">
             <div className="hero-content-sante">
-              <h1>Santé et qualité de vie</h1>
+              <h1>Santé et énergie</h1>
               <p className="hero-subtitle-sante">Acteur de sa santé, vers un bien-être durable</p>
               <div className="hero-description-sante">
                 <p>

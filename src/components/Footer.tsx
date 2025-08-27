@@ -35,16 +35,8 @@ const Footer: React.FC = () => {
       <div className="footer__main">
         <div className="footer__container">
           <div className="footer__grid">
-            {/* Colonne 1 : Logo et description */}
-            <div className="footer__brand">
-              <Logo variant="footer" />
-              <p className="footer__description">
-                Des accompagnements personnalisés pour devenir acteur de votre santé et de votre épanouissement; Une approche intégrative alliant sciences cognitives, psychologie et pleine conscience.
-              </p>
-            </div>
-
-            {/* Colonne 2 : Services */}
-            <div className="footer__section">
+            {/* Colonne 1 : Services */}
+            < div className="footer__section">
               <h4 className="footer__section-title">Services</h4>
               <ul className="footer__links">
                 <li><Link to="/services#individuels">Santé & qualité de vie</Link></li>
@@ -54,7 +46,7 @@ const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Colonne 3 : Informations pratiques */}
+            {/* Colonne 2 : Informations pratiques */}
             <div className="footer__section">
               <h4 className="footer__section-title">Informations pratiques</h4>
               <ul className="footer__contact">
@@ -75,6 +67,16 @@ const Footer: React.FC = () => {
                   <span>Lun-Ven: 9h-18h</span>
                 </li>
               </ul>
+            </div>
+            {/* Colonne 3 : Logo et description */}
+            <div className="footer__brand">
+              <div className="footer__brand-logo">
+                <img src="/logo.png" alt="EsenCiel Logo" className="footer__logo-image" />
+              </div>
+              <div className="footer__brand-text">
+                <h1 className="footer__brand-title">EsenCiel</h1>
+                <p className="footer__author">by Véronique Carrié</p>
+              </div>
             </div>
           </div>
         </div>
@@ -219,19 +221,60 @@ const Footer: React.FC = () => {
 
         /* Colonne 1 : Logo et description */
         .footer__brand {
-          text-align: left;
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
+          align-items: center;
+          text-align: center;
+          gap: 1rem;
+        }
+
+        .footer__brand-logo {
+          display: flex;
+          justify-content: center;
+        }
+
+        .footer__logo-image {
+          width: 60px;
+          height: auto;
+        }
+
+        .footer__brand-text {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        
+        .footer__brand-title {
+          font-family: var(--font-heading);
+          font-size: clamp(1.8rem, 3vw, 2.2rem);
+          font-weight: 300;
+          letter-spacing: -0.02em;
+          color: #fffcea;
+          margin: 0;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          line-height: 1;
+        }
+
+        .footer__author {
+          font-family: var(--font-body);
+          font-size: clamp(0.9rem, 1.5vw, 1rem);
+          font-weight: 300;
+          font-style: italic;
+          color: rgba(255, 252, 234, 0.8);
+          margin: 0;
+          text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+          letter-spacing: 0.05em;
         }
 
         .footer__description {
           color: #fffcea;
           line-height: 1.7;
           font-size: 0.95rem;
-          margin-top: 2rem;
+          margin-top: 0;
           margin-bottom: 0;
-          text-align: left;
+          text-align: center;
+          max-width: 400px;
         }
 
         /* Colonnes 2 et 3 : Services et Infos */
@@ -410,23 +453,9 @@ const Footer: React.FC = () => {
             text-align: center;
             max-width: 280px;
           }
-
-          .footer__section {
+          
+          .footer__author {
             text-align: center;
-          }
-
-          .footer__contact-item {
-            justify-content: center;
-          }
-
-          .footer__legal-content {
-            flex-direction: column;
-            text-align: center;
-            gap: 1rem;
-          }
-
-          .footer__legal-credits {
-            align-items: center;
           }
         }
 
@@ -441,7 +470,7 @@ const Footer: React.FC = () => {
           }
         }
       `}</style>
-    </footer>
+    </footer >
   );
 };
 

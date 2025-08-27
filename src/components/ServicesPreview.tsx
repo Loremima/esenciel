@@ -68,9 +68,8 @@ const ServicesPreview: React.FC = () => {
         </div>
 
         <div className="section-cta">
-          <Link to="/services" className="btn btn-outline">
-            Voir tous les services
-            <ArrowRight size={18} />
+          <Link to="/services" className="btn btn-glass">
+            Tous les services <ArrowRight size={16} />
           </Link>
         </div>
       </div>
@@ -193,15 +192,8 @@ const ServicesPreview: React.FC = () => {
           margin-top: var(--spacing-8);
         }
         
-        .section-cta .btn {
-          background: #fffcea;
-          color: var(--color-primary);
-          border: 1px solid #fffcea;
-          font-weight: 600;
+        .section-cta .btn-glass {
           padding: 0.8rem 2.2rem;
-          border-radius: var(--radius-lg);
-          backdrop-filter: blur(10px);
-          transition: all 0.3s ease;
         }
         
         .section-cta .btn:hover {

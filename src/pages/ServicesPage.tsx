@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CalendarDays } from 'lucide-react';
 import { individualServices, groupServices, collectivePrograms, otherFormats } from '../pages/servicesData';
 import ServiceCard from '../components/ServiceCard';
 import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
@@ -121,9 +120,8 @@ const ServicesPage: React.FC = () => {
               Contactez-moi pour discuter de vos besoins et trouver l'accompagnement
               qui vous correspond le mieux.
             </p>
-            <Link to="/contact-reservation" className="btn btn-primary">
+            <Link to="/contact-reservation" className="btn btn-glass">
               Prendre rendez-vous
-              <CalendarDays size={18} />
             </Link>
           </div>
         </div>

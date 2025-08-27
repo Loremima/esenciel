@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Calendar, Send, CheckCircle } from 'lucide-react';
-import CalendlyWidget from '../components/CalendlyWidget';
-import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const ContactPage: React.FC = () => {
-  const videoRef = useSlowMoVideo();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -98,7 +95,6 @@ const ContactPage: React.FC = () => {
       {/* Hero Section */}
       <section className="hero-section">
         <video
-          ref={videoRef}
           autoPlay
           muted
           loop
@@ -122,9 +118,9 @@ const ContactPage: React.FC = () => {
 
       {/* Main Content */}
       <main className="main-content">
-        <div className="container">
-          {/* Contact Information */}
-          <section className="contact-info-section">
+        {/* Contact Information */}
+        <section className="contact-info-section">
+          <div className="container">
             <div className="section-header">
               <h1>Informations de contact</h1>
             </div>
@@ -147,164 +143,165 @@ const ContactPage: React.FC = () => {
                 );
               })}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Contact Form */}
-          <section className="form-section parallax-surface">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="parallax-video"
-            >
-              <source src="/background.mp4" type="video/mp4" />
-            </video>
-            <div className="container">
-              <div className="section-header">
-                <h1>Prendre rendez-vous</h1>
-                <p>Remplissez ce formulaire pour me faire part de votre demande. Je vous recontacterai rapidement pour planifier notre première rencontre.</p>
-              </div>
-              <div className="form-wrapper">
+        {/* Contact Form */}
+        <section className="form-section parallax-surface">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="parallax-video"
+          >
+            <source src="/background.mp4" type="video/mp4" />
+          </video>
+          <div className="container">
+            <div className="section-header">
+              <h1>Prendre rendez-vous</h1>
+              <p>Remplissez ce formulaire pour me faire part de votre demande. Je vous recontacterai rapidement pour planifier notre première rencontre.</p>
+            </div>
+            <div className="form-wrapper">
 
-                <form className="contact-form" onSubmit={handleSubmit}>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="name">Nom complet *</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="email">Email *</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="form-input"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="phone">Téléphone</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="service">Service souhaité</label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        className="form-select"
-                      >
-                        <option value="">Choisir un service</option>
-                        <option value="sante">Santé & qualité de vie</option>
-                        <option value="mindfulness">Pleine conscience et présence attentive.</option>
-                        <option value="tao">Jeu du Tao</option>
-                        <option value="mbsr">Programme MBSR</option>
-                        <option value="mbct">Programme MBCT</option>
-                        <option value="autre">Autre / À définir</option>
-                      </select>
-                    </div>
-                  </div>
-
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="subject">Objet de votre demande *</label>
+                    <label htmlFor="name">Nom complet *</label>
                     <input
                       type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
+                      id="name"
+                      name="name"
+                      value={formData.name}
                       onChange={handleInputChange}
                       required
                       className="form-input"
-                      placeholder="Ex: Première consultation, information sur les programmes..."
                     />
                   </div>
-
-
                   <div className="form-group">
-                    <label htmlFor="message">Message *</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
+                    <label htmlFor="email">Email *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="form-textarea"
-                      rows={5}
-                      placeholder="Décrivez brièvement votre situation et vos attentes..."
-                    ></textarea>
+                      className="form-input"
+                    />
                   </div>
+                </div>
 
-                  <div className="form-group consent-group">
-                    <label className="consent-label">
-                      <input
-                        type="checkbox"
-                        name="consent"
-                        checked={formData.consent}
-                        onChange={handleInputChange}
-                        required
-                        className="consent-checkbox"
-                      />
-                      <span className="checkmark"></span>
-                      J'accepte que mes données soient utilisées pour me recontacter dans le cadre de ma demande *
-                    </label>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="phone">Téléphone</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="form-input"
+                    />
                   </div>
+                  <div className="form-group">
+                    <label htmlFor="service">Service souhaité</label>
+                    <select
+                      id="service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleInputChange}
+                      className="form-select"
+                    >
+                      <option value="">Choisir un service</option>
+                      <option value="sante">Santé & qualité de vie</option>
+                      <option value="mindfulness">Pleine conscience et présence attentive.</option>
+                      <option value="tao">Jeu du Tao</option>
+                      <option value="mbsr">Programme MBSR</option>
+                      <option value="mbct">Programme MBCT</option>
+                      <option value="autre">Autre / À définir</option>
+                    </select>
+                  </div>
+                </div>
 
-                  <button type="submit" className="btn btn-primary submit-btn">
-                    <Send size={18} />
-                    Envoyer ma demande
-                  </button>
-                </form>
-              </div>
-            </div>
-          </section>
+                <div className="form-group">
+                  <label htmlFor="subject">Objet de votre demande *</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                    className="form-input"
+                    placeholder="Ex: Première consultation, information sur les programmes..."
+                  />
+                </div>
 
-          {/* Consultation Types */}
-          <section className="consultation-section">
-            <div className="container">
-              <div className="section-header">
-                <h1>Types de consultation</h1>
-              </div>
-              <div className="consultation-grid">
-                {consultationTypes.map((type, index) => {
-                  const IconComponent = type.icon;
-                  return (
-                    <div key={index} className="consultation-card">
-                      <IconComponent size={32} />
-                      <h2>{type.title}</h2>
-                      <p>{type.description}</p>
-                    </div>
-                  );
-                })}
-              </div>
+
+                <div className="form-group">
+                  <label htmlFor="message">Message *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    className="form-textarea"
+                    rows={5}
+                    placeholder="Décrivez brièvement votre situation et vos attentes..."
+                  ></textarea>
+                </div>
+
+                <div className="form-group consent-group">
+                  <label className="consent-label">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      checked={formData.consent}
+                      onChange={handleInputChange}
+                      required
+                      className="consent-checkbox"
+                    />
+                    <span className="checkmark"></span>
+                    J'accepte que mes données soient utilisées pour me recontacter dans le cadre de ma demande *
+                  </label>
+                </div>
+
+                <button type="submit" className="btn btn-primary submit-btn">
+                  <Send size={18} />
+                  Envoyer ma demande
+                </button>
+              </form>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+
+        {/* Consultation Types */}
+        <section className="consultation-section">
+          <div className="container">
+            <div className="section-header">
+              <h1>Types de consultation</h1>
+            </div>
+            <div className="consultation-grid">
+              {consultationTypes.map((type, index) => {
+                const IconComponent = type.icon;
+                return (
+                  <div key={index} className="consultation-card">
+                    <IconComponent size={32} />
+                    <h2>{type.title}</h2>
+                    <p>{type.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
       </main>
 
       <style>{`
         .contact-page {
+          padding-top: 0;
         }
 
         /* === HERO SECTION === */

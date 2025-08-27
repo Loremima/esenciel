@@ -46,7 +46,7 @@ const HomePage: React.FC = () => {
                 Prenez le temps de découvrir, de vous recentrer et d'avancer à votre rythme, afin de vous rapprocher d'un mode de vie plus conscient et plus épanouissant.
               </p>
               <Link to="/qui-suis-je" className="btn btn-outline">
-                Découvrir mon approche <ArrowRight size={16} />
+                Mon approche <ArrowRight size={16} />
               </Link>
             </div>
             <div className="welcome-video">

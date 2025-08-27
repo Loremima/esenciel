@@ -253,16 +253,24 @@ p {
   text-shadow: none !important;
 }
 
-/* Bouton "En savoir plus" bleu par défaut dans les sections parallax */
-.parallax-surface .service-card .btn-info {
-  background: var(--color-primary) !important;
-  color: #fffcea !important;
-  border: 2px solid var(--color-primary) !important;
+/* Bouton "En savoir plus" et "Réserver" en style verre dépoli dans les sections parallax */
+.parallax-surface .service-card .btn-info,
+.parallax-surface .service-card .btn-primary {
+  background: rgba(255, 252, 234, 0.1) !important;
+  border: 1px solid rgba(255, 252, 234, 0.2) !important;
+  color: rgba(255, 252, 234, 0.9) !important;
+  font-weight: 400 !important;
+  border-radius: 30px !important;
+  transition: all 0.4s ease !important;
+  backdrop-filter: blur(10px) !important;
 }
 
-.parallax-surface .service-card .btn-info:hover {
-  background: #fffcea !important;
-  color: var(--color-primary) !important;
+.parallax-surface .service-card .btn-info:hover,
+.parallax-surface .service-card .btn-primary:hover {
+  background: rgba(255, 252, 234, 0.2) !important;
+  border-color: rgba(255, 252, 234, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Formulaire plus lisible sur parallax */
@@ -363,6 +371,23 @@ p {
 .btn-info:hover {
   background: var(--color-primary-dark);
   box-shadow: var(--shadow-lg);
+}
+
+.btn-glass {
+  background: rgba(255, 252, 234, 0.1);
+  border: 1px solid rgba(255, 252, 234, 0.2);
+  color: rgba(255, 252, 234, 0.9);
+  font-weight: 400;
+  border-radius: 30px;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 252, 234, 0.2);
+  border-color: rgba(255, 252, 234, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 /* Cards - Style uniforme comme le Jeu du Tao : blanc haut-gauche → transparent bas-droite */
