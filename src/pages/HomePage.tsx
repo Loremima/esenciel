@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
         <div className="container">
           <div className="welcome-content">
             <div className="welcome-text">
-              <h2 className="welcome-title">Bienvenue sur mon site</h2>
+              <h2 className="welcome-title">Bienvenue sur EsenCiel 🌅</h2>
               <p className="welcome-description">
                 Un espace dédié à la pleine conscience au service de votre bien-être authentique.
               </p>

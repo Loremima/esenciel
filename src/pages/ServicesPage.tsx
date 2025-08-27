@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import { CalendarDays } from 'lucide-react';
 import { individualServices, groupServices, collectivePrograms, otherFormats } from '../pages/servicesData';
 import ServiceCard from '../components/ServiceCard';
+import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const ServicesPage: React.FC = () => {
+  const videoRef = useSlowMoVideo();
   return (
     <div className="services-page">
       {/* Hero Section avec vidéo de fond (aligné sur Blog/Infos) */}
       <section className="hero-services">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop

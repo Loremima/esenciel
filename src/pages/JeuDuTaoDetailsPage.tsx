@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Clock, Users, Target, Heart, Sparkles, MapPin } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
+import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const JeuDuTaoDetailsPage: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const journeyRef = useRef<HTMLElement>(null);
+  const videoRef = useSlowMoVideo();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -108,6 +110,7 @@ const JeuDuTaoDetailsPage: React.FC = () => {
       {/* Section des bénéfices avec vidéo de fond */}
       <section className="section benefits-section-tao parallax-surface">
         <video
+          ref={videoRef}
           muted
           loop
           playsInline

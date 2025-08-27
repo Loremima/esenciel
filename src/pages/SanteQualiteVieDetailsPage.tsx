@@ -1,8 +1,10 @@
 import React from 'react';
 import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
+import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const SanteQualiteVieDetailsPage: React.FC = () => {
+  const videoRef = useSlowMoVideo();
 
   const benefits = [
     {
@@ -82,6 +84,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
             </div>
             <div className="hero-video-sante">
               <video
+                ref={videoRef}
                 autoPlay
                 muted
                 loop

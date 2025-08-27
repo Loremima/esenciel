@@ -36,6 +36,7 @@ const Header: React.FC = () => {
     { path: '/blog', label: 'Blog' },
     { path: '/infos-pratiques', label: 'Infos pratiques' },
     { path: '/contact-reservation', label: 'Contact' },
+    { path: '/contact-reservation', label: 'Réserver', isButton: true },
   ];
 
   useEffect(() => {
@@ -59,84 +60,100 @@ const Header: React.FC = () => {
         <Link to="/" className="logo-link">
           <Logo variant="navbar" isScrolled={isScrolled} theme={shouldUseLightText ? 'light' : 'dark'} />
         </Link>
-        <nav className="desktop-nav">
-          {navLinks.map((link, index) => (
-            <div
-              key={index}
-              className="nav-item"
-              onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
-              onMouseLeave={() => {
-                // Délai plus long pour laisser le temps à l'utilisateur
-                if (link.submenu) {
-                  setTimeout(() => setOpenSubmenu(null), 300);
-                }
-              }}
-            >
-              {link.submenu ? (
-                <NavLink to="/services" className="nav-link with-submenu">
-                  <span>{link.label}</span>
-                  <ChevronDown size={16} />
-                </NavLink>
-              ) : (
-                <NavLink to={link.path!} className="nav-link">
-                  {link.label}
-                </NavLink>
-              )}
-              {link.submenu && openSubmenu === link.label && (
-                <div
-                  className="submenu"
-                  onMouseEnter={() => setOpenSubmenu(link.label)}
-                  onMouseLeave={() => {
-                    // Délai plus long pour laisser le temps à l'utilisateur
+        <div className="nav-right-section">
+          <nav className="desktop-nav">
+            {navLinks.filter(link => !link.isButton).map((link, index) => (
+              <div
+                key={index}
+                className="nav-item"
+                onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
+                onMouseLeave={() => {
+                  // Délai plus long pour laisser le temps à l'utilisateur
+                  if (link.submenu) {
                     setTimeout(() => setOpenSubmenu(null), 300);
-                  }}
-                >
-                  {link.submenu.map((sublink, subIndex) => (
-                    <Link key={subIndex} to={sublink.path} className="submenu-link">
-                      {sublink.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
+                  }
+                }}
+              >
+                {link.submenu ? (
+                  <NavLink to="/services" className="nav-link with-submenu">
+                    <span>{link.label}</span>
+                    <ChevronDown size={16} />
+                  </NavLink>
+                ) : (
+                  <NavLink to={link.path!} className="nav-link">
+                    {link.label}
+                  </NavLink>
+                )}
+                {link.submenu && openSubmenu === link.label && (
+                  <div
+                    className="submenu"
+                    onMouseEnter={() => setOpenSubmenu(link.label)}
+                    onMouseLeave={() => {
+                      // Délai plus long pour laisser le temps à l'utilisateur
+                      setTimeout(() => setOpenSubmenu(null), 300);
+                    }}
+                  >
+                    {link.submenu.map((sublink, subIndex) => (
+                      <Link key={subIndex} to={sublink.path} className="submenu-link">
+                        {sublink.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+          <Link to="/contact-reservation" className="btn-reserver-header">
+            Réserver
+          </Link>
+        </div>
         <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
           {isMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
 
       {isMenuOpen && (
-        <nav className="mobile-nav">
-          {navLinks.map((link, index) => (
-            <div key={index} className="mobile-nav-item">
-              {link.submenu ? (
-                <>
-                  <div
-                    className="mobile-nav-link with-submenu"
-                    onClick={() => setOpenSubmenu(openSubmenu === link.label ? null : link.label)}
-                  >
-                    <span>{link.label}</span>
-                    <ChevronDown size={16} className={openSubmenu === link.label ? 'open' : ''} />
-                  </div>
-                  {openSubmenu === link.label && (
-                    <div className="mobile-submenu">
-                      {link.submenu.map((sublink, subIndex) => (
-                        <Link key={subIndex} to={sublink.path} className="mobile-submenu-link">
-                          {sublink.label}
-                        </Link>
-                      ))}
-                    </div>
+        <div className="mobile-overlay">
+          <nav className="mobile-nav">
+            <button className="mobile-close-btn" onClick={toggleMenu} aria-label="Fermer le menu">
+              <X size={24} />
+            </button>
+            <div className="mobile-nav-content">
+              {navLinks.map((link, index) => (
+                <div key={index} className="mobile-nav-item">
+                  {link.submenu ? (
+                    <>
+                      <div
+                        className="mobile-nav-link with-submenu"
+                        onClick={() => setOpenSubmenu(openSubmenu === link.label ? null : link.label)}
+                      >
+                        <span>{link.label}</span>
+                        <ChevronDown size={20} className={`chevron ${openSubmenu === link.label ? 'open' : ''}`} />
+                      </div>
+                      {openSubmenu === link.label && (
+                        <div className="mobile-submenu">
+                          {link.submenu.map((sublink, subIndex) => (
+                            <Link key={subIndex} to={sublink.path} className="mobile-submenu-link">
+                              {sublink.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : link.isButton ? (
+                    <NavLink to={link.path!} className="mobile-nav-link btn-reserver-mobile">
+                      {link.label}
+                    </NavLink>
+                  ) : (
+                    <NavLink to={link.path!} className="mobile-nav-link">
+                      {link.label}
+                    </NavLink>
                   )}
-                </>
-              ) : (
-                <NavLink to={link.path!} className="mobile-nav-link">
-                  {link.label}
-                </NavLink>
-              )}
+                </div>
+              ))}
             </div>
-          ))}
-        </nav>
+          </nav>
+        </div>
       )}
 
       <style>{`
@@ -153,7 +170,7 @@ const Header: React.FC = () => {
           );
           backdrop-filter: blur(5px);
           transition: all 0.3s ease;
-          padding: 1.25rem 0;
+          padding: 0.35rem 0;
         }
 
         .header.scrolled {
@@ -164,19 +181,23 @@ const Header: React.FC = () => {
           );
           backdrop-filter: blur(15px);
           box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-          padding: 1rem 0;
+          padding: 0.35rem 0;
         }
 
         .container {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 var(--spacing-6);
+          width: 100%;
+          padding: 0.5rem;
         }
 
-        .logo-link { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-link { 
+          display: flex; 
+          align-items: center; 
+          gap: 0.75rem; 
+          text-decoration: none;
+        }
         .brand-name { 
           font-weight: 600;
           transition: color 0.3s ease, text-shadow 0.3s ease;
@@ -192,6 +213,12 @@ const Header: React.FC = () => {
         .header.dark-text .brand-name { 
           color: var(--color-primary); 
           text-shadow: none; 
+        }
+
+        .nav-right-section {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-6);
         }
 
         .desktop-nav {
@@ -246,6 +273,46 @@ const Header: React.FC = () => {
           width: 100%;
         }
 
+        .btn-reserver {
+          background: #fffcea !important;
+          color: var(--color-primary) !important;
+          padding: 0.6rem 1.5rem !important;
+          border-radius: 25px !important;
+          font-weight: 500 !important;
+          transition: all 0.3s ease !important;
+          text-shadow: none !important;
+          border: 1px solid #fffcea !important;
+        }
+
+        .btn-reserver::after {
+          display: none !important;
+        }
+
+        .btn-reserver:hover {
+          background: rgba(255, 252, 234, 0.9) !important;
+          color: var(--color-primary-dark) !important;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 15px rgba(255, 252, 234, 0.3);
+        }
+
+        .btn-reserver-header {
+          background: #fffcea;
+          color: var(--color-primary);
+          padding: 0.6rem 1.5rem;
+          border-radius: 25px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          border: 1px solid #fffcea;
+        }
+
+        .btn-reserver-header:hover {
+          background: rgba(255, 252, 234, 0.9);
+          color: var(--color-primary-dark);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 15px rgba(255, 252, 234, 0.3);
+        }
+
         .with-submenu {
           display: flex;
           align-items: center;
@@ -292,13 +359,21 @@ const Header: React.FC = () => {
         .mobile-nav { display: none; }
 
         @media (max-width: 768px) {
-          .desktop-nav { display: none; }
+          .nav-right-section { display: none; }
           .mobile-menu-toggle {
             display: block;
             background: none;
             border: none;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 8px;
+            z-index: 1004;
+          }
+          
+          .mobile-menu-toggle:hover {
+            background: rgba(255, 252, 234, 0.2);
+            transform: scale(1.05);
           }
           
           /* Bouton mobile beige sur la home page quand on n'a pas scrollé */
@@ -311,53 +386,206 @@ const Header: React.FC = () => {
             color: var(--color-primary);
           }
 
+          .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            z-index: 1002;
+            animation: fadeInOverlay 0.3s ease-out;
+          }
+
           .mobile-nav {
-            display: block;
-            background: #fffcea;
-            padding: var(--spacing-4) var(--spacing-6);
-            border-top: 1px solid var(--color-gray-200);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(
+              135deg,
+              rgba(255, 252, 234, 0.95) 0%,
+              rgba(255, 252, 234, 0.85) 50%,
+              rgba(255, 252, 234, 0.95) 100%
+            );
+            backdrop-filter: blur(30px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideInFromTop 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1003;
+          }
+
+          .mobile-close-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 1004;
+          }
+
+          .mobile-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            color: var(--color-primary-dark);
+          }
+
+          .mobile-nav-content {
+            text-align: center;
+            max-width: 300px;
+            width: 90%;
           }
 
           .mobile-nav-item {
-            border-bottom: 1px solid var(--color-gray-200);
+            margin: clamp(1.5rem, 4vw, 2.5rem) 0;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
           }
-          
-          .mobile-nav-item:last-child {
-            border-bottom: none;
-          }
+
+          .mobile-nav-item:nth-child(1) { animation-delay: 0.1s; }
+          .mobile-nav-item:nth-child(2) { animation-delay: 0.2s; }
+          .mobile-nav-item:nth-child(3) { animation-delay: 0.3s; }
+          .mobile-nav-item:nth-child(4) { animation-delay: 0.4s; }
+          .mobile-nav-item:nth-child(5) { animation-delay: 0.5s; }
 
           .mobile-nav-link {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 1rem 0;
+            gap: 0.5rem;
+            padding: clamp(1rem, 3vw, 1.5rem) 0;
             text-decoration: none;
-            color: var(--color-gray-700);
-            font-weight: 500;
+            color: var(--color-primary);
+            font-weight: 400;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            letter-spacing: 0.02em;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            position: relative;
+          }
+          
+          .mobile-nav-link:hover {
+            color: var(--color-primary-dark);
+            transform: translateY(-2px);
           }
           
           .mobile-nav-link.active {
-            color: var(--color-primary);
+            color: var(--color-primary-dark);
+            font-weight: 500;
+          }
+
+          .mobile-nav-link.active::before {
+            content: '';
+            position: absolute;
+            bottom: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--color-primary);
+            border-radius: 1px;
+          }
+
+          .btn-reserver-mobile {
+            background: var(--color-primary) !important;
+            color: #fffcea !important;
+            padding: clamp(1.2rem, 4vw, 1.8rem) clamp(2rem, 6vw, 3rem) !important;
+            border-radius: 30px !important;
+            font-weight: 600 !important;
+            font-size: clamp(1.4rem, 5vw, 1.8rem) !important;
+            margin: clamp(2rem, 5vw, 3rem) 0 !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+            transform: none !important;
+          }
+
+          .btn-reserver-mobile::before {
+            display: none !important;
+          }
+
+          .btn-reserver-mobile:hover {
+            background: var(--color-primary-dark) !important;
+            color: #fffcea !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2) !important;
           }
 
           .mobile-submenu {
-            padding-left: 1rem;
-            padding-bottom: 0.5rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
           }
 
           .mobile-submenu-link {
             display: block;
-            padding: 0.75rem 0;
+            padding: 0.8rem 0;
             color: var(--color-gray-600);
             text-decoration: none;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: 300;
+            transition: all 0.2s ease;
+            border-radius: 8px;
           }
 
-          .with-submenu .chevron {
-            transition: transform 0.3s ease;
+          .mobile-submenu-link:hover {
+            color: var(--color-primary);
+            transform: translateX(4px);
+          }
+
+          .chevron {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.7;
           }
           
-          .with-submenu .chevron.open {
+          .chevron.open {
             transform: rotate(180deg);
+          }
+
+          @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+
+          @keyframes slideInFromTop {
+            from { 
+              opacity: 0;
+              transform: translateY(-100%);
+            }
+            to { 
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
         }
       `}</style>

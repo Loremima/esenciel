@@ -1,25 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const HeroSection: React.FC = () => {
   const [visibleWords, setVisibleWords] = useState(0);
   const words = ['Ralenti,', 'Respire,', 'Ressens'];
+  const videoRef = useSlowMoVideo();
 
   useEffect(() => {
     const audio = document.getElementById('site-bgm') as HTMLAudioElement | null;
     if (!audio) return;
-    const armPlay = () => {
-      audio.muted = false;
-      audio.play().catch(() => { });
-      window.removeEventListener('pointerdown', armPlay);
-      window.removeEventListener('keydown', armPlay);
+
+    // Essayer de jouer immédiatement
+    const tryAutoplay = async () => {
+      try {
+        audio.muted = false;
+        audio.volume = 0.3; // Volume modéré
+        await audio.play();
+      } catch (error) {
+        // Si l'autoplay échoue, fallback sur interaction utilisateur
+        const armPlay = () => {
+          audio.muted = false;
+          audio.play().catch(() => { });
+          window.removeEventListener('pointerdown', armPlay);
+          window.removeEventListener('keydown', armPlay);
+        };
+        window.addEventListener('pointerdown', armPlay, { once: true });
+        window.addEventListener('keydown', armPlay, { once: true });
+      }
     };
-    window.addEventListener('pointerdown', armPlay, { once: true });
-    window.addEventListener('keydown', armPlay, { once: true });
-    return () => {
-      window.removeEventListener('pointerdown', armPlay);
-      window.removeEventListener('keydown', armPlay);
-    };
+
+    tryAutoplay();
   }, []);
 
   useEffect(() => {
@@ -30,7 +41,7 @@ const HeroSection: React.FC = () => {
         }
         return prev;
       });
-    }, 1000); // Apparition plus posée
+    }, 2000); // Apparition plus contemplative
 
     return () => clearInterval(timer);
   }, [words.length]);
@@ -38,6 +49,7 @@ const HeroSection: React.FC = () => {
   return (
     <section className="hero">
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
@@ -55,8 +67,9 @@ const HeroSection: React.FC = () => {
       <div className="overlay" aria-hidden="true"></div>
 
       <div className="hero-center">
-        <div className="brand-title">EsenCiel</div>
-        <h1 className="animated-slogan">
+        <h1 className="main-brand-title">EsenCiel</h1>
+        <p className="by-author">by Véronique Carrié</p>
+        <div className="animated-slogan">
           {words.map((word, index) => (
             <span
               key={index}
@@ -65,11 +78,11 @@ const HeroSection: React.FC = () => {
               {word}
             </span>
           ))}
-        </h1>
+        </div>
+        <p className="hero-tagline">
+          Retrouvez votre équilibre naturel grâce à la pleine conscience
+        </p>
         <div className="actions">
-          <Link to="/contact-reservation" className="btn btn-primary">
-            <span>Réserver</span>
-          </Link>
           <Link to="/qui-suis-je" className="btn btn-info">
             <span>En savoir plus</span>
           </Link>
@@ -124,20 +137,33 @@ const HeroSection: React.FC = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: var(--spacing-6);
+          gap: clamp(1rem, 3vw, 2rem);
           text-align: center;
+          max-width: 85vw;
         }
 
-        .brand-title {
+        .main-brand-title {
           font-family: var(--font-heading);
-          font-variant-caps: small-caps;
-          font-size: clamp(2.2rem, 4vw, 3rem);
-          font-weight: 500;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
+          font-size: clamp(4rem, 12vw, 8rem);
+          font-weight: 300;
+          letter-spacing: -0.02em;
           color: #fffcea;
-          margin: 0; /* espacement géré par gap du conteneur */
-          text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+          margin: 0;
+          text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+          line-height: 0.9;
+          font-style: normal;
+        }
+
+        .by-author {
+          font-family: var(--font-body);
+          font-size: clamp(1rem, 2vw, 1.4rem);
+          font-weight: 300;
+          font-style: italic;
+          color: rgba(255, 252, 234, 0.8);
+          margin: 0;
+          text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+          letter-spacing: 0.05em;
+          margin-top: -0.5rem;
         }
 
         .hero-main-title {
@@ -151,18 +177,32 @@ const HeroSection: React.FC = () => {
         }
 
         .animated-slogan {
-          font-size: clamp(1.2rem, 3.2vw, 1.8rem); /* plus petit que le brand-title */
-          line-height: 1.2;
-          color: #fffcea;
-          letter-spacing: 0.05em;
-          text-shadow: 0 3px 12px rgba(0,0,0,0.35);
+          font-size: clamp(1.4rem, 3vw, 1.8rem);
+          line-height: 1.3;
+          color: rgba(255, 252, 234, 0.9);
+          letter-spacing: 0.15em;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.4);
           font-weight: 400;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: center;
-          gap: var(--spacing-4);
-          margin: var(--spacing-4) 0; /* espacement géré par gap */
+          gap: clamp(0.5rem, 2vw, 1rem);
+          margin: 0.5rem 0 clamp(1rem, 2vw, 1.5rem) 0;
+          font-family: var(--font-body);
+        }
+
+        .hero-tagline {
+          font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+          line-height: 1.4;
+          color: rgba(255, 252, 234, 0.95);
+          font-weight: 400;
+          margin: 0;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+          max-width: 500px;
+          text-align: center;
+          letter-spacing: 0.03em;
+          font-family: var(--font-body);
         }
 
         .animated-slogan .word {
@@ -171,9 +211,9 @@ const HeroSection: React.FC = () => {
           transform: translateY(10px) scale(0.98);
           filter: blur(8px);
           transition:
-            opacity 1200ms ease,
-            transform 1200ms cubic-bezier(0.22, 1, 0.36, 1),
-            filter 1200ms ease;
+            opacity 1800ms ease,
+            transform 1800ms cubic-bezier(0.22, 1, 0.36, 1),
+            filter 1800ms ease;
           font-size: inherit; /* hérite de .animated-slogan */
           font-family: var(--font-heading);
           color: #fffcea;
@@ -190,33 +230,35 @@ const HeroSection: React.FC = () => {
 
         .actions {
           display: flex;
-          gap: var(--spacing-4);
+          gap: clamp(1rem, 3vw, 1.5rem);
           flex-wrap: wrap;
           justify-content: center;
-          margin: 0; /* espacement géré par gap */
+          margin: clamp(1rem, 3vw, 2rem) 0 0 0;
         }
 
         .actions .btn {
           position: relative;
-          background: rgba(255, 252, 234, 0.1);
-          border: 1px solid rgba(255, 252, 234, 0.35);
-          color: #fffcea;
-          font-weight: 500;
-          font-size: 1rem;
-          padding: 1rem 2.5rem;
-          border-radius: 8px;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background: rgba(255, 252, 234, 0.05);
+          border: 1px solid rgba(255, 252, 234, 0.2);
+          color: rgba(255, 252, 234, 0.9);
+          font-weight: 300;
+          font-size: clamp(0.9rem, 1.8vw, 1rem);
+          padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+          border-radius: 30px;
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
           text-decoration: none;
-          min-width: 180px;
+          min-width: clamp(140px, 25vw, 160px);
           text-align: center;
-          backdrop-filter: blur(10px);
-          letter-spacing: 0.025em;
+          backdrop-filter: blur(20px);
+          letter-spacing: 0.05em;
+          font-family: var(--font-body);
         }
 
         .actions .btn:hover {
-          background: rgba(255, 252, 234, 0.22);
-          border-color: rgba(255, 252, 234, 0.6);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+          background: rgba(255, 252, 234, 0.12);
+          border-color: rgba(255, 252, 234, 0.4);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+          transform: translateY(-2px);
         }
         
         .actions .btn span {
@@ -225,17 +267,18 @@ const HeroSection: React.FC = () => {
         }
         
         .actions .btn-primary {
-          background: #fffcea;
-          border-color: #fffcea;
+          background: rgba(255, 252, 234, 0.9);
+          border-color: rgba(255, 252, 234, 0.9);
           color: var(--color-primary);
-          font-weight: 600;
+          font-weight: 400;
         }
 
         .actions .btn-primary:hover {
-          background: transparent;
-          border-color: #fffcea;
-          color: #fffcea;
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+          background: rgba(255, 252, 234, 1);
+          border-color: rgba(255, 252, 234, 1);
+          color: var(--color-primary);
+          box-shadow: 0 8px 25px rgba(255, 252, 234, 0.2);
+          transform: translateY(-2px);
         }
 
         .actions .btn-secondary {
@@ -267,31 +310,45 @@ const HeroSection: React.FC = () => {
         }
 
         @media (max-width: 768px) {
-          .brand-title { font-size: clamp(2.2rem, 8vw, 3rem); }
+          .main-brand-title { 
+            font-size: clamp(4rem, 18vw, 6rem);
+            line-height: 0.85;
+          }
+
+          .by-author {
+            font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+            margin-top: -0.3rem;
+          }
           
           .animated-slogan {
             flex-direction: row;
-            gap: var(--spacing-3);
-            font-size: clamp(1.4rem, 6vw, 1.8rem);
+            gap: clamp(0.3rem, 1.5vw, 0.8rem);
+            font-size: clamp(1.4rem, 5vw, 1.8rem);
+            margin: 0.5rem 0 clamp(1rem, 3vw, 1.5rem) 0;
           }
 
-          .hero-main-title {
-            font-size: clamp(2rem, 8vw, 3rem);
+          .hero-tagline {
+            font-size: clamp(1.2rem, 4.5vw, 1.4rem);
+            max-width: 380px;
+            line-height: 1.3;
           }
 
           .hero-center {
-            gap: var(--spacing-4);
+            gap: clamp(0.8rem, 2.5vw, 1.5rem);
+            max-width: 95vw;
           }
 
           .actions {
             flex-direction: column;
-            gap: var(--spacing-3);
+            gap: clamp(0.8rem, 2vw, 1rem);
             width: 100%;
-            max-width: 280px;
+            max-width: 250px;
+            margin-top: clamp(1.5rem, 4vw, 2rem);
           }
 
           .actions .btn {
             width: 100%;
+            padding: clamp(0.9rem, 3vw, 1.1rem) clamp(1.5rem, 4vw, 2rem);
           }
         }
       `}</style>

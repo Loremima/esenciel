@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, User, ArrowRight, Tag } from 'lucide-react';
+import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const BlogPage: React.FC = () => {
+  const videoRef = useSlowMoVideo();
+
   const blogPosts = [
     {
       id: 1,
@@ -67,113 +70,114 @@ const BlogPage: React.FC = () => {
   ];
 
   const categories = ['Tous', 'Pleine conscience et présence attentive.', 'Santé', 'Développement Personnel', 'MBSR', 'Neurosciences', 'Bien-être'];
-  const [selectedCategory, setSelectedCategory] = React.useState('Tous');
+  const [selectedCategory, setSelectedCategory] = useState('Tous');
 
   const filteredPosts = selectedCategory === 'Tous'
     ? blogPosts
     : blogPosts.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="blog-page">
-      {/* Hero Section avec vidéo de fond */}
-      <section className="hero-blog">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hero-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-          <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="Paysage serein - MindWayLife"
-          />
-        </video>
+    <>
+      <div className="blog-page">
+        {/* Hero Section avec vidéo de fond */}
+        <section className="hero-blog">
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="hero-video"
+          >
+            <source src="/background.mp4" type="video/mp4" />
+            <img
+              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              alt="Paysage serein - MindWayLife"
+            />
+          </video>
 
-        <div className="hero-overlay" aria-hidden="true"></div>
+          <div className="hero-overlay" aria-hidden="true"></div>
 
-        <div className="hero-content">
-          <h1>Blog</h1>
-          <p className="hero-subtitle">
-            Conseils, réflexions et actualités autour du bien-être et de la pleine conscience
-          </p>
-        </div>
-      </section>
-
-      {/* Filtres */}
-      <section className="section filters-section">
-        <div className="container">
-          <div className="filters">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </button>
-            ))}
+          <div className="hero-content">
+            <h1>Blog</h1>
+            <p className="hero-subtitle">
+              Conseils, réflexions et actualités autour du bien-être et de la pleine conscience
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Articles */}
-      <section className="section articles-section parallax-surface">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="parallax-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container">
-          <div className="articles-grid">
-            {filteredPosts.map((post) => (
-              <article key={post.id} className="blog-card article-card">
-                <div className="article-image">
-                  <img src={post.image} alt={post.title} loading="lazy" />
-                  <div className="article-category">{post.category}</div>
-                </div>
+        {/* Filtres */}
+        <section className="section filters-section">
+          <div className="container">
+            <div className="filters">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                <div className="article-content">
-                  <div className="article-meta">
-                    <div className="meta-item">
-                      <Calendar size={14} />
-                      <span>{post.date}</span>
-                    </div>
-                    <div className="meta-item">
-                      <User size={14} />
-                      <span>{post.author}</span>
-                    </div>
+        {/* Articles */}
+        <section className="section articles-section parallax-surface">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="parallax-video"
+          >
+            <source src="/background.mp4" type="video/mp4" />
+          </video>
+          <div className="container">
+            <div className="articles-grid">
+              {filteredPosts.map((post) => (
+                <article key={post.id} className="blog-card article-card">
+                  <div className="article-image">
+                    <img src={post.image} alt={post.title} loading="lazy" />
+                    <div className="article-category">{post.category}</div>
                   </div>
 
-                  <h3 className="article-title">{post.title}</h3>
-                  <p className="article-excerpt">{post.excerpt}</p>
+                  <div className="article-content">
+                    <div className="article-meta">
+                      <div className="meta-item">
+                        <Calendar size={14} />
+                        <span>{post.date}</span>
+                      </div>
+                      <div className="meta-item">
+                        <User size={14} />
+                        <span>{post.author}</span>
+                      </div>
+                    </div>
 
-                  <div className="article-tags">
-                    {post.tags.map((tag) => (
-                      <span key={tag} className="tag">
-                        <Tag size={12} />
-                        {tag}
-                      </span>
-                    ))}
+                    <h3 className="article-title">{post.title}</h3>
+                    <p className="article-excerpt">{post.excerpt}</p>
+
+                    <div className="article-tags">
+                      {post.tags.map((tag) => (
+                        <span key={tag} className="tag">
+                          <Tag size={12} />
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Link to={`/blog/${post.id}`} className="article-link">
+                      Lire l'article
+                      <ArrowRight size={16} />
+                    </Link>
                   </div>
-
-                  <Link to={`/blog/${post.id}`} className="article-link">
-                    Lire l'article
-                    <ArrowRight size={16} />
-                  </Link>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-
+        </section>
+      </div>
 
       <style>{`
         .blog-page {
@@ -446,7 +450,7 @@ const BlogPage: React.FC = () => {
           }
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

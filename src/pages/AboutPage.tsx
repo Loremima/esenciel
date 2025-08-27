@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Sparkles, Heart, Award, ArrowRight, CalendarDays } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const AboutPage: React.FC = () => {
+  const videoRef = useSlowMoVideo();
   const quotes = [
     {
       text: 'Celui qui regarde l\'extérieur rêve, celui qui regarde à l\'intérieur s\'éveille.',
@@ -91,6 +93,7 @@ const AboutPage: React.FC = () => {
       {/* Hero Section avec vidéo de fond */}
       <section className="hero-about">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop

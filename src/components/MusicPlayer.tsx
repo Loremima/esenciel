@@ -140,8 +140,8 @@ const MusicPlayer: React.FC = () => {
           background: rgba(0,0,0,0.06);
           color: var(--color-primary-dark);
           border: none;
-          width: 28px;
-          height: 28px;
+          width: 36px;
+          height: 36px;
           border-radius: 50%;
           display: flex;
           align-items: center;

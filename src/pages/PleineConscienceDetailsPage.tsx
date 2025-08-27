@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Clock, Users, Target, Heart, Sparkles, MapPin } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
+import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const PleineConscienceDetailsPage: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const journeyRef = useRef<HTMLElement>(null);
+  const videoRef = useSlowMoVideo();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,6 +98,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
             </div>
             <div className="hero-video-pleine-conscience">
               <video
+                ref={videoRef}
                 autoPlay
                 muted
                 loop

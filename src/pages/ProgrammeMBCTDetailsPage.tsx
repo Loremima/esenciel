@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
+import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
 
 const ProgrammeMBCTDetailsPage: React.FC = () => {
   const benefits = [
@@ -23,6 +24,7 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
 
   const [scrollY, setScrollY] = useState(0);
   const journeyRef = useRef<HTMLElement>(null);
+  const videoRef = useSlowMoVideo();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,6 +69,7 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
             </div>
             <div className="hero-video-mbct">
               <video
+                ref={videoRef}
                 autoPlay
                 muted
                 loop
