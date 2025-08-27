@@ -241,7 +241,7 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
       <VideoCTA
         title="Alors ? Prêt(e) à prendre en main votre santé et votre bien-être ?"
         subtitle="Réservez dès maintenant votre premier rendez-vous et engagez-vous dans un accompagnement sur mesure pour créer des changements durables."
-        buttonText="Réserver ma première séance"
+        buttonText="Réserver ma séance"
         buttonLink="/contact-reservation"
       />
 

@@ -226,51 +226,109 @@ p {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-/* Cartes beiges dans les sections parallax */
+/* Cartes beiges dans les sections parallax avec meilleur contraste */
 .parallax-surface .service-card,
 .parallax-surface .card {
-  background: #fffcea !important;
-  border: 1px solid rgba(184, 138, 43, 0.3) !important;
-  backdrop-filter: none !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+  background: rgba(255, 252, 234, 0.95) !important;
+  border: 1px solid rgba(184, 138, 43, 0.4) !important;
+  backdrop-filter: blur(15px) saturate(120%) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
 }
 
 .parallax-surface .service-card:hover,
 .parallax-surface .card:hover {
-  border-color: rgba(184, 138, 43, 0.5) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+  background: rgba(255, 252, 234, 0.98) !important;
+  border-color: rgba(184, 138, 43, 0.6) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
+  transform: translateY(-2px) !important;
 }
 
-/* Texte normal dans les cartes parallax */
+/* Texte contrasté dans les cartes parallax */
 .parallax-surface .service-card *,
 .parallax-surface .service-card h1,
 .parallax-surface .service-card h2,
 .parallax-surface .service-card h3,
 .parallax-surface .service-card h4,
 .parallax-surface .service-card p,
-.parallax-surface .service-card label {
-  color: inherit !important;
+.parallax-surface .service-card label,
+.parallax-surface .service-card .service-title,
+.parallax-surface .service-card .service-description,
+.parallax-surface .service-card .info-label,
+.parallax-surface .service-card .info-value,
+.parallax-surface .service-card .info-detail {
+  color: var(--color-gray-800) !important;
   text-shadow: none !important;
 }
 
-/* Bouton "En savoir plus" et "Réserver" en style verre dépoli dans les sections parallax */
-.parallax-surface .service-card .btn-info,
-.parallax-surface .service-card .btn-primary {
-  background: rgba(255, 252, 234, 0.1) !important;
-  border: 1px solid rgba(255, 252, 234, 0.2) !important;
-  color: rgba(255, 252, 234, 0.9) !important;
-  font-weight: 400 !important;
-  border-radius: 30px !important;
-  transition: all 0.4s ease !important;
-  backdrop-filter: blur(10px) !important;
+/* Icônes et éléments spéciaux */
+.parallax-surface .service-card .service-icon {
+  background: var(--color-primary) !important;
+  color: white !important;
 }
 
-.parallax-surface .service-card .btn-info:hover,
-.parallax-surface .service-card .btn-primary:hover {
-  background: rgba(255, 252, 234, 0.2) !important;
-  border-color: rgba(255, 252, 234, 0.3) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-  transform: translateY(-2px) !important;
+.parallax-surface .service-card .chip {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Bouton "En savoir plus" reste bleu dans les sections parallax */
+.parallax-surface .service-card .btn-info {
+  background: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.parallax-surface .service-card .btn-info:hover {
+  background: var(--color-primary-dark) !important;
+  border-color: var(--color-primary-dark) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Autres boutons style beige dans les sections parallax */
+.parallax-surface .service-card .btn-primary,
+.parallax-surface .service-card .btn-outline,
+.parallax-surface .service-card .btn {
+  background: #fffcea !important;
+  border: 1px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.parallax-surface .service-card .btn-primary:hover,
+.parallax-surface .service-card .btn-outline:hover,
+.parallax-surface .service-card .btn:hover {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Icônes suivent la couleur du texte */
+.parallax-surface .service-card .btn-info svg {
+  color: white !important;
+}
+
+.parallax-surface .service-card .btn-primary svg,
+.parallax-surface .service-card .btn-outline svg,
+.parallax-surface .service-card .btn svg {
+  color: var(--color-primary) !important;
+}
+
+.parallax-surface .service-card .btn-primary:hover svg,
+.parallax-surface .service-card .btn-outline:hover svg,
+.parallax-surface .service-card .btn:hover svg {
+  color: white !important;
 }
 
 /* Formulaire plus lisible sur parallax */
@@ -374,19 +432,20 @@ p {
 }
 
 .btn-glass {
-  background: rgba(255, 252, 234, 0.1);
-  border: 1px solid rgba(255, 252, 234, 0.2);
-  color: rgba(255, 252, 234, 0.9);
+  background: rgba(255, 252, 234, 0.15) !important;
+  border: 1px solid rgba(255, 252, 234, 0.4) !important;
+  color: rgba(255, 252, 234, 0.95) !important;
   font-weight: 400;
   border-radius: 30px;
   transition: all 0.4s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px) saturate(120%);
 }
 
 .btn-glass:hover {
-  background: rgba(255, 252, 234, 0.2);
-  border-color: rgba(255, 252, 234, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 252, 234, 0.25) !important;
+  border-color: rgba(255, 252, 234, 0.6) !important;
+  color: rgba(255, 252, 234, 1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
 
@@ -945,4 +1004,85 @@ a[href*="bolt.build"],
   .service-modalities {
     justify-content: center;
   }
+}
+
+/* Align SVG icon color with button text inside service cards */
+.service-card .btn svg,
+.service-card .btn-info svg,
+.service-card .btn-primary svg,
+.service-card .btn-outline svg {
+  color: currentColor !important;
+  transition: color 0.2s ease;
+}
+
+/* Ensure hover also inherits correctly */
+.service-card .btn:hover svg,
+.service-card .btn-info:hover svg,
+.service-card .btn-primary:hover svg,
+.service-card .btn-outline:hover svg {
+  color: currentColor !important;
+}
+
+/* OVERRIDE: En savoir plus (btn-info) must stay blue on parallax cards */
+.parallax-surface .service-card a.btn.btn-info,
+.parallax-surface .service-card .btn.btn-info {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: #fffcea !important;
+}
+
+.parallax-surface .service-card a.btn.btn-info:hover,
+.parallax-surface .service-card .btn.btn-info:hover {
+  background: var(--color-primary-dark) !important;
+  border-color: var(--color-primary-dark) !important;
+  color: #fffcea !important;
+}
+
+.parallax-surface .service-card .btn.btn-info svg,
+.parallax-surface .service-card a.btn.btn-info svg {
+  color: #fffcea !important;
+}
+
+/* Default style for beige background cards: blue icon bg, beige glyph, beige text in tags */
+.service-card .service-icon {
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  color: #fffcea;
+}
+
+.service-card .chip,
+.service-card .chip.neutral,
+.service-card .modality-tag {
+  background: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+  color: #fffcea !important;
+}
+
+.service-card .chip svg,
+.service-card .modality-tag svg {
+  color: #fffcea !important;
+}
+
+/* Override for video background cards: beige icon bg, blue glyph, beige text in tags */
+.parallax-surface .service-card .service-icon {
+  background: #fffcea !important;
+  border: 1px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+
+/* Tags avec spécificité maximale pour surcharger la règle générale ligne 259 */
+.parallax-surface .service-card .chip,
+.parallax-surface .service-card .chip.neutral,
+.parallax-surface .service-card .modality-tag,
+.parallax-surface .service-card .chip *,
+.parallax-surface .service-card .chip.neutral *,
+.parallax-surface .service-card .modality-tag * {
+  background: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+  color: #fffcea !important;
+}
+
+.parallax-surface .service-card .chip svg,
+.parallax-surface .service-card .modality-tag svg {
+  color: #fffcea !important;
 }

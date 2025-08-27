@@ -120,7 +120,7 @@ const ServicesPage: React.FC = () => {
               Contactez-moi pour discuter de vos besoins et trouver l'accompagnement
               qui vous correspond le mieux.
             </p>
-            <Link to="/contact-reservation" className="btn btn-glass">
+            <Link to="/contact-reservation" className="btn btn-primary">
               Prendre rendez-vous
             </Link>
           </div>

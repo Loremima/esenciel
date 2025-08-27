@@ -137,12 +137,11 @@ const ServiceCard = ({ service, isHighlight = false }: { service: any, isHighlig
                 .service-card.highlight::before { display: none; }
 
                 .service-header { display: flex; align-items: center; gap: var(--spacing-3); margin-bottom: var(--spacing-3); }
-                .service-icon { background: transparent; color: var(--color-primary); width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--color-gray-200); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+                .service-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
                 .service-title { font-size: 1.15rem; font-weight: 650; color: var(--color-primary) !important; margin: 0; line-height: 1.3; }
 
                 .meta-chips { display: flex; flex-wrap: wrap; gap: var(--spacing-2); margin-bottom: var(--spacing-3); }
-                .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--color-primary); color: var(--color-primary) !important; font-size: 0.82rem; font-weight: 600; }
-                .chip.neutral { border-color: var(--color-gray-300); color: var(--color-gray-700) !important; }
+                .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; }
 
                 .service-description { color: var(--color-gray-700) !important; line-height: 1.65; margin-bottom: var(--spacing-4); flex-grow: 1; }
 
@@ -162,7 +161,7 @@ const ServiceCard = ({ service, isHighlight = false }: { service: any, isHighlig
                 .more-features { font-style: italic; color: var(--color-gray-600) !important; font-size: 0.85rem !important; }
 
                 .service-modalities { display: flex; flex-wrap: wrap; gap: var(--spacing-2); margin-bottom: var(--spacing-5); }
-                .modality-tag { background: transparent; color: var(--color-primary) !important; padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--color-gray-200); }
+                .modality-tag { padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
 
                 .service-actions { display: flex; gap: var(--spacing-3); margin-top: auto; }
                 .btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: var(--spacing-2); padding: 14px 16px; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; text-align: center; min-height: 48px; }
