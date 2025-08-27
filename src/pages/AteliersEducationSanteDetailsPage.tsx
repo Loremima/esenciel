@@ -129,7 +129,7 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
                       </li>
                     ))}
                   </ul>
-                    </div>
+                </div>
               ))}
 
               <div className="programme-note">
@@ -139,8 +139,8 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
                   conçus pour développer la sérénité, la clarté d'esprit, une présence et concentration
                   plus stable, et une meilleure gestion du stress.
                 </p>
-                                </div>
-                            </div>
+              </div>
+            </div>
 
             <div className="info-card-standalone">
               <p className="highlight-text">
@@ -148,13 +148,13 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
                 d'un devis personnalisé.
               </p>
             </div>
-                    </div>
-                </div>
-            </section>
+          </div>
+        </div>
+      </section>
 
       {/* Section Collectivités */}
       <section className="section collectivites-section">
-                <div className="container">
+        <div className="container">
           <div className="collectivites-layout">
             <div className="collectivites-content">
               <div className="section-badge">
@@ -164,12 +164,12 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
               <h2>Accompagnement des publics fragiles</h2>
               <div className="intro-text">
                 <p>
-                  J'interviens auprès des collectivités territoriales dans le cadre d'appels à projets 
-                  santé et bien-être, pour accompagner des publics spécifiques avec bienveillance 
+                  J'interviens auprès des collectivités territoriales dans le cadre d'appels à projets
+                  santé et bien-être, pour accompagner des publics spécifiques avec bienveillance
                   et expertise.
                 </p>
               </div>
-              
+
               <div className="approach-highlights">
                 <div className="highlight-item">
                   <Heart size={24} className="highlight-icon" />
@@ -177,17 +177,17 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
                     <h4>Approche adaptée</h4>
                     <p>Programmes personnalisés selon les besoins de chaque public</p>
                   </div>
-                        </div>
+                </div>
                 <div className="highlight-item">
                   <Users size={24} className="highlight-icon" />
-                                        <div>
+                  <div>
                     <h4>Collaboration étroite</h4>
                     <p>Travail en partenariat avec les équipes locales</p>
-                                        </div>
-                                    </div>
+                  </div>
+                </div>
                 <div className="highlight-item">
                   <Target size={24} className="highlight-icon" />
-                                        <div>
+                  <div>
                     <h4>Impact mesurable</h4>
                     <p>Suivi et évaluation des bénéfices sur le bien-être</p>
                   </div>
@@ -206,14 +206,14 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
                     <div className="public-info">
                       <h4>{publicTarget.title}</h4>
                       <p>{publicTarget.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-                                        </div>
-                                    </div>
                                 </div>
-      </section>
+                            </div>
+                        ))}
+              </div>
+            </div>
+                    </div>
+                </div>
+            </section>
 
       {/* Section Conférences */}
       <section className="section conferences-section parallax-surface">
@@ -226,7 +226,7 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
         >
           <source src="/background.mp4" type="video/mp4" />
         </video>
-        <div className="container">
+                <div className="container">
           <div className="conferences-hero">
             <div className="conferences-intro">
               <div className="section-badge light">
@@ -235,7 +235,7 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
               </div>
               <h2>Inspirez votre communauté</h2>
               <p className="conferences-lead">
-                Des conférences interactives et inspirantes qui créent un élan collectif 
+                Des conférences interactives et inspirantes qui créent un élan collectif
                 vers plus de bien-être et de sérénité.
               </p>
             </div>
@@ -251,19 +251,19 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
               <div className="impact-card">
                 <div className="impact-icon">
                   <Users size={28} />
-                </div>
+                        </div>
                 <h3>Élan collectif</h3>
                 <p>Créez une dynamique positive dans votre communauté</p>
-              </div>
+                                        </div>
               <div className="impact-card">
                 <div className="impact-icon">
                   <Heart size={28} />
-                </div>
+                                    </div>
                 <h3>Impact durable</h3>
                 <p>Plantez des graines de transformation qui germeront</p>
-              </div>
-            </div>
-          </div>
+                                        </div>
+                                    </div>
+                                </div>
 
           <div className="conferences-formats">
             <h3>Formats adaptés à vos besoins</h3>
@@ -271,19 +271,19 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
               <div className="format-card">
                 <h4>Conférences plénières</h4>
                 <p>Grandes assemblées, événements publics, séminaires</p>
-              </div>
+                                    </div>
               <div className="format-card">
                 <h4>Ateliers découverte</h4>
                 <p>Sessions interactives avec pratiques guidées</p>
-              </div>
+                                </div>
               <div className="format-card">
                 <h4>Tables rondes</h4>
                 <p>Échanges participatifs autour de la santé et du bien-être</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
       {/* Section Ils m'ont fait confiance */}
       <section className="section trust-section">
@@ -298,9 +298,9 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
                   <span>{org}</span>
                 </div>
               ))}
-                                    </div>
-                                </div>
-                            </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* CTA Final avec fond vidéo */}
@@ -322,10 +322,10 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
                 Demander un devis
                 <ArrowRight size={16} />
               </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
+          </div>
+        </div>
+      </section>
 
             <style>{`
         .ateliers-details-page {
@@ -451,7 +451,9 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
         }
 
         .themes-container {
-          background: white;
+          background: rgba(255, 252, 234, 0.92);
+          backdrop-filter: blur(12px) saturate(120%);
+          border: 1px solid rgba(255, 252, 234, 0.4);
           border-radius: var(--radius-2xl);
           padding: var(--spacing-8);
           margin-bottom: var(--spacing-8);
@@ -601,11 +603,12 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
         }
 
         .publics-sidebar {
-          background: white;
+          background: rgba(255, 252, 234, 0.95);
+          backdrop-filter: blur(12px) saturate(120%);
           border-radius: var(--radius-2xl);
           padding: var(--spacing-8);
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-          border: 1px solid var(--color-gray-200);
+          border: 1px solid rgba(255, 252, 234, 0.4);
           position: sticky;
           top: 2rem;
         }
@@ -632,7 +635,7 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
         }
 
         .public-item:hover {
-          background: var(--color-gray-50);
+          background: rgba(255, 252, 234, 0.5);
         }
 
         .public-icon-mini {
@@ -761,10 +764,11 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
         }
 
         .format-card {
-          background: white;
+          background: rgba(255, 252, 234, 0.95);
+          backdrop-filter: blur(10px);
           border-radius: var(--radius-lg);
           padding: var(--spacing-5);
-          border: 1px solid var(--color-gray-200);
+          border: 1px solid rgba(255, 252, 234, 0.4);
           transition: transform 0.2s ease;
         }
 
@@ -810,7 +814,7 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
         /* Section Trust */
         .trust-section {
           padding: var(--spacing-16) 0;
-          background: var(--color-gray-50);
+          background: #fffcea;
         }
 
         .trust-content {
@@ -841,9 +845,10 @@ const AteliersEducationSanteDetailsPage: React.FC = () => {
           align-items: center;
           gap: var(--spacing-2);
           padding: var(--spacing-3) var(--spacing-6);
-          background: white;
+          background: rgba(255, 252, 234, 0.9);
+          border: 1px solid rgba(255, 252, 234, 0.4);
           border-radius: var(--radius-lg);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
           font-weight: 500;
           color: var(--color-gray-700);
         }
