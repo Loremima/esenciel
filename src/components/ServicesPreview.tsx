@@ -39,7 +39,7 @@ const ServicesPreview: React.FC = () => {
       <div className="container section-inner">
         <div className="section-header">
           <h2>Mes Services</h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle services-preview-subtitle">
             Une approche holistique pour devenir acteur de votre santé et de votre bien-être.
           </p>
         </div>

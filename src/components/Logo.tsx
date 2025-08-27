@@ -3,19 +3,22 @@ import React from 'react';
 interface LogoProps {
   variant?: 'navbar' | 'footer';
   isScrolled?: boolean;
+  theme?: 'light' | 'dark';
 }
 
-const Logo: React.FC<LogoProps> = ({ variant = 'navbar', isScrolled = false }) => {
+const Logo: React.FC<LogoProps> = ({ variant = 'navbar', isScrolled = false, theme = 'dark' }) => {
+  const logoSrc = theme === 'dark' ? '/logo_black.png' : '/logo.png';
+
   return (
     <div className={`logo logo--${variant} ${isScrolled ? 'logo--scrolled' : ''}`}>
       <img
-        src="/logo.png"
+        src={logoSrc}
         alt="MindWayLife Logo"
         className="logo__image"
       />
 
       <div className="logo__text">
-        <h1 className="logo__name brand-name">Véronique Carrié</h1>
+        <h1 className="logo__name brand-name">EsenCiel</h1>
       </div>
 
       <style jsx>{`

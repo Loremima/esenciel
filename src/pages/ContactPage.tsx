@@ -301,7 +301,6 @@ const ContactPage: React.FC = () => {
 
       <style>{`
         .contact-page {
-          padding-top: 0;
         }
 
         /* === HERO SECTION === */

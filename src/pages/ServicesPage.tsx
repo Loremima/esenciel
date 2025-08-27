@@ -25,7 +25,7 @@ const ServicesPage: React.FC = () => {
         <div className="hero-overlay" aria-hidden="true"></div>
         <div className="hero-content">
           <h1>Mes services</h1>
-          <p className="hero-subtitle">
+          <p className="hero-subtitle services-hero-subtitle">
             Une approche personnalisée pour votre épanouissement et votre bien-être
           </p>
         </div>

@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
             {/* Copyright et crédit à droite */}
             <div className="footer__legal-credits">
               <p className="footer__copyright">
-                &copy; {currentYear} Véronique Carrié. Tous droits réservés.
+                &copy; {currentYear} EsenCiel. Tous droits réservés.
               </p>
               <p className="footer__credit">
                 Site créé avec <Heart size={14} className="footer__heart" /> par Lorenzo.

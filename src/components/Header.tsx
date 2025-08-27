@@ -8,10 +8,18 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const location = useLocation();
-  
-  // Détermine si on est sur la home page ET si on n'a pas scrollé
-  const isHomePage = location.pathname === '/';
-  const shouldUseLightText = isHomePage && !isScrolled;
+
+  // Détermine si on doit utiliser le header "light" (texte et logo clairs)
+  const pagesWithLightHeader = [
+    '/',
+    '/qui-suis-je',
+    '/services',
+    '/blog',
+    '/infos-pratiques',
+    '/contact-reservation'
+  ];
+  const isLightHeaderPage = pagesWithLightHeader.includes(location.pathname);
+  const shouldUseLightText = isLightHeaderPage && !isScrolled;
 
   const navLinks = [
     { path: '/qui-suis-je', label: 'Qui suis-je' },
@@ -49,7 +57,7 @@ const Header: React.FC = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''} ${shouldUseLightText ? 'light-text' : 'dark-text'}`}>
       <div className="container">
         <Link to="/" className="logo-link">
-          <Logo variant="navbar" isScrolled={isScrolled} />
+          <Logo variant="navbar" isScrolled={isScrolled} theme={shouldUseLightText ? 'light' : 'dark'} />
         </Link>
         <nav className="desktop-nav">
           {navLinks.map((link, index) => (

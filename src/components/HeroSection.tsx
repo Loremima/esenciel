@@ -55,7 +55,7 @@ const HeroSection: React.FC = () => {
       <div className="overlay" aria-hidden="true"></div>
 
       <div className="hero-center">
-        <div className="brand-title">Véronique Carrié</div>
+        <div className="brand-title">EsenCiel</div>
         <h1 className="animated-slogan">
           {words.map((word, index) => (
             <span
@@ -267,12 +267,12 @@ const HeroSection: React.FC = () => {
         }
 
         @media (max-width: 768px) {
-          .brand-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+          .brand-title { font-size: clamp(2.2rem, 8vw, 3rem); }
           
           .animated-slogan {
-            flex-direction: column;
-            gap: var(--spacing-2);
-            font-size: clamp(1rem, 4.5vw, 1.4rem);
+            flex-direction: row;
+            gap: var(--spacing-3);
+            font-size: clamp(1.4rem, 6vw, 1.8rem);
           }
 
           .hero-main-title {

@@ -226,7 +226,22 @@ p {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-/* Ne pas altérer les cartes dans les sections parallax */
+/* Cartes beiges dans les sections parallax */
+.parallax-surface .service-card,
+.parallax-surface .card {
+  background: #fffcea !important;
+  border: 1px solid rgba(184, 138, 43, 0.3) !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+.parallax-surface .service-card:hover,
+.parallax-surface .card:hover {
+  border-color: rgba(184, 138, 43, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Texte normal dans les cartes parallax */
 .parallax-surface .service-card *,
 .parallax-surface .service-card h1,
 .parallax-surface .service-card h2,
@@ -236,6 +251,18 @@ p {
 .parallax-surface .service-card label {
   color: inherit !important;
   text-shadow: none !important;
+}
+
+/* Bouton "En savoir plus" bleu par défaut dans les sections parallax */
+.parallax-surface .service-card .btn-info {
+  background: var(--color-primary) !important;
+  color: #fffcea !important;
+  border: 2px solid var(--color-primary) !important;
+}
+
+.parallax-surface .service-card .btn-info:hover {
+  background: #fffcea !important;
+  color: var(--color-primary) !important;
 }
 
 /* Formulaire plus lisible sur parallax */
@@ -718,12 +745,23 @@ a[href*="bolt.build"],
 
 .hero-subtitle {
   font-size: clamp(1.2rem, 3vw, 1.6rem);
-  color: rgba(255, 252, 234, 0.95) !important;
+  color: #fffcea !important;
   max-width: 900px;
   margin: 0.5rem auto 0;
   line-height: 1.7;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.02em;
+}
+
+/* Règle spécifique pour forcer la couleur sur toutes les pages */
+.hero-services .hero-subtitle,
+.hero-content .hero-subtitle,
+.services-hero-subtitle,
+.hero-services .hero-content .hero-subtitle,
+.hero-services .services-hero-subtitle,
+.services-preview-subtitle {
+  color: #fffcea !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Services Section */

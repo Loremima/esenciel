@@ -9,7 +9,7 @@ const BlogPage: React.FC = () => {
       title: 'Les bienfaits de la pleine conscience sur le stress',
       excerpt: 'Découvrez comment la pratique de la mindfulness peut transformer votre relation au stress au quotidien.',
       date: '15 Mars 2024',
-      author: 'Véronique Carrié',
+      author: 'EsenCiel',
       category: 'Pleine conscience et présence attentive.',
       image: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg',
       tags: ['mindfulness', 'stress', 'bien-être']
@@ -19,7 +19,7 @@ const BlogPage: React.FC = () => {
       title: 'Comment devenir acteur de sa santé ?',
       excerpt: 'Explorez les clés pour reprendre le contrôle de votre bien-être et développer votre autonomie en santé.',
       date: '8 Mars 2024',
-      author: 'Véronique Carrié',
+      author: 'EsenCiel',
       category: 'Santé',
       image: 'https://images.pexels.com/photos/3760259/pexels-photo-3760259.jpeg',
       tags: ['santé', 'autonomie', 'prévention']
@@ -29,7 +29,7 @@ const BlogPage: React.FC = () => {
       title: 'Le Jeu du Tao : explorer son potentiel par le jeu',
       excerpt: 'Une approche ludique du développement personnel qui révèle vos ressources cachées.',
       date: '1er Mars 2024',
-      author: 'Véronique Carrié',
+      author: 'EsenCiel',
       category: 'Développement Personnel',
       image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
       tags: ['créativité', 'jeu', 'potentiel']
@@ -39,7 +39,7 @@ const BlogPage: React.FC = () => {
       title: 'MBSR : 8 semaines pour transformer sa vie',
       excerpt: 'Retour d\'expérience sur les programmes MBSR et leurs effets durables sur le bien-être.',
       date: '22 Février 2024',
-      author: 'Véronique Carrié',
+      author: 'EsenCiel',
       category: 'MBSR',
       image: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg',
       tags: ['MBSR', 'programme', 'transformation']
@@ -49,7 +49,7 @@ const BlogPage: React.FC = () => {
       title: 'Neuroplasticité et méditation : ce que dit la science',
       excerpt: 'Les découvertes neuroscientifiques sur les effets de la méditation sur notre cerveau.',
       date: '14 Février 2024',
-      author: 'Véronique Carrié',
+      author: 'EsenCiel',
       category: 'Neurosciences',
       image: 'https://images.pexels.com/photos/3760627/pexels-photo-3760627.jpeg',
       tags: ['neurosciences', 'méditation', 'recherche']
@@ -59,7 +59,7 @@ const BlogPage: React.FC = () => {
       title: 'Cultiver la bienveillance envers soi-même',
       excerpt: 'Apprenez à développer une relation plus douce et compassionnelle avec vous-même.',
       date: '7 Février 2024',
-      author: 'Véronique Carrié',
+      author: 'EsenCiel',
       category: 'Bien-être',
       image: 'https://images.pexels.com/photos/3823495/pexels-photo-3823495.jpeg',
       tags: ['bienveillance', 'estime de soi', 'compassion']
