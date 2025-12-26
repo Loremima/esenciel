@@ -4,9 +4,9 @@ export const individualServices = [
     {
         id: 'sante-qualite-vie',
         icon: Heart,
-        title: 'Santé et énergie',
+        title: 'Santé et vitalité',
         description: 'Cet accompagnement est conçu pour vous aider à devenir acteur de votre santé et à adopter des habitudes de vie favorables à votre bien-être.',
-        duration: '1h30-2h (1ère séance) / 1h (suivantes)',
+        duration: '1h30 (1ère séance) / 1h (suivantes)',
         price: '90€ (1ère séance) / 60€ (suivantes)',
         sessionType: 'Individuel',
         modalities: ['Présentiel', 'Distanciel'],
@@ -25,15 +25,15 @@ export const individualServices = [
         icon: Brain,
         title: 'Pleine conscience et présence attentive',
         description: 'Cet accompagnement vous invite à ralentir, à vous poser et à respirer pour cultiver une présence plus profonde et authentique avec vous-même.',
-        duration: '45min-1h',
-        price: 'Sur devis',
+        duration: '1h30 (1ère séance) / 1h (suivantes)',
+        price: '90€ (1ère séance) / 60€ (suivantes)',
         sessionType: 'Individuel',
         modalities: ['Présentiel', 'Distanciel'],
         features: [
             'Développer une écoute plus attentive à soi-même',
             'Se reconnecter à l\'instant présent et à ses besoins profonds',
             'Libérer l\'espace mental et émotionnel',
-            'Cultiver l\'autonomie et améliorer sa qualité de vie',
+            'Cultiver l\'autonomie et améliorer sa vitalité',
             'Faire des choix de vie plus éclairés et alignés'
         ],
         detailPage: '/pleine-conscience'

@@ -80,7 +80,7 @@ const HeroSection: React.FC = () => {
           ))}
         </div>
         <p className="hero-tagline">
-          Retrouvez votre équilibre naturel grâce à la pleine conscience
+          Retrouvez votre équilibre naturel par la pleine conscience
         </p>
         <div className="actions">
           <Link to="/qui-suis-je" className="btn btn-info">

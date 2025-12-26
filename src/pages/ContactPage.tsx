@@ -43,7 +43,7 @@ const ContactPage: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
-      content: 'veroniquecarrie27@gmail.com'
+      content: 'esenciel.contact@gmail.com'
     },
     {
       icon: Clock,
@@ -214,7 +214,7 @@ const ContactPage: React.FC = () => {
                       className="form-select"
                     >
                       <option value="">Choisir un service</option>
-                      <option value="sante">Santé & qualité de vie</option>
+                      <option value="sante">Santé & vitalité</option>
                       <option value="mindfulness">Pleine conscience et présence attentive.</option>
                       <option value="tao">Jeu du Tao</option>
                       <option value="mbsr">Programme MBSR</option>

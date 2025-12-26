@@ -45,13 +45,13 @@ const AboutPage: React.FC = () => {
       icon: Award,
       title: 'Coach prévention santé - Qualité de vie',
       description: 'Accompagnement holistique',
-      details: 'Santé- Sérénité - Energie'
+      details: 'Santé- Sérénité - Vitalité'
     },
     {
       icon: Sparkles,
       title: 'Instructrice de programmes basés sur la pleine conscience',
       description: 'Mindfulness-Based Interventions - MBIs',
-      details: 'Certification des programmes MBCT-MBAS'
+      details: 'Certification des programmes MBCT - MBCAS'
     },
     {
       icon: Sparkles,
@@ -113,7 +113,7 @@ const AboutPage: React.FC = () => {
           <div className="hero-text">
             <h1>Qui suis-je ?</h1>
             <p className="hero-subtitle">
-              Coach & formatrice Santé et énergie<br />
+              Coach & formatrice Santé et vitalité<br />
               Intructrice de programmes basés sur la pleine conscience.<br />
             </p>
           </div>

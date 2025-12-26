@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
+import PracticalInfoCard from '../components/PracticalInfoCard';
 
 const ProgrammeMBCTDetailsPage: React.FC = () => {
   const benefits = [
@@ -22,18 +23,7 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
     }
   ];
 
-  const [scrollY, setScrollY] = useState(0);
-  const journeyRef = useRef<HTMLElement>(null);
   const videoRef = useSlowMoVideo();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <div className="mbct-details-page service-detail-page">
@@ -115,7 +105,7 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
       </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
-      <section ref={journeyRef} className="section journey-section">
+      <section className="section journey-section">
         <div className="container">
           <div className="journey-layout">
             <div className="journey-content">
@@ -163,68 +153,45 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           </div>
 
           <div className="journey-aside">
-            <div
-              className="info-card-merged"
-              style={{
-                transform: `translateY(${(scrollY - (journeyRef.current?.offsetTop || 0)) * 0.1
-                  }px)`,
-              }}
+            <PracticalInfoCard
+              variant="primary"
+              isSticky={true}
+              duration={<>8 séances hebdomadaires<br /><small>2h à 2h30 chacune</small></>}
+              format={<>Petit groupe<br /><small>5 à 10 participants</small></>}
+              tarifs={[{
+                amount: '330€',
+                label: 'Programme complet',
+                details: ''
+              }]}
+              pricingNote="Entretien préalable • Paiement fractionné possible"
             >
-              <h2>Informations pratiques</h2>
-
-              {/* Section modalités */}
-              <div className="info-section">
-                <h3 className="section-subtitle">Modalités</h3>
-                <div className="format-highlights-merged">
-                  <div className="format-item-merged">
-                    <strong>8 séances hebdomadaires</strong> de 2h à 2h30 chacune
+              <div className="info-section-enhanced custom-support-section">
+                <h3 className="section-subtitle-enhanced">Accompagnement spécifique</h3>
+                <div className="support-items">
+                  <div className="support-item">
+                    <span className="support-icon">🎯</span>
+                    <div className="support-content">
+                      <div className="support-title">Public spécialisé</div>
+                      <div className="support-desc">Personnes ayant vécu des épisodes dépressifs ou anxieux</div>
+                    </div>
                   </div>
-                  <div className="format-item-merged">
-                    <strong>Approche intégrative</strong> alliant pleine conscience et thérapie cognitive
+                  <div className="support-item">
+                    <span className="support-icon">📚</span>
+                    <div className="support-content">
+                      <div className="support-title">Supports complets</div>
+                      <div className="support-desc">Livrets, exercices et méditations guidées</div>
+                    </div>
                   </div>
-                  <div className="format-item-merged">
-                    <strong>Petit groupe</strong> de 5 à 10 participants maximum
-                  </div>
-                </div>
-                <p className="format-description">
-                  Chaque séance combine méditation de pleine conscience et techniques issues des thérapies cognitives et comportementales.
-                  Vous apprendrez à observer vos pensées et émotions avec recul, développant une relation plus saine avec votre mental.
-                </p>
-              </div>
-
-              {/* Section accompagnement */}
-              <div className="info-section">
-                <h3 className="section-subtitle">Accompagnement</h3>
-                <div className="detail-item-revisited">
-                  <span>🎯</span>
-                  <div>
-                    <strong>Public spécialisé</strong>
-                    <span>Personnes ayant vécu des épisodes dépressifs ou anxieux</span>
-                  </div>
-                </div>
-                <div className="detail-item-revisited">
-                  <span>📚</span>
-                  <div>
-                    <strong>Supports complets fournis</strong>
-                    <span>Livrets, exercices et méditations guidées</span>
-                  </div>
-                </div>
-                <div className="detail-item-revisited">
-                  <span>🧠</span>
-                  <div>
-                    <strong>Outils cognitifs</strong>
-                    <span>Techniques validées scientifiquement</span>
+                  <div className="support-item">
+                    <span className="support-icon">🧠</span>
+                    <div className="support-content">
+                      <div className="support-title">Outils cognitifs</div>
+                      <div className="support-desc">Techniques validées scientifiquement</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="pricing-section">
-                <div className="price-row">
-                  <div className="price-amount">330€</div>
-                  <div className="price-label">Programme complet</div>
-                </div>
-                <p className="small-text">Entretien préalable recommandé. Possibilité de régler en plusieurs fois.</p>
-              </div>
-            </div>
+            </PracticalInfoCard>
           </div>
         </div>
       </section>
@@ -501,117 +468,58 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
           color: var(--color-gray-700);
         }
 
-        /* Styles pour la carte d'information fusionnée */
-        .info-card-merged {
-          background: var(--color-white);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-8);
-          box-shadow: var(--shadow-lg);
-          border: 1px solid var(--color-gray-200);
-          width: 100%;
-          max-width: 400px;
-          z-index: 10;
-          will-change: transform;
+        /* Styles for the custom support section inside the blue card */
+        .custom-support-section {
+          border-top: 1px solid rgba(255, 252, 234, 0.3);
+          padding-top: var(--spacing-6);
         }
 
-        .info-card-merged h2 {
-          font-size: 1.8rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-6);
-        }
-
-        .section-subtitle {
-          font-size: 1.2rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-4);
-          font-weight: 600;
-          border-bottom: 1px solid var(--color-gray-200);
-          padding-bottom: var(--spacing-2);
-        }
-
-        .format-highlights-merged {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-2);
-          margin-bottom: var(--spacing-4);
-          padding: var(--spacing-4);
-          background: #fffcea;
-          border-radius: var(--radius-lg);
-        }
-
-        .format-item-merged {
-          color: var(--color-primary);
-          font-size: 1rem;
-          padding: var(--spacing-2) 0;
-        }
-
-        .format-item-merged strong {
-          font-weight: 700;
-        }
-
-        .format-description {
-          font-size: 0.95rem;
-          line-height: 1.6;
-          color: var(--color-gray-700);
-          margin-bottom: 0;
-        }
-
-        .info-section {
-          margin-bottom: var(--spacing-6);
-          padding-bottom: var(--spacing-6);
-          border-bottom: 1px solid var(--color-gray-200);
-        }
-
-        .detail-item-revisited {
-          display: flex;
-          align-items: flex-start;
-          gap: var(--spacing-4);
-          color: var(--color-primary);
-        }
-
-        .detail-item-revisited:not(:last-child) {
+        .custom-support-section .section-subtitle-enhanced {
+          font-size: 1.4rem;
+          color: #fffcea;
           margin-bottom: var(--spacing-5);
+          font-weight: 600;
         }
 
-        .detail-item-revisited strong {
-          display: block;
-          font-size: 1.1rem;
-          margin-bottom: 2px;
-        }
-
-        .detail-item-revisited span {
-          font-size: 1rem;
-          color: var(--color-text-secondary);
-        }
-
-        .pricing-section {
+        .support-items {
           display: grid;
           gap: var(--spacing-4);
         }
 
-        .price-row {
+        .support-item {
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: var(--spacing-3) 0;
+          align-items: flex-start;
+          gap: var(--spacing-3);
+          padding: var(--spacing-3);
+          border-radius: 8px;
+          transition: background-color 0.2s ease;
         }
 
-        .price-amount {
-          font-size: 2.5rem;
-          font-weight: 700;
-          color: var(--color-primary);
+        .support-item:hover {
+          background: rgba(255, 252, 234, 0.1);
         }
 
-        .price-label {
-          font-size: 1.1rem;
-          color: var(--color-text-secondary);
-          font-weight: 500;
+        .support-icon {
+          font-size: 1.2rem;
+          margin-top: 2px;
+          color: #fffcea;
         }
 
-        .small-text {
+        .support-content {
+          flex: 1;
+        }
+
+        .support-title {
+          font-weight: 600;
+          color: #fffcea;
+          font-size: 1rem;
+          margin-bottom: 2px;
+        }
+
+        .support-desc {
           font-size: 0.9rem;
-          color: var(--color-gray-600);
-          line-height: 1.5;
+          color: rgba(255, 252, 234, 0.8);
+          line-height: 1.4;
         }
 
         /* === RESPONSIVE === */
@@ -621,9 +529,6 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
             gap: var(--spacing-8);
           }
           .journey-aside { margin-top: 0; }
-          .info-card-merged { 
-            max-width: none !important;
-          }
         }
 
         @media (max-width: 1024px) {
@@ -679,10 +584,6 @@ const ProgrammeMBCTDetailsPage: React.FC = () => {
             grid-template-columns: 1fr;
           }
           
-          .info-card-merged { 
-            max-width: none !important;
-          }
-
           .journey-content h2 {
             text-align: center;
           }

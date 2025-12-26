@@ -1,22 +1,28 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Clock, Users, Calendar, MapPin, Target, Heart, Sparkles } from 'lucide-react';
+import React from 'react';
+import { Clock, Users, Target, Heart, Sparkles } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
+import PracticalInfoCard from '../components/PracticalInfoCard';
 
 const ProgrammeMBCASDetailsPage: React.FC = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const journeyRef = useRef<HTMLElement>(null);
   const videoRef = useSlowMoVideo();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+  const benefits = [
+    {
+      icon: Target,
+      title: 'Prévention santé',
+      description: 'Maintenez et améliorez votre bien-être physique et mental.'
+    },
+    {
+      icon: Heart,
+      title: 'Sérénité intérieure',
+      description: 'Cultivez un état d\'esprit apaisé face aux défis du quotidien.'
+    },
+    {
+      icon: Sparkles,
+      title: 'Joie de vivre',
+      description: 'Redécouvrez le plaisir simple d\'être présent à votre vie.'
+    }
+  ];
   return (
     <div className="mbcas-details-page service-detail-page">
       {/* Hero Section Élégant avec image de l'arbre */}
@@ -58,7 +64,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
       </section>
 
       {/* Section des bénéfices avec vidéo de fond */}
-      <section className="section benefits-section-mbcas parallax-surface">
+      <section className="section benefits-section-shared parallax-surface">
         <video
           muted
           loop
@@ -69,15 +75,15 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
         </video>
         <div className="container">
           <div className="section-header">
-            <h2>Les bénéfices du programme</h2>
-            <p>Une approche douce et progressive pour cultiver le bien-être à chaque étape de la vie</p>
+            <h2>Les bénéfices de l'accompagnement</h2>
+            <p>Un accompagnement pour vous aider à devenir acteur de votre santé et à adopter des habitudes de vie favorables à votre bien-être.</p>
           </div>
-          <div className="benefits-grid-simplified">
+          <div className="benefits-grid-shared-simplified">
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
               return (
-                <div key={index} className="benefit-card-simplified">
-                  <IconComponent size={28} className="benefit-icon-simplified" />
+                <div key={index} className="benefit-card-shared-simplified">
+                  <IconComponent size={28} className="benefit-icon-shared-simplified" />
                   <h3>{benefit.title}</h3>
                   <p>{benefit.description}</p>
                 </div>
@@ -88,14 +94,14 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
       </section>
 
       {/* Section unifiée : Parcours et apprentissages */}
-      <section ref={journeyRef} className="section journey-section">
+      <section className="section journey-section">
         <div className="container">
           <div className="journey-layout">
             <div className="journey-content">
-              <h2>Un parcours de 8 mois vers l'épanouissement</h2>
+              <h2>Votre parcours vers la sérénité</h2>
               <p className="journey-intro">
-                Ce programme vous accompagne pas à pas dans la découverte de vos ressources intérieures
-                et dans l'apprentissage d'outils concrets pour naviguer avec sérénité les défis de l'avancée en âge.
+                Un accompagnement individuel sur-mesure qui vous guide dans l'apprentissage de la pleine conscience,
+                à votre rythme et selon vos besoins spécifiques, pour une transformation authentique et durable.
               </p>
 
               <div className="learning-outcomes">
@@ -133,70 +139,47 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
               </div>
 
             </div>
-          </div>
 
-          <div className="journey-aside">
-            <div
-              className="info-card-merged"
-              style={{
-                transform: `translateY(${(scrollY - (journeyRef.current?.offsetTop || 0)) * 0.1
-                  }px)`,
-              }}
-            >
-              <h2>Informations pratiques</h2>
-
-              {/* Section modalités */}
-              <div className="info-section">
-                <h3 className="section-subtitle">Modalités</h3>
-                <div className="format-highlights-merged">
-                  <div className="format-item-merged">
-                    <strong>15 séances</strong> réparties sur 8 mois
-                  </div>
-                  <div className="format-item-merged">
-                    <strong>2 rencontres par mois</strong> : une principale + une intermédiaire
-                  </div>
-                  <div className="format-item-merged">
-                    <strong>Petit groupe</strong> de 5 à 10 participants maximum
-                  </div>
-                </div>
-                <p className="format-description">
-                  Chaque séance combine pratiques guidées, moments d'apprentissage et temps d'échange,
-                  abordant des thèmes profonds comme la compassion, la spiritualité et l'acceptation de sa propre finitude.
-                </p>
-              </div>
-
-              {/* Section accompagnement */}
-              <div className="info-section">
-                <h3 className="section-subtitle">Accompagnement</h3>
-                <div className="detail-item-revisited">
-                  <span>📋</span>
-                  <div>
-                    <strong>Entretien préalable inclus</strong>
-                    <span>Pour personnaliser votre accompagnement</span>
-                  </div>
-                </div>
-                <div className="detail-item-revisited">
-                  <span>📚</span>
-                  <div>
-                    <strong>Supports fournis</strong>
-                    <span>Livrets, fichiers audios et exercices</span>
+            <div className="journey-aside">
+              <PracticalInfoCard
+                variant="primary"
+                isSticky={true}
+                duration={<>15 séances sur 8 mois<br /><small>2 rencontres par mois</small></>}
+                format={<>Petit groupe<br /><small>5 à 10 participants</small></>}
+                tarifs={[{
+                  amount: '380€',
+                  label: 'Programme complet',
+                  details: ''
+                }]}
+                pricingNote="Paiement en 3/4 fois possible. Me contacter si difficultés."
+              >
+                <div className="info-section-enhanced custom-support-section">
+                  <h3 className="section-subtitle-enhanced">Accompagnement inclus</h3>
+                  <div className="support-items">
+                    <div className="support-item">
+                      <span className="support-icon">📋</span>
+                      <div className="support-content">
+                        <div className="support-title">Entretien préalable</div>
+                        <div className="support-desc">Pour personnaliser votre accompagnement</div>
+                      </div>
+                    </div>
+                    <div className="support-item">
+                      <span className="support-icon">📚</span>
+                      <div className="support-content">
+                        <div className="support-title">Supports fournis</div>
+                        <div className="support-desc">Livrets, audios et exercices</div>
+                      </div>
+                    </div>
+                    <div className="support-item">
+                      <span className="support-icon">🏠</span>
+                      <div className="support-content">
+                        <div className="support-title">Pratique à domicile</div>
+                        <div className="support-desc">Exercices guidés entre les séances</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="detail-item-revisited">
-                  <span>🏠</span>
-                  <div>
-                    <strong>Pratique à domicile</strong>
-                    <span>Exercices guidés entre les séances</span>
-                  </div>
-                </div>
-              </div>
-              <div className="pricing-section">
-                <div className="price-row">
-                  <div className="price-amount">380€</div>
-                  <div className="price-label">Programme complet</div>
-                </div>
-                <p className="small-text">Règlement possible en 3 ou 4 versements. En cas de difficulté financière, n'hésitez pas à me contacter.</p>
-              </div>
+              </PracticalInfoCard>
             </div>
           </div>
         </div>
@@ -211,14 +194,14 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
       />
 
       <style>{`
-        /* === HERO SECTION MBCAS === */
-        .hero-mbcas {
+        /* === HERO SECTION SANTÉ === */
+        .hero-sante {
           padding: var(--spacing-20) 0;
           background: #fffcea;
           overflow: hidden;
         }
 
-        .hero-mbcas-layout {
+        .hero-sante-layout {
           display: grid;
           grid-template-columns: 1.2fr 1fr;
           gap: var(--spacing-12);
@@ -226,7 +209,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           min-height: 70vh;
         }
 
-        .hero-content-mbcas h1 {
+        .hero-content-sante h1 {
           font-size: clamp(3rem, 6vw, 4.5rem);
           color: var(--color-primary);
           margin-bottom: var(--spacing-4);
@@ -234,7 +217,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           font-weight: 700;
         }
 
-        .hero-subtitle-mbcas {
+        .hero-subtitle-sante {
           font-size: clamp(1.3rem, 2.5vw, 1.8rem);
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-6);
@@ -242,7 +225,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           line-height: 1.4;
         }
 
-        .hero-description-mbcas p {
+        .hero-description-sante p {
           font-size: 1.15rem;
           line-height: 1.7;
           color: var(--color-gray-700);
@@ -250,7 +233,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           max-width: 55ch;
         }
 
-        .hero-highlights-mbcas {
+        .hero-highlights-sante {
           display: flex;
           flex-direction: column;
           gap: var(--spacing-4);
@@ -274,7 +257,7 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           font-size: 1.2rem;
         }
 
-        .hero-image-mbcas {
+        .hero-image-sante {
           position: relative;
           height: 600px;
           border-radius: 24px;
@@ -282,83 +265,17 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .hero-image-mbcas img {
+        .hero-image-element {
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
         }
 
-        .image-overlay-mbcas {
+        .image-overlay-sante {
           position: absolute;
           inset: 0;
           background: linear-gradient(45deg, rgba(31, 41, 55, 0.1) 0%, rgba(31, 41, 55, 0.05) 100%);
-        }
-
-        /* === BENEFITS SECTION AVEC VIDÉO === */
-        .benefits-section-mbcas {
-          padding: var(--spacing-16) 0;
-          position: relative;
-        }
-
-        .benefits-section-mbcas .section-header {
-          text-align: center;
-          margin-bottom: var(--spacing-12);
-        }
-
-        .benefits-section-mbcas .section-header h2 {
-          font-size: clamp(2.2rem, 4vw, 3rem);
-          color: #fffcea;
-          margin-bottom: var(--spacing-4);
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-        }
-
-        .benefits-section-mbcas .section-header p {
-          font-size: 1.2rem;
-          color: rgba(255, 252, 234, 0.9);
-          max-width: 600px;
-          margin: 0 auto;
-          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .benefits-grid-simplified {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: var(--spacing-8);
-        }
-
-        .benefit-card-simplified {
-          background: rgba(255, 252, 234, 0.95);
-          border: 1px solid rgba(255, 252, 234, 0.3);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-8);
-          text-align: center;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          backdrop-filter: blur(10px);
-        }
-
-        .benefit-card-simplified:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-          background: rgba(255, 252, 234, 1);
-        }
-
-        .benefit-icon-simplified {
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-4);
-        }
-
-        .benefit-card-simplified h3 {
-          font-size: 1.4rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-3);
-          font-weight: 600;
-        }
-
-        .benefit-card-simplified p {
-          color: var(--color-gray-700);
-          line-height: 1.6;
-          font-size: 1rem;
         }
 
         /* === JOURNEY SECTION === */
@@ -389,215 +306,141 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           max-width: 85ch;
         }
 
-        .learning-outcomes {
+        .learning-outcomes, .objectives-exploration {
           margin-bottom: var(--spacing-10);
         }
 
-        .learning-outcomes h3 {
+        .learning-outcomes h3, .objectives-exploration h3 {
           font-size: 1.8rem;
           color: var(--color-primary);
           margin-bottom: var(--spacing-6);
           font-weight: 600;
         }
 
-        .outcomes-grid {
+        .outcomes-grid, .objectives-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: var(--spacing-6);
         }
 
-        .outcome-item {
+        .outcome-item, .objective-item {
           display: flex;
           gap: var(--spacing-4);
           align-items: flex-start;
         }
 
-        .outcome-icon {
+        .outcome-icon, .objective-icon {
           font-size: 1.5rem;
           flex-shrink: 0;
           margin-top: 2px;
         }
 
-        .outcome-item h4 {
+        .outcome-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          background: var(--color-primary);
+          color: white;
+          border-radius: 50%;
+          font-weight: 700;
+          font-size: 0.9rem;
+        }
+
+        .outcome-item h4, .objective-item h4 {
           font-size: 1.2rem;
           color: var(--color-primary);
           margin-bottom: var(--spacing-2);
           font-weight: 600;
         }
 
-        .outcome-item p {
+        .outcome-item p, .objective-item p {
           color: var(--color-gray-700);
           line-height: 1.6;
           font-size: 1rem;
         }
 
-        .program-format h3 {
-          font-size: 1.8rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-6);
-          font-weight: 600;
-        }
+        /* Merged info card styles are now in globals.css */
 
-        .format-highlights {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-3);
-          margin-bottom: var(--spacing-6);
-          padding: var(--spacing-6);
-          background: var(--color-white);
-          border-radius: var(--radius-lg);
-          border-left: 4px solid var(--color-primary);
-        }
-
-        .format-item {
-          color: var(--color-primary);
-          font-size: 1.1rem;
-        }
-
-        .format-item strong {
-          font-weight: 700;
-        }
-
-        .program-format p {
-          font-size: 1.1rem;
-          line-height: 1.7;
-          color: var(--color-gray-700);
-        }
-
-        /* === VIDÉO STATIQUE === */
-        .parallax-video-static {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: 1;
-          /* Suppression de autoPlay pour arrêter le mouvement */
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 1024px) {
-          .hero-mbcas-layout {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
-            text-align: center;
-          }
-          
-          .hero-image-mbcas {
-            height: 400px;
-            order: -1;
-          }
-          
-          .hero-description-mbcas p {
-            margin: 0 auto var(--spacing-8);
-          }
-        }
-
-        @media (max-width: 1200px) {
-          .journey-layout {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
-          }
-        }
-
-        @media (max-width: 768px) {
-          .hero-mbcas {
-            padding: var(--spacing-12) 0;
-          }
-          
-          .hero-image-mbcas {
-            height: 300px;
-          }
-          
-          .benefits-grid-simplified {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-6);
-            padding: 0 var(--spacing-4);
-          }
-
-          .benefit-card-simplified {
-            padding: var(--spacing-6);
-            margin: 0;
-            max-width: 100%;
-            box-sizing: border-box;
-          }
-
-          .benefits-section-mbcas .container {
-            padding: 0 var(--spacing-4);
-            max-width: 100%;
-            overflow-x: hidden;
-          }
-          
-          .highlight-item {
-            justify-content: center;
-          }
-
-          .outcomes-grid {
-            grid-template-columns: 1fr;
-          }
-          
-          .journey-content h2 {
-            text-align: center;
-          }
-
-          .journey-intro {
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .benefits-section-mbcas {
-            padding: var(--spacing-12) 0;
-          }
-
-          .benefits-section-mbcas .section-header h2 {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
-            padding: 0 var(--spacing-2);
-          }
-
-          .benefits-section-mbcas .section-header p {
-            font-size: 1rem;
-            padding: 0 var(--spacing-2);
-          }
-
-          .benefits-grid-simplified {
-            gap: var(--spacing-4);
-            padding: 0 var(--spacing-2);
-          }
-
-          .benefit-card-simplified {
-            padding: var(--spacing-5);
-          }
-
-          .benefit-card-simplified h3 {
-            font-size: 1.2rem;
-          }
-
-          .benefit-card-simplified p {
-            font-size: 0.95rem;
-          }
-        }
-
-        /* Styles existants */
+        /* Reset and simplify previous styles */
         .value-section, .process-section, .practical-info {
           padding: var(--spacing-16) 0;
         }
 
         /* Value Section refined */
-        .value-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--spacing-12); align-items: center; }
-        .value-left h2 { font-size: clamp(2.2rem, 4.2vw, 3rem); color: var(--color-primary); margin-bottom: var(--spacing-4); }
-        .value-left .lead { font-size: 1.15rem; color: var(--color-text-secondary); line-height: 1.7; max-width: 48ch; text-align: justify; }
+        .value-layout {
+          display: grid;
+          grid-template-columns: 1fr 1.6fr;
+          gap: var(--spacing-12);
+          align-items: center;
+        }
 
-        .benefits-grid-refined { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--spacing-6); }
-        .benefit-card-refined { background: var(--color-white); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); padding: var(--spacing-5) var(--spacing-6); }
-        .benefit-header { display: flex; align-items: center; gap: var(--spacing-3); margin-bottom: var(--spacing-3); }
-        .benefit-icon-refined { color: var(--color-primary); }
-        .benefit-card-refined h3 { font-size: 1.2rem; margin: 0; color: var(--color-primary); letter-spacing: 0.01em; }
-        .benefit-card-refined p { color: var(--color-text-secondary); line-height: 1.65; font-size: 1rem; }
-        @media (max-width: 900px) { .value-layout { grid-template-columns: 1fr; } .value-left { text-align: center; } .value-left .lead { margin: 0 auto; } }
-        
+        .value-left h2 {
+          font-size: clamp(2.2rem, 4.2vw, 3rem);
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+        }
+
+        .value-left .lead {
+          font-size: 1.15rem;
+          color: var(--color-text-secondary);
+          line-height: 1.7;
+          max-width: 48ch;
+          text-align: justify;
+        }
+
+        .benefits-grid-refined {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: var(--spacing-6);
+        }
+
+        .benefit-card-refined {
+          background: var(--color-white);
+          border: 1px solid var(--color-gray-200);
+          border-radius: var(--radius-lg);
+          padding: var(--spacing-5) var(--spacing-6);
+        }
+
+        .benefit-header {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-3);
+          margin-bottom: var(--spacing-3);
+        }
+
+        .benefit-icon-refined {
+          color: var(--color-primary);
+        }
+
+        .benefit-card-refined h3 {
+          font-size: 1.2rem;
+          margin: 0;
+          color: var(--color-primary);
+          letter-spacing: 0.01em;
+        }
+
+        .benefit-card-refined p {
+          color: var(--color-text-secondary);
+          line-height: 1.65;
+          font-size: 1rem;
+        }
+
+        @media (max-width: 900px) {
+          .value-layout {
+            grid-template-columns: 1fr;
+          }
+
+          .value-left {
+            text-align: center;
+          }
+
+          .value-left .lead {
+            margin: 0 auto;
+          }
+        }
+
         /* Process Section Revisited */
         .process-container-revisited {
           display: grid;
@@ -606,38 +449,105 @@ const ProgrammeMBCASDetailsPage: React.FC = () => {
           align-items: center;
           color: #fff;
         }
+
         .process-intro-revisited h2 {
           font-size: clamp(3rem, 6vw, 4.5rem);
           line-height: 1.1;
-          text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
         }
+
         .process-intro-revisited p {
           font-size: 1.2rem;
           line-height: 1.6;
-          text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+          text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
           max-width: 30ch;
         }
-        .timeline-revisited { border-left: 1px solid rgba(255, 252, 234, 0.45); padding-left: var(--spacing-8); }
+
+        .timeline-revisited {
+          border-left: 1px solid rgba(255, 252, 234, 0.45);
+          padding-left: var(--spacing-8);
+        }
+
         .timeline-item-revisited {
           position: relative;
           padding-bottom: var(--spacing-16);
         }
-        .timeline-item-revisited:last-child { padding-bottom: 0; }
-        .timeline-number-revisited { position: absolute; left: calc(-1 * var(--spacing-8) - 19px); top: -4px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 252, 234, 0.08); border: 1px solid rgba(255, 252, 234, 0.7); color: #fffcea; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; box-shadow: none; backdrop-filter: saturate(120%) blur(2px); }
-        .timeline-content-revisited h3 { font-size: 1.35rem; margin-bottom: var(--spacing-2); text-shadow: 1px 1px 2px rgba(0,0,0,0.35); }
-        .timeline-content-revisited p { line-height: 1.7; color: rgba(255,255,255,0.92); }
+
+        .timeline-item-revisited:last-child {
+          padding-bottom: 0;
+        }
+
+        .timeline-number-revisited {
+          position: absolute;
+          left: calc(-1 * var(--spacing-8) - 19px);
+          top: -4px;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(255, 252, 234, 0.08);
+          border: 1px solid rgba(255, 252, 234, 0.7);
+          color: #fffcea;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 0.95rem;
+          box-shadow: none;
+          backdrop-filter: saturate(120%) blur(2px);
+        }
+
+        .timeline-content-revisited h3 {
+          font-size: 1.35rem;
+          margin-bottom: var(--spacing-2);
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+        }
+
+        .timeline-content-revisited p {
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.92);
+        }
 
         /* Coaching details layout */
-        .coaching-details-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--spacing-12); align-items: start; }
-        .coaching-text h2 { font-size: clamp(2.1rem, 4vw, 2.8rem); color: var(--color-primary); margin-bottom: var(--spacing-4); }
-        .coaching-text p { color: var(--color-text-secondary); line-height: 1.8; }
-        .coaching-text h3 { margin-top: var(--spacing-8); margin-bottom: var(--spacing-3); color: var(--color-primary); font-size: clamp(1.6rem, 2.2vw, 2rem); letter-spacing: 0.01em; }
-        .coaching-aside { display: grid; gap: var(--spacing-6); }
+        .coaching-details-grid {
+          display: grid;
+          grid-template-columns: 1.4fr 1fr;
+          gap: var(--spacing-12);
+          align-items: start;
+        }
+
+        .coaching-text h2 {
+          font-size: clamp(2.1rem, 4vw, 2.8rem);
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-4);
+        }
+
+        .coaching-text p {
+          color: var(--color-text-secondary);
+          line-height: 1.8;
+        }
+
+        .coaching-text h3 {
+          margin-top: var(--spacing-8);
+          margin-bottom: var(--spacing-3);
+          color: var(--color-primary);
+          font-size: clamp(1.6rem, 2.2vw, 2rem);
+          letter-spacing: 0.01em;
+        }
+
+        .coaching-aside {
+          display: grid;
+          gap: var(--spacing-6);
+        }
         
         /* Larger process text */
-        .process-text-large p { font-size: 1.25rem; line-height: 1.9; margin-bottom: var(--spacing-6); text-align: justify; }
+        .process-text-large p {
+          font-size: 1.25rem;
+          line-height: 1.9;
+          margin-bottom: var(--spacing-6);
+          text-align: justify;
+        }
         
-        /* Styles pour la carte d'information fusionnée */
+        /* Merged info card */
         .info-card-merged {
           background: var(--color-white);
           border-radius: var(--radius-xl);

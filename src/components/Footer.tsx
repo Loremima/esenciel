@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
           <div className="newsletter__content">
             <h3 className="newsletter__title">Newsletter</h3>
             <p className="newsletter__description">
-              Recevez chaque mois des pratiques et des informations pour soutenir votre santé et votre qualité de vie.
+              Recevez chaque mois des pratiques et des informations pour soutenir votre santé et votre vitalité.
             </p>
             <form className="newsletter__form">
               <input
@@ -39,10 +39,11 @@ const Footer: React.FC = () => {
             < div className="footer__section">
               <h4 className="footer__section-title">Services</h4>
               <ul className="footer__links">
-                <li><Link to="/services#individuels">Santé & qualité de vie</Link></li>
-                <li><Link to="/services#individuels">Pleine conscience et présence attentive.</Link></li>
+                <li><Link to="/services#individuels">Santé & vitalité</Link></li>
+                <li><Link to="/services#individuels">Pleine conscience & présence attentive</Link></li>
                 <li><Link to="/services#groupes">Jeu du Tao</Link></li>
-                <li><Link to="/services#programmes">Programmes de pleine conscience </Link></li>
+                <li><Link to="/services#programmes">Programmes de pleine conscience</Link></li>
+                <li><Link to="/services#programmes">Entreprises & collectivités</Link></li>
               </ul>
             </div>
 
@@ -60,7 +61,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li className="footer__contact-item">
                   <Mail size={16} />
-                  <span>veroniquecarrie27@gmail.com</span>
+                  <span>esenciel.contact@gmail.com</span>
                 </li>
                 <li className="footer__contact-item">
                   <Clock size={16} />

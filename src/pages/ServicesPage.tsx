@@ -101,7 +101,7 @@ const ServicesPage: React.FC = () => {
         <div className="container">
           <div className="section-header">
             <h1>Offres pour entreprises & collectivités</h1>
-            <p>Ateliers éducation à la santé /conférences pour entreprises et collectivités.</p>
+            <p>Offrir des espaces pour ralentir, respirer et se recentrer</p>
           </div>
           <div className="services-grid">
             {otherFormats.map(service => (

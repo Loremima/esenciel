@@ -1,21 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { Clock, Users, Target, Heart, Sparkles, MapPin } from 'lucide-react';
 import VideoCTA from '../components/VideoCTA';
 import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
+import PracticalInfoCard from '../components/PracticalInfoCard';
 
 const PleineConscienceDetailsPage: React.FC = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const journeyRef = useRef<HTMLElement>(null);
+
   const videoRef = useSlowMoVideo();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const benefits = [
     {
@@ -85,7 +76,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
               <div className="hero-highlights-pleine-conscience">
                 <div className="highlight-item">
                   <Clock size={20} />
-                  <span><strong>45min-1h</strong> par séance</span>
+                  <span><strong>1h30 (1ère séance) / 1h (suivantes)</strong> par séance</span>
                 </div>
                 <div className="highlight-item">
                   <Users size={20} />
@@ -114,7 +105,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
       </section>
 
       {/* Section des bénéfices avec vidéo de fond */}
-      <section className="section benefits-section-pleine-conscience parallax-surface">
+      <section className="section benefits-section-shared parallax-surface">
         <video
           muted
           loop
@@ -128,12 +119,12 @@ const PleineConscienceDetailsPage: React.FC = () => {
             <h2>Les bénéfices de l'accompagnement</h2>
             <p>Un chemin vers plus de clarté, de sens et d'alignement avec votre essence</p>
           </div>
-          <div className="benefits-grid-simplified">
+          <div className="benefits-grid-shared-simplified">
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
               return (
-                <div key={index} className="benefit-card-simplified">
-                  <IconComponent size={28} className="benefit-icon-simplified" />
+                <div key={index} className="benefit-card-shared-simplified">
+                  <IconComponent size={28} className="benefit-icon-shared-simplified" />
                   <h3>{benefit.title}</h3>
                   <p>{benefit.description}</p>
                 </div>
@@ -144,7 +135,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
       </section>
 
       {/* Section unifiée : Expérience d'accompagnement et déroulement */}
-      <section ref={journeyRef} className="section journey-section">
+      <section className="section journey-section">
         <div className="container">
           <div className="journey-layout">
             <div className="journey-content">
@@ -205,43 +196,14 @@ const PleineConscienceDetailsPage: React.FC = () => {
             </div>
 
             <div className="journey-aside">
-              <div
-                className="info-card-enhanced"
-                style={{
-                  transform: `translateY(${(scrollY - (journeyRef.current?.offsetTop || 0)) * 0.1
-                    }px)`,
-                }}
+              <PracticalInfoCard
+                variant="primary"
+                isSticky={true}
+                duration="45min - 1h"
+                format="Accompagnement individuel"
+                location="Distanciel ou Présentiel"
               >
-                <h2>Informations pratiques</h2>
-                <div className="info-section-enhanced">
-                  <div className="modalities-grid">
-                    <div className="modality-card">
-                      <Users size={24} className="modality-icon-revisited" />
-                      <div className="modality-content">
-                        <div className="modality-label">Format</div>
-                        <div className="modality-value">Accompagnement individuel</div>
-                        <div className="modality-detail">Une approche sur-mesure</div>
-                      </div>
-                    </div>
-                    <div className="modality-card">
-                      <Clock size={24} className="modality-icon-revisited" />
-                      <div className="modality-content">
-                        <div className="modality-label">Durée</div>
-                        <div className="modality-value">45min - 1h</div>
-                        <div className="modality-detail">Adaptée à votre rythme</div>
-                      </div>
-                    </div>
-                    <div className="modality-card">
-                      <MapPin size={24} className="modality-icon-revisited" />
-                      <div className="modality-content">
-                        <div className="modality-label">Lieu</div>
-                        <div className="modality-value">Distanciel ou Présentiel</div>
-                        <div className="modality-detail">Selon vos préférences</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="pricing-section-enhanced">
+                <div className="pricing-section-enhanced custom-pricing-section">
                   <div className="price-display">
                     <div className="price-amount">Sur devis</div>
                     <div className="price-label">Séance personnalisée</div>
@@ -253,7 +215,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
                     Demander un devis
                   </a>
                 </div>
-              </div>
+              </PracticalInfoCard>
             </div>
           </div>
         </div>
@@ -546,6 +508,8 @@ const PleineConscienceDetailsPage: React.FC = () => {
 
         .info-section-enhanced {
           margin-bottom: var(--spacing-7);
+          padding-bottom: var(--spacing-6);
+          border-bottom: 1px solid var(--color-gray-100);
         }
 
         .info-section-enhanced:last-of-type {
@@ -570,24 +534,13 @@ const PleineConscienceDetailsPage: React.FC = () => {
         }
 
         .modality-card {
-          display: flex;
-          align-items: flex-start;
-          gap: var(--spacing-4);
-          padding: var(--spacing-4) 0;
+          padding: var(--spacing-3) 0;
+          background: transparent;
+          border-radius: 0;
+          border-left: none;
           border-bottom: 1px solid var(--color-gray-100);
         }
 
-        .modality-card:last-child {
-          border-bottom: none;
-          padding-bottom: 0;
-        }
-
-        .modality-icon-revisited {
-          color: var(--color-primary);
-          flex-shrink: 0;
-          margin-top: 4px;
-        }
-        
         .modality-label {
           font-size: 0.85rem;
           color: var(--color-text-secondary);
@@ -608,14 +561,62 @@ const PleineConscienceDetailsPage: React.FC = () => {
           color: var(--color-text-secondary);
         }
 
-        .modality-content {
-          flex-grow: 1;
+        .format-description-enhanced {
+          font-size: 0.95rem;
+          color: var(--color-text-secondary);
+          line-height: 1.6;
+          padding: 0;
+          background: transparent;
+          border-radius: 0;
+          border: none;
+        }
+
+        .support-items {
+          display: grid;
+          gap: var(--spacing-4);
+        }
+
+        .support-item {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--spacing-3);
+          padding: var(--spacing-3);
+          border-radius: 8px;
+          transition: background-color 0.2s ease;
+        }
+
+        .support-item:hover {
+          background: rgba(249, 247, 234, 0.3);
+        }
+
+        .support-icon {
+          font-size: 1.2rem;
+          margin-top: 2px;
+        }
+
+        .support-content {
+          flex: 1;
+        }
+
+        .support-title {
+          font-weight: 600;
+          color: var(--color-primary);
+          font-size: 1rem;
+          margin-bottom: 2px;
+        }
+
+        .support-desc {
+          font-size: 0.9rem;
+          color: var(--color-text-secondary);
+          line-height: 1.4;
         }
 
         .pricing-section-enhanced {
           margin-top: var(--spacing-6);
-          padding-top: var(--spacing-6);
-          border-top: 1px solid var(--color-gray-100);
+          padding: 0;
+          background: transparent;
+          border-radius: 0;
+          border: none;
         }
 
         .price-display {
@@ -642,23 +643,71 @@ const PleineConscienceDetailsPage: React.FC = () => {
           color: var(--color-text-secondary);
           line-height: 1.5;
         }
+        .price-amount { font-size: 2.5rem; font-weight: 700; color: var(--color-primary); }
+        .price-label { font-size: 1.1rem; color: var(--color-text-secondary); font-weight: 500; }
         
-        .cta-button-card {
-          display: block;
-          width: 100%;
-          text-align: center;
-          background: var(--color-primary);
-          color: white;
-          padding: var(--spacing-3) var(--spacing-4);
-          border-radius: var(--radius-md);
-          font-weight: 600;
-          text-decoration: none;
-          margin-top: var(--spacing-5);
-          transition: background-color 0.3s ease-out;
+        @media (max-width: 900px) { .coaching-details-grid { grid-template-columns: 1fr; } }
+
+        @media (max-width: 768px) {
+          .process-container-revisited { grid-template-columns: 1fr; gap: var(--spacing-8); text-align: center; }
+          .process-intro-revisited p { margin: 0 auto; }
+          .timeline-revisited { border-left: none; padding-left: 0; }
+          .timeline-item-revisited { text-align: left; }
+          .timeline-number-revisited { position: static; margin-bottom: var(--spacing-4); width: 45px; height: 45px; }
         }
-        
-        .cta-button-card:hover {
-          background: #4A7A78; /* Darker primary */
+
+        /* Custom styles for support section inside blue card */
+        .custom-support-section {
+          border-top: 1px solid rgba(255, 252, 234, 0.3);
+          padding-top: var(--spacing-6);
+        }
+
+        .custom-support-section .section-subtitle-enhanced {
+          font-size: 1.4rem;
+          color: #fffcea;
+          margin-bottom: var(--spacing-5);
+          font-weight: 600;
+        }
+
+        .support-items {
+          display: grid;
+          gap: var(--spacing-4);
+        }
+
+        .support-item {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--spacing-3);
+          padding: var(--spacing-3);
+          border-radius: 8px;
+          transition: background-color 0.2s ease;
+        }
+
+        .support-item:hover {
+          background: rgba(255, 252, 234, 0.1);
+        }
+
+        .support-icon {
+          font-size: 1.2rem;
+          margin-top: 2px;
+          color: #fffcea;
+        }
+
+        .support-content {
+          flex: 1;
+        }
+
+        .support-title {
+          font-weight: 600;
+          color: #fffcea;
+          font-size: 1rem;
+          margin-bottom: 2px;
+        }
+
+        .support-desc {
+          font-size: 0.9rem;
+          color: rgba(255, 252, 234, 0.8);
+          line-height: 1.4;
         }
 
         /* === RESPONSIVE === */
@@ -676,18 +725,6 @@ const PleineConscienceDetailsPage: React.FC = () => {
           
           .hero-description-pleine-conscience p {
             margin: 0 auto var(--spacing-8);
-          }
-
-        }
-
-        @media (max-width: 1200px) {
-          .journey-layout {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
-          }
-          .journey-aside { margin-top: 0; }
-          .info-card-enhanced { 
-            max-width: none !important;
           }
         }
 
@@ -726,7 +763,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
           .outcomes-grid, .techniques-grid {
             grid-template-columns: 1fr;
           }
-          
+
         }
 
         @media (max-width: 480px) {

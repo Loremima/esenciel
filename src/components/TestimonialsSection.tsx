@@ -26,7 +26,7 @@ const TestimonialsSection: React.FC = () => {
       name: 'Sophie D.',
       location: 'Vaureilles',
       rating: 5,
-      text: 'L\'accompagnement en Santé et énergie m\'a aidée à reprendre le contrôle de mon bien-être. Véronique allie parfaitement expertise scientifique et approche humaine. Je recommande vivement.',
+      text: 'L\'accompagnement en Santé et vitalité m\'a aidée à reprendre le contrôle de mon bien-être. Véronique allie parfaitement expertise scientifique et approche humaine. Je recommande vivement.',
       service: 'Coaching Santé'
     },
     {
