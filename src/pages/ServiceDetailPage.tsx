@@ -51,7 +51,7 @@ const ServiceDetailPage: React.FC = () => {
                                             {s.title}
                                         </Link>
                                     ))}
-                                    <Link to="/programmes-mbsr-mbct" className="related-link">
+                                    <Link to="/programmes-gestion-stress-prevention-rechute" className="related-link">
                                         Programmes de pleine conscience
                                     </Link>
                                 </div>
@@ -86,7 +86,7 @@ const ServiceDetailPage: React.FC = () => {
                                             {s.title}
                                         </Link>
                                     ))}
-                                    <Link to="/programmes-mbsr-mbct" className="related-link">
+                                    <Link to="/programmes-gestion-stress-prevention-rechute" className="related-link">
                                         Programmes de pleine conscience
                                     </Link>
                                 </div>

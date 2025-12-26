@@ -1,76 +1,53 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { CalendarDays } from 'lucide-react';
 import { collectivePrograms } from './servicesData';
 import ServiceCard from '../components/ServiceCard';
 import VideoCTA from '../components/VideoCTA';
+import ParallaxSection from '../components/ParallaxSection';
 
 const ProgrammesPleineConsciencePage: React.FC = () => {
-  return (
-    <div className="services-page">
-      <section className="hero-services">
-        <video autoPlay muted loop playsInline className="hero-video">
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-overlay" aria-hidden="true"></div>
-        <div className="hero-content">
-          <h1>Programmes de pleine conscience</h1>
-        </div>
-      </section>
+  const primaryDark = '#1F2937';
 
-      <section id="programmes" className="section services-section">
-        <div className="container programmes-container">
-          <div className="section-header">
-            <h1>Programmes de pleine conscience</h1>
-            <p>Programmes structurés et scientifiquement validés pour cultiver le bien-être ensemble</p>
+  return (
+    <div className="programmes-pleine-conscience-page">
+      <ParallaxSection 
+        videoSrc="/background.mp4" 
+        className="hero-programmes min-h-[60vh]"
+        overlayOpacity={0.4}
+      >
+        <div className="hero-content text-center">
+          <h1>Programmes de pleine conscience</h1>
+          <p className="hero-subtitle">
+            Des parcours structurés et scientifiquement validés pour cultiver le calme et la clarté mentale ensemble.
+          </p>
+        </div>
+      </ParallaxSection>
+
+      <section id="programmes" className="section bg-[#fffcea]">
+        <div className="container flex flex-col items-center">
+          <div className="max-w-4xl mx-auto text-center mb-20 w-full">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading" style={{ color: primaryDark }}>Nos Cycles</h2>
+            <p className="text-stone-600 text-xl font-light leading-relaxed max-w-2xl mx-auto">
+              Découvrez les programmes basés sur la pleine conscience pour transformer votre rapport au quotidien.
+            </p>
           </div>
-          <div className="services-grid three-cols">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
             {collectivePrograms.map(service => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard
+                key={service.id}
+                service={service}
+                variant="on-nude"
+              />
             ))}
           </div>
         </div>
       </section>
 
       <VideoCTA
-        title="Prêt(e) à transformer votre quotidien ?"
-        subtitle="Contactez-moi pour connaître les prochaines sessions et réserver votre place."
-        buttonText="M'inscrire à un programme"
+        title="Une pause nécessaire ?"
+        subtitle="Découvrez nos prochaines dates de cycle et inscrivez-vous pour transformer votre quotidien."
+        buttonText="Voir les dates"
         buttonLink="/contact-reservation"
       />
-      <style>{`
-              .programmes-container { 
-                max-width: 1200px; 
-                width: 100%;
-              }
-              .programmes-container .services-grid.three-cols {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: var(--spacing-8) !important;
-                width: 100%;
-                justify-items: center;
-              }
-              .programmes-container .services-grid.three-cols > *:nth-child(3) {
-                grid-column: 1 / -1 !important;
-                max-width: 400px;
-                justify-self: center;
-              }
-              .programmes-container .services-grid.three-cols .service-card { 
-                width: 100%;
-                max-width: 500px;
-                box-sizing: border-box;
-              }
-              @media (max-width: 768px) {
-                .programmes-container .services-grid.three-cols { 
-                  grid-template-columns: 1fr !important; 
-                  gap: var(--spacing-6) !important;
-                }
-                .programmes-container .services-grid.three-cols > *:nth-child(3) {
-                  grid-column: 1 !important;
-                  max-width: 100%;
-                }
-              }
-            `}</style>
     </div>
   );
 };

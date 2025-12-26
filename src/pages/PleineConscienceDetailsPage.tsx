@@ -1,805 +1,94 @@
 import React from 'react';
-import { Clock, Users, Target, Heart, Sparkles, MapPin } from 'lucide-react';
-import VideoCTA from '../components/VideoCTA';
-import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
-import PracticalInfoCard from '../components/PracticalInfoCard';
+import { Target, Heart, Sparkles } from 'lucide-react';
+import ServiceLayout from '../components/ServiceLayout';
 
 const PleineConscienceDetailsPage: React.FC = () => {
-
-  const videoRef = useSlowMoVideo();
-
-  const benefits = [
-    {
-      icon: Target,
-      title: 'Conscience de soi',
-      description: 'Développez une meilleure connaissance de vos besoins et de vos réactions.'
-    },
-    {
-      icon: Heart,
-      title: 'Équilibre émotionnel',
-      description: 'Apprenez à accueillir et réguler vos émotions avec bienveillance.'
-    },
-    {
-      icon: Sparkles,
-      title: 'Sérénité quotidienne',
-      description: 'Intégrez la pleine conscience dans votre vie pour plus de paix intérieure.'
-    }
-  ];
-
-  const processSteps = [
-    {
-      number: '01',
-      title: 'Première rencontre',
-      description: 'Écoute de vos besoins, exploration de vos objectifs et définition du cadre d\'accompagnement.'
-    },
-    {
-      number: '02',
-      title: 'Initiation aux pratiques',
-      description: 'Découverte des techniques de base : respiration consciente, scan corporel et méditation.'
-    },
-    {
-      number: '03',
-      title: 'Approfondissement',
-      description: 'Développement de votre pratique personnelle avec des exercices adaptés à votre quotidien.'
-    },
-    {
-      number: '04',
-      title: 'Intégration et échanges',
-      description: 'Partage d\'expériences, ajustements et renforcement des acquis pour une pratique autonome.'
-    },
-    {
-      number: '05',
-      title: 'Autonomie et suivi',
-      description: 'Consolidation de votre pratique avec des outils pour maintenir votre équilibre durablement.'
-    }
-  ];
-
   return (
-    <div className="pleine-conscience-details-page service-detail-page">
-      {/* Hero Section Élégant avec vidéo sand */}
-      <section className="hero-pleine-conscience">
-        <div className="container">
-          <div className="hero-pleine-conscience-layout">
-            <div className="hero-content-pleine-conscience">
-              <h1>Pleine conscience</h1>
-              <p className="hero-subtitle-pleine-conscience">
-                Ralentir pour mieux se retrouver
-              </p>
-              <div className="hero-description-pleine-conscience">
-                <p>
-                  Cet accompagnement vous invite à ralentir, à vous poser, à respirer, pour cultiver
-                  une qualité de présence plus profonde et plus authentique à vous-même. Grâce
-                  aux outils de la pleine conscience, vous apprendrez à être à l'écoute de votre
-                  intériorité et à apaiser votre cœur.
-                </p>
-              </div>
-              <div className="hero-highlights-pleine-conscience">
-                <div className="highlight-item">
-                  <Clock size={20} />
-                  <span><strong>1h30 (1ère séance) / 1h (suivantes)</strong> par séance</span>
-                </div>
-                <div className="highlight-item">
-                  <Users size={20} />
-                  <span><strong>Individuel</strong> • Accompagnement personnalisé</span>
-                </div>
-                <div className="highlight-item">
-                  <span className="price-highlight"><strong>Sur devis</strong> • Adapté à vos besoins</span>
-                </div>
-              </div>
-            </div>
-            <div className="hero-video-pleine-conscience">
-              <video
-                ref={videoRef}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="hero-video-element"
-              >
-                <source src="/sand_conscience.mp4" type="video/mp4" />
-              </video>
-              <div className="video-overlay-pleine-conscience"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section des bénéfices avec vidéo de fond */}
-      <section className="section benefits-section-shared parallax-surface">
-        <video
-          muted
-          loop
-          playsInline
-          className="parallax-video-static"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container">
-          <div className="section-header">
-            <h2>Les bénéfices de l'accompagnement</h2>
-            <p>Un chemin vers plus de clarté, de sens et d'alignement avec votre essence</p>
-          </div>
-          <div className="benefits-grid-shared-simplified">
-            {benefits.map((benefit, index) => {
-              const IconComponent = benefit.icon;
-              return (
-                <div key={index} className="benefit-card-shared-simplified">
-                  <IconComponent size={28} className="benefit-icon-shared-simplified" />
-                  <h3>{benefit.title}</h3>
-                  <p>{benefit.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Section unifiée : Expérience d'accompagnement et déroulement */}
-      <section className="section journey-section">
-        <div className="container">
-          <div className="journey-layout">
-            <div className="journey-content">
-              <h2>Votre parcours vers la sérénité</h2>
-              <p className="journey-intro">
-                Un accompagnement individuel sur-mesure qui vous guide dans l'apprentissage de la pleine conscience,
-                à votre rythme et selon vos besoins spécifiques, pour une transformation authentique et durable.
-              </p>
-
-              <div className="learning-outcomes">
-                <h3>Déroulement de l'accompagnement</h3>
-                <div className="outcomes-grid">
-                  {processSteps.map((step, index) => (
-                    <div key={index} className="outcome-item">
-                      <div className="outcome-icon">{step.number}</div>
-                      <div>
-                        <h4>{step.title}</h4>
-                        <p>{step.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="techniques-exploration">
-                <h3>Techniques et pratiques intégrées</h3>
-                <div className="techniques-grid">
-                  <div className="technique-item">
-                    <div className="technique-icon">🫁</div>
-                    <div>
-                      <h4>Respiration consciente</h4>
-                      <p>Maîtrise des techniques respiratoires pour apaiser le mental et retrouver votre centre.</p>
-                    </div>
-                  </div>
-                  <div className="technique-item">
-                    <div className="technique-icon">🧘‍♀️</div>
-                    <div>
-                      <h4>Méditations guidées</h4>
-                      <p>Pratiques adaptées à votre expérience et à vos objectifs personnels de bien-être.</p>
-                    </div>
-                  </div>
-                  <div className="technique-item">
-                    <div className="technique-icon">🌺</div>
-                    <div>
-                      <h4>Scan corporel</h4>
-                      <p>Développement de la conscience corporelle pour une connexion authentique à vos ressentis.</p>
-                    </div>
-                  </div>
-                  <div className="technique-item">
-                    <div className="technique-icon">💗</div>
-                    <div>
-                      <h4>Pratiques d'autocompassion</h4>
-                      <p>Cultiver une relation bienveillante et apaisante avec vous-même et vos émotions.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="journey-aside">
-              <PracticalInfoCard
-                variant="primary"
-                isSticky={true}
-                duration="45min - 1h"
-                format="Accompagnement individuel"
-                location="Distanciel ou Présentiel"
-              >
-                <div className="pricing-section-enhanced custom-pricing-section">
-                  <div className="price-display">
-                    <div className="price-amount">Sur devis</div>
-                    <div className="price-label">Séance personnalisée</div>
-                  </div>
-                  <div className="pricing-details">
-                    Tarif adapté à vos besoins et à la fréquence des séances.
-                  </div>
-                  <a href="/contact-reservation" className="cta-button-card">
-                    Demander un devis
-                  </a>
-                </div>
-              </PracticalInfoCard>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <VideoCTA
-        title="Prêt(e) à vous reconnecter à vous-même ?"
-        subtitle="Contactez-moi pour discuter de vos besoins et commencer votre parcours vers plus de présence et de sérénité."
-        buttonText="Demander un accompagnement"
-        buttonLink="/contact-reservation"
-      />
-
-      <style>{`
-        /* === HERO SECTION PLEINE CONSCIENCE === */
-        .hero-pleine-conscience {
-          padding: var(--spacing-20) 0;
-          background: #fffcea;
-          overflow: hidden;
-        }
-
-        .hero-pleine-conscience-layout {
-          display: grid;
-          grid-template-columns: 1.2fr 1fr;
-          gap: var(--spacing-12);
-          align-items: center;
-          min-height: 70vh;
-        }
-
-        .hero-content-pleine-conscience h1 {
-          font-size: clamp(3rem, 6vw, 4.5rem);
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-4);
-          line-height: 1.1;
-          font-weight: 700;
-        }
-
-        .hero-subtitle-pleine-conscience {
-          font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-6);
-          font-weight: 500;
-          line-height: 1.4;
-        }
-
-        .hero-description-pleine-conscience p {
-          font-size: 1.15rem;
-          line-height: 1.7;
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-8);
-          max-width: 55ch;
-        }
-
-        .hero-highlights-pleine-conscience {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-4);
-        }
-
-        .highlight-item {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-3);
-          font-size: 1.1rem;
-          color: var(--color-primary);
-        }
-
-        .highlight-item svg {
-          color: var(--color-primary);
-          flex-shrink: 0;
-        }
-
-        .price-highlight {
-          color: var(--color-primary) !important;
-          font-size: 1.2rem;
-        }
-
-        .hero-video-pleine-conscience {
-          position: relative;
-          height: 600px;
-          border-radius: 24px;
-          overflow: hidden;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .hero-video-element {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-        }
-
-        .video-overlay-pleine-conscience {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(45deg, rgba(31, 41, 55, 0.1) 0%, rgba(31, 41, 55, 0.05) 100%);
-        }
-
-        /* === BENEFITS SECTION AVEC VIDÉO === */
-        .benefits-section-pleine-conscience {
-          padding: var(--spacing-16) 0;
-          position: relative;
-        }
-
-        .benefits-section-pleine-conscience .section-header {
-          text-align: center;
-          margin-bottom: var(--spacing-12);
-        }
-
-        .benefits-section-pleine-conscience .section-header h2 {
-          font-size: clamp(2.2rem, 4vw, 3rem);
-          color: #fffcea;
-          margin-bottom: var(--spacing-4);
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-        }
-
-        .benefits-section-pleine-conscience .section-header p {
-          font-size: 1.2rem;
-          color: rgba(255, 252, 234, 0.9);
-          max-width: 600px;
-          margin: 0 auto;
-          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .benefits-grid-simplified {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: var(--spacing-8);
-        }
-
-        .benefit-card-simplified {
-          background: rgba(255, 252, 234, 0.95);
-          border: 1px solid rgba(255, 252, 234, 0.3);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-8);
-          text-align: center;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          backdrop-filter: blur(10px);
-        }
-
-        .benefit-card-simplified:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-          background: rgba(255, 252, 234, 1);
-        }
-
-        .benefit-icon-simplified {
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-4);
-        }
-
-        .benefit-card-simplified h3 {
-          font-size: 1.4rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-3);
-          font-weight: 600;
-        }
-
-        .benefit-card-simplified p {
-          color: var(--color-gray-700);
-          line-height: 1.6;
-          font-size: 1rem;
-        }
-
-        /* === VIDÉO STATIQUE === */
-        .parallax-video-static {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: 1;
-        }
-
-        /* === JOURNEY SECTION === */
-        .journey-section {
-          padding: var(--spacing-20) 0;
-          background: #fffcea;
-        }
-
-        .journey-layout {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: var(--spacing-6);
-          align-items: start;
-        }
-
-        .journey-content h2 {
-          font-size: clamp(2.5rem, 4.5vw, 3.5rem);
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-6);
-          line-height: 1.2;
-        }
-
-        .journey-intro {
-          font-size: 1.25rem;
-          line-height: 1.7;
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-10);
-          max-width: 85ch;
-        }
-
-        .learning-outcomes, .techniques-exploration {
-          margin-bottom: var(--spacing-10);
-        }
-
-        .learning-outcomes h3, .techniques-exploration h3 {
-          font-size: 1.8rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-6);
-          font-weight: 600;
-        }
-
-        .techniques-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: var(--spacing-6);
-        }
-
-        .technique-item {
-          display: flex;
-          gap: var(--spacing-4);
-          align-items: flex-start;
-        }
-
-        .technique-icon {
-          font-size: 1.5rem;
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-
-        .outcomes-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: var(--spacing-6);
-        }
-
-        .outcome-item {
-          display: flex;
-          gap: var(--spacing-4);
-          align-items: flex-start;
-        }
-
-        .outcome-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          background: var(--color-primary);
-          color: white;
-          border-radius: 50%;
-          font-weight: 700;
-          font-size: 0.9rem;
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-
-        .outcome-item h4, .technique-item h4 {
-          font-size: 1.2rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-2);
-          font-weight: 600;
-        }
-
-        .outcome-item p, .technique-item p {
-          color: var(--color-gray-700);
-          line-height: 1.6;
-          font-size: 1rem;
-        }
-
-        /* Enhanced info card styles */
-        .info-card-enhanced {
-          background: var(--color-white);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-8);
-          box-shadow: var(--shadow-lg);
-          border: 1px solid var(--color-gray-200);
-          width: 100%;
-          max-width: 400px;
-          z-index: 10;
-          will-change: transform;
-        }
-
-        .info-card-enhanced h2 {
-          font-size: 1.8rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-6);
-        }
-
-        .info-section-enhanced {
-          margin-bottom: var(--spacing-7);
-          padding-bottom: var(--spacing-6);
-          border-bottom: 1px solid var(--color-gray-100);
-        }
-
-        .info-section-enhanced:last-of-type {
-          border-bottom: none;
-          margin-bottom: 0;
-        }
-
-        .section-subtitle-enhanced {
-          font-size: 1.3rem;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-5);
-          font-weight: 600;
-        }
-
-        .modalities-grid {
-          display: grid;
-          gap: var(--spacing-0);
-          padding: var(--spacing-4);
-          background: #fffcea;
-          border-radius: var(--radius-lg);
-          margin-bottom: var(--spacing-4);
-        }
-
-        .modality-card {
-          padding: var(--spacing-3) 0;
-          background: transparent;
-          border-radius: 0;
-          border-left: none;
-          border-bottom: 1px solid var(--color-gray-100);
-        }
-
-        .modality-label {
-          font-size: 0.85rem;
-          color: var(--color-text-secondary);
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          margin-bottom: 4px;
-        }
-
-        .modality-value {
-          font-weight: 600;
-          color: var(--color-primary);
-          font-size: 1.1rem;
-          margin-bottom: 2px;
-        }
-
-        .modality-detail {
-          font-size: 0.95rem;
-          color: var(--color-text-secondary);
-        }
-
-        .format-description-enhanced {
-          font-size: 0.95rem;
-          color: var(--color-text-secondary);
-          line-height: 1.6;
-          padding: 0;
-          background: transparent;
-          border-radius: 0;
-          border: none;
-        }
-
-        .support-items {
-          display: grid;
-          gap: var(--spacing-4);
-        }
-
-        .support-item {
-          display: flex;
-          align-items: flex-start;
-          gap: var(--spacing-3);
-          padding: var(--spacing-3);
-          border-radius: 8px;
-          transition: background-color 0.2s ease;
-        }
-
-        .support-item:hover {
-          background: rgba(249, 247, 234, 0.3);
-        }
-
-        .support-icon {
-          font-size: 1.2rem;
-          margin-top: 2px;
-        }
-
-        .support-content {
-          flex: 1;
-        }
-
-        .support-title {
-          font-weight: 600;
-          color: var(--color-primary);
-          font-size: 1rem;
-          margin-bottom: 2px;
-        }
-
-        .support-desc {
-          font-size: 0.9rem;
-          color: var(--color-text-secondary);
-          line-height: 1.4;
-        }
-
-        .pricing-section-enhanced {
-          margin-top: var(--spacing-6);
-          padding: 0;
-          background: transparent;
-          border-radius: 0;
-          border: none;
-        }
-
-        .price-display {
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-          margin-bottom: var(--spacing-2);
-        }
-
-        .price-display .price-amount {
-          font-size: 2.2rem;
-          font-weight: 700;
-          color: var(--color-primary);
-        }
-
-        .price-display .price-label {
-          font-size: 1rem;
-          color: var(--color-text-secondary);
-          font-weight: 500;
-        }
-
-        .pricing-details {
-          font-size: 0.9rem;
-          color: var(--color-text-secondary);
-          line-height: 1.5;
-        }
-        .price-amount { font-size: 2.5rem; font-weight: 700; color: var(--color-primary); }
-        .price-label { font-size: 1.1rem; color: var(--color-text-secondary); font-weight: 500; }
-        
-        @media (max-width: 900px) { .coaching-details-grid { grid-template-columns: 1fr; } }
-
-        @media (max-width: 768px) {
-          .process-container-revisited { grid-template-columns: 1fr; gap: var(--spacing-8); text-align: center; }
-          .process-intro-revisited p { margin: 0 auto; }
-          .timeline-revisited { border-left: none; padding-left: 0; }
-          .timeline-item-revisited { text-align: left; }
-          .timeline-number-revisited { position: static; margin-bottom: var(--spacing-4); width: 45px; height: 45px; }
-        }
-
-        /* Custom styles for support section inside blue card */
-        .custom-support-section {
-          border-top: 1px solid rgba(255, 252, 234, 0.3);
-          padding-top: var(--spacing-6);
-        }
-
-        .custom-support-section .section-subtitle-enhanced {
-          font-size: 1.4rem;
-          color: #fffcea;
-          margin-bottom: var(--spacing-5);
-          font-weight: 600;
-        }
-
-        .support-items {
-          display: grid;
-          gap: var(--spacing-4);
-        }
-
-        .support-item {
-          display: flex;
-          align-items: flex-start;
-          gap: var(--spacing-3);
-          padding: var(--spacing-3);
-          border-radius: 8px;
-          transition: background-color 0.2s ease;
-        }
-
-        .support-item:hover {
-          background: rgba(255, 252, 234, 0.1);
-        }
-
-        .support-icon {
-          font-size: 1.2rem;
-          margin-top: 2px;
-          color: #fffcea;
-        }
-
-        .support-content {
-          flex: 1;
-        }
-
-        .support-title {
-          font-weight: 600;
-          color: #fffcea;
-          font-size: 1rem;
-          margin-bottom: 2px;
-        }
-
-        .support-desc {
-          font-size: 0.9rem;
-          color: rgba(255, 252, 234, 0.8);
-          line-height: 1.4;
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 1024px) {
-          .hero-pleine-conscience-layout {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-8);
-            text-align: center;
+    <ServiceLayout
+      hero={{
+        title: <>Pleine<br /><span className="opacity-40 italic font-light">conscience</span></>,
+        subtitle: "Ralentir pour mieux se retrouver et cultiver une présence authentique à vous-même.",
+        tag: "Accompagnement individuel",
+        duration: "1H - 1H30",
+        format: "INDIVIDUEL",
+        location: "VAUREILLES / VISIO",
+        mediaSrc: "/sand_conscience.mp4",
+        mediaType: "video"
+      }}
+      benefits={{
+        title: "Les bénéfices attendus",
+        subtitle: "Un chemin vers plus de clarté et d'alignement",
+        items: [
+          {
+            icon: Target,
+            title: 'Conscience de soi',
+            description: 'Développez une meilleure connaissance de vos besoins et de vos réactions.'
+          },
+          {
+            icon: Heart,
+            title: 'Équilibre émotionnel',
+            description: 'Apprenez à accueillir et réguler vos émotions avec bienveillance.'
+          },
+          {
+            icon: Sparkles,
+            title: 'Sérénité quotidienne',
+            description: 'Intégrez la pleine conscience dans votre vie pour plus de paix intérieure.'
           }
-          
-          .hero-video-pleine-conscience {
-            height: 400px;
-            order: -1;
+        ]
+      }}
+      process={{
+        title: "Déroulement",
+        subtitle: "Un cheminement progressif vers la pleine présence",
+        steps: [
+          {
+            number: '01',
+            title: 'Première rencontre',
+            description: 'Écoute de vos besoins, exploration de vos objectifs et définition du cadre d\'accompagnement.'
+          },
+          {
+            number: '02',
+            title: 'Initiation aux pratiques',
+            description: 'Découverte des techniques de base : respiration consciente, scan corporel et méditation.'
+          },
+          {
+            number: '03',
+            title: 'Approfondissement',
+            description: 'Développement de votre pratique personnelle avec des exercices adaptés à votre quotidien.'
+          },
+          {
+            number: '04',
+            title: 'Autonomie',
+            description: 'Consolidation de votre pratique avec des outils pour maintenir votre équilibre durablement.'
           }
-          
-          .hero-description-pleine-conscience p {
-            margin: 0 auto var(--spacing-8);
-          }
-        }
-
-        @media (max-width: 768px) {
-          .hero-pleine-conscience {
-            padding: var(--spacing-12) 0;
-          }
-          
-          .hero-video-pleine-conscience {
-            height: 300px;
-          }
-          
-          .benefits-grid-simplified {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-6);
-            padding: 0 var(--spacing-4);
-          }
-
-          .benefit-card-simplified {
-            padding: var(--spacing-6);
-            margin: 0;
-            max-width: 100%;
-            box-sizing: border-box;
-          }
-
-          .benefits-section-pleine-conscience .container {
-            padding: 0 var(--spacing-4);
-            max-width: 100%;
-            overflow-x: hidden;
-          }
-          
-          .highlight-item {
-            justify-content: center;
-          }
-
-          .outcomes-grid, .techniques-grid {
-            grid-template-columns: 1fr;
-          }
-
-        }
-
-        @media (max-width: 480px) {
-          .benefits-section-pleine-conscience {
-            padding: var(--spacing-12) 0;
-          }
-
-          .benefits-section-pleine-conscience .section-header h2 {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
-            padding: 0 var(--spacing-2);
-          }
-
-          .benefits-section-pleine-conscience .section-header p {
-            font-size: 1rem;
-            padding: 0 var(--spacing-2);
-          }
-
-          .benefits-grid-simplified {
-            gap: var(--spacing-4);
-            padding: 0 var(--spacing-2);
-          }
-
-          .benefit-card-simplified {
-            padding: var(--spacing-5);
-          }
-
-          .benefit-card-simplified h3 {
-            font-size: 1.2rem;
-          }
-
-          .benefit-card-simplified p {
-            font-size: 0.95rem;
-          }
-        }
-      `}</style>
-    </div >
+        ]
+      }}
+      objectives={{
+        title: "Techniques intégrées",
+        subtitle: "Des outils concrets pour votre pratique",
+        items: [
+          { title: 'Respiration', description: 'Techniques de respiration consciente pour apaiser le mental.' },
+          { title: 'Méditation', description: 'Pratiques formelles guidées adaptées à votre niveau.' },
+          { title: 'Scan corporel', description: 'Reconnexion aux sensations du corps pour s\'ancrer.' },
+          { title: 'Vie quotidienne', description: 'Exercices informels pour intégrer la présence au quotidien.' }
+        ]
+      }}
+      practical={{
+        durationDetail: "45min - 1h30",
+        formatDetail: "Accompagnement individuel",
+        locationDetail: "Vaureilles (12) ou Visio",
+        priceMain: "90€",
+        priceSub: "60€",
+        priceLabelMain: "Bilan Initial",
+        priceLabelSub: "Suivi",
+        description: "Chaque séance est unique et s'adapte à votre état du moment. Nous avançons ensemble à votre rythme, avec douceur et bienveillance.",
+        features: ['Séances personnalisées', 'Enregistrements audios', 'Suivi entre les séances']
+      }}
+      cta={{
+        title: "Prêt(e) à vous reconnecter à vous-même ?",
+        subtitle: "Contactez-moi pour discuter de vos besoins et commencer votre parcours.",
+        buttonText: "Me contacter"
+      }}
+    />
   );
 };
 

@@ -31,12 +31,12 @@ const HomePage: React.FC = () => {
       <HeroSection />
 
       {/* Welcome Section */}
-      <section className="section welcome-section">
+      <section className="section welcome-section bg-[#fffcea]">
         <div className="container">
           <div className="welcome-content">
             <div className="welcome-text">
               <h2 className="welcome-title">Bienvenue sur EsenCiel 🌅</h2>
-              <p className="welcome-description">
+              <p className="welcome-intro">
                 Un espace dédié à la pleine conscience au service de votre bien-être authentique.
               </p>
               <p className="welcome-description">
@@ -55,7 +55,7 @@ const HomePage: React.FC = () => {
                 muted
                 loop
                 playsInline
-                className="zen-video"
+                className="zen-video parallax-video pointer-events-none"
               >
                 <source src="/hero_video.mp4" type="video/mp4" />
               </video>
@@ -108,21 +108,9 @@ const HomePage: React.FC = () => {
 
                  /* WELCOME SECTION */
          .welcome-section {
-           background: #fffcea url('/path-to-your-background-image.jpg') no-repeat center center;
-           background-size: cover;
            padding: 6rem 0;
            position: relative;
            z-index: 1;
-         }
-         .welcome-section::before {
-           content: '';
-           position: absolute;
-           top: 0;
-           left: 0;
-           right: 0;
-           bottom: 0;
-           background: rgba(255, 252, 234, 0.85);
-           z-index: -1;
          }
          .welcome-content {
            display: grid;

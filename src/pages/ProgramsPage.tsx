@@ -2,30 +2,31 @@ import React from 'react';
 import { collectivePrograms } from './servicesData';
 import ServiceCard from '../components/ServiceCard';
 import VideoCTA from '../components/VideoCTA';
+import ParallaxSection from '../components/ParallaxSection';
 
 const ProgramsPage: React.FC = () => {
   return (
     <div className="services-page">
-      <section className="hero-services">
-        <video autoPlay muted loop playsInline className="hero-video">
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-overlay" aria-hidden="true"></div>
-        <div className="hero-content">
+      <ParallaxSection 
+        videoSrc="/background.mp4" 
+        className="hero-services min-h-[60vh]"
+        overlayOpacity={0.4}
+      >
+        <div className="hero-content text-center">
           <h1>Programmes de pleine conscience</h1>
           <p className="hero-subtitle">Programmes structurés et scientifiquement validés</p>
         </div>
-      </section>
+      </ParallaxSection>
 
-      <section id="programmes" className="section services-section">
+      <section id="programmes" className="section services-section bg-[#fffcea]">
         <div className="container">
           <div className="section-header">
             <h1>Programmes de pleine conscience</h1>
             <p>Programmes structurés et scientifiquement validés</p>
           </div>
-          <div className="services-grid">
+          <div className="services-grid grid md:grid-cols-3 gap-8">
             {collectivePrograms.map(service => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard key={service.id} service={service} variant="on-nude" />
             ))}
           </div>
         </div>

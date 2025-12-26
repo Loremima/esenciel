@@ -11,7 +11,7 @@ const TestimonialsSection: React.FC = () => {
       location: 'Rodez',
       rating: 5,
       text: 'Véronique m\'a accompagnée avec une approche très personnalisée. Grâce aux techniques de pleine conscience, j\'ai retrouvé un équilibre que je pensais perdu. Son professionnalisme et sa bienveillance font toute la différence.',
-      service: 'Programme MBSR'
+      service: 'Programme Gestion du stress par la pleine conscience'
     },
     {
       id: 2,
@@ -119,7 +119,7 @@ const TestimonialsSection: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .testimonials-section {
           background: transparent;
           color: var(--color-primary);
@@ -146,15 +146,13 @@ const TestimonialsSection: React.FC = () => {
         }
 
         .section-header h2 {
-          color: #fffcea;
-          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          color: var(--color-primary) !important;
           margin-bottom: var(--spacing-4);
           font-size: clamp(2rem, 4vw, 2.5rem);
         }
 
         .section-subtitle {
-          color: #fffcea;
-          text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+          color: var(--color-gray-700) !important;
           font-size: 1.2rem;
           max-width: 600px;
           margin: 0 auto;
@@ -270,7 +268,7 @@ const TestimonialsSection: React.FC = () => {
           height: 12px;
           border-radius: 50%;
           border: none;
-          background: rgba(255, 252, 234, 0.3);
+          background: rgba(31, 41, 55, 0.1);
           cursor: pointer;
           transition: all var(--transition-fast);
         }
@@ -281,7 +279,7 @@ const TestimonialsSection: React.FC = () => {
         }
 
         .indicator:hover {
-          background: rgba(255, 252, 234, 0.6);
+          background: rgba(31, 41, 55, 0.3);
         }
 
         @media (max-width: 1024px) {

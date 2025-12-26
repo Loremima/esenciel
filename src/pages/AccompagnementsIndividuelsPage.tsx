@@ -1,41 +1,51 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { CalendarDays } from 'lucide-react';
 import { individualServices } from './servicesData';
 import ServiceCard from '../components/ServiceCard';
 import VideoCTA from '../components/VideoCTA';
+import ParallaxSection from '../components/ParallaxSection';
 
 const AccompagnementsIndividuelsPage: React.FC = () => {
-  return (
-    <div className="services-page">
-      <section className="hero-services">
-        <video autoPlay muted loop playsInline className="hero-video">
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-overlay" aria-hidden="true"></div>
-        <div className="hero-content">
-          <h1>Accompagnements individuels</h1>
-        </div>
-      </section>
+  const primaryDark = '#1F2937';
 
-      <section id="individuels" className="section services-section">
-        <div className="container">
-          <div className="section-header">
-            <h1>Accompagnements individuels</h1>
-            <p>Un accompagnement sur mesure pour une santé de qualité, une vie optimisée et une pleine conscience au quotidien. </p>
+  return (
+    <div className="accompagnements-individuels-page">
+      <ParallaxSection 
+        videoSrc="/background.mp4" 
+        className="hero-individuel min-h-[60vh]"
+        overlayOpacity={0.4}
+      >
+        <div className="hero-content text-center">
+          <h1>Accompagnement Individuel</h1>
+          <p className="hero-subtitle">
+            Un suivi personnalisé pour une santé de qualité, une vie optimisée et une pleine conscience au quotidien.
+          </p>
+        </div>
+      </ParallaxSection>
+
+      <section id="individuels" className="section bg-[#fffcea]">
+        <div className="container flex flex-col items-center">
+          <div className="max-w-4xl mx-auto text-center mb-20 w-full">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading" style={{ color: primaryDark }}>Nos Accompagnements</h2>
+            <p className="text-stone-600 text-xl font-light leading-relaxed max-w-2xl mx-auto">
+              Découvrez comment je peux vous aider à retrouver votre équilibre.
+            </p>
           </div>
-          <div className="services-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
             {individualServices.map(service => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard
+                key={service.id}
+                service={service}
+                variant="on-nude"
+              />
             ))}
           </div>
         </div>
       </section>
 
       <VideoCTA
-        title="Prêt(e) à transformer votre quotidien ?"
-        subtitle="Contactez-moi pour discuter de vos besoins et trouver l'accompagnement qui vous correspond le mieux."
-        buttonText="Prendre rendez-vous"
+        title="Prêt(e) pour un changement ?"
+        subtitle="Commencez votre voyage vers une version plus sereine et vitalisée de vous-même."
+        buttonText="Réserver un bilan"
         buttonLink="/contact-reservation"
       />
     </div>

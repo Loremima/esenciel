@@ -194,6 +194,17 @@ p {
     height: 100%;
     object-fit: cover;
     z-index: 1;
+    pointer-events: none;
+}
+
+/* Hide default play button on iOS/Safari globally for parallax videos */
+.parallax-video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+}
+
+.parallax-video::-webkit-media-controls {
+    display: none !important;
 }
 
 .parallax-surface::before {
@@ -226,126 +237,7 @@ p {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-/* Cartes beiges dans les sections parallax avec meilleur contraste */
-.parallax-surface .service-card,
-.parallax-surface .card {
-    background: rgba(255, 252, 234, 0.95) !important;
-    border: 1px solid rgba(184, 138, 43, 0.4) !important;
-    backdrop-filter: blur(15px) saturate(120%) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
-}
-
-.parallax-surface .service-card:hover,
-.parallax-surface .card:hover {
-    background: rgba(255, 252, 234, 0.98) !important;
-    border-color: rgba(184, 138, 43, 0.6) !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* Texte contrasté dans les cartes parallax */
-.parallax-surface .service-card *,
-.parallax-surface .service-card h1,
-.parallax-surface .service-card h2,
-.parallax-surface .service-card h3,
-.parallax-surface .service-card h4,
-.parallax-surface .service-card p,
-.parallax-surface .service-card label,
-.parallax-surface .service-card .service-title,
-.parallax-surface .service-card .service-description,
-.parallax-surface .service-card .info-label,
-.parallax-surface .service-card .info-value,
-.parallax-surface .service-card .info-detail {
-    color: var(--color-gray-800) !important;
-    text-shadow: none !important;
-}
-
-/* Icônes et éléments spéciaux */
-.parallax-surface .service-card .service-icon {
-    background: var(--color-primary) !important;
-    color: white !important;
-}
-
-.parallax-surface .service-card .chip {
-    border-color: var(--color-primary) !important;
-    color: var(--color-primary) !important;
-    background: rgba(255, 255, 255, 0.8) !important;
-}
-
-/* Bouton "En savoir plus" reste bleu dans les sections parallax */
-.parallax-surface .service-card .btn-info {
-    background: var(--color-primary) !important;
-    border: 1px solid var(--color-primary) !important;
-    color: white !important;
-    font-weight: 600 !important;
-    border-radius: 12px !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-}
-
-.parallax-surface .service-card .btn-info:hover {
-    background: var(--color-primary-dark) !important;
-    border-color: var(--color-primary-dark) !important;
-    color: white !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* Autres boutons style beige dans les sections parallax */
-.parallax-surface .service-card .btn-primary,
-.parallax-surface .service-card .btn-outline,
-.parallax-surface .service-card .btn {
-    background: #fffcea !important;
-    border: 1px solid var(--color-primary) !important;
-    color: var(--color-primary) !important;
-    font-weight: 600 !important;
-    border-radius: 12px !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-}
-
-.parallax-surface .service-card .btn-primary:hover,
-.parallax-surface .service-card .btn-outline:hover,
-.parallax-surface .service-card .btn:hover {
-    background: var(--color-primary) !important;
-    border-color: var(--color-primary) !important;
-    color: white !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* Icônes suivent la couleur du texte */
-.parallax-surface .service-card .btn-info svg {
-    color: white !important;
-}
-
-.parallax-surface .service-card .btn-primary svg,
-.parallax-surface .service-card .btn-outline svg,
-.parallax-surface .service-card .btn svg {
-    color: var(--color-primary) !important;
-}
-
-.parallax-surface .service-card .btn-primary:hover svg,
-.parallax-surface .service-card .btn-outline:hover svg,
-.parallax-surface .service-card .btn:hover svg {
-    color: white !important;
-}
-
-/* Formulaire plus lisible sur parallax */
-.parallax-surface .form-grid input,
-.parallax-surface .form-grid select,
-.parallax-surface .form-grid textarea {
-    background: rgba(255, 255, 255, 0.95) !important;
-    color: var(--color-gray-800) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.parallax-surface .form-grid input:focus,
-.parallax-surface .form-grid select:focus,
-.parallax-surface .form-grid textarea:focus {
-    background: rgba(255, 255, 255, 1) !important;
-    border-color: var(--color-secondary);
-}
+/* Spécificités supprimées pour laisser place au nouveau composant ServiceCard adaptatif */
 
 .mx-auto {
     margin-left: auto;
@@ -431,22 +323,55 @@ p {
     box-shadow: var(--shadow-lg);
 }
 
-.btn-glass {
-    background: rgba(255, 252, 234, 0.15) !important;
-    border: 1px solid rgba(255, 252, 234, 0.4) !important;
-    color: rgba(255, 252, 234, 0.95) !important;
+/* Nouveau composant GlassButton standardisé pour les fonds vidéo */
+.btn-glass-shared {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3);
+    padding: 0.8rem 2.2rem;
+    background: rgba(255, 252, 234, 0.15);
+    border: 1px solid rgba(255, 252, 234, 0.4);
+    color: rgba(255, 252, 234, 0.95);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
     font-weight: 400;
-    border-radius: 30px;
-    transition: all 0.4s ease;
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(15px) saturate(120%);
+    -webkit-backdrop-filter: blur(15px) saturate(120%);
 }
 
-.btn-glass:hover {
-    background: rgba(255, 252, 234, 0.25) !important;
-    border-color: rgba(255, 252, 234, 0.6) !important;
-    color: rgba(255, 252, 234, 1) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+.btn-glass-shared--compact {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    gap: var(--spacing-2);
+    border-radius: 12px;
+}
+
+.btn-glass-shared:hover {
+    background: rgba(255, 252, 234, 0.25);
+    border-color: rgba(255, 252, 234, 0.6);
+    color: #fffcea;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
+}
+
+.btn-glass-shared__icon {
+    transition: transform 0.3s ease;
+}
+
+.btn-glass-shared:hover .btn-glass-shared__icon {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .btn-glass-shared {
+        width: 100%;
+        padding: 1rem 1.5rem;
+    }
 }
 
 /* Cards - Style uniforme comme le Jeu du Tao : blanc haut-gauche → transparent bas-droite */
@@ -882,19 +807,7 @@ a[href*="bolt.build"],
     margin: 0 auto;
 }
 
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: var(--spacing-8);
-    margin-top: var(--spacing-8);
-}
-
-/* Forcer les 3 cartes de la section programmes sur la même ligne */
-#programmes .services-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-6);
-}
-
+/* Grilles de services gérées par flexbox adaptative dans les composants */
 
 /* CTA Section */
 .cta-section {

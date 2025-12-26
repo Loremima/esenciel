@@ -1,5 +1,6 @@
 import React from 'react';
 import { Brain, Heart, Lightbulb, Target, BookOpen, Users, Compass } from 'lucide-react';
+import ParallaxSection from '../components/ParallaxSection';
 
 const InfosPratiquesPage: React.FC = () => {
   const definitions = [
@@ -65,30 +66,18 @@ const InfosPratiquesPage: React.FC = () => {
   return (
     <div className="infos-pratiques-page">
       {/* Hero Section avec vidéo de fond */}
-      <section className="hero-infos">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hero-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-          <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="Paysage serein - MindWayLife"
-          />
-        </video>
-
-        <div className="hero-overlay" aria-hidden="true"></div>
-
-        <div className="hero-content">
+      <ParallaxSection 
+        videoSrc="/background.mp4" 
+        className="hero-infos min-h-[60vh]"
+        overlayOpacity={0.4}
+      >
+        <div className="hero-content text-center">
           <h1>Infos pratiques</h1>
           <p className="hero-subtitle">
             Tout ce qu'il faut savoir pour mieux comprendre et approfondir votre démarche
           </p>
         </div>
-      </section>
+      </ParallaxSection>
 
       {/* Définitions */}
       <section className="section definitions-section">
@@ -118,20 +107,11 @@ const InfosPratiquesPage: React.FC = () => {
       </section>
 
       {/* Ressources */}
-      <section className="section resources-section parallax-surface">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="parallax-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container">
+      <ParallaxSection videoSrc="/background.mp4" className="section resources-section py-32" overlayOpacity={0.25}>
+        <div className="container relative z-10">
           <div className="section-header">
-            <h1>Ressources pour approfondir</h1>
-            <p>Outils et références pour enrichir votre pratique</p>
+            <h1 className="text-[#fffcea]">Ressources pour approfondir</h1>
+            <p className="text-[#fffcea]/80">Outils et références pour enrichir votre pratique</p>
           </div>
 
           <div className="resources-grid">
@@ -155,7 +135,7 @@ const InfosPratiquesPage: React.FC = () => {
             })}
           </div>
         </div>
-      </section>
+      </ParallaxSection>
 
       {/* FAQ ou conseils supplémentaires */}
       <section className="section tips-section">

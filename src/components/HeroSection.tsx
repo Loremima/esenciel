@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
+import ParallaxSection from './ParallaxSection';
+import GlassButton from './GlassButton';
 
 const HeroSection: React.FC = () => {
   const [visibleWords, setVisibleWords] = useState(0);
   const words = ['Ralenti,', 'Respire,', 'Ressens'];
-  const videoRef = useSlowMoVideo();
-
+  
   useEffect(() => {
     const audio = document.getElementById('site-bgm') as HTMLAudioElement | null;
     if (!audio) return;
@@ -47,25 +47,11 @@ const HeroSection: React.FC = () => {
   }, [words.length]);
 
   return (
-    <section className="hero">
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="hero-video"
-      >
-        <source src="/background.mp4" type="video/mp4" />
-        {/* Fallback image si la vidéo ne charge pas */}
-        <img
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-          alt="Paysage serein - MindWayLife"
-        />
-      </video>
-
-      <div className="overlay" aria-hidden="true"></div>
-
+    <ParallaxSection 
+      videoSrc="/background.mp4" 
+      className="hero min-h-screen"
+      overlayOpacity={0.3}
+    >
       <div className="hero-center">
         <h1 className="main-brand-title">EsenCiel</h1>
         <p className="by-author">by Véronique Carrié</p>
@@ -83,63 +69,23 @@ const HeroSection: React.FC = () => {
           Retrouvez votre équilibre naturel par la pleine conscience
         </p>
         <div className="actions">
-          <Link to="/qui-suis-je" className="btn btn-info">
-            <span>En savoir plus</span>
-          </Link>
+          <GlassButton to="/qui-suis-je">
+            En savoir plus
+          </GlassButton>
         </div>
       </div>
 
       <style>{`
-        .hero {
-          position: relative;
-          min-height: 100vh;
-          width: 100%;
-          overflow: hidden;
-        }
-
-        .hero-video {
-          position: fixed;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          z-index: -2;
-        }
-
-        .hero-video img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-        }
-
-        /* voile subtil pour la lisibilité sans masquer l'image */
-        .overlay {
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(
-            ellipse at center,
-            rgba(0, 0, 0, 0.2) 0%,
-            rgba(0, 0, 0, 0.4) 100%
-          );
-          z-index: -1;
-        }
-
+        /* Styles spécifiques au contenu du Hero qui ne sont pas gérés par ParallaxSection */
+        
         .hero-center {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          z-index: 2;
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: clamp(1rem, 3vw, 2rem);
           text-align: center;
           max-width: 85vw;
+          /* Le centrage est géré par le flex parent de ParallaxSection */
         }
 
         .main-brand-title {
@@ -164,16 +110,6 @@ const HeroSection: React.FC = () => {
           text-shadow: 0 1px 4px rgba(0,0,0,0.4);
           letter-spacing: 0.05em;
           margin-top: -0.5rem;
-        }
-
-        .hero-main-title {
-          font-size: clamp(3rem, 8vw, 5rem);
-          line-height: 1.1;
-          color: var(--color-white);
-          font-weight: 700;
-          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-          margin: 0; /* espacement géré par gap */
-          max-width: 800px;
         }
 
         .animated-slogan {
@@ -214,7 +150,7 @@ const HeroSection: React.FC = () => {
             opacity 1800ms ease,
             transform 1800ms cubic-bezier(0.22, 1, 0.36, 1),
             filter 1800ms ease;
-          font-size: inherit; /* hérite de .animated-slogan */
+          font-size: inherit;
           font-family: var(--font-heading);
           color: #fffcea;
           text-shadow: 0 3px 12px rgba(0,0,0,0.35);
@@ -234,79 +170,6 @@ const HeroSection: React.FC = () => {
           flex-wrap: wrap;
           justify-content: center;
           margin: clamp(1rem, 3vw, 2rem) 0 0 0;
-        }
-
-        .actions .btn {
-          position: relative;
-          background: rgba(255, 252, 234, 0.05);
-          border: 1px solid rgba(255, 252, 234, 0.2);
-          color: rgba(255, 252, 234, 0.9);
-          font-weight: 300;
-          font-size: clamp(0.9rem, 1.8vw, 1rem);
-          padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
-          border-radius: 30px;
-          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-          text-decoration: none;
-          min-width: clamp(140px, 25vw, 160px);
-          text-align: center;
-          backdrop-filter: blur(20px);
-          letter-spacing: 0.05em;
-          font-family: var(--font-body);
-        }
-
-        .actions .btn:hover {
-          background: rgba(255, 252, 234, 0.12);
-          border-color: rgba(255, 252, 234, 0.4);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-          transform: translateY(-2px);
-        }
-        
-        .actions .btn span {
-          position: relative;
-          z-index: 1;
-        }
-        
-        .actions .btn-primary {
-          background: rgba(255, 252, 234, 0.9);
-          border-color: rgba(255, 252, 234, 0.9);
-          color: var(--color-primary);
-          font-weight: 400;
-        }
-
-        .actions .btn-primary:hover {
-          background: rgba(255, 252, 234, 1);
-          border-color: rgba(255, 252, 234, 1);
-          color: var(--color-primary);
-          box-shadow: 0 8px 25px rgba(255, 252, 234, 0.2);
-          transform: translateY(-2px);
-        }
-
-        .actions .btn-secondary {
-          background: rgba(255, 252, 234, 0.1);
-          border-color: rgba(255, 252, 234, 0.35);
-          color: #fffcea;
-        }
-
-        .actions .btn-secondary:hover {
-          background: rgba(255, 252, 234, 0.22);
-          border-color: rgba(255, 252, 234, 0.6);
-        }
-
-        .scroll-indicator {
-          color: #fffcea;
-          animation: bounce 2s infinite ease-in-out;
-        }
-
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% {
-            transform: translateY(0);
-          }
-          40% {
-            transform: translateY(-15px);
-          }
-          60% {
-            transform: translateY(-10px);
-          }
         }
 
         @media (max-width: 768px) {
@@ -345,14 +208,9 @@ const HeroSection: React.FC = () => {
             max-width: 250px;
             margin-top: clamp(1.5rem, 4vw, 2rem);
           }
-
-          .actions .btn {
-            width: 100%;
-            padding: clamp(0.9rem, 3vw, 1.1rem) clamp(1.5rem, 4vw, 2rem);
-          }
         }
       `}</style>
-    </section>
+    </ParallaxSection>
   );
 };
 

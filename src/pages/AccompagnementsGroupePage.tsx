@@ -1,41 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { CalendarDays } from 'lucide-react';
 import { groupServices } from './servicesData';
 import ServiceCard from '../components/ServiceCard';
 import VideoCTA from '../components/VideoCTA';
 
 const AccompagnementsGroupePage: React.FC = () => {
-  return (
-    <div className="services-page">
-      <section className="hero-services">
-        <video autoPlay muted loop playsInline className="hero-video">
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-overlay" aria-hidden="true"></div>
-        <div className="hero-content">
-          <h1>Accompagnements groupe</h1>
-        </div>
-      </section>
+  const primaryDark = '#1F2937';
 
-      <section id="groupes" className="section services-section">
-        <div className="container">
-          <div className="section-header">
-            <h1>Accompagnements groupe</h1>
-            <p>Expérience collective enrichissante</p>
+  return (
+    <div className="accompagnements-groupe-page">
+      <section id="groupes" className="section bg-[#fffcea] pt-32">
+        <div className="container flex flex-col items-center">
+          <div className="max-w-4xl mx-auto text-center mb-20 w-full">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 font-heading" style={{ color: primaryDark }}>Accompagnement Groupe</h1>
+            <p className="text-stone-600 text-xl font-light leading-relaxed max-w-2xl mx-auto">
+              Une dynamique de partage et d'entraide pour évoluer ensemble vers un mieux-être durable.
+            </p>
           </div>
-          <div className="services-grid">
-            {groupServices.map(service => (
-              <ServiceCard key={service.id} service={service} isHighlight={service.highlight} />
-            ))}
+          <div className="flex justify-center">
+            <div className="max-w-xl w-full">
+              {groupServices.map(service => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  isHighlight={service.highlight}
+                  variant="on-nude"
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       <VideoCTA
-        title="Prêt(e) à transformer votre quotidien ?"
-        subtitle="Contactez-moi pour discuter de vos besoins et trouver l'accompagnement qui vous correspond le mieux."
-        buttonText="Prendre rendez-vous"
+        title="L'aventure vous tente ?"
+        subtitle="Rejoignez un groupe pour vivre une expérience humaine riche et transformatrice."
+        buttonText="Me contacter"
         buttonLink="/contact-reservation"
       />
     </div>

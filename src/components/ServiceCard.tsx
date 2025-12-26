@@ -1,183 +1,181 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, Users, Euro, CheckCircle, CalendarDays } from 'lucide-react';
+import { ArrowRight, CalendarDays } from 'lucide-react';
+import GlassButton from './GlassButton';
 
-const ServiceCard = ({ service, isHighlight = false }: { service: any, isHighlight?: boolean }) => {
+interface ServiceCardProps {
+    service: {
+        id: string;
+        icon: any;
+        title: string;
+        description: string;
+        duration?: string;
+        sessionDuration?: string;
+        price?: string;
+        sessionType?: string;
+        modalities?: string[];
+        features?: string[];
+        detailPage?: string;
+    };
+    isHighlight?: boolean;
+    variant?: 'on-video' | 'on-nude';
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({
+    service,
+    _isHighlight = false,
+    variant = 'on-nude'
+}) => {
     const IconComponent = service.icon;
+    const isVideo = variant === 'on-video';
+    const primaryDark = '#1F2937';
 
-    // Extract participants info when present
-    const isGroup = typeof service.sessionType === 'string' && /groupe/i.test(service.sessionType);
-    const participantsRange = (() => {
-        if (!service?.sessionType) return '';
-        const match = String(service.sessionType).match(/\(([^)]+)\)/); // text inside parentheses
-        return match ? match[1] : '';
-    })();
+    // Styles inline
+    const cardStyle: React.CSSProperties = {
+        display: 'flex',
+        flexDirection: 'column',
+        // On retire height: '100%' pour éviter l'étirement moche
+        // On laisse le contenu définir la hauteur
+        width: '100%',
+        borderRadius: '2.5rem',
+        overflow: 'hidden',
+        transition: 'all 0.3s ease',
+        backgroundColor: isVideo ? 'rgba(255,255,255,0.1)' : 'white',
+        backdropFilter: isVideo ? 'blur(12px)' : 'none',
+        border: isVideo ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(0,0,0,0.05)',
+        boxShadow: isVideo ? '0 8px 32px rgba(0,0,0,0.15)' : '0 10px 40px rgba(0,0,0,0.06)',
+    };
 
-    // Separate 'Minimum X participants' from other modalities
-    const minParticipants = Array.isArray(service?.modalities)
-        ? service.modalities.find((m: string) => /minimum\s*\d+/i.test(m))
-        : undefined;
-    const cleanModalities = Array.isArray(service?.modalities)
-        ? service.modalities.filter((m: string) => !/minimum\s*\d+/i.test(m))
-        : [];
+    const contentStyle: React.CSSProperties = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        textAlign: 'left',
+        padding: '2.5rem',
+        // Pas de height: 100% ici non plus
+    };
+
+    const headerStyle: React.CSSProperties = {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1.25rem',
+        marginBottom: '1.5rem',
+        width: '100%',
+    };
+
+    const iconStyle: React.CSSProperties = {
+        width: '3.5rem',
+        height: '3.5rem',
+        borderRadius: '1.25rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+        backgroundColor: isVideo ? 'rgba(255,255,255,0.1)' : '#f5f5f4',
+    };
+
+    const titleStyle: React.CSSProperties = {
+        fontSize: '1.5rem',
+        fontWeight: 700,
+        lineHeight: 1.2,
+        margin: 0,
+        color: isVideo ? '#fffcea' : primaryDark,
+    };
+
+    const descStyle: React.CSSProperties = {
+        display: 'block',
+        width: '100%',
+        fontSize: '0.95rem',
+        lineHeight: 1.7,
+        marginBottom: '2rem',
+        minHeight: '4.5rem', // Pour aligner un peu les cartes
+        color: isVideo ? 'rgba(255,252,234,0.85)' : '#57534e',
+    };
+
+    const buttonsContainerStyle: React.CSSProperties = {
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '0.75rem',
+        width: '100%',
+        marginTop: 'auto',
+    };
+
+    const btnBaseStyle: React.CSSProperties = {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '0.5rem',
+        flex: 1,
+        padding: '0.875rem 1rem',
+        borderRadius: '1rem',
+        fontSize: '0.875rem',
+        fontWeight: 600,
+        textDecoration: 'none',
+        transition: 'all 0.3s ease',
+    };
+
+    const btnSecondaryStyle: React.CSSProperties = {
+        ...btnBaseStyle,
+        backgroundColor: isVideo ? 'rgba(255,255,255,0.08)' : '#f5f5f4',
+        border: isVideo ? '1px solid rgba(255,255,255,0.15)' : '1px solid #e7e5e4',
+        color: isVideo ? '#fffcea' : primaryDark,
+    };
+
+    const btnPrimaryStyle: React.CSSProperties = {
+        ...btnBaseStyle,
+        backgroundColor: isVideo ? '#fffcea' : primaryDark,
+        color: isVideo ? primaryDark : 'white',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+    };
 
     return (
-        <div className={`service-card ${isHighlight ? 'highlight' : ''}`}>
-            {/* Header avec icône et titre */}
-            <div className="service-header">
-                <div className="service-icon">
-                    <IconComponent size={22} />
-                </div>
-                <h3 className="service-title">{service.title}</h3>
-            </div>
-
-            {/* Meta chips (type / participants) */}
-            <div className="meta-chips">
-                {service.sessionType && (
-                    <span className="chip">
-                        <Users size={14} />
-                        <span>{String(service.sessionType).replace(/\s*\([^)]*\)/, '').trim()}</span>
-                    </span>
-                )}
-                {isGroup && (
-                    <span className="chip neutral">
-                        <Users size={14} />
-                        <span>
-                            {participantsRange || 'Participants'}
-                            {minParticipants ? ` · ${minParticipants.replace(/minimum/i, 'min.').trim()}` : ''}
-                        </span>
-                    </span>
-                )}
-            </div>
-
-            {/* Description */}
-            <p className="service-description">{service.description}</p>
-
-            {/* Informations principales en grid */}
-            <div className="service-main-info">
-                <div className="info-item-grid">
-                    <Clock size={16} />
-                    <div>
-                        <span className="info-label">Durée</span>
-                        <span className="info-value">{service.duration}</span>
-                        {service.sessionDuration && (
-                            <span className="info-detail">{service.sessionDuration}</span>
-                        )}
+        <div style={cardStyle}>
+            <div style={contentStyle}>
+                {/* Header: Icône + Titre */}
+                <div style={headerStyle}>
+                    <div style={iconStyle}>
+                        <IconComponent
+                            size={28}
+                            strokeWidth={1.5}
+                            style={{ color: isVideo ? '#fffcea' : primaryDark }}
+                        />
                     </div>
+                    <h3 style={titleStyle}>
+                        {service.title}
+                    </h3>
                 </div>
-                <div className="info-item-grid">
-                    <Euro size={16} />
-                    <div>
-                        <span className="info-label">Tarif</span>
-                        <span className="info-value">{service.price}</span>
-                    </div>
+
+                {/* Description */}
+                <p style={descStyle}>
+                    {service.description}
+                </p>
+
+                {/* Boutons côte à côte */}
+                <div style={buttonsContainerStyle}>
+                    {service.detailPage && (
+                        isVideo ? (
+                            <GlassButton to={service.detailPage} icon={ArrowRight} compact className="flex-1">
+                                Détails
+                            </GlassButton>
+                        ) : (
+                            <Link to={service.detailPage} style={btnSecondaryStyle}>
+                                Détails
+                                <ArrowRight size={16} />
+                            </Link>
+                        )
+                    )}
+                    {isVideo ? (
+                        <GlassButton to="/contact-reservation" compact className="flex-1">
+                            Réserver
+                        </GlassButton>
+                    ) : (
+                        <Link to="/contact-reservation" style={btnPrimaryStyle}>
+                            Réserver
+                            <CalendarDays size={16} />
+                        </Link>
+                    )}
                 </div>
             </div>
-
-            {/* Features si disponibles */}
-            {service.features && service.features.length > 0 && (
-                <div className="service-features">
-                    <h4>Inclus :</h4>
-                    <ul>
-                        {service.features.slice(0, 3).map((feature: string, index: number) => (
-                            <li key={index}>
-                                <CheckCircle size={14} />
-                                <span>{feature}</span>
-                            </li>
-                        ))}
-                        {service.features.length > 3 && (
-                            <li className="more-features">
-                                <span>+ {service.features.length - 3} autres avantages</span>
-                            </li>
-                        )}
-                    </ul>
-                </div>
-            )}
-
-            {/* Modalités (sans le minimum) */}
-            {cleanModalities && cleanModalities.length > 0 && (
-                <div className="service-modalities">
-                    {cleanModalities.map((modality: string, index: number) => (
-                        <span key={index} className="modality-tag">{modality}</span>
-                    ))}
-                </div>
-            )}
-
-            {/* Actions uniformes */}
-            <div className="service-actions">
-                {service.detailPage && (
-                    <Link to={service.detailPage} className="btn btn-info">
-                        En savoir plus
-                        <ArrowRight size={16} />
-                    </Link>
-                )}
-                <Link to="/contact-reservation" className="btn btn-primary">
-                    Réserver
-                    <CalendarDays size={16} />
-                </Link>
-            </div>
-
-            <style jsx>{`
-                .service-card {
-                    background: var(--color-white);
-                    border-radius: 14px;
-                    padding: var(--spacing-6);
-                    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-                    border: 1px solid rgba(0,0,0,0.06);
-                    transition: border-color 0.2s ease;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    position: relative;
-                }
-
-                .service-card * { text-shadow: none !important; }
-                .service-card:hover { border-color: var(--color-primary); }
-                .service-card.highlight { border: 1.5px solid var(--color-secondary); }
-                .service-card.highlight::before { display: none; }
-
-                .service-header { display: flex; align-items: center; gap: var(--spacing-3); margin-bottom: var(--spacing-3); }
-                .service-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-                .service-title { font-size: 1.15rem; font-weight: 650; color: var(--color-primary) !important; margin: 0; line-height: 1.3; }
-
-                .meta-chips { display: flex; flex-wrap: wrap; gap: var(--spacing-2); margin-bottom: var(--spacing-3); }
-                .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; }
-
-                .service-description { color: var(--color-gray-700) !important; line-height: 1.65; margin-bottom: var(--spacing-4); flex-grow: 1; }
-
-                .service-main-info { background: transparent; border-radius: 12px; padding: 0; margin-bottom: var(--spacing-5); border-top: 1px solid var(--color-gray-200); padding-top: var(--spacing-4); }
-                .info-item-grid { display: flex; align-items: flex-start; gap: var(--spacing-3); padding: var(--spacing-3) 0; border-bottom: 1px solid var(--color-gray-100); color: var(--color-primary) !important; }
-                .info-item-grid:last-child { border-bottom: none; }
-                .info-item-grid > div { flex: 1; }
-                .info-label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--color-gray-600) !important; margin-bottom: 2px; }
-                .info-value { display: block; font-size: 1rem; font-weight: 650; color: var(--color-primary) !important; }
-                .info-detail { display: block; font-size: 0.8rem; color: var(--color-gray-600) !important; margin-top: 2px; }
-
-                .service-features { margin-bottom: var(--spacing-5); }
-                .service-features h4 { font-size: 0.85rem; font-weight: 650; color: var(--color-primary) !important; margin: 0 0 var(--spacing-3) 0; text-transform: uppercase; letter-spacing: 0.04em; }
-                .service-features ul { list-style: none; padding: 0; margin: 0; }
-                .service-features li { display: flex; align-items: flex-start; gap: var(--spacing-2); padding: var(--spacing-1) 0; font-size: 0.92rem; color: var(--color-gray-700) !important; }
-                .service-features li svg { color: var(--color-secondary); margin-top: 2px; flex-shrink: 0; }
-                .more-features { font-style: italic; color: var(--color-gray-600) !important; font-size: 0.85rem !important; }
-
-                .service-modalities { display: flex; flex-wrap: wrap; gap: var(--spacing-2); margin-bottom: var(--spacing-5); }
-                .modality-tag { padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
-
-                .service-actions { display: flex; gap: var(--spacing-3); margin-top: auto; }
-                .btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: var(--spacing-2); padding: 14px 16px; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; text-align: center; min-height: 48px; }
-                .btn-outline { background: transparent; color: var(--color-primary); border: 1.5px solid var(--color-primary); }
-                .btn-outline:hover { background: var(--color-primary); color: white; }
-
-                .btn-primary { background: #fffcea; color: var(--color-primary); border: 1.5px solid var(--color-primary); }
-                .btn-primary:hover { background: var(--color-primary); color: white; border-color: var(--color-primary); }
-
-                @media (max-width: 768px) {
-                    .service-card { padding: var(--spacing-5); }
-                    .service-actions { flex-direction: column; }
-                    .service-header { gap: var(--spacing-2); }
-                    .service-icon { width: 34px; height: 34px; }
-                }
-            `}</style>
         </div>
     );
 };

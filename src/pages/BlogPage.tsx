@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, User, ArrowRight, Tag } from 'lucide-react';
-import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
+import ParallaxSection from '../components/ParallaxSection';
 
 const BlogPage: React.FC = () => {
-  const videoRef = useSlowMoVideo();
-
   const blogPosts = [
     {
       id: 1,
@@ -39,13 +37,13 @@ const BlogPage: React.FC = () => {
     },
     {
       id: 4,
-      title: 'MBSR : 8 semaines pour transformer sa vie',
-      excerpt: 'Retour d\'expérience sur les programmes MBSR et leurs effets durables sur le bien-être.',
+      title: 'Gestion du stress par la pleine conscience : 8 semaines pour transformer sa vie',
+      excerpt: 'Retour d\'expérience sur les programmes Gestion du stress par la pleine conscience et leurs effets durables sur le bien-être.',
       date: '22 Février 2024',
       author: 'EsenCiel',
-      category: 'MBSR',
+      category: 'Gestion du stress par la pleine conscience',
       image: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg',
-      tags: ['MBSR', 'programme', 'transformation']
+      tags: ['Gestion du stress par la pleine conscience', 'programme', 'transformation']
     },
     {
       id: 5,
@@ -69,7 +67,7 @@ const BlogPage: React.FC = () => {
     }
   ];
 
-  const categories = ['Tous', 'Pleine conscience et présence attentive.', 'Santé', 'Développement Personnel', 'MBSR', 'Neurosciences', 'Bien-être'];
+  const categories = ['Tous', 'Pleine conscience et présence attentive.', 'Santé', 'Développement Personnel', 'Gestion du stress par la pleine conscience', 'Neurosciences', 'Bien-être'];
   const [selectedCategory, setSelectedCategory] = useState('Tous');
 
   const filteredPosts = selectedCategory === 'Tous'
@@ -80,31 +78,18 @@ const BlogPage: React.FC = () => {
     <>
       <div className="blog-page">
         {/* Hero Section avec vidéo de fond */}
-        <section className="hero-blog">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="hero-video"
-          >
-            <source src="/background.mp4" type="video/mp4" />
-            <img
-              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-              alt="Paysage serein - MindWayLife"
-            />
-          </video>
-
-          <div className="hero-overlay" aria-hidden="true"></div>
-
-          <div className="hero-content">
+        <ParallaxSection 
+          videoSrc="/background.mp4" 
+          className="hero-blog min-h-[60vh]"
+          overlayOpacity={0.4}
+        >
+          <div className="hero-content text-center">
             <h1>Blog</h1>
             <p className="hero-subtitle">
               Conseils, réflexions et actualités autour du bien-être et de la pleine conscience
             </p>
           </div>
-        </section>
+        </ParallaxSection>
 
         {/* Filtres */}
         <section className="section filters-section">
@@ -124,20 +109,11 @@ const BlogPage: React.FC = () => {
         </section>
 
         {/* Articles */}
-        <section className="section articles-section parallax-surface">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="parallax-video"
-          >
-            <source src="/background.mp4" type="video/mp4" />
-          </video>
-          <div className="container">
+        <ParallaxSection videoSrc="/background.mp4" className="section articles-section py-32" overlayOpacity={0.25}>
+          <div className="container relative z-10">
             <div className="articles-grid">
               {filteredPosts.map((post) => (
-                <article key={post.id} className="blog-card article-card">
+                <article key={post.id} className="blog-card article-card h-full">
                   <div className="article-image">
                     <img src={post.image} alt={post.title} loading="lazy" />
                     <div className="article-category">{post.category}</div>
@@ -176,7 +152,7 @@ const BlogPage: React.FC = () => {
               ))}
             </div>
           </div>
-        </section>
+        </ParallaxSection>
       </div>
 
       <style>{`

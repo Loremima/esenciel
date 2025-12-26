@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Sparkles, Heart, Award, ArrowRight, CalendarDays } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
+import ParallaxSection from '../components/ParallaxSection';
 
 const AboutPage: React.FC = () => {
-  const videoRef = useSlowMoVideo();
   const quotes = [
     {
       text: 'Celui qui regarde l\'extérieur rêve, celui qui regarde à l\'intérieur s\'éveille.',
@@ -50,8 +49,8 @@ const AboutPage: React.FC = () => {
     {
       icon: Sparkles,
       title: 'Instructrice de programmes basés sur la pleine conscience',
-      description: 'Mindfulness-Based Interventions - MBIs',
-      details: 'Certification des programmes MBCT - MBCAS'
+      description: 'Mindfulness-Based Interventions',
+      details: 'Certification des programmes Gestion du stress - Prévention des rechutes dépressives - Bien vivre son avancée en âge'
     },
     {
       icon: Sparkles,
@@ -91,25 +90,12 @@ const AboutPage: React.FC = () => {
   return (
     <div className="about-page">
       {/* Hero Section avec vidéo de fond */}
-      <section className="hero-about">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hero-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-          <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="Paysage serein - MindWayLife"
-          />
-        </video>
-
-        <div className="hero-overlay" aria-hidden="true"></div>
-
-        <div className="hero-content">
+      <ParallaxSection 
+        videoSrc="/background.mp4" 
+        className="hero-about min-h-[60vh]"
+        overlayOpacity={0.4}
+      >
+        <div className="hero-content text-center">
           <div className="hero-text">
             <h1>Qui suis-je ?</h1>
             <p className="hero-subtitle">
@@ -118,7 +104,7 @@ const AboutPage: React.FC = () => {
             </p>
           </div>
         </div>
-      </section>
+      </ParallaxSection>
 
       {/* Intro Section */}
       <section className="section intro-section">
@@ -144,11 +130,8 @@ const AboutPage: React.FC = () => {
       </section >
 
       {/* Section combinée Approche, Qualifications, Valeurs */}
-      < section className="section combined-details parallax-surface" >
-        <video autoPlay muted loop playsInline className="parallax-video">
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container">
+      <ParallaxSection videoSrc="/background.mp4" className="section combined-details py-32" overlayOpacity={0.3}>
+        <div className="container relative z-10">
           <div className="details-wrapper">
             {/* Colonne 1: Approche */}
             <div className="full-width-values">
@@ -211,7 +194,7 @@ const AboutPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section >
+      </ParallaxSection>
 
       {/* CTA */}
       < section className="section cta-about" >
@@ -323,36 +306,6 @@ const AboutPage: React.FC = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-
-        .hero-video {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          z-index: -2;
-        }
-
-        .hero-video img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-        }
-
-        .hero-overlay {
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(
-            ellipse at center,
-            rgba(0, 0, 0, 0.3) 0%,
-            rgba(0, 0, 0, 0.5) 100%
-          );
-          z-index: -1;
         }
 
         .hero-content {
@@ -515,8 +468,6 @@ const AboutPage: React.FC = () => {
             transition: all 0.3s ease;
         }
 
-        .credential-card:hover { }
-
         .credential-icon {
             position: absolute;
             top: var(--spacing-5);
@@ -586,8 +537,6 @@ const AboutPage: React.FC = () => {
           text-align: center;
           transition: all 0.4s ease;
         }
-
-        .value-card:hover { }
 
         .value-card h3 {
           font-size: 1.1rem;
@@ -812,8 +761,6 @@ const AboutPage: React.FC = () => {
           .hero-content {
             padding: 0 1rem;
           }
-
-          /* Container responsive défini dans globals.css */
 
           .philosophy blockquote {
             font-size: 1.1rem;

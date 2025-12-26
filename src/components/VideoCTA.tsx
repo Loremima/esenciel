@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { CalendarDays } from 'lucide-react';
+import ParallaxSection from './ParallaxSection';
+import GlassButton from './GlassButton';
 
 interface VideoCTAProps {
   title: string;
@@ -11,29 +11,24 @@ interface VideoCTAProps {
 
 const VideoCTA: React.FC<VideoCTAProps> = ({ title, subtitle, buttonText, buttonLink }) => {
   return (
-    <section className="section cta-section parallax-surface">
-      <video autoPlay muted loop playsInline className="parallax-video">
-        <source src="/background.mp4" type="video/mp4" />
-      </video>
-      <div className="container">
-        <div className="cta-content">
-          <div className="cta-text">
-            <h2>{title}</h2>
-            <p>{subtitle}</p>
-          </div>
-          <div className="cta-actions">
-            <Link to={buttonLink} className="btn btn-glass cta-primary">
-              {buttonText} <CalendarDays size={20} />
-            </Link>
-          </div>
+    <ParallaxSection 
+      videoSrc="/background.mp4" 
+      className="cta-section py-32"
+      overlayOpacity={0.3}
+    >
+      <div className="cta-content text-center">
+        <div className="cta-text">
+          <h2>{title}</h2>
+          <p>{subtitle}</p>
+        </div>
+        <div className="cta-actions flex justify-center mt-8">
+          <GlassButton to={buttonLink}>
+            {buttonText}
+          </GlassButton>
         </div>
       </div>
       <style>{`
-        .cta-section.parallax-surface {
-          color: #fffcea;
-        }
         .cta-section .cta-content {
-          text-align: center;
           max-width: 800px;
           margin: 0 auto;
         }
@@ -52,15 +47,8 @@ const VideoCTA: React.FC<VideoCTAProps> = ({ title, subtitle, buttonText, button
           line-height: 1.7;
           margin-bottom: var(--spacing-8);
         }
-        .cta-section .cta-actions {
-          display: flex;
-          justify-content: center;
-        }
-        .cta-section .cta-primary {
-          padding: 0.8rem 2.2rem;
-        }
       `}</style>
-    </section>
+    </ParallaxSection>
   );
 };
 

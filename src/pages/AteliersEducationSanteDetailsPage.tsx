@@ -1,338 +1,92 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Target, Users, Heart, BookOpen, Sparkles, Calendar,
-  Building2, MapPin, Clock, CheckCircle, ArrowRight,
-  Briefcase, TreePine, Moon, Brain, Shield, Award
-} from 'lucide-react';
-import { useSlowMoVideo } from '../hooks/useSlowMoVideo';
+import { Target, Heart, Sparkles } from 'lucide-react';
+import ServiceLayout from '../components/ServiceLayout';
 
 const AteliersEducationSanteDetailsPage: React.FC = () => {
-  const videoRef = useSlowMoVideo();
-
-  const entreprisesThemes = [
-    {
-      category: "Gestion du stress et prévention",
-      themes: [
-        "Gestion du stress et régulation des émotions",
-        "Prévention de l'épuisement et du burn-out",
-        "Renforcer la résilience et la capacité d'adaptation"
-      ]
-    },
-    {
-      category: "Équilibre et ressources personnelles",
-      themes: [
-        "Retrouver un équilibre de vie durable",
-        "Mieux gérer son énergie et son temps",
-        "Favoriser un sommeil réparateur"
-      ]
-    }
-  ];
-
-  const collectivitesPublics = [
-    {
-      icon: Users,
-      title: "Seniors",
-      description: "Favoriser le maintien de l'autonomie, soutenir la qualité de vie et encourager la sérénité ainsi que la résilience face aux défis du vieillissement."
-    },
-    {
-      icon: Heart,
-      title: "Aidants",
-      description: "Offrir des espaces de répit et de ressourcement, pour souffler, prévenir l'épuisement et retrouver un meilleur équilibre personnel."
-    },
-    {
-      icon: Shield,
-      title: "Publics vulnérables ou en difficulté",
-      description: "Proposer des approches accessibles et adaptées favorisant le bien-être, la confiance en soi et une meilleure capacité d'adaptation face aux difficultés."
-    }
-  ];
-
-  const trustedBy = [
-    "EHPAD Les Jardins",
-    "Mairie de Toulouse",
-    "Association AIDER",
-    "Centre Social du Quartier",
-    "Entreprise INNOV'TECH"
-  ];
-
   return (
-    <div className="ateliers-details-page service-detail-page">
-      {/* Hero Section */}
-      <section className="hero-ateliers">
-        <div className="container">
-          <div className="hero-ateliers-layout">
-            <div className="hero-content-ateliers">
-              <h1>Entreprises & collectivités</h1>
-              <p className="hero-tagline">Offrir des espaces pour ralentir, respirer et se recentrer</p>
-              <p className="hero-subtitle-ateliers">
-                Investir dans plus de sérénité, c'est favoriser l'efficacité, l'équilibre et la santé –
-                au sein de vos équipes comme auprès de vos publics.
-              </p>
-              <div className="hero-description-ateliers">
-                <p>
-                  Je propose des formations, ateliers expérientiels et conférences sur mesure, adaptés aux
-                  besoins des entreprises et des collectivités. Mes interventions peuvent également s'intégrer
-                  à des projets et appels d'offres dans les domaines de la prévention et éducation à la santé
-                  ainsi que de la pleine conscience.
-                </p>
-              </div>
-            </div>
-            <div className="hero-video-ateliers">
-              <video
-                ref={videoRef}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="hero-video-element"
-              >
-                <source src="/background.mp4" type="video/mp4" />
-              </video>
-              <div className="video-overlay-ateliers"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section Entreprises */}
-      <section className="section entreprises-section parallax-surface">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="parallax-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container">
-          <div className="section-content-centered">
-            <div className="section-header-detailed">
-              <h2>Entreprises : Formations & ateliers expérientiels</h2>
-              <p>
-                J'accompagne vos équipes à travers des programmes adaptés, où la pratique et l'expérience
-                sont au cœur de l'apprentissage. Chaque atelier ou formation permet de vivre concrètement
-                des outils utiles et transférables dans la vie professionnelle comme personnelle.
-              </p>
-            </div>
-
-            <div className="themes-container">
-              <h3>Exemples de thématiques :</h3>
-              {entreprisesThemes.map((group, idx) => (
-                <div key={idx} className="theme-group">
-                  <h4>{group.category} :</h4>
-                  <ul className="theme-list">
-                    {group.themes.map((theme, index) => (
-                      <li key={index}>
-                        <CheckCircle size={18} />
-                        <span>{theme}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-
-              <div className="programme-note">
-                <Brain size={24} />
-                <p>
-                  <strong>Programmes de pleine conscience :</strong> des parcours structurés et progressifs,
-                  conçus pour développer la sérénité, la clarté d'esprit, une présence et concentration
-                  plus stable, et une meilleure gestion du stress.
-                </p>
-              </div>
-            </div>
-
-            <div className="info-card-standalone">
-              <p className="highlight-text">
-                Chaque projet est élaboré sur mesure, en fonction de vos besoins, et fait l'objet
-                d'un devis personnalisé.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section Collectivités */}
-      <section className="section collectivites-section">
-        <div className="container">
-          <div className="collectivites-layout">
-            <div className="collectivites-content">
-              <div className="section-badge">
-                <MapPin size={20} />
-                <span>Collectivités territoriales</span>
-              </div>
-              <h2>Accompagnement des publics fragiles</h2>
-              <div className="intro-text">
-                <p>
-                  J'interviens auprès des collectivités territoriales dans le cadre d'appels à projets
-                  santé et bien-être, pour accompagner des publics spécifiques avec bienveillance
-                  et expertise.
-                </p>
-              </div>
-
-              <div className="approach-highlights">
-                <div className="highlight-item">
-                  <Heart size={24} className="highlight-icon" />
-                  <div>
-                    <h4>Approche adaptée</h4>
-                    <p>Programmes personnalisés selon les besoins de chaque public</p>
-                  </div>
-                </div>
-                <div className="highlight-item">
-                  <Users size={24} className="highlight-icon" />
-                  <div>
-                    <h4>Collaboration étroite</h4>
-                    <p>Travail en partenariat avec les équipes locales</p>
-                  </div>
-                </div>
-                <div className="highlight-item">
-                  <Target size={24} className="highlight-icon" />
-                  <div>
-                    <h4>Impact mesurable</h4>
-                    <p>Suivi et évaluation des bénéfices sur le bien-être</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="publics-sidebar">
-              <h3>Publics accompagnés</h3>
-              <div className="publics-list">
-                {collectivitesPublics.map((publicTarget, index) => (
-                  <div key={index} className="public-item">
-                    <div className="public-icon-mini">
-                      <publicTarget.icon size={20} />
-                    </div>
-                    <div className="public-info">
-                      <h4>{publicTarget.title}</h4>
-                      <p>{publicTarget.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section Conférences */}
-      <section className="section conferences-section parallax-surface">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="parallax-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container">
-          <div className="conferences-layout">
-
-            <div className="conferences-main-content">
-              <div className="conferences-intro">
-                <div className="section-badge light">
-                  <Sparkles size={20} />
-                  <span>Conférences & événements</span>
-                </div>
-                <h2>Inspirez votre communauté</h2>
-                <p className="conferences-lead">
-                  Des conférences interactives et inspirantes qui créent un élan collectif
-                  vers plus de bien-être et de sérénité.
-                </p>
-              </div>
-
-              <div className="conferences-impact">
-                <div className="impact-card">
-                  <div className="impact-icon">
-                    <Target size={28} />
-                  </div>
-                  <h3>Sensibilisation large</h3>
-                  <p>Touchez un public nombreux avec des messages impactants</p>
-                </div>
-                <div className="impact-card">
-                  <div className="impact-icon">
-                    <Users size={28} />
-                  </div>
-                  <h3>Élan collectif</h3>
-                  <p>Créez une dynamique positive dans votre communauté</p>
-                </div>
-                <div className="impact-card">
-                  <div className="impact-icon">
-                    <Heart size={28} />
-                  </div>
-                  <h3>Impact durable</h3>
-                  <p>Plantez des graines de transformation qui germeront</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="conferences-formats">
-              <h3>Formats adaptés à vos besoins</h3>
-              <div className="formats-grid">
-                <div className="format-card">
-                  <h4>Conférences plénières</h4>
-                  <p>Grandes assemblées, événements publics, séminaires</p>
-                </div>
-                <div className="format-card">
-                  <h4>Ateliers découverte</h4>
-                  <p>Sessions interactives avec pratiques guidées</p>
-                </div>
-                <div className="format-card">
-                  <h4>Tables rondes</h4>
-                  <p>Échanges participatifs autour de la santé et du bien-être</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Section Ils m'ont fait confiance */}
-      <section className="section trust-section">
-        <div className="container">
-          <div className="trust-content">
-            <h2>Ils m'ont fait confiance</h2>
-            <p>Pour des conférences, des ateliers et des programmes de pleine conscience.</p>
-            <div className="trust-logos">
-              {trustedBy.map((org, index) => (
-                <div key={index} className="trust-item">
-                  <Award size={20} />
-                  <span>{org}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Final avec fond vidéo */}
-      <section className="section cta-final parallax-surface">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="parallax-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-        </video>
-        <div className="container">
-          <div className="cta-content-detailed">
-            <h2>Et si nous ouvrions ensemble un espace de respiration et de sérénité pour vos équipes ?</h2>
-            <div className="cta-actions">
-              <Link to="/contact-reservation" className="btn btn-glass">
-                Demander un devis
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* No local styles needed anymore, moved to globals.css */}
-    </div>
+    <ServiceLayout
+      hero={{
+        title: <>Ateliers<br /><span className="opacity-40 italic font-light">éducation santé</span></>,
+        subtitle: "Des interventions pédagogiques et expérientielles pour promouvoir la santé et le bien-être au sein de votre structure.",
+        tag: "Pour les structures",
+        duration: "SUR MESURE",
+        format: "GROUPE / ÉQUIPE",
+        location: "IN SITU / DISTANCIEL",
+        mediaSrc: "/background.mp4",
+        mediaType: "video"
+      }}
+      benefits={{
+        title: "Les impacts",
+        subtitle: "Soutenir la qualité de vie au travail et le bien-être",
+        items: [
+          {
+            icon: Target,
+            title: 'Prévention',
+            description: 'Agir en amont pour prévenir l\'épuisement professionnel et les risques psychosociaux.'
+          },
+          {
+            icon: Heart,
+            title: 'Cohésion',
+            description: 'Renforcer les liens et la qualité des relations au sein des équipes.'
+          },
+          {
+            icon: Sparkles,
+            title: 'Ressources',
+            description: 'Outiller vos collaborateurs pour mieux gérer leur stress et leur énergie.'
+          }
+        ]
+      }}
+      process={{
+        title: "Notre démarche",
+        subtitle: "Co-construire une intervention adaptée à vos besoins",
+        steps: [
+          {
+            number: '01',
+            title: 'Analyse',
+            description: 'Échange approfondi pour comprendre votre contexte, vos enjeux et vos attentes.'
+          },
+          {
+            number: '02',
+            title: 'Conception',
+            description: 'Proposition d\'un format et d\'un contenu pédagogique sur-mesure.'
+          },
+          {
+            number: '03',
+            title: 'Intervention',
+            description: 'Animation des ateliers avec une pédagogie active et participative.'
+          },
+          {
+            number: '04',
+            title: 'Bilan',
+            description: 'Retour d\'expérience et évaluation de l\'impact de l\'action.'
+          }
+        ]
+      }}
+      objectives={{
+        title: "Thématiques",
+        subtitle: "Exemples de sujets d'intervention",
+        items: [
+          { title: 'Stress & Émotions', description: 'Comprendre et réguler son stress.' },
+          { title: 'Qualité de vie', description: 'Prendre soin de soi au travail.' },
+          { title: 'Communication', description: 'Développer une écoute bienveillante.' },
+          { title: 'Resilience', description: 'S\'adapter aux changements avec souplesse.' }
+        ]
+      }}
+      practical={{
+        durationDetail: "Adaptable (2h à 2 jours)",
+        formatDetail: "Intra-entreprise",
+        locationDetail: "Vos locaux ou extérieur",
+        priceMain: "Sur devis",
+        priceLabelMain: "Selon cahier des charges",
+        description: "J'interviens auprès des entreprises, associations, collectivités et établissements de santé. Chaque projet fait l'objet d'une étude personnalisée pour répondre au plus juste à votre demande.",
+        features: ['Ingénierie pédagogique', 'Animation experte', 'Supports de formation', 'Bilan d\'intervention']
+      }}
+      cta={{
+        title: "Un projet pour vos équipes ?",
+        subtitle: "Contactez-moi pour échanger sur vos besoins et construire votre projet.",
+        buttonText: "Demander un devis"
+      }}
+    />
   );
 };
 

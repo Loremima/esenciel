@@ -16,7 +16,10 @@ const Header: React.FC = () => {
     '/services',
     '/blog',
     '/infos-pratiques',
-    '/contact-reservation'
+    '/contact-reservation',
+    '/accompagnements-individuels',
+    '/programmes-pleine-conscience',
+    '/interventions-entreprises'
   ];
   const isLightHeaderPage = pagesWithLightHeader.includes(location.pathname);
   const shouldUseLightText = isLightHeaderPage && !isScrolled;
@@ -33,7 +36,7 @@ const Header: React.FC = () => {
         { path: '/interventions-entreprises', label: 'Entreprises & collectivités' },
       ]
     },
-    { path: '/blog', label: 'Blog' },
+    // { path: '/blog', label: 'Blog' },
     { path: '/infos-pratiques', label: 'Infos pratiques' },
     { path: '/contact-reservation', label: 'Contact' },
     { path: '/contact-reservation', label: 'Réserver', isButton: true },
@@ -56,7 +59,7 @@ const Header: React.FC = () => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''} ${shouldUseLightText ? 'light-text' : 'dark-text'}`}>
-      <div className="container">
+      <div className="header-container">
         <Link to="/" className="logo-link">
           <Logo variant="navbar" isScrolled={isScrolled} theme={shouldUseLightText ? 'light' : 'dark'} />
         </Link>
@@ -103,7 +106,7 @@ const Header: React.FC = () => {
               </div>
             ))}
           </nav>
-          <Link to="/contact-reservation" className="btn-reserver-header">
+          <Link to="/contact-reservation" className={`btn-reserver-header ${!shouldUseLightText ? 'is-beige' : ''}`}>
             Réserver
           </Link>
         </div>
@@ -184,12 +187,14 @@ const Header: React.FC = () => {
           padding: 0.35rem 0;
         }
 
-        .container {
+        .header-container {
           display: flex;
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          padding: 0.5rem;
+          max-width: 1350px;
+          margin: 0 auto;
+          padding: 0.5rem 2rem;
         }
 
         .logo-link { 
@@ -296,21 +301,43 @@ const Header: React.FC = () => {
         }
 
         .btn-reserver-header {
-          background: #fffcea;
-          color: var(--color-primary);
           padding: 0.6rem 1.5rem;
           border-radius: 25px;
           font-weight: 500;
           transition: all 0.3s ease;
           text-decoration: none;
           border: 1px solid #fffcea;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
         }
 
-        .btn-reserver-header:hover {
-          background: rgba(255, 252, 234, 0.9);
-          color: var(--color-primary-dark);
+        /* Quand la barre est beige (scrolled ou page sombre), le bouton est bleu */
+        .btn-reserver-header.is-beige {
+          background: var(--color-primary);
+          color: #fffcea;
+          border-color: var(--color-primary);
+        }
+
+        /* Quand la barre est transparente (sur hero), le bouton est discret (pas en avant) */
+        .btn-reserver-header:not(.is-beige) {
+          background: transparent;
+          color: #fffcea;
+          border: 1px solid #fffcea;
+          opacity: 0.85;
+        }
+
+        .btn-reserver-header.is-beige:hover {
+          background: var(--color-primary-dark);
+          border-color: var(--color-primary-dark);
           transform: translateY(-1px);
-          box-shadow: 0 4px 15px rgba(255, 252, 234, 0.3);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-reserver-header:not(.is-beige):hover {
+          background: rgba(255, 252, 234, 0.1);
+          opacity: 1;
+          transform: translateY(-1px);
         }
 
         .with-submenu {
@@ -358,7 +385,14 @@ const Header: React.FC = () => {
         .mobile-menu-toggle { display: none; }
         .mobile-nav { display: none; }
 
+        @media (max-width: 1024px) {
+          .header-container { padding: 0.5rem 1.5rem; }
+          .nav-right-section { gap: var(--spacing-4); }
+          .desktop-nav { gap: var(--spacing-4); }
+        }
+
         @media (max-width: 768px) {
+          .header-container { padding: 0.5rem 1rem; }
           .nav-right-section { display: none; }
           .mobile-menu-toggle {
             display: block;

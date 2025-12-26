@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Calendar, Send, CheckCircle } from 'lucide-react';
+import ParallaxSection from '../components/ParallaxSection';
+import GlassButton from '../components/GlassButton';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -93,28 +95,18 @@ const ContactPage: React.FC = () => {
   return (
     <div className="contact-page">
       {/* Hero Section */}
-      <section className="hero-section">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hero-video"
-        >
-          <source src="/background.mp4" type="video/mp4" />
-          <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="Paysage serein - MindWayLife"
-          />
-        </video>
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
+      <ParallaxSection
+        videoSrc="/background.mp4"
+        className="hero-section min-h-[60vh]"
+        overlayOpacity={0.4}
+      >
+        <div className="hero-content text-center">
           <h1>Contact</h1>
           <p className="hero-subtitle">
             Prenons le temps d'échanger sur vos besoins et objectifs
           </p>
         </div>
-      </section>
+      </ParallaxSection>
 
       {/* Main Content */}
       <main className="main-content">
@@ -147,17 +139,8 @@ const ContactPage: React.FC = () => {
         </section>
 
         {/* Contact Form */}
-        <section className="form-section parallax-surface">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="parallax-video"
-          >
-            <source src="/background.mp4" type="video/mp4" />
-          </video>
-          <div className="container">
+        <ParallaxSection videoSrc="/background.mp4" className="form-section py-32" overlayOpacity={0.3}>
+          <div className="container relative z-10">
             <div className="section-header">
               <h1>Prendre rendez-vous</h1>
               <p>Remplissez ce formulaire pour me faire part de votre demande. Je vous recontacterai rapidement pour planifier notre première rencontre.</p>
@@ -217,8 +200,9 @@ const ContactPage: React.FC = () => {
                       <option value="sante">Santé & vitalité</option>
                       <option value="mindfulness">Pleine conscience et présence attentive.</option>
                       <option value="tao">Jeu du Tao</option>
-                      <option value="mbsr">Programme MBSR</option>
-                      <option value="mbct">Programme MBCT</option>
+                      <option value="gestion-stress">Gestion du stress par la pleine conscience</option>
+                      <option value="prevention-rechute">Prévention des rechutes dépressives</option>
+                      <option value="bien-vieillir">Bien vivre son avancée en âge</option>
                       <option value="autre">Autre / À définir</option>
                     </select>
                   </div>
@@ -268,14 +252,13 @@ const ContactPage: React.FC = () => {
                   </label>
                 </div>
 
-                <button type="submit" className="btn btn-primary submit-btn">
-                  <Send size={18} />
+                <GlassButton type="submit" className="submit-btn" icon={Send}>
                   Envoyer ma demande
-                </button>
+                </GlassButton>
               </form>
             </div>
           </div>
-        </section>
+        </ParallaxSection>
 
         {/* Consultation Types */}
         <section className="consultation-section">
@@ -380,9 +363,18 @@ const ContactPage: React.FC = () => {
         }
 
         .container {
+          width: 100%;
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 2rem;
+        }
+
+        @media (max-width: 1024px) {
+          .container { padding: 0 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+          .container { padding: 0 1rem; }
         }
 
         /* === SECTION HEADERS === */
