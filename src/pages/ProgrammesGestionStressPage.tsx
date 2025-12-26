@@ -8,18 +8,18 @@ const ProgrammesGestionStressPage: React.FC = () => {
     {
       id: 'gestion-stress',
       title: 'Gestion du stress par la pleine conscience',
-      subtitle: 'Cycle de 8 semaines',
-      description: 'Le programme classique de réduction du stress basé sur la pleine conscience. Idéal pour débuter et transformer son rapport au stress.',
-      duration: '8 semaines (2h30/semaine)',
+      subtitle: 'Cycle de 8 séances',
+      description: 'Développer une relation plus consciente à son expérience et mieux faire face aux situations stressantes.',
+      duration: '8 séances (2h30/séance)',
       format: 'Groupe (5-10 pers.)',
       link: '/gestion-stress'
     },
     {
       id: 'prevention-rechute',
       title: 'Prévention des rechutes dépressives',
-      subtitle: 'Approche intégrative',
-      description: 'Spécifiquement conçu pour consolider le bien-être après un épisode difficile et prévenir les rechutes.',
-      duration: '8 semaines (2h30/semaine)',
+      subtitle: 'Approche MBCT',
+      description: 'Réduire le risque de rechute dépressive en changeant la relation aux pensées et états émotionnels.',
+      duration: '8 séances (2h-2h30/séance)',
       format: 'Groupe (5-10 pers.)',
       link: '/prevention-rechutes-depressives'
     }
@@ -58,8 +58,8 @@ const ProgrammesGestionStressPage: React.FC = () => {
                     <span>{program.format}</span>
                   </div>
                 </div>
-                <Link 
-                  to={program.link} 
+                <Link
+                  to={program.link}
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-primary text-white rounded-2xl font-bold hover:bg-primary-dark transition-all"
                 >
                   Voir le programme détaillé

@@ -34,8 +34,8 @@ const AccompagnementsGroupePage: React.FC = () => {
       <VideoCTA
         title="L'aventure vous tente ?"
         subtitle="Rejoignez un groupe pour vivre une expérience humaine riche et transformatrice."
-        buttonText="Me contacter"
-        buttonLink="/contact-reservation"
+        buttonText="Réserver ma place"
+        buttonLink="https://esenciel.setmore.com"
       />
     </div>
   );

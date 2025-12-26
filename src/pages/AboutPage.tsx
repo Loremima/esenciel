@@ -38,7 +38,7 @@ const AboutPage: React.FC = () => {
       icon: Heart,
       title: 'Master en psychologie clinique',
       description: 'Spécialité en neuropsychologie',
-      details: 'Approche intégrative',
+      details: 'Approche cognitive',
     },
     {
       icon: Award,
@@ -50,7 +50,7 @@ const AboutPage: React.FC = () => {
       icon: Sparkles,
       title: 'Instructrice de programmes basés sur la pleine conscience',
       description: 'Mindfulness-Based Interventions',
-      details: 'Certification des programmes Gestion du stress - Prévention des rechutes dépressives - Bien vivre son avancée en âge'
+      details: 'Certification des programmes Gestion du stress - Prévention des rechutes dépressives (MBCT) - Seniors (MBCAS)'
     },
     {
       icon: Sparkles,
@@ -90,8 +90,8 @@ const AboutPage: React.FC = () => {
   return (
     <div className="about-page">
       {/* Hero Section avec vidéo de fond */}
-      <ParallaxSection 
-        videoSrc="/background.mp4" 
+      <ParallaxSection
+        videoSrc="/background.mp4"
         className="hero-about min-h-[60vh]"
         overlayOpacity={0.4}
       >
@@ -206,10 +206,15 @@ const AboutPage: React.FC = () => {
               Je serai ravie d'échanger avec vous.
             </p>
             <div className="cta-actions">
-              <Link to="/contact-reservation" className="btn btn-primary">
+              <a 
+                href="https://esenciel.setmore.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
                 Prendre rendez-vous
                 <CalendarDays size={16} />
-              </Link>
+              </a>
               <Link to="/services" className="btn btn-outline">
                 Découvrir mes services
                 <ArrowRight size={18} />

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Target, Heart, Sparkles } from 'lucide-react';
 import ServiceLayout from '../components/ServiceLayout';
+import { individualServices } from './servicesData';
 
 const PleineConscienceDetailsPage: React.FC = () => {
+  const serviceData = individualServices.find(s => s.id === 'pleine-conscience-presence');
+
   return (
     <ServiceLayout
       hero={{
@@ -11,7 +14,7 @@ const PleineConscienceDetailsPage: React.FC = () => {
         tag: "Accompagnement individuel",
         duration: "1H - 1H30",
         format: "INDIVIDUEL",
-        location: "VAUREILLES / VISIO",
+        location: "Présentiel/Distanciel",
         mediaSrc: "/sand_conscience.mp4",
         mediaType: "video"
       }}
@@ -67,15 +70,15 @@ const PleineConscienceDetailsPage: React.FC = () => {
         subtitle: "Des outils concrets pour votre pratique",
         items: [
           { title: 'Respiration', description: 'Techniques de respiration consciente pour apaiser le mental.' },
-          { title: 'Méditation', description: 'Pratiques formelles guidées adaptées à votre niveau.' },
+          { title: 'Méditation', description: 'Pratiques formelles guidées.' },
           { title: 'Scan corporel', description: 'Reconnexion aux sensations du corps pour s\'ancrer.' },
           { title: 'Vie quotidienne', description: 'Exercices informels pour intégrer la présence au quotidien.' }
         ]
       }}
       practical={{
-        durationDetail: "45min - 1h30",
+        durationDetail: "1h30 (1ère séance) / 1h (suivantes)",
         formatDetail: "Accompagnement individuel",
-        locationDetail: "Vaureilles (12) ou Visio",
+        locationDetail: "Présentiel/Distanciel",
         priceMain: "90€",
         priceSub: "60€",
         priceLabelMain: "Bilan Initial",
@@ -88,6 +91,8 @@ const PleineConscienceDetailsPage: React.FC = () => {
         subtitle: "Contactez-moi pour discuter de vos besoins et commencer votre parcours.",
         buttonText: "Me contacter"
       }}
+      bookingLink={serviceData?.bookingLink}
+      followUpBookingLink={serviceData?.followUpBookingLink}
     />
   );
 };

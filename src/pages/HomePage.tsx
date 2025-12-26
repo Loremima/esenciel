@@ -77,7 +77,7 @@ const HomePage: React.FC = () => {
         title="Prêt(e) à transformer votre quotidien ?"
         subtitle="Prenez rendez-vous pour un premier entretien personnalisé. Ensemble, nous définirons l'accompagnement le plus adapté à vos besoins et objectifs."
         buttonText="Prendre rendez-vous"
-        buttonLink="/contact-reservation"
+        buttonLink="https://esenciel.setmore.com"
       />
 
       <style>{`

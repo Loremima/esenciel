@@ -1,17 +1,20 @@
 import React from 'react';
 import { Target, Heart, Sparkles } from 'lucide-react';
 import ServiceLayout from '../components/ServiceLayout';
+import { individualServices } from './servicesData';
 
 const SanteQualiteVieDetailsPage: React.FC = () => {
+  const serviceData = individualServices.find(s => s.id === 'sante-qualite-vie');
+
   return (
     <ServiceLayout
       hero={{
         title: <>Santé et<br /><span className="opacity-40 italic font-light">vitalité</span></>,
-        subtitle: "Devenir acteur de sa santé pour un bien-être durable et une vie pleine de vitalité au quotidien.",
+        subtitle: "Devenir acteur de sa santé pour un bien-être durable and une vie pleine de vitalité au quotidien.",
         tag: "Accompagnement individuel",
         duration: "1H - 1H30",
         format: "INDIVIDUEL",
-        location: "VAUREILLES / VISIO",
+        location: "Présentiel/Distanciel",
         mediaSrc: "/vitalité_sainté.mp4",
         mediaType: "video"
       }}
@@ -73,9 +76,9 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         ]
       }}
       practical={{
-        durationDetail: "1h30 puis 1h",
+        durationDetail: "1h30 (1ère séance) / 1h (suivantes)",
         formatDetail: "Accompagnement individuel",
-        locationDetail: "Vaureilles (12) ou Visio",
+        locationDetail: "Présentiel/Distanciel",
         priceMain: "90€",
         priceSub: "60€",
         priceLabelMain: "Bilan Initial",
@@ -88,6 +91,8 @@ const SanteQualiteVieDetailsPage: React.FC = () => {
         subtitle: "Réservez votre premier rendez-vous pour un accompagnement sur mesure.",
         buttonText: "Réserver ma séance"
       }}
+      bookingLink={serviceData?.bookingLink}
+      followUpBookingLink={serviceData?.followUpBookingLink}
     />
   );
 };

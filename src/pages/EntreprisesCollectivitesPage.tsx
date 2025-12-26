@@ -45,8 +45,8 @@ const EntreprisesCollectivitesPage: React.FC = () => {
       <VideoCTA
         title="Un projet sur-mesure ?"
         subtitle="Contactez-moi pour concevoir ensemble une intervention adaptée aux besoins de vos équipes."
-        buttonText="Demander un devis"
-        buttonLink="/contact-reservation"
+        buttonText="Prendre rendez-vous"
+        buttonLink="https://esenciel.setmore.com/services/7d7693d8-ace7-4cb8-92fe-f33968dd54ca"
       />
     </div>
   );

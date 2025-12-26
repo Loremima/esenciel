@@ -39,7 +39,7 @@ const Header: React.FC = () => {
     // { path: '/blog', label: 'Blog' },
     { path: '/infos-pratiques', label: 'Infos pratiques' },
     { path: '/contact-reservation', label: 'Contact' },
-    { path: '/contact-reservation', label: 'Réserver', isButton: true },
+    { path: 'https://esenciel.setmore.com', label: 'Réserver', isButton: true, isExternal: true },
   ];
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const Header: React.FC = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''} ${shouldUseLightText ? 'light-text' : 'dark-text'}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''} ${shouldUseLightText ? 'light-text' : 'dark-text'}`}>
       <div className="header-container">
         <Link to="/" className="logo-link">
           <Logo variant="navbar" isScrolled={isScrolled} theme={shouldUseLightText ? 'light' : 'dark'} />
@@ -106,9 +106,14 @@ const Header: React.FC = () => {
               </div>
             ))}
           </nav>
-          <Link to="/contact-reservation" className={`btn-reserver-header ${!shouldUseLightText ? 'is-beige' : ''}`}>
+          <a
+            href="https://esenciel.setmore.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`btn-reserver-header ${!shouldUseLightText ? 'is-beige' : ''}`}
+          >
             Réserver
-          </Link>
+          </a>
         </div>
         <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
           {isMenuOpen ? <X /> : <Menu />}
@@ -118,9 +123,6 @@ const Header: React.FC = () => {
       {isMenuOpen && (
         <div className="mobile-overlay">
           <nav className="mobile-nav">
-            <button className="mobile-close-btn" onClick={toggleMenu} aria-label="Fermer le menu">
-              <X size={24} />
-            </button>
             <div className="mobile-nav-content">
               {navLinks.map((link, index) => (
                 <div key={index} className="mobile-nav-item">
@@ -144,9 +146,20 @@ const Header: React.FC = () => {
                       )}
                     </>
                   ) : link.isButton ? (
-                    <NavLink to={link.path!} className="mobile-nav-link btn-reserver-mobile">
-                      {link.label}
-                    </NavLink>
+                    link.isExternal ? (
+                      <a
+                        href={link.path!}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mobile-nav-link btn-reserver-mobile"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <NavLink to={link.path!} className="mobile-nav-link btn-reserver-mobile">
+                        {link.label}
+                      </NavLink>
+                    )
                   ) : (
                     <NavLink to={link.path!} className="mobile-nav-link">
                       {link.label}
@@ -414,6 +427,11 @@ const Header: React.FC = () => {
           .header.light-text .mobile-menu-toggle {
             color: #fffcea;
           }
+
+          /* Force la couleur quand le menu est ouvert car le fond devient clair */
+          .header.menu-open .mobile-menu-toggle {
+            color: var(--color-primary) !important;
+          }
           
           /* Bouton mobile couleur primaire partout ailleurs */
           .header.dark-text .mobile-menu-toggle {
@@ -454,32 +472,6 @@ const Header: React.FC = () => {
             justify-content: center;
             animation: slideInFromTop 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1003;
-          }
-
-          .mobile-close-btn {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-primary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            z-index: 1004;
-          }
-
-          .mobile-close-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-            color: var(--color-primary-dark);
           }
 
           .mobile-nav-content {

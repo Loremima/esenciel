@@ -1,38 +1,41 @@
 import React from 'react';
 import { Shield, Brain, Sparkles } from 'lucide-react';
 import ServiceLayout from '../components/ServiceLayout';
+import { collectivePrograms } from './servicesData';
 
 const PreventionRechuteDetailsPage: React.FC = () => {
+  const serviceData = collectivePrograms.find(s => s.id === 'prevention-rechute');
+
   return (
     <ServiceLayout
       hero={{
-        title: <>Prévention<br /><span className="opacity-40 italic font-light">rechute</span></>,
-        subtitle: "Un programme alliant thérapie cognitive et pleine conscience pour consolider votre équilibre émotionnel.",
+        title: <>Prévention<br /><span className="opacity-40 italic font-light">rechute dépressive</span></>,
+        subtitle: "Réduire le risque de rechute dépressive en changeant la relation aux pensées et états émotionnels.",
         tag: "Programme collectif",
-        duration: "8 SEMAINES",
+        duration: "8 SÉANCES",
         format: "GROUPE (5-10 PERS.)",
-        location: "PRÉSENTIEL",
+        location: "PRÉSENTIEL/DISTANCIEL",
         mediaSrc: "/sunrise_MBCT.mp4",
         mediaType: "video"
       }}
       benefits={{
-        title: "Les objectifs",
+        title: "Les bénéfices principaux",
         subtitle: "Renforcer sa stabilité face aux défis de la vie",
         items: [
           {
             icon: Shield,
-            title: 'Protection',
-            description: 'Identifier les signes avant-coureurs de rechute et savoir comment agir.'
+            title: 'Prévention',
+            description: 'Identifier les pensées répétitives et reconnaître les premiers signes de dépression.'
           },
           {
             icon: Brain,
-            title: 'Compréhension',
-            description: 'Comprendre les mécanismes du mental qui mènent à la spirale dépressive.'
+            title: 'Prise de recul',
+            description: 'Observer pensées et émotions sans se laisser submerger.'
           },
           {
             icon: Sparkles,
-            title: 'Libération',
-            description: 'Se désengager des ruminations mentales et des pensées négatives.'
+            title: 'Présence consciente',
+            description: 'Cultiver l’attention au moment présent pour un meilleur équilibre psychique.'
           }
         ]
       }}
@@ -63,19 +66,18 @@ const PreventionRechuteDetailsPage: React.FC = () => {
         ]
       }}
       objectives={{
-        title: "Piliers du programme",
+        title: "Ce que vous allez développer",
         subtitle: "Les axes de travail",
         items: [
-          { title: 'Cognitif', description: 'Outils issus des TCC pour gérer les pensées.' },
-          { title: 'Méditatif', description: 'Pratiques pour ancrer le calme.' },
-          { title: 'Émotionnel', description: 'Accueillir sans se laisser envahir.' },
-          { title: 'Corporel', description: 'Le corps comme baromètre du bien-être.' }
+          { title: 'Accueil', description: 'Pratique de la pleine conscience pour observer et accueillir pensées et émotions.' },
+          { title: 'Recul', description: 'Exercices de décentration cognitive pour prendre du recul face aux ruminations.' },
+          { title: 'Présence', description: 'Développement d’une présence consciente et ouverte.' }
         ]
       }}
       practical={{
-        durationDetail: "8 séances de 2h",
+        durationDetail: "8 séances (2h/séance)",
         formatDetail: "Groupe de 5 à 10 pers.",
-        locationDetail: "Présentiel",
+        locationDetail: "Présentiel/Distanciel",
         priceMain: "330€",
         priceLabelMain: "Cycle complet",
         description: "Particulièrement recommandé aux personnes ayant déjà vécu des épisodes dépressifs ou anxieux. Un entretien préalable est nécessaire pour valider l'adéquation du programme.",
@@ -86,6 +88,8 @@ const PreventionRechuteDetailsPage: React.FC = () => {
         subtitle: "Rejoignez un groupe bienveillant pour prévenir durablement la rechute.",
         buttonText: "Me pré-inscrire"
       }}
+      bookingLink="https://esenciel.setmore.com/services/9eefb15d-57de-4f51-91cc-b37949858c23"
+      learnMoreLink="https://esenciel.setmore.com/services/c3da0ac5-1530-4576-8ad5-2e43d65c30bc"
     />
   );
 };

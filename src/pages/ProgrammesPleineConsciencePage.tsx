@@ -46,7 +46,7 @@ const ProgrammesPleineConsciencePage: React.FC = () => {
         title="Une pause nécessaire ?"
         subtitle="Découvrez nos prochaines dates de cycle et inscrivez-vous pour transformer votre quotidien."
         buttonText="Voir les dates"
-        buttonLink="/contact-reservation"
+        buttonLink="https://esenciel.setmore.com/services/c3da0ac5-1530-4576-8ad5-2e43d65c30bc"
       />
     </div>
   );

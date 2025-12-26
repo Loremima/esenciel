@@ -30,10 +30,15 @@ const ServiceDetailPage: React.FC = () => {
                                     pricingNote={currentService.price}
                                 >
                                     <div className="cta-buttons">
-                                        <Link to="/contact-reservation" className="btn btn-primary">
+                                        <a 
+                                            href="https://esenciel.setmore.com" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="btn btn-primary"
+                                        >
                                             Prendre rendez-vous
                                             <ArrowRight size={16} />
-                                        </Link>
+                                        </a>
                                         <a href="tel:+33625137250" className="btn btn-outline">
                                             <Phone size={16} />
                                             Appeler
@@ -65,16 +70,21 @@ const ServiceDetailPage: React.FC = () => {
                                 format={Array.isArray(currentService.modalities) ? currentService.modalities.join(', ') : currentService.modalities}
                                 pricingNote={currentService.price}
                             >
-                                <div className="cta-buttons">
-                                    <Link to="/contact-reservation" className="btn btn-primary">
-                                        Prendre rendez-vous
-                                        <ArrowRight size={16} />
-                                    </Link>
-                                    <a href="tel:+33625137250" className="btn btn-outline">
-                                        <Phone size={16} />
-                                        Appeler
-                                    </a>
-                                </div>
+                                    <div className="cta-buttons">
+                                        <a 
+                                            href="https://esenciel.setmore.com" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="btn btn-primary"
+                                        >
+                                            Prendre rendez-vous
+                                            <ArrowRight size={16} />
+                                        </a>
+                                        <a href="tel:+33625137250" className="btn btn-outline">
+                                            <Phone size={16} />
+                                            Appeler
+                                        </a>
+                                    </div>
                             </PracticalInfoCard>
 
                             {/* Autres services */}

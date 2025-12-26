@@ -16,6 +16,7 @@ interface ServiceCardProps {
         modalities?: string[];
         features?: string[];
         detailPage?: string;
+        bookingLink?: string;
     };
     isHighlight?: boolean;
     variant?: 'on-video' | 'on-nude';
@@ -29,6 +30,42 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     const IconComponent = service.icon;
     const isVideo = variant === 'on-video';
     const primaryDark = '#1F2937';
+
+    // Helper pour le bouton de réservation
+    const renderBookingButton = () => {
+        const buttonText = "Réserver";
+        const linkTo = service.bookingLink || "/contact-reservation";
+        const isExternal = linkTo.startsWith('http');
+
+        if (isVideo) {
+            return (
+                <GlassButton to={linkTo} compact className="flex-1">
+                    {buttonText}
+                </GlassButton>
+            );
+        }
+
+        if (isExternal) {
+            return (
+                <a 
+                    href={linkTo} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    style={btnPrimaryStyle}
+                >
+                    {buttonText}
+                    <CalendarDays size={16} />
+                </a>
+            );
+        }
+
+        return (
+            <Link to={linkTo} style={btnPrimaryStyle}>
+                {buttonText}
+                <CalendarDays size={16} />
+            </Link>
+        );
+    };
 
     // Styles inline
     const cardStyle: React.CSSProperties = {
@@ -164,16 +201,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                             </Link>
                         )
                     )}
-                    {isVideo ? (
-                        <GlassButton to="/contact-reservation" compact className="flex-1">
-                            Réserver
-                        </GlassButton>
-                    ) : (
-                        <Link to="/contact-reservation" style={btnPrimaryStyle}>
-                            Réserver
-                            <CalendarDays size={16} />
-                        </Link>
-                    )}
+                    {renderBookingButton()}
                 </div>
             </div>
         </div>

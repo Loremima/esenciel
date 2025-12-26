@@ -1,44 +1,47 @@
 import React from 'react';
 import { Target, Heart, Sparkles } from 'lucide-react';
 import ServiceLayout from '../components/ServiceLayout';
+import { collectivePrograms } from './servicesData';
 
 const GestionStressDetailsPage: React.FC = () => {
+  const serviceData = collectivePrograms.find(s => s.id === 'gestion-stress');
+
   return (
     <ServiceLayout
       hero={{
         title: <>Gestion du<br /><span className="opacity-40 italic font-light">stress</span></>,
-        subtitle: "Retrouvez votre équilibre et votre sérénité grâce à un programme structuré basé sur la pleine conscience.",
+        subtitle: "Développer une relation plus consciente à son expérience et mieux faire face aux situations stressantes.",
         tag: "Programme collectif",
-        duration: "8 SEMAINES",
+        duration: "8 SÉANCES",
         format: "GROUPE (5-10 PERS.)",
         location: "PRÉSENTIEL",
         mediaSrc: "/surf_MBCR.mp4",
         mediaType: "video"
       }}
       benefits={{
-        title: "Les bienfaits",
+        title: "Les bénéfices principaux",
         subtitle: "Une approche validée pour apaiser le mental",
         items: [
-    {
-      icon: Target,
-            title: 'Apaisement',
-            description: 'Diminuez significativement votre niveau de stress et d\'anxiété au quotidien.'
-    },
-    {
-      icon: Heart,
-            title: 'Bienveillance',
-            description: 'Améliorez votre relation à vous-même et développez l\'autocompassion.'
-    },
-    {
-      icon: Sparkles,
-            title: 'Régulation',
-            description: 'Apprenez à mieux vivre vos émotions et à ne plus vous laisser submerger.'
+          {
+            icon: Target,
+            title: 'Gestion du stress',
+            description: 'Reconnaître les signes de stress et y répondre de façon ajustée.'
+          },
+          {
+            icon: Heart,
+            title: 'Clarté et concentration',
+            description: 'Améliorer l’attention au moment présent et réduire les distractions mentales.'
+          },
+          {
+            icon: Sparkles,
+            title: 'Présence quotidienne',
+            description: 'Être plus attentif à ce qui se passe en soi sans réagir automatiquement.'
           }
         ]
       }}
       process={{
         title: "Le cycle",
-        subtitle: "Un apprentissage progressif sur 8 semaines",
+        subtitle: "Un apprentissage progressif en 8 séances",
         steps: [
           {
             number: '01',
@@ -63,29 +66,30 @@ const GestionStressDetailsPage: React.FC = () => {
         ]
       }}
       objectives={{
-        title: "Compétences clés",
-        subtitle: "Ce que vous allez développer",
+        title: "Ce que vous allez développer",
+        subtitle: "Des outils pour votre quotidien",
         items: [
-          { title: 'Attention', description: 'Muscler sa capacité à rester concentré.' },
-          { title: 'Recul', description: 'Observer ses pensées sans s\'y accrocher.' },
-          { title: 'Réponse', description: 'Choisir sa réaction plutôt que de subir.' },
-          { title: 'Soin de soi', description: 'Savoir prendre soin de ses besoins.' }
+          { title: 'Observation', description: 'Pratiques de pleine conscience pour observer pensées, émotions et sensations.' },
+          { title: 'Techniques', description: 'Techniques d’attention consciente appliquées au quotidien.' },
+          { title: 'Lucidité', description: 'Exercices pour répondre au stress avec plus de lucidité.' }
         ]
       }}
       practical={{
-        durationDetail: "8 séances de 2h30",
+        durationDetail: "8 séances (2h/séance)",
         formatDetail: "Groupe de 5 à 10 pers.",
-        locationDetail: "Présentiel",
+        locationDetail: "Présentiel/Distanciel",
         priceMain: "330€",
         priceLabelMain: "Cycle complet",
-        description: "Ce programme demande un engagement personnel avec une pratique quotidienne d'environ 30 minutes. C'est la clé pour en ressentir les bénéfices profonds.",
-        features: ['Supports écrits', 'Enregistrements audios', 'Journée de pratique', 'Entretien préalable']
+        description: "Ce programme demande un engagement personnel avec une pratique quotidienne. C'est la clé pour en ressentir les bénéfices profonds.",
+        features: ['Supports écrits', 'Enregistrements audios', 'Entretien préalable']
       }}
       cta={{
         title: "Envie de retrouver le calme ?",
         subtitle: "Inscrivez-vous au prochain cycle de gestion du stress.",
         buttonText: "Me pré-inscrire"
       }}
+      bookingLink="https://esenciel.setmore.com/services/75422cbc-2646-42db-9eee-97e4628f71e8"
+      learnMoreLink="https://esenciel.setmore.com/services/c3da0ac5-1530-4576-8ad5-2e43d65c30bc"
     />
   );
 };

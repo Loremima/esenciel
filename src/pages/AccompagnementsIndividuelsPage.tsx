@@ -46,7 +46,7 @@ const AccompagnementsIndividuelsPage: React.FC = () => {
         title="Prêt(e) pour un changement ?"
         subtitle="Commencez votre voyage vers une version plus sereine et vitalisée de vous-même."
         buttonText="Réserver un bilan"
-        buttonLink="/contact-reservation"
+        buttonLink="https://esenciel.setmore.com"
       />
     </div>
   );

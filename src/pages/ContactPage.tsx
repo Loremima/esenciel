@@ -33,11 +33,6 @@ const ContactPage: React.FC = () => {
 
   const contactInfo = [
     {
-      icon: MapPin,
-      title: 'Adresse',
-      content: 'Cabinet de consultation\nVaureilles\n12110 Aveyron'
-    },
-    {
       icon: Phone,
       title: 'Téléphone',
       content: '06 25 13 72 50'
@@ -143,7 +138,7 @@ const ContactPage: React.FC = () => {
           <div className="container relative z-10">
             <div className="section-header">
               <h1>Prendre rendez-vous</h1>
-              <p>Remplissez ce formulaire pour me faire part de votre demande. Je vous recontacterai rapidement pour planifier notre première rencontre.</p>
+              <p className="mb-8">Remplissez ce formulaire pour me faire part de votre demande.</p>
             </div>
             <div className="form-wrapper">
 
@@ -201,7 +196,7 @@ const ContactPage: React.FC = () => {
                       <option value="mindfulness">Pleine conscience et présence attentive.</option>
                       <option value="tao">Jeu du Tao</option>
                       <option value="gestion-stress">Gestion du stress par la pleine conscience</option>
-                      <option value="prevention-rechute">Prévention des rechutes dépressives</option>
+                      <option value="prevention-rechute">Prévention des rechutes dépressives (MBCT)</option>
                       <option value="bien-vieillir">Bien vivre son avancée en âge</option>
                       <option value="autre">Autre / À définir</option>
                     </select>

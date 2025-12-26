@@ -36,6 +36,20 @@ const GlassButton: React.FC<GlassButtonProps> = ({
   );
 
   if (to) {
+    const isExternal = to.startsWith('http');
+    if (isExternal) {
+      return (
+        <a 
+          href={to} 
+          className={baseClasses} 
+          onClick={onClick}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {content}
+        </a>
+      );
+    }
     return (
       <Link to={to} className={baseClasses} onClick={onClick}>
         {content}

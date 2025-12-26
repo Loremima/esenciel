@@ -37,7 +37,7 @@ const BlogPage: React.FC = () => {
     },
     {
       id: 4,
-      title: 'Gestion du stress par la pleine conscience : 8 semaines pour transformer sa vie',
+      title: 'Gestion du stress par la pleine conscience : transformer sa vie en 8 séances',
       excerpt: 'Retour d\'expérience sur les programmes Gestion du stress par la pleine conscience et leurs effets durables sur le bien-être.',
       date: '22 Février 2024',
       author: 'EsenCiel',

@@ -64,7 +64,11 @@ interface ServiceLayoutProps {
         title: string;
         subtitle: string;
         buttonText: string;
+        buttonLink?: string; // Optionnel, si absent on garde /contact-reservation
     };
+    bookingLink?: string;
+    followUpBookingLink?: string;
+    learnMoreLink?: string; // Lien "En savoir plus" pour les programmes collectifs
 }
 
 const ServiceLayout: React.FC<ServiceLayoutProps> = ({
@@ -73,9 +77,38 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
     process,
     objectives,
     practical,
-    cta
+    cta,
+    bookingLink,
+    followUpBookingLink,
+    learnMoreLink
 }) => {
     const videoRef = useSlowMoVideo();
+
+    // Helper pour les liens externes vs internes
+    const renderButton = (text: string, to: string, className: string, icon?: React.ReactNode) => {
+        const isExternal = to.startsWith('http');
+        if (isExternal) {
+            return (
+                <a
+                    href={to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                >
+                    {icon && icon}
+                    {text}
+                    {!icon && <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />}
+                </a>
+            );
+        }
+        return (
+            <Link to={to} className={className}>
+                {icon && icon}
+                {text}
+                {!icon && <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />}
+            </Link>
+        );
+    };
 
     return (
         <div className="service-page-layout">
@@ -118,13 +151,20 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
                                 )}
                             </div>
 
-                            <Link
-                                to="/contact-reservation"
-                                className="inline-flex items-center gap-4 px-10 py-5 bg-[#1F2937] text-[#fffcea] rounded-full font-bold hover:bg-[#111827] transition-all duration-500 shadow-xl hover:shadow-2xl hover:-translate-y-1 group"
-                            >
-                                Réserver ma séance
-                                <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-                            </Link>
+                            <div className="flex gap-4 flex-wrap">
+                                {learnMoreLink && (
+                                    renderButton(
+                                        "En savoir plus",
+                                        learnMoreLink,
+                                        "inline-flex items-center gap-4 px-10 py-5 bg-white/90 text-[#1F2937] rounded-full font-bold hover:bg-white transition-all duration-500 shadow-xl hover:shadow-2xl hover:-translate-y-1 group border border-stone-200"
+                                    )
+                                )}
+                                {renderButton(
+                                    "Réserver ma place",
+                                    bookingLink || "/contact-reservation",
+                                    "inline-flex items-center gap-4 px-10 py-5 bg-[#1F2937] text-[#fffcea] rounded-full font-bold hover:bg-[#111827] transition-all duration-500 shadow-xl hover:shadow-2xl hover:-translate-y-1 group"
+                                )}
+                            </div>
                         </div>
 
                         {/* Média (Vidéo ou Image) - Poussé à droite */}
@@ -162,9 +202,6 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
             >
                 <div className="flex flex-col items-center justify-center w-full px-4"> {/* Ajout de justify-center, w-full et px-4 */}
                     <div className="max-w-4xl w-full text-center mb-24"> {/* Ajout de w-full */}
-                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#fffcea] mb-4 block" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
-                            Transformation
-                        </span>
                         <h2 className="text-5xl md:text-6xl font-bold text-[#fffcea] mb-6 font-heading leading-tight" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
                             {benefits.title}
                         </h2>
@@ -327,15 +364,40 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
                             </div>
 
                             <div className="pt-10 border-t border-stone-200/60 flex gap-4">
-                                <div className="flex-1 p-6 rounded-3xl bg-[#1F2937] text-[#fffcea] text-center">
-                                    <div className="text-2xl font-bold mb-1">{practical.priceMain}</div>
-                                    <div className="text-[9px] font-bold uppercase tracking-widest opacity-60">{practical.priceLabelMain}</div>
-                                </div>
-                                {practical.priceSub && (
-                                    <div className="flex-1 p-6 rounded-3xl bg-white border border-stone-200 text-center text-[#1F2937]">
-                                        <div className="text-2xl font-bold mb-1">{practical.priceSub}</div>
-                                        <div className="text-[9px] font-bold uppercase tracking-widest text-stone-400">{practical.priceLabelSub}</div>
+                                {bookingLink ? (
+                                    <a
+                                        href={bookingLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex-1 p-6 rounded-3xl bg-[#1F2937] text-[#fffcea] text-center transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                                    >
+                                        <div className="text-2xl font-bold mb-1">{practical.priceMain}</div>
+                                        <div className="text-[9px] font-bold uppercase tracking-widest opacity-60">{practical.priceLabelMain}</div>
+                                    </a>
+                                ) : (
+                                    <div className="flex-1 p-6 rounded-3xl bg-[#1F2937] text-[#fffcea] text-center">
+                                        <div className="text-2xl font-bold mb-1">{practical.priceMain}</div>
+                                        <div className="text-[9px] font-bold uppercase tracking-widest opacity-60">{practical.priceLabelMain}</div>
                                     </div>
+                                )}
+
+                                {practical.priceSub && (
+                                    followUpBookingLink ? (
+                                        <a
+                                            href={followUpBookingLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex-1 p-6 rounded-3xl bg-white border border-stone-200 text-center text-[#1F2937] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                                        >
+                                            <div className="text-2xl font-bold mb-1">{practical.priceSub}</div>
+                                            <div className="text-[9px] font-bold uppercase tracking-widest text-stone-400">{practical.priceLabelSub}</div>
+                                        </a>
+                                    ) : (
+                                        <div className="flex-1 p-6 rounded-3xl bg-white border border-stone-200 text-center text-[#1F2937]">
+                                            <div className="text-2xl font-bold mb-1">{practical.priceSub}</div>
+                                            <div className="text-[9px] font-bold uppercase tracking-widest text-stone-400">{practical.priceLabelSub}</div>
+                                        </div>
+                                    )
                                 )}
                             </div>
                         </div>
@@ -357,13 +419,12 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
                                 ))}
                             </ul>
 
-                            <Link
-                                to="/contact-reservation"
-                                className="inline-flex items-center gap-4 px-10 py-5 bg-[#1F2937] text-[#fffcea] rounded-full font-bold hover:bg-[#111827] transition-all duration-500 shadow-xl group"
-                            >
+                            {renderButton(
+                                "Prendre rendez-vous",
+                                bookingLink || "/contact-reservation",
+                                "inline-flex items-center gap-4 px-10 py-5 bg-[#1F2937] text-[#fffcea] rounded-full font-bold hover:bg-[#111827] transition-all duration-500 shadow-xl group",
                                 <Calendar size={20} />
-                                Prendre rendez-vous
-                            </Link>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -374,7 +435,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
                 title={cta.title}
                 subtitle={cta.subtitle}
                 buttonText={cta.buttonText}
-                buttonLink="/contact-reservation"
+                buttonLink={cta.buttonLink || bookingLink || "/contact-reservation"}
             />
         </div>
     );

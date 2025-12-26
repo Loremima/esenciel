@@ -123,14 +123,16 @@ const ServicesPage: React.FC = () => {
             <p className="text-stone-500 text-lg mb-10">
               Contactez-moi pour discuter de vos besoins et trouver l'accompagnement qui vous correspond le mieux.
             </p>
-            <Link 
-              to="/contact-reservation" 
+            <a 
+              href="https://esenciel.setmore.com" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 py-4 text-white rounded-xl font-bold transition-all duration-300 shadow-xl hover:opacity-90"
               style={{ backgroundColor: primaryDark }}
             >
               Prendre rendez-vous 
               <ArrowRight size={18} />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
