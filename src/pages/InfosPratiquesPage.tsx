@@ -360,7 +360,6 @@ const InfosPratiquesPage: React.FC = () => {
           line-height: 1.7;
           margin: 0;
           font-size: 1.05rem;
-          text-align: justify;
         }
 
         .resources-grid {

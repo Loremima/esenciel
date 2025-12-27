@@ -275,7 +275,6 @@ const AboutPage: React.FC = () => {
           line-height: 1.8;
           color: var(--color-gray-700);
           margin-bottom: var(--spacing-4); /* Ajout d'espacement */
-          text-align: justify;
         }
         .intro-signature {
           font-family: 'Brush Script MT', cursive, 'Playfair Display', serif;
@@ -414,7 +413,6 @@ const AboutPage: React.FC = () => {
             margin: 0;
             font-size: 1.12rem;
             line-height: 2;
-            text-align: justify;
         }
         .philosophy-card p + p { margin-top: var(--spacing-6); }
         
