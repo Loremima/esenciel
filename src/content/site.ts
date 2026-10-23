@@ -52,6 +52,7 @@ export const LEGAL = {
   siret: '817 627 003 00020',
   address: '1 allée Georges Brassens, 34290 Abeilhan',
   vat: 'TVA non applicable, article 293 B du Code général des impôts',
+  // Médiateur de la consommation : en pause (Lorenzo, 23/10). Obligatoire dès qu'on vend à des particuliers.
   mediator: '',
   host: {
     name: 'Vercel Inc.',

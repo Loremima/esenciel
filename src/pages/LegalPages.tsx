@@ -165,7 +165,9 @@ export function CgvPage() {
       <section>
         <h2>Médiation et litiges</h2>
         <p>
-          En cas de désaccord, contactez d’abord {SITE.owner} pour trouver une solution amiable. Pour les particuliers, le recours gratuit à un médiateur de la consommation est possible : <Todo value={LEGAL.mediator} hint="nom et site du médiateur de la consommation" />. Les présentes conditions sont soumises au droit français.
+          En cas de désaccord, contactez d’abord {SITE.owner} pour trouver une solution amiable. {LEGAL.mediator
+            ? <>Pour les particuliers, le recours gratuit à un médiateur de la consommation est possible : {LEGAL.mediator}.</>
+            : null}{' '}Les présentes conditions sont soumises au droit français.
         </p>
       </section>
     </LegalLayout>
