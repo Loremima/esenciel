@@ -49,7 +49,7 @@ export const CREDENTIALS = {
 // être remplis avant la mise en ligne.
 export const LEGAL = {
   status: 'Entrepreneuse individuelle (micro-entreprise)',
-  siret: '',
+  siret: '817 627 003 00020',
   address: '1 allée Georges Brassens, 34290 Abeilhan',
   vat: 'TVA non applicable, article 293 B du Code général des impôts',
   mediator: '',
