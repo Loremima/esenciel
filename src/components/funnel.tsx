@@ -21,26 +21,41 @@ function useMotionOk() {
 }
 
 /** Image fixe, remplacée par une vidéo en boucle quand elle arrive à l'écran. */
-export function LoopVideo({ media, className = '' }: { media: Media; className?: string }) {
+export function LoopVideo({ media, className = '', priority = false }: { media: Media; className?: string; priority?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const motionOk = useMotionOk();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (!motionOk || !ref.current) return;
+    const el = ref.current;
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) {
         setVisible(true);
         io.disconnect();
       }
     }, { rootMargin: '200px' });
-    io.observe(ref.current);
-    return () => io.disconnect();
-  }, [motionOk]);
+    // La vidéo du héros attend la fin du chargement : l'image s'affiche d'abord, vite.
+    const start = () => io.observe(el);
+    if (!priority || document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+    return () => {
+      window.removeEventListener('load', start);
+      io.disconnect();
+    };
+  }, [motionOk, priority]);
 
   return (
     <div ref={ref} aria-hidden className={`absolute inset-0 ${className}`}>
-      <img src={media.poster} alt="" width={960} height={540} loading="lazy" className="h-full w-full object-cover" />
+      <img
+        src={media.poster}
+        alt=""
+        width={960}
+        height={540}
+        loading={priority ? 'eager' : 'lazy'}
+        {...{ fetchpriority: priority ? 'high' : 'auto' }}
+        className="h-full w-full object-cover"
+      />
       {visible && <video className="absolute inset-0 h-full w-full object-cover" src={media.video} poster={media.poster} autoPlay muted loop playsInline />}
     </div>
   );
@@ -66,7 +81,7 @@ export function HeroVideo({
 }) {
   return (
     <section className={`relative -mt-[4.5rem] flex flex-col justify-end overflow-hidden bg-night text-cream md:justify-center ${full ? 'min-h-[40rem] [height:100svh]' : 'min-h-[34rem] md:min-h-[36rem]'}`}>
-      <LoopVideo media={media} />
+      <LoopVideo media={media} priority />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-night/55 via-night/20 to-night/90 md:via-night/35 md:to-night/70" />
       <div className="container-site fade-up relative pb-24 pt-28 text-center md:pb-16">
         {kicker && <p className="font-heading text-2xl tracking-wide">{kicker}</p>}

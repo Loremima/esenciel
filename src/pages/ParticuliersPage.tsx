@@ -23,7 +23,7 @@ function GroupRow({ o }: { o: OffreParticulier }) {
   return (
     <li className="flex items-center gap-3.5 rounded-[22px] border border-sand-dark bg-cream-light p-3 text-left">
       <Link to={o.path} className="flex min-w-0 flex-1 items-center gap-3.5">
-        <img src={o.image.src} alt="" width={144} height={144} loading="lazy" className="h-[72px] w-[72px] shrink-0 rounded-2xl object-cover" />
+        <img src={o.image.src.replace('.webp', '-144.webp')} alt="" width={144} height={144} loading="lazy" className="h-[72px] w-[72px] shrink-0 rounded-2xl object-cover" />
         <span className="min-w-0">
           <span className="block font-semibold leading-tight">{c.name}</span>
           <span className="block text-[0.82rem] text-ink-muted">{c.sub}</span>

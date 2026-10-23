@@ -32,7 +32,7 @@ export default function AboutPage() {
       />
 
       <section className="relative -mt-[4.5rem] overflow-hidden bg-night pb-14 pt-28 text-center text-cream md:pb-20 md:pt-32">
-        <LoopVideo media={MEDIA.ciel} className="opacity-55" />
+        <LoopVideo media={MEDIA.ciel} className="opacity-55" priority />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-night/30 to-night/95" />
         <div className="container-site fade-up relative flex flex-col items-center">
           <img src="/images/veronique.webp" alt="Portrait de Véronique Carrié" width={800} height={1000} className="h-[288px] w-[230px] rounded-arch border-4 border-gold-light/50 object-cover md:h-[360px] md:w-[288px]" />

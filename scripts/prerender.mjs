@@ -1,7 +1,7 @@
 // Prérendu : chaque page est écrite en HTML complet dans dist/, pour que
 // Google et les assistants IA (qui n'exécutent pas le JavaScript) lisent le
 // vrai contenu. Génère aussi le sitemap et la page 404.
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -11,7 +11,10 @@ const ssr = join(root, 'dist-ssr');
 const SITE_URL = 'https://esenciel.net';
 
 const { render, STATIC_ROUTES } = await import(pathToFileURL(join(ssr, 'entry-server.js')).href);
-const template = readFileSync(join(dist, 'index.html'), 'utf8');
+// Précharge les polices latines du haut de page (titres Fraunces, texte Inter).
+const fonts = readdirSync(join(dist, 'assets')).filter((f) => /^(fraunces-latin-opsz-normal|inter-latin-wght-normal)-.*\.woff2$/.test(f));
+const preloads = fonts.map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin />`).join('\n    ');
+const template = readFileSync(join(dist, 'index.html'), 'utf8').replace('<!--app-head-->', `${preloads}\n    <!--app-head-->`);
 
 const page = (url) => {
   const { html, head } = render(url);

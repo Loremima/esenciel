@@ -55,7 +55,7 @@ export default function Header() {
         Aller au contenu
       </a>
       <div className="container-site flex h-[4.5rem] items-center justify-between gap-6">
-        <Link to="/" aria-label="EsenCiel, accueil">
+        <Link to="/" title="Accueil">
           <Logo light={overlay} />
         </Link>
 
