@@ -326,7 +326,7 @@ export type OffreParticulier = {
 };
 
 // Lien direct vers une prestation sutempo (sans effet tant que sutempo ne le gère pas : la page s'ouvre simplement).
-const S = (id: string) => `${SITE.booking}?service=${id}`;
+const S = (id: string) => `${SITE.booking}/?service=${id}`;
 
 export const particuliers: OffreParticulier[] = [
   {

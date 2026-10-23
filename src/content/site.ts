@@ -12,7 +12,7 @@ export const SITE = {
   phoneHref: 'tel:+33625137250',
   email: 'esenciel.contact@gmail.com',
   // Agenda de réservation en ligne : la seule adresse à changer pour passer sur un autre outil.
-  booking: 'https://sutempo.com/esenciel',
+  booking: 'https://esenciel.sutempo.com',
   linkedin: 'https://fr.linkedin.com/in/v%C3%A9ronique-carri%C3%A9',
   plaquette: '/docs/plaquette-esenciel-structures.pdf',
   ogImage: '/og-image.jpg',
@@ -26,7 +26,7 @@ export const FIRST_MEETING = {
     info: 'Échange découverte · 20 min · gratuit',
     text: 'Votre public, vos dates, votre financement : on regarde ensemble ce qui est possible.',
     cta: 'Choisir mon créneau',
-    href: `${SITE.booking}?service=b65a6aed-6cbb-5e65-aa85-e9a419134383`,
+    href: `${SITE.booking}/?service=b65a6aed-6cbb-5e65-aa85-e9a419134383`,
   },
   particulier: {
     label: 'Particulier',
