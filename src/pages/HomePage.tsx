@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
                 Notre cerveau fonctionne souvent en pilote automatique. C'est utile, jusqu'au jour où la vie change : la retraite, la mémoire qui flanche, un proche à aider, un métier qui épuise.
               </p>
               <p className="welcome-description">
-                Formée en psychologie clinique et en neuropsychologie, je vous aide à comprendre ces mécanismes, à les observer, puis à reprendre la main, avec des outils issus de programmes validés scientifiquement.
+                Formée en psychologie clinique et en neuropsychologie du vieillissement, je vous aide à comprendre ces mécanismes, à les observer, puis à reprendre la main, avec des outils issus de programmes validés scientifiquement.
               </p>
               <p className="welcome-description">
                 J'interviens auprès des structures (conférences, ateliers, formations) et des particuliers, dans l'Hérault et l'Aveyron.

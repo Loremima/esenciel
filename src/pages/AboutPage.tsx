@@ -36,8 +36,8 @@ const AboutPage: React.FC = () => {
   const credentials = [
     {
       icon: Heart,
-      title: 'Master en psychologie clinique',
-      description: 'Spécialité en neuropsychologie',
+      title: 'Master 1 en psychologie clinique',
+      description: 'Spécialisation en neuropsychologie du vieillissement',
       details: 'Approche cognitive',
     },
     {

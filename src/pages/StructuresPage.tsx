@@ -11,7 +11,7 @@ const StructuresPage: React.FC = () => {
     {
       icon: Brain,
       title: 'Une expertise du cerveau',
-      description: "Formée en psychologie clinique, spécialité neuropsychologie. Je n'anime pas seulement des exercices : j'explique les mécanismes."
+      description: "Formation universitaire en psychologie clinique (Master 1), spécialisée en neuropsychologie du vieillissement. Je n'anime pas seulement des exercices : j'explique les mécanismes."
     },
     {
       icon: FlaskConical,
@@ -96,7 +96,7 @@ const StructuresPage: React.FC = () => {
             Conférences, ateliers et formations pour les structures, spécialisés dans l'avancée en âge : seniors, aidants et professionnels qui les accompagnent.
           </p>
           <p className="text-[#fffcea]/80 text-sm md:text-base mt-4 max-w-3xl mx-auto">
-            Véronique Carrié · Psychologie clinique et neuropsychologie · Instructrice certifiée MBSR, MBCT, MBCAS · Hérault et Aveyron
+            Véronique Carrié · Formée en neuropsychologie du vieillissement · Instructrice certifiée MBSR, MBCT, MBCAS · Formatrice en éducation à la santé · Hérault et Aveyron
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <GlassButton to="/contact-reservation" icon={ArrowRight}>
