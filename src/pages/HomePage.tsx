@@ -29,7 +29,7 @@ export default function HomePage() {
 
       {/* Héros */}
       <section className="relative overflow-hidden bg-cream pb-16 pt-10 md:pb-24 md:pt-16">
-        <div aria-hidden className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gold-light/25 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-sand-dark/40 blur-3xl" />
         <div className="container-site relative grid items-center gap-12 md:grid-cols-[1.3fr_1fr] md:gap-16">
           <div className="fade-up">
             <p className="eyebrow mb-5">Prévention et éducation à la santé · {SITE.zone}</p>

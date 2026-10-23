@@ -96,7 +96,7 @@ export function ConfidentialitePage() {
         <h2>Destinataires et sous-traitants</h2>
         <ul>
           <li>{SITE.owner}, seule destinataire de vos messages.</li>
-          <li>{LEGAL.host.name} héberge le site et reçoit les messages du formulaire. Ses serveurs peuvent être situés hors de l’Union européenne ; les transferts sont encadrés par les clauses contractuelles types de la Commission européenne.</li>
+          <li>{LEGAL.host.name} héberge le site, et Resend (Plus Five Five, Inc.) achemine les messages du formulaire jusqu’à la boîte e-mail d’EsenCiel. Leurs serveurs peuvent être situés hors de l’Union européenne ; les transferts sont encadrés par les clauses contractuelles types de la Commission européenne.</li>
           <li>Setmore, service de réservation en ligne, si vous réservez une séance depuis le site. Sa propre politique de confidentialité s’applique alors.</li>
         </ul>
         <p>Vos données ne sont ni vendues ni utilisées à des fins publicitaires.</p>

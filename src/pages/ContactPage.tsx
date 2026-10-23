@@ -9,8 +9,8 @@ import { Seo, breadcrumbLd } from '../lib/head';
 type Profil = 'structure' | 'particulier';
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
-// Le formulaire est enregistré par Netlify Forms (attribut data-netlify) :
-// les messages arrivent dans l'interface Netlify et par e-mail.
+// Le formulaire est envoyé à la fonction /api/contact (dossier api/), qui
+// transmet le message par e-mail via Resend.
 export default function ContactPage() {
   const [profil, setProfil] = useState<Profil>('structure');
   const [offre, setOffre] = useState('');
@@ -32,10 +32,10 @@ export default function ContactPage() {
     setStatus('sending');
     const data = new FormData(e.currentTarget);
     try {
-      const res = await fetch('/', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(data)),
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus('sent');
@@ -75,8 +75,7 @@ export default function ContactPage() {
                 <p className="mt-3 text-ink-soft">Je vous réponds sous 48 heures, par e-mail ou par téléphone.</p>
               </div>
             ) : (
-              <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={onSubmit} className="space-y-5">
-                <input type="hidden" name="form-name" value="contact" />
+              <form name="contact" method="POST" action="/api/contact" onSubmit={onSubmit} className="space-y-5">
                 <p hidden>
                   <label>
                     Ne pas remplir : <input name="bot-field" tabIndex={-1} autoComplete="off" />
@@ -87,7 +86,7 @@ export default function ContactPage() {
                   <legend className={label}>Vous êtes</legend>
                   <div className="grid grid-cols-2 gap-3">
                     {(['structure', 'particulier'] as Profil[]).map((p) => (
-                      <label key={p} className={`cursor-pointer rounded-xl border px-4 py-3 text-center transition-colors ${profil === p ? 'border-ink bg-ink text-cream' : 'border-sand-dark bg-white text-ink hover:border-ink/50'}`}>
+                      <label key={p} className={`cursor-pointer rounded-xl border px-4 py-3 text-center transition-colors ${profil === p ? 'border-ink bg-ink text-cream' : 'border-sand-dark bg-cream-light text-ink hover:border-ink/50'}`}>
                         <input type="radio" name="profil" value={p} checked={profil === p} onChange={() => { setProfil(p); setOffre(''); }} className="sr-only" />
                         {p === 'structure' ? 'Une structure' : 'Un particulier'}
                       </label>

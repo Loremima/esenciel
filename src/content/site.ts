@@ -30,13 +30,13 @@ export const CREDENTIALS = {
 export const LEGAL = {
   status: 'Entrepreneuse individuelle (micro-entreprise)',
   siret: '',
-  address: '',
+  address: '1 allée Georges Brassens, 34290 Abeilhan',
   vat: 'TVA non applicable, article 293 B du Code général des impôts',
   mediator: '',
   host: {
-    name: 'Netlify, Inc.',
-    address: '512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis',
-    url: 'https://www.netlify.com',
+    name: 'Vercel Inc.',
+    address: '440 N Barranca Ave #4133, Covina, CA 91723, États-Unis',
+    url: 'https://vercel.com',
   },
   updated: '23 octobre 2026',
 };

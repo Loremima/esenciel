@@ -18,11 +18,7 @@ npm run lint
 - `public/llms.txt` : résumé du site pour les assistants IA, à mettre à jour si les offres changent.
 - Photo : remplacer `public/images/veronique.webp` (800 × 1000) et `veronique-480.webp` (480 × 600).
 
-## Hébergement (Netlify)
+## Hébergement (Vercel)
 
-- `netlify.toml` : commande de build et dossier publié.
-- `public/_redirects` : redirections 301 des anciennes adresses.
-- `public/_headers` : en-têtes de sécurité et de cache.
-- Formulaire de contact : Netlify Forms (formulaire `contact`). Activer la détection des formulaires dans Netlify (Forms > Enable form detection) et ajouter une notification e-mail vers esenciel.contact@gmail.com.
-
-`vercel.json` reprend les mêmes redirections et en-têtes si le site passe sur Vercel ; le formulaire devra alors passer par un autre service.
+- `vercel.json` : build, redirections 301 des anciennes adresses, en-têtes de sécurité et de cache.
+- Formulaire de contact : la fonction `api/contact.ts` envoie chaque message par e-mail via Resend. Dans Vercel (Settings > Environment Variables), définir `RESEND_API_KEY`. Le domaine esenciel.net doit être vérifié dans Resend pour l'expéditeur `contact@esenciel.net` ; sinon, définir `CONTACT_FROM` sur une adresse vérifiée. `CONTACT_TO` change le destinataire (par défaut esenciel.contact@gmail.com).

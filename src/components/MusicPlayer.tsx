@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { Music, Pause } from 'lucide-react';
+import { Maximize2, Minus, Pause, Play } from 'lucide-react';
 
-// Musique d'ambiance : rien n'est téléchargé tant que le visiteur ne clique
-// pas. Le lecteur vit dans la mise en page, donc la musique continue d'une
-// page à l'autre.
+// Lecteur de musique d'ambiance : la bulle en verre dépoli de l'ancien site.
+// Rien n'est téléchargé tant que le visiteur ne clique pas sur lecture. Le
+// lecteur vit dans la mise en page, donc la musique continue d'une page à l'autre.
 
 const SRC = '/media/ambiance.m4a';
 
 export default function MusicPlayer() {
   const audio = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
+  const [minimized, setMinimized] = useState(false);
 
   useEffect(() => () => audio.current?.pause(), []);
 
@@ -32,16 +33,22 @@ export default function MusicPlayer() {
     }
   };
 
+  const round = 'grid h-9 w-9 shrink-0 place-items-center rounded-full transition-transform hover:scale-105';
+
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-pressed={playing}
-      className="fixed bottom-4 left-4 z-30 flex items-center gap-2 rounded-full border border-sand-dark bg-cream/95 px-3.5 py-2.5 text-sm text-ink-soft shadow-soft backdrop-blur transition-colors hover:text-ink"
-    >
-      {playing ? <Pause aria-hidden className="h-4 w-4" /> : <Music aria-hidden className="h-4 w-4" />}
-      <span className="hidden sm:inline">{playing ? 'Couper la musique' : 'Musique d’ambiance'}</span>
-      <span className="sr-only sm:hidden">{playing ? 'Couper la musique' : 'Lancer la musique d’ambiance'}</span>
-    </button>
+    <div className="player-in fixed bottom-4 right-4 z-30 flex items-center gap-3 rounded-full border border-white/40 bg-cream/40 py-2 pl-2 pr-2 text-ink shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl md:bottom-8 md:right-8">
+      <button type="button" onClick={toggle} aria-pressed={playing} aria-label={playing ? 'Mettre la musique en pause' : 'Lancer la musique d’ambiance'} className={`${round} bg-ink text-cream`}>
+        {playing ? <Pause aria-hidden size={18} /> : <Play aria-hidden size={18} className="translate-x-px" />}
+      </button>
+      {!minimized && (
+        <div className="min-w-0 pr-1 leading-tight">
+          <p className="text-[0.9rem] font-semibold">Beginnings Are Such Delicate Times</p>
+          <p className="text-[0.8rem] opacity-70">Hans Zimmer</p>
+        </div>
+      )}
+      <button type="button" onClick={() => setMinimized((m) => !m)} aria-label={minimized ? 'Agrandir le lecteur' : 'Réduire le lecteur'} className={`${round} bg-black/5 text-ink-soft`}>
+        {minimized ? <Maximize2 aria-hidden size={14} /> : <Minus aria-hidden size={14} />}
+      </button>
+    </div>
   );
 }

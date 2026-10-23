@@ -17,7 +17,7 @@ type ButtonProps = {
 const variants = {
   primary: 'bg-ink text-cream hover:bg-ink-soft',
   secondary: 'border border-ink/80 text-ink hover:bg-ink hover:text-cream',
-  light: 'bg-cream text-ink hover:bg-white',
+  light: 'bg-cream text-ink hover:bg-cream-light',
   ghost: 'text-ink hover:text-gold-dark px-0',
 };
 
@@ -42,7 +42,7 @@ export function Section({ children, tone = 'cream', className = '', id }: { chil
   const tones = {
     cream: 'bg-cream',
     sand: 'bg-sand',
-    white: 'bg-cream-light',
+    white: 'bg-cream',
     ink: 'bg-ink text-cream',
   };
   return (
@@ -98,7 +98,7 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden bg-cream pb-14 pt-8 md:pb-20 md:pt-12">
-      <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[28rem] w-[28rem] rounded-full bg-gold-light/20 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[28rem] w-[28rem] rounded-full bg-sand-dark/40 blur-3xl" />
       <div className={`container-site relative ${aside ? 'grid items-center gap-10 md:grid-cols-[1.25fr_1fr] md:gap-14' : ''}`}>
         <div className="fade-up">
           {crumbs && <Breadcrumbs items={crumbs} />}

@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: { DEFAULT: '#FFFCEA', light: '#FFFEF6' },
-        sand: { DEFAULT: '#F5EFD9', dark: '#E8DEBE' },
+        cream: { DEFAULT: '#FAF6EE', light: '#FFFDF9' },
+        sand: { DEFAULT: '#F2EBDD', dark: '#E2D7C2' },
         ink: { DEFAULT: '#1F2937', soft: '#374151', muted: '#5B6472' },
         gold: { DEFAULT: '#C99A2E', light: '#EBC65E', dark: '#8A6417' },
         clay: { DEFAULT: '#A85A35', light: '#F3E1D5' },
