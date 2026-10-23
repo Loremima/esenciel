@@ -4,15 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: { DEFAULT: '#FAF6EE', light: '#FFFDF9' },
-        sand: { DEFAULT: '#F2EBDD', dark: '#E2D7C2' },
-        ink: { DEFAULT: '#1F2937', soft: '#374151', muted: '#5B6472' },
-        gold: { DEFAULT: '#C99A2E', light: '#EBC65E', dark: '#8A6417' },
+        night: { DEFAULT: '#121A2B', deep: '#0D1320' },
+        cream: { DEFAULT: '#F6F1E7', light: '#FBF8F2' },
+        sand: { DEFAULT: '#EDE4D3', dark: '#E2D6BF' },
+        ink: { DEFAULT: '#1B2333', soft: '#3A4253', muted: '#4F5768' },
+        gold: { DEFAULT: '#C9973A', light: '#E8C47A', dark: '#8A6417' },
         clay: { DEFAULT: '#A85A35', light: '#F3E1D5' },
         sage: { DEFAULT: '#4D6B5E', light: '#DDE7DF' },
       },
       fontFamily: {
-        heading: ['"Playfair Display Variable"', 'Georgia', 'serif'],
+        heading: ['"Fraunces Variable"', 'Georgia', 'serif'],
         sans: ['"Inter Variable"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       maxWidth: { prose: '68ch' },

@@ -15,8 +15,8 @@ type ButtonProps = {
 };
 
 const variants = {
-  primary: 'bg-ink text-cream hover:bg-ink-soft',
-  secondary: 'border border-ink/80 text-ink hover:bg-ink hover:text-cream',
+  primary: 'bg-night text-cream hover:bg-night/90',
+  secondary: 'border border-ink/80 text-ink hover:bg-night hover:text-cream',
   light: 'bg-cream text-ink hover:bg-cream-light',
   ghost: 'text-ink hover:text-gold-dark px-0',
 };
@@ -43,7 +43,7 @@ export function Section({ children, tone = 'cream', className = '', id }: { chil
     cream: 'bg-cream',
     sand: 'bg-sand',
     white: 'bg-cream',
-    ink: 'bg-ink text-cream',
+    ink: 'bg-night text-cream',
   };
   return (
     <section id={id} className={`${tones[tone]} py-16 md:py-24 ${className}`}>
@@ -144,7 +144,7 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
 
 export function CtaBand({ title, text, primary }: { title: string; text: string; primary?: { label: string; to: string } }) {
   return (
-    <section className="bg-ink py-16 text-cream md:py-20">
+    <section className="bg-night py-16 text-cream md:py-20">
       <div className="container-site grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
         <div>
           <h2 className="h-section text-cream">{title}</h2>
@@ -152,7 +152,7 @@ export function CtaBand({ title, text, primary }: { title: string; text: string;
         </div>
         <div className="flex flex-wrap gap-3 md:justify-end">
           <Button to={primary?.to ?? '/contact'} variant="light" arrow>
-            {primary?.label ?? 'Réserver un appel de 20 min'}
+            {primary?.label ?? 'Prendre rendez-vous'}
           </Button>
           <a href={SITE.phoneHref} className="inline-flex items-center gap-2 rounded-full border border-cream/40 px-6 py-3 text-[0.95rem] font-medium text-cream transition-colors hover:bg-cream/10">
             <Phone aria-hidden className="h-4 w-4" />

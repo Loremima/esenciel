@@ -1,6 +1,25 @@
 // Toutes les offres du site. Les pages lisent ces données : un tarif ou une
 // durée ne se modifie qu'ici.
 
+import {
+  Activity,
+  AlertTriangle,
+  BatteryCharging,
+  BellRing,
+  Brain,
+  Eye,
+  Focus,
+  HeartHandshake,
+  Home,
+  Layers,
+  Palette,
+  Sparkles,
+  Target,
+  Timer,
+  Users,
+  Wind,
+  type LucideIcon,
+} from 'lucide-react';
 import { SITE } from './site';
 
 export type Fact = { label: string; value: string };
@@ -20,6 +39,10 @@ export type OffreStructure = {
   quote?: string;
   audience?: string;
   accent: Accent;
+  /** Trois chiffres clés affichés sous le titre. */
+  stats: Fact[];
+  /** Ce que le public y gagne, en quelques mots. */
+  gains: { icon: LucideIcon; label: string }[];
   facts: Fact[];
   objectifs: string[];
   deroule: Step[];
@@ -39,6 +62,17 @@ export const conferences: OffreStructure[] = [
     title: '« Quand mon cerveau n’en fait qu’à sa tête »',
     promise: 'Comprendre le pilote automatique de notre cerveau : pourquoi il nous rend service, et quand il nous joue des tours.',
     accent: 'gold',
+    stats: [
+      { value: '1 h 30 à 2 h', label: 'une seule séance' },
+      { value: '15 à 50', label: 'personnes' },
+      { value: '3', label: 'versions selon le public' },
+    ],
+    gains: [
+      { icon: Brain, label: 'Comprendre le pilote automatique' },
+      { icon: Palette, label: 'Vivre l’expérience des couleurs' },
+      { icon: AlertTriangle, label: 'Repérer quand il nous piège' },
+      { icon: Sparkles, label: 'Donner envie d’aller plus loin' },
+    ],
     facts: [
       { label: 'Public', value: 'Seniors, aidants ou professionnels, avec une version adaptée à chaque public. Grand public d’une commune ou d’une structure.' },
       { label: 'Format', value: '1 h 30 à 2 h, de 15 à 50 personnes, une seule séance, dans une salle avec vidéoprojecteur' },
@@ -78,6 +112,17 @@ export const conferences: OffreStructure[] = [
     title: '« Qui pilote ma vie : ma conscience ou mes automatismes ? »',
     promise: 'Passer de la compréhension à l’action : repérer ses automatismes face au stress et apprendre à choisir sa réponse.',
     accent: 'gold',
+    stats: [
+      { value: '1 h 30 à 2 h', label: 'une seule séance' },
+      { value: '15 à 50', label: 'personnes' },
+      { value: '3', label: 'versions selon le public' },
+    ],
+    gains: [
+      { icon: Layers, label: 'Distinguer pensées, émotions, réactions' },
+      { icon: Activity, label: 'Comprendre la mécanique du stress' },
+      { icon: Target, label: 'Des outils pour reprendre la main' },
+      { icon: Home, label: 'Une pratique à emporter chez soi' },
+    ],
     facts: [
       { label: 'Public', value: 'Seniors, aidants ou professionnels. Idéale après la première conférence, ou seule.' },
       { label: 'Format', value: '1 h 30 à 2 h, de 15 à 50 personnes, une seule séance, dans une salle avec vidéoprojecteur' },
@@ -122,6 +167,17 @@ export const programmes: OffreStructure[] = [
     quote: '« Mon cerveau change, que puis-je faire ? »',
     audience: 'Seniors',
     accent: 'gold',
+    stats: [
+      { value: '12 à 15', label: 'séances' },
+      { value: '2 h', label: 'par séance' },
+      { value: '5 à 12', label: 'participants' },
+    ],
+    gains: [
+      { icon: Brain, label: 'Dédramatiser les petits oublis' },
+      { icon: Wind, label: 'Apaiser stress et ruminations' },
+      { icon: Focus, label: 'Entraîner son attention' },
+      { icon: Users, label: 'Renforcer le lien social' },
+    ],
     facts: [
       { label: 'Public', value: 'Personnes de 60 ans et plus, autonomes, vivant à domicile ou en résidence autonomie' },
       { label: 'Format', value: 'Format MBCAS : 15 séances de 2 h sur 8 mois. Format CFPPA : 12 semaines à 2 séances par semaine, puis 3 séances de suivi. De 5 à 12 personnes, carnet de pratique remis à chacun.' },
@@ -158,6 +214,17 @@ export const programmes: OffreStructure[] = [
     quote: '« Je m’épuise à aider. »',
     audience: 'Aidants',
     accent: 'clay',
+    stats: [
+      { value: '6 à 8', label: 'séances' },
+      { value: '2 h', label: 'par séance' },
+      { value: '5 à 12', label: 'participants' },
+    ],
+    gains: [
+      { icon: Brain, label: 'Comprendre la charge mentale' },
+      { icon: BellRing, label: 'Repérer ses signaux d’alerte' },
+      { icon: Timer, label: 'Des pauses de 5 minutes' },
+      { icon: Users, label: 'Sortir de l’isolement' },
+    ],
     facts: [
       { label: 'Public', value: 'Proches aidants (conjoints, enfants) d’une personne âgée, malade ou en situation de handicap' },
       { label: 'Format', value: '6 à 8 séances de 2 h, de 5 à 12 personnes. Une solution de répit pour la personne aidée est à prévoir par la structure.' },
@@ -196,6 +263,17 @@ export const programmes: OffreStructure[] = [
     quote: '« Comment je tiens ? »',
     audience: 'Soignants et professionnels',
     accent: 'sage',
+    stats: [
+      { value: '6', label: 'séances, ou 1 journée' },
+      { value: '1 h 30', label: 'par séance' },
+      { value: '6 à 12', label: 'professionnels' },
+    ],
+    gains: [
+      { icon: Activity, label: 'Comprendre le stress au travail' },
+      { icon: Eye, label: 'Repérer ses automatismes' },
+      { icon: BatteryCharging, label: 'Récupérer pendant le service' },
+      { icon: HeartHandshake, label: 'Une relation de soin apaisée' },
+    ],
     facts: [
       { label: 'Public', value: 'Équipes d’EHPAD, de SAAD, de résidences autonomie : aides-soignants, auxiliaires de vie, animateurs, cadres' },
       { label: 'Format', value: 'Cycle de 6 séances d’1 h 30 sur le temps de travail, ou journée en intra (1 jour ou 2 demi-journées). De 6 à 12 professionnels, dans vos locaux.' },

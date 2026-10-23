@@ -1,20 +1,20 @@
-import { Award, GraduationCap, HeartHandshake, Leaf } from 'lucide-react';
-import { Button, CtaBand, PageHero, Section, SectionHeader } from '../components/ui';
-import { SITE } from '../content/site';
+import { Award, GraduationCap, MapPin, Presentation } from 'lucide-react';
+import { BookingSection, IconSquare, LoopVideo, Title } from '../components/funnel';
+import { MEDIA } from '../content/media';
 import { Seo, breadcrumbLd } from '../lib/head';
 
 const parcours = [
-  { icon: GraduationCap, title: 'Master 1 de psychologie clinique', text: 'Spécialisation en neuropsychologie du vieillissement : le fonctionnement de l’attention, de la mémoire et des émotions quand on avance en âge.' },
-  { icon: Leaf, title: 'Instructrice certifiée MBSR, MBCT et MBCAS', text: 'Les trois programmes de pleine conscience les plus étudiés : gestion du stress, prévention de la rechute dépressive, et avancée en âge.' },
-  { icon: Award, title: 'Formatrice en éducation à la santé', text: 'Certifiée en promotion et éducation à la santé, coach en prévention santé et qualité de vie.' },
-  { icon: HeartHandshake, title: 'Intervenante de terrain', text: 'J’anime des ateliers de prévention pour le programme Neo Silver, et j’interviens dans l’Hérault et l’Aveyron.' },
+  { icon: GraduationCap, title: 'Master 1 de psychologie clinique', text: 'Neuropsychologie du vieillissement' },
+  { icon: Award, title: 'Instructrice certifiée', text: 'MBSR, MBCT, MBCAS' },
+  { icon: Presentation, title: 'Formatrice', text: 'Éducation et promotion de la santé' },
+  { icon: MapPin, title: 'Sur le terrain', text: 'Neo Silver, Hérault, Aveyron' },
 ];
 
 const valeurs = [
-  { title: 'Rigueur', text: 'Des contenus issus de la recherche, expliqués sans jargon.' },
-  { title: 'Bienveillance', text: 'Chacun avance à son rythme, sans jugement.' },
-  { title: 'Concret', text: 'Des outils que l’on peut utiliser dès le lendemain.' },
-  { title: 'Honnêteté', text: 'Je dis clairement ce que je fais, et ce que je ne fais pas.' },
+  { title: 'Rigueur', text: 'Issu de la recherche' },
+  { title: 'Bienveillance', text: 'Sans jugement' },
+  { title: 'Concret', text: 'Utile dès demain' },
+  { title: 'Honnêteté', text: 'Ce que je fais, et pas' },
 ];
 
 export default function AboutPage() {
@@ -26,77 +26,61 @@ export default function AboutPage() {
     <>
       <Seo
         title="Véronique Carrié, formée en neuropsychologie du vieillissement et instructrice MBSR, MBCT, MBCAS"
-        description="Le parcours de Véronique Carrié : psychologie clinique (Master 1), neuropsychologie du vieillissement, pleine conscience et éducation à la santé. Hérault et Aveyron."
+        description="Le parcours de Véronique Carrié : psychologie clinique (Master 1), neuropsychologie du vieillissement, pleine conscience et éducation à la santé. Hérault et Aveyron."
         path="/qui-suis-je"
         jsonLd={[breadcrumbLd(crumbs)]}
       />
-      <PageHero
-        crumbs={crumbs}
-        eyebrow="Qui suis-je"
-        title="Véronique Carrié"
-        lead="J’aide chacun à mieux comprendre son cerveau pour traverser les changements de la vie : l’âge qui avance, le rôle d’aidant, un métier qui épuise."
-        aside={<img src="/images/veronique.webp" alt="Portrait de Véronique Carrié" width={800} height={1000} className="mx-auto w-full max-w-sm rounded-3xl object-cover shadow-soft" />}
-      >
-        <Button to="/contact" arrow>Me contacter</Button>
-      </PageHero>
 
-      <Section tone="white">
-        <div className="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed text-ink-soft">
-          <p>
-            Au fil de mon parcours dans la prévention et l’accompagnement, j’ai vu combien comprendre son propre fonctionnement pouvait changer une trajectoire de vie. Quand on sait pourquoi le cerveau s’emballe, oublie ou se fatigue, on a moins peur, et on peut agir.
-          </p>
-          <p>
-            C’est le cœur d’EsenCiel : <strong className="font-semibold text-ink">comprendre, observer, agir</strong>. J’associe les apports de la neuropsychologie, les pratiques de pleine conscience et l’éducation à la santé pour transmettre des outils simples, que chacun adapte à sa vie.
-          </p>
-          <p>
-            Je travaille surtout avec les structures qui accompagnent l’avancée en âge (CCAS, centres sociaux, résidences, EHPAD, plateformes de répit) et avec les particuliers qui souhaitent avancer en groupe ou en individuel.
-          </p>
+      <section className="relative -mt-[4.5rem] overflow-hidden bg-night pb-14 pt-28 text-center text-cream md:pb-20 md:pt-32">
+        <LoopVideo media={MEDIA.ciel} className="opacity-55" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-night/30 to-night/95" />
+        <div className="container-site fade-up relative flex flex-col items-center">
+          <img src="/images/veronique.webp" alt="Portrait de Véronique Carrié" width={800} height={1000} className="h-[288px] w-[230px] rounded-arch border-4 border-gold-light/50 object-cover md:h-[360px] md:w-[288px]" />
+          <h1 className="mt-6 font-heading font-light text-cream [font-size:clamp(2.5rem,5vw,3.8rem)]">Véronique Carrié</h1>
+          <p className="mt-3 max-w-md text-cream/85 md:text-lg">Comprendre son cerveau pour traverser les changements de la vie.</p>
         </div>
-      </Section>
+      </section>
 
-      <Section>
-        <SectionHeader eyebrow="Formation et expérience" title="Mon parcours" />
-        <div className="grid gap-5 sm:grid-cols-2">
-          {parcours.map((p) => (
-            <div key={p.title} className="card flex gap-5 p-6">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gold-light/30 text-gold-dark">
-                <p.icon aria-hidden className="h-5 w-5" />
-              </span>
-              <div>
-                <h3 className="text-xl font-medium">{p.title}</h3>
-                <p className="mt-2 text-ink-soft">{p.text}</p>
-              </div>
-            </div>
-          ))}
+      <section className="bg-cream py-16 md:py-20">
+        <div className="container-site">
+          <Title>Mon parcours</Title>
+          <ul className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-2.5 md:mt-12 md:grid-cols-4 md:gap-5">
+            {parcours.map((p) => (
+              <li key={p.title} className="flex flex-col items-center gap-2.5 rounded-[22px] bg-cream-light px-2.5 py-6 text-center">
+                <IconSquare icon={p.icon} />
+                <span className="text-sm font-semibold leading-tight">{p.title}</span>
+                <span className="text-[0.82rem] leading-tight text-ink-muted">{p.text}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <p className="mt-8 max-w-3xl text-ink-soft">
-          Mes interventions relèvent de la prévention et de l’éducation à la santé. Je ne pratique ni consultation ni psychothérapie : si votre situation le demande, je vous oriente vers les professionnels de santé adaptés.
+      </section>
+
+      <section className="bg-sand px-7 py-16 text-center md:py-20">
+        <span aria-hidden className="block font-heading text-7xl leading-[0.5] text-gold">“</span>
+        <p className="mx-auto mt-4 max-w-2xl font-heading text-[1.65rem] font-light leading-snug md:text-4xl">
+          Quand on sait pourquoi le cerveau s’emballe, oublie ou se fatigue, on a moins peur, et on peut agir.
         </p>
-      </Section>
+      </section>
 
-      <Section tone="sand">
-        <SectionHeader eyebrow="Ce qui me guide" title="Mes valeurs" />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {valeurs.map((v) => (
-            <div key={v.title} className="border-t-2 border-gold pt-4">
-              <h3 className="text-xl font-medium">{v.title}</h3>
-              <p className="mt-2 text-ink-soft">{v.text}</p>
-            </div>
-          ))}
-        </div>
-        <blockquote className="mx-auto mt-16 max-w-3xl text-center">
-          <p className="font-heading text-2xl italic leading-snug text-ink md:text-3xl">
-            « Entre le stimulus et la réponse, il y a un espace. Dans cet espace se trouve notre pouvoir de choisir notre réponse. »
+      <section className="bg-cream py-16 md:py-20">
+        <div className="container-site">
+          <Title>Ma façon de faire</Title>
+          <ul className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-2.5 md:mt-12 md:grid-cols-4 md:gap-5">
+            {valeurs.map((v) => (
+              <li key={v.title} className="rounded-[20px] border border-sand-dark px-2 py-5 text-center">
+                <span className="block font-heading text-[1.4rem]">{v.title}</span>
+                <span className="mt-1 block text-[0.82rem] text-ink-muted">{v.text}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mx-auto mt-10 max-w-xl text-center text-sm text-ink-muted">
+            Mes interventions relèvent de la prévention et de l’éducation à la santé. Je ne pratique ni consultation ni psychothérapie : si votre situation le demande, je vous oriente vers les professionnels de santé adaptés.
           </p>
-          <footer className="mt-4 text-ink-muted">Pensée attribuée à Viktor Frankl</footer>
-        </blockquote>
-      </Section>
+        </div>
+      </section>
 
-      <CtaBand
-        title="Travaillons ensemble"
-        text={`Une structure à accompagner, ou une démarche personnelle ? Écrivez-moi ou appelez le ${SITE.phone}.`}
-        primary={{ label: 'Me contacter', to: '/contact' }}
-      />
+      <BookingSection />
     </>
   );
 }

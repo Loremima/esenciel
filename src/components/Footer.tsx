@@ -8,7 +8,7 @@ export default function Footer() {
   const col = 'space-y-2.5 text-[0.95rem] text-cream/75';
   const a = 'transition-colors hover:text-cream';
   return (
-    <footer className="bg-ink text-cream">
+    <footer className="bg-night-deep text-cream">
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Logo light />
@@ -41,7 +41,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="hidden md:block">
           <p className="mb-4 font-heading text-lg">Conférences</p>
           <ul className={col}>
             {conferences.map((c) => (
@@ -50,7 +50,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="hidden md:block">
           <p className="mb-4 font-heading text-lg">Particuliers</p>
           <ul className={col}>
             {particuliers.map((p) => (

@@ -5,7 +5,7 @@ export const SITE = {
   name: 'EsenCiel',
   url: 'https://esenciel.net',
   owner: 'Véronique Carrié',
-  tagline: 'Piloter son cerveau face aux changements de la vie',
+  tagline: 'Prendre soin de son cerveau, à chaque âge de la vie',
   specialty: "Spécialiste de l'avancée en âge : seniors, aidants et professionnels qui les accompagnent",
   zone: 'Hérault et Aveyron',
   phone: '06 25 13 72 50',
@@ -16,6 +16,28 @@ export const SITE = {
   linkedin: 'https://fr.linkedin.com/in/v%C3%A9ronique-carri%C3%A9',
   plaquette: '/docs/plaquette-esenciel-structures.pdf',
   ogImage: '/og-image.jpg',
+};
+
+// Le premier rendez-vous (20 min, gratuit), proposé dans le bloc « Prendre rendez-vous ».
+// En attendant sutempo, une structure demande à être rappelée (formulaire) et un
+// particulier ouvre l'agenda actuel. Au passage sur sutempo, mettre les deux sur
+// les créneaux en ligne (cta « Choisir mon créneau ») avec les services « découverte » :
+// structures b65a6aed-6cbb-5e65-aa85-e9a419134383, particuliers ad91cf30-bb05-5201-8a0b-cf168c366224.
+export const FIRST_MEETING = {
+  structure: {
+    label: 'Structure',
+    info: 'Échange découverte · 20 min · gratuit',
+    text: 'Votre public, vos dates, votre financement : on regarde ensemble ce qui est possible.',
+    cta: 'Être rappelé sous 48 h',
+    href: '/contact?profil=structure#formulaire',
+  },
+  particulier: {
+    label: 'Particulier',
+    info: 'Séance individuelle ou cycle en groupe',
+    text: 'Réservez directement votre séance, ou pré-inscrivez-vous à un cycle.',
+    cta: 'Voir l’agenda',
+    href: SITE.booking,
+  },
 };
 
 // Formulation validée : jamais « psychologue » ni « neuropsychologue » (titres protégés).
@@ -43,8 +65,7 @@ export const LEGAL = {
 };
 
 export const NAV = [
-  { to: '/structures', label: 'Structures & financeurs' },
-  { to: '/conferences', label: 'Conférences' },
+  { to: '/structures', label: 'Structures' },
   { to: '/particuliers', label: 'Particuliers' },
   { to: '/qui-suis-je', label: 'Qui suis-je' },
 ];

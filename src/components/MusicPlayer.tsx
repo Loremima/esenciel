@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Maximize2, Minus, Pause, Play } from 'lucide-react';
+import { ALL_STRUCTURE_OFFERS } from '../content/offres';
 
 // Lecteur de musique d'ambiance : la bulle en verre dépoli de l'ancien site.
 // Rien n'est téléchargé tant que le visiteur ne clique pas sur lecture. Le
@@ -11,6 +13,9 @@ export default function MusicPlayer() {
   const audio = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [minimized, setMinimized] = useState(false);
+  // Sur les pages d'offre, une barre d'action occupe le bas de l'écran mobile.
+  const { pathname } = useLocation();
+  const raised = ALL_STRUCTURE_OFFERS.some((o) => o.path === pathname.replace(/\/$/, ''));
 
   useEffect(() => () => audio.current?.pause(), []);
   // Sur téléphone, la bulle démarre réduite pour ne pas masquer le contenu.
@@ -40,8 +45,8 @@ export default function MusicPlayer() {
   const round = 'grid h-9 w-9 shrink-0 place-items-center rounded-full transition-transform hover:scale-105';
 
   return (
-    <div className="player-in fixed bottom-4 right-4 z-30 flex items-center gap-3 rounded-full border border-white/50 bg-cream/75 py-2 pl-2 pr-2 text-ink shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl md:bottom-8 md:right-8">
-      <button type="button" onClick={toggle} aria-pressed={playing} aria-label={playing ? 'Mettre la musique en pause' : 'Lancer la musique d’ambiance'} className={`${round} bg-ink text-cream`}>
+    <div className={`player-in fixed ${raised ? 'bottom-20' : 'bottom-4'} right-4 z-30 flex items-center gap-3 rounded-full border border-white/50 bg-cream/75 py-2 pl-2 pr-2 text-ink shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl md:bottom-8 md:right-8`}>
+      <button type="button" onClick={toggle} aria-pressed={playing} aria-label={playing ? 'Mettre la musique en pause' : 'Lancer la musique d’ambiance'} className={`${round} bg-night text-cream`}>
         {playing ? <Pause aria-hidden size={18} /> : <Play aria-hidden size={18} className="translate-x-px" />}
       </button>
       {!minimized && (

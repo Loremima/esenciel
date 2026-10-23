@@ -1,44 +1,77 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { Button, CtaBand, PageHero, Section, SectionHeader } from '../components/ui';
-import { SITE } from '../content/site';
 import { particuliers, type OffreParticulier } from '../content/offres';
+import { BookingSection, HeroVideo, LoopVideo, Title } from '../components/funnel';
+import { MEDIA } from '../content/media';
 import { Seo, breadcrumbLd } from '../lib/head';
 
-const groupes: { id: OffreParticulier['category']; title: string; intro: string }[] = [
-  { id: 'cycle', title: 'Cycles en groupe', intro: 'Des programmes structurés de 8 à 15 séances, issus de méthodes évaluées par la recherche.' },
-  { id: 'individuel', title: 'Accompagnement individuel', intro: 'À votre rythme, en présentiel ou à distance.' },
-  { id: 'atelier', title: 'Atelier', intro: 'Une demi-journée en petit groupe.' },
-];
+// Noms courts et repères affichés dans les listes (le détail est sur chaque page).
+const CARD: Record<string, { name: string; sub: string; price: string; video?: keyof typeof MEDIA }> = {
+  'gestion-du-stress': { name: 'Gestion du stress', sub: 'MBSR · 8 séances', price: '330 €' },
+  'prevention-rechute-depressive': { name: 'Prévenir la rechute dépressive', sub: 'MBCT · 8 séances', price: '330 €' },
+  'bien-vivre-son-avancee-en-age': { name: 'Bien vivre son avancée en âge', sub: 'MBCAS · 15 séances', price: '420 €' },
+  'jeu-du-tao': { name: 'Jeu du Tao', sub: '3 à 4 personnes · 4 à 5 h', price: '70 €' },
+  'sante-et-vitalite': { name: 'Santé et vitalité', sub: '90 € puis 60 €', price: '', video: 'bougie' },
+  'pleine-conscience': { name: 'Pleine conscience', sub: '90 € puis 60 €', price: '' },
+};
 
-function OffreCard({ o }: { o: OffreParticulier }) {
+type Filtre = 'tout' | 'groupe' | 'individuel';
+
+function GroupRow({ o }: { o: OffreParticulier }) {
+  const c = CARD[o.slug];
   return (
-    <article className="card flex flex-col overflow-hidden">
-      <img src={o.image.src} alt={o.image.alt} width={600} height={400} loading="lazy" className="h-44 w-full object-cover" />
-      <div className="flex flex-1 flex-col p-6">
-        {o.method && <p className="eyebrow">{o.method}</p>}
-        <h3 className="mt-2 text-2xl font-medium leading-snug">
-          <Link to={o.path} className="hover:text-gold-dark">{o.title}</Link>
-        </h3>
-        <p className="mt-3 flex-1 text-ink-soft">{o.short}</p>
-        <p className="mt-4 text-sm text-ink-muted">{o.facts[0].value}</p>
-        <p className="mt-1 font-semibold text-ink">{o.price}</p>
-        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <Button href={o.booking} className="!px-5 !py-2.5 text-sm">{o.bookingLabel}</Button>
-          <Link to={o.path} className="inline-flex items-center gap-1.5 text-sm font-medium hover:text-gold-dark">
-            En savoir plus <ArrowRight aria-hidden className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-    </article>
+    <li className="flex items-center gap-3.5 rounded-[22px] border border-sand-dark bg-cream-light p-3 text-left">
+      <Link to={o.path} className="flex min-w-0 flex-1 items-center gap-3.5">
+        <img src={o.image.src} alt="" width={144} height={144} loading="lazy" className="h-[72px] w-[72px] shrink-0 rounded-2xl object-cover" />
+        <span className="min-w-0">
+          <span className="block font-semibold leading-tight">{c.name}</span>
+          <span className="block text-[0.82rem] text-ink-muted">{c.sub}</span>
+          <span className="mt-1 inline-block font-heading text-lg text-gold-dark">{c.price}</span>
+        </span>
+      </Link>
+      <a href={o.booking} target="_blank" rel="noopener noreferrer" className="shrink-0 rounded-full bg-night px-4 py-3 text-sm font-semibold text-cream hover:bg-night/90">
+        Réserver
+      </a>
+    </li>
+  );
+}
+
+function SoloCard({ o }: { o: OffreParticulier }) {
+  const c = CARD[o.slug];
+  return (
+    <Link to={o.path} className="group relative flex h-[260px] flex-col justify-end overflow-hidden rounded-[22px] text-center text-cream md:h-[340px]">
+      {c.video ? (
+        <LoopVideo media={MEDIA[c.video]} />
+      ) : (
+        <img src={o.image.src} alt="" width={600} height={800} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+      )}
+      <span aria-hidden className="absolute inset-0 bg-gradient-to-b from-night/0 from-30% to-night/90" />
+      <span className="relative p-4 md:p-6">
+        <span className="block font-heading text-xl leading-tight md:text-2xl">{c.name}</span>
+        <span className="mt-1.5 block text-[0.82rem] text-gold-light">{c.sub}</span>
+        <span className="mt-2 hidden items-center gap-1.5 text-sm text-cream/85 md:inline-flex">
+          Découvrir <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </span>
+      </span>
+    </Link>
   );
 }
 
 export default function ParticuliersPage() {
+  const [filtre, setFiltre] = useState<Filtre>('tout');
   const crumbs = [
     { name: 'Accueil', path: '/' },
     { name: 'Particuliers', path: '/particuliers' },
   ];
+  const groupe = particuliers.filter((o) => o.category !== 'individuel');
+  const solo = particuliers.filter((o) => o.category === 'individuel');
+  const filtres: { id: Filtre; label: string }[] = [
+    { id: 'tout', label: 'Tout' },
+    { id: 'groupe', label: 'En groupe' },
+    { id: 'individuel', label: 'Individuel' },
+  ];
+
   return (
     <>
       <Seo
@@ -47,41 +80,52 @@ export default function ParticuliersPage() {
         path="/particuliers"
         jsonLd={[breadcrumbLd(crumbs)]}
       />
-      <PageHero
-        crumbs={crumbs}
-        eyebrow="Particuliers"
-        title="Les mêmes outils, pour vous"
-        lead="Mieux gérer le stress, prévenir la rechute, accueillir l’avancée en âge ou changer une habitude : des cycles en groupe et des séances individuelles, avec réservation en ligne."
-      >
-        <Button href={SITE.booking} arrow>Voir l’agenda et réserver</Button>
-        <Button to="/contact?profil=particulier" variant="secondary">Poser une question</Button>
-      </PageHero>
+      <HeroVideo media={MEDIA.soleil} eyebrow="Particuliers" title={<>Prendre soin de soi, <em>à son rythme</em></>} lead="En petit groupe ou en individuel." />
 
-      {groupes.map((g, i) => (
-        <Section key={g.id} tone={i % 2 === 0 ? 'white' : 'cream'} id={g.id}>
-          <SectionHeader title={g.title} intro={g.intro} />
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {particuliers.filter((o) => o.category === g.id).map((o) => (
-              <OffreCard key={o.slug} o={o} />
-            ))}
-          </div>
-        </Section>
-      ))}
-
-      <Section tone="sand">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="h-section">Les prochaines dates</h2>
-          <p className="lead mt-4">
-            Les cycles démarrent dès qu’un groupe est complet. Pré-inscrivez-vous en ligne ou appelez-moi au{' '}
-            <a href={SITE.phoneHref} className="link-underline whitespace-nowrap">{SITE.phone}</a> : je vous préviens dès qu’une date est fixée.
-          </p>
-          <p className="mt-6 text-sm text-ink-muted">
-            Mes séances relèvent de la prévention et de l’éducation à la santé. Elles ne remplacent pas un suivi médical ou psychologique.
-          </p>
+      <div className="bg-cream pt-6">
+        <div role="tablist" aria-label="Filtrer les offres" className="container-site flex justify-center gap-2">
+          {filtres.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              role="tab"
+              aria-selected={filtre === f.id}
+              onClick={() => setFiltre(f.id)}
+              className={`rounded-full px-4 py-2.5 text-sm font-semibold transition-colors sm:px-5 ${filtre === f.id ? 'bg-night text-cream' : 'border border-sand-dark text-ink hover:border-ink/40'}`}
+            >
+              {f.label}
+            </button>
+          ))}
         </div>
-      </Section>
+      </div>
 
-      <CtaBand title="Vous hésitez entre deux formats ?" text="Expliquez-moi ce que vous traversez : je vous dirai honnêtement ce qui peut vous convenir." primary={{ label: 'Me contacter', to: '/contact?profil=particulier' }} />
+      {filtre !== 'individuel' && (
+        <section id="cycle" className={`bg-cream pt-10 md:pt-14 ${filtre === 'groupe' ? 'pb-16 md:pb-20' : 'pb-4'}`}>
+          <div className="container-site">
+            <Title>En petit groupe</Title>
+            <ul className="mx-auto mt-7 grid max-w-4xl gap-2.5 md:grid-cols-2 md:gap-4">
+              {groupe.map((o) => <GroupRow key={o.slug} o={o} />)}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {filtre !== 'groupe' && (
+        <section id="individuel" className="bg-cream pb-16 pt-10 md:pb-20 md:pt-14">
+          <div className="container-site">
+            <Title>En individuel</Title>
+            <div className="mx-auto mt-7 grid max-w-4xl grid-cols-2 gap-2.5 md:gap-5">
+              {solo.map((o) => <SoloCard key={o.slug} o={o} />)}
+            </div>
+            <p className="mt-4 text-center text-sm text-ink-muted">En présentiel ou à distance.</p>
+          </div>
+        </section>
+      )}
+
+      <BookingSection initial="particulier" />
+      <p className="bg-sand pb-10 text-center text-xs text-ink-muted">
+        <span className="container-site block max-w-xl">Mes séances relèvent de la prévention et de l’éducation à la santé. Elles ne remplacent pas un suivi médical ou psychologique.</span>
+      </p>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
-import { CalendarDays, CheckCircle2, Mail, MapPin, Phone } from 'lucide-react';
-import { PageHero, Section } from '../components/ui';
+import { Link, useLocation } from 'react-router-dom';
+import { CheckCircle2, Mail, MapPin, Phone } from 'lucide-react';
+import { BookingCard, IconSquare, Title } from '../components/funnel';
 import { SITE } from '../content/site';
 import { ALL_STRUCTURE_OFFERS, particuliers } from '../content/offres';
 import { Seo, breadcrumbLd } from '../lib/head';
@@ -15,15 +15,16 @@ export default function ContactPage() {
   const [profil, setProfil] = useState<Profil>('structure');
   const [offre, setOffre] = useState('');
   const [status, setStatus] = useState<Status>('idle');
+  const { search } = useLocation();
 
-  // Préremplissage depuis les liens « Demander un devis » (?profil=…&offre=…).
+  // Préremplissage depuis les liens du site (?profil=…&offre=…).
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(search);
     const p = params.get('profil');
     if (p === 'structure' || p === 'particulier') setProfil(p);
     const o = params.get('offre');
     if (o) setOffre(o);
-  }, []);
+  }, [search]);
 
   const offres = profil === 'structure' ? ALL_STRUCTURE_OFFERS : particuliers;
 
@@ -58,15 +59,40 @@ export default function ContactPage() {
         path="/contact"
         jsonLd={[breadcrumbLd(crumbs)]}
       />
-      <PageHero
-        crumbs={crumbs}
-        eyebrow="Contact"
-        title="Parlons de votre projet"
-        lead="Structure : je vous rappelle sous 48 heures pour un échange de 20 minutes, gratuit et sans engagement. Particulier : je vous réponds, moi aussi, sous 48 heures."
-      />
+      <section className="bg-sand pb-14 pt-10 md:pb-20 md:pt-16">
+        <div className="container-site">
+          <h1 className="h-display text-center">Prendre <em>rendez-vous</em></h1>
+          <p className="mb-8 mt-3 text-center text-ink-muted">Choisissez ce qui vous correspond.</p>
+          <BookingCard initial={profil} />
+        </div>
+      </section>
 
-      <Section tone="white" className="!pt-10">
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
+      <section className="bg-cream py-14 md:py-20">
+        <div className="container-site">
+          <Title>Ou directement</Title>
+          <div className="mx-auto mt-7 grid max-w-md grid-cols-2 gap-2.5">
+            <a href={SITE.phoneHref} className="flex flex-col items-center gap-2.5 rounded-[22px] border border-sand-dark bg-cream-light px-2.5 py-6 text-center hover:border-ink/40">
+              <IconSquare icon={Phone} round />
+              <span className="font-semibold">Appeler</span>
+              <span className="text-[0.82rem] text-ink-muted">{SITE.phone}</span>
+            </a>
+            <a href="#formulaire" className="flex flex-col items-center gap-2.5 rounded-[22px] border border-sand-dark bg-cream-light px-2.5 py-6 text-center hover:border-ink/40">
+              <IconSquare icon={Mail} round />
+              <span className="font-semibold">Écrire</span>
+              <span className="text-[0.82rem] text-ink-muted">Réponse sous 48 h</span>
+            </a>
+          </div>
+          <p className="mt-7 flex items-center justify-center gap-2 text-sm text-ink-muted">
+            <MapPin aria-hidden className="h-[18px] w-[18px] text-gold-dark" /> J’interviens dans l’Hérault et l’Aveyron
+          </p>
+        </div>
+      </section>
+
+      <section id="formulaire" className="bg-cream pb-16 md:pb-24">
+        <div className="container-site">
+          <Title className="mb-3">Être rappelé, ou m’écrire</Title>
+          <p className="mx-auto mb-8 max-w-md text-center text-ink-muted">Structure : je vous rappelle sous 48 heures pour 20 minutes, gratuites. Particulier : je vous réponds sous 48 heures.</p>
+          <div className="mx-auto max-w-2xl">
           <div className="card p-6 md:p-9">
             {status === 'sent' ? (
               <div role="status" className="py-10 text-center">
@@ -86,7 +112,7 @@ export default function ContactPage() {
                   <legend className={label}>Vous êtes</legend>
                   <div className="grid grid-cols-2 gap-3">
                     {(['structure', 'particulier'] as Profil[]).map((p) => (
-                      <label key={p} className={`cursor-pointer rounded-xl border px-4 py-3 text-center transition-colors ${profil === p ? 'border-ink bg-ink text-cream' : 'border-sand-dark bg-cream-light text-ink hover:border-ink/50'}`}>
+                      <label key={p} className={`cursor-pointer rounded-xl border px-4 py-3 text-center transition-colors ${profil === p ? 'border-ink bg-night text-cream' : 'border-sand-dark bg-cream-light text-ink hover:border-ink/50'}`}>
                         <input type="radio" name="profil" value={p} checked={profil === p} onChange={() => { setProfil(p); setOffre(''); }} className="sr-only" />
                         {p === 'structure' ? 'Une structure' : 'Un particulier'}
                       </label>
@@ -117,7 +143,7 @@ export default function ContactPage() {
                   <span className={label}>Pour l’appel de 20 minutes, quand vous joindre ?</span>
                   <div className="flex flex-wrap gap-2">
                     {['Le matin', 'L’après-midi', 'Peu importe'].map((c) => (
-                      <label key={c} className="cursor-pointer rounded-full border border-sand-dark bg-cream-light px-4 py-2 text-sm text-ink transition-colors has-[:checked]:border-ink has-[:checked]:bg-ink has-[:checked]:text-cream">
+                      <label key={c} className="cursor-pointer rounded-full border border-sand-dark bg-cream-light px-4 py-2 text-sm text-ink transition-colors has-[:checked]:border-ink has-[:checked]:bg-night has-[:checked]:text-cream">
                         <input type="radio" name="creneau" value={c} className="sr-only" />
                         {c}
                       </label>
@@ -167,7 +193,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="w-full rounded-full bg-ink px-6 py-3.5 font-medium text-cream transition-colors hover:bg-ink-soft disabled:opacity-60 sm:w-auto"
+                  className="w-full rounded-full bg-night px-6 py-3.5 font-medium text-cream transition-colors hover:bg-night/90 disabled:opacity-60 sm:w-auto"
                 >
                   {status === 'sending' ? 'Envoi en cours…' : 'Envoyer mon message'}
                 </button>
@@ -175,37 +201,9 @@ export default function ContactPage() {
             )}
           </div>
 
-          <aside className="space-y-8">
-            <div>
-              <h2 className="font-heading text-2xl">En direct</h2>
-              <ul className="mt-5 space-y-4">
-                <li>
-                  <a href={SITE.phoneHref} className="flex items-center gap-4 hover:text-gold-dark">
-                    <span className="grid h-11 w-11 place-items-center rounded-full bg-gold-light/30 text-gold-dark"><Phone aria-hidden className="h-5 w-5" /></span>
-                    <span className="text-lg">{SITE.phone}</span>
-                  </a>
-                </li>
-                <li>
-                  <a href={`mailto:${SITE.email}`} className="flex items-center gap-4 break-all hover:text-gold-dark">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold-light/30 text-gold-dark"><Mail aria-hidden className="h-5 w-5" /></span>
-                    {SITE.email}
-                  </a>
-                </li>
-                <li className="flex items-center gap-4">
-                  <span className="grid h-11 w-11 place-items-center rounded-full bg-gold-light/30 text-gold-dark"><MapPin aria-hidden className="h-5 w-5" /></span>
-                  J’interviens dans l’Hérault et l’Aveyron
-                </li>
-              </ul>
-            </div>
-            <div className="rounded-2xl bg-sand p-6">
-              <CalendarDays aria-hidden className="h-6 w-6 text-gold-dark" />
-              <h2 className="mt-3 font-heading text-xl">Particuliers : réservez en ligne</h2>
-              <p className="mt-2 text-ink-soft">Séances individuelles et pré-inscriptions aux cycles se réservent directement dans mon agenda.</p>
-              <a href={SITE.booking} target="_blank" rel="noopener noreferrer" className="link-underline mt-4 inline-block font-medium">Ouvrir l’agenda</a>
-            </div>
-          </aside>
+          </div>
         </div>
-      </Section>
+      </section>
     </>
   );
 }

@@ -66,7 +66,7 @@ export default function OffreParticulierPage({ offre }: { offre: OffreParticulie
               <h2 className="mb-4 font-heading text-2xl">Infos pratiques</h2>
               <FactList facts={facts} />
             </div>
-            <div className="rounded-2xl bg-ink p-6 text-cream">
+            <div className="rounded-2xl bg-night p-6 text-cream">
               <p className="font-heading text-xl">Réserver</p>
               <p className="mt-2 text-cream/80">La réservation se fait en ligne, en quelques clics.</p>
               <Button href={offre.booking} variant="light" className="mt-5 w-full" arrow>{offre.bookingLabel}</Button>

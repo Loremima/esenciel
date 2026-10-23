@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { Button, CtaBand, PageHero, Section } from '../components/ui';
 import { conferences } from '../content/offres';
+import { BookingSection, HeroVideo, PrimaryCta } from '../components/funnel';
+import { MEDIA } from '../content/media';
 import { Seo, breadcrumbLd } from '../lib/head';
 
 export default function ConferencesPage() {
@@ -17,37 +18,39 @@ export default function ConferencesPage() {
         path="/conferences"
         jsonLd={[breadcrumbLd(crumbs)]}
       />
-      <PageHero
-        crumbs={crumbs}
+      <HeroVideo
+        media={MEDIA.ciel}
         eyebrow="Conférences"
-        title="Deux conférences pour comprendre son cerveau, et reprendre la main"
-        lead="Interactives, sans jargon, avec des expériences à vivre en direct. Pour une commune, un CCAS, une association, une résidence ou une équipe de soignants."
+        title={<>Comprendre son cerveau, <em>et reprendre la main</em></>}
+        lead="Interactives, sans jargon, avec des expériences à vivre en direct."
       >
-        <Button to="/contact?profil=structure" arrow>Organiser une conférence</Button>
-      </PageHero>
+        <PrimaryCta to="#rdv" light>Organiser une conférence</PrimaryCta>
+      </HeroVideo>
 
-      <Section tone="white">
-        <div className="space-y-6">
-          {conferences.map((c, i) => (
-            <article key={c.slug} className="card grid gap-6 p-7 md:grid-cols-[5rem_1fr_auto] md:items-center md:p-9">
-              <span aria-hidden className="font-heading text-6xl text-gold/60">{i + 1}</span>
-              <div>
-                <h2 className="text-2xl font-medium leading-snug md:text-3xl">{c.title}</h2>
-                <p className="mt-3 max-w-2xl text-ink-soft">{c.promise}</p>
-                <p className="mt-3 text-sm text-ink-muted">1 h 30 à 2 h · 15 à 50 personnes · seniors, aidants ou professionnels</p>
-              </div>
-              <Link to={c.path} className="inline-flex items-center gap-2 self-start rounded-full border border-ink/80 px-5 py-2.5 font-medium transition-colors hover:bg-ink hover:text-cream md:self-center">
-                Le programme <ArrowRight aria-hidden className="h-4 w-4" />
-              </Link>
-            </article>
-          ))}
+      <section className="bg-cream py-16 md:py-20">
+        <div className="container-site">
+          <ol className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2 md:gap-5">
+            {conferences.map((c, i) => (
+              <li key={c.slug}>
+                <Link to={c.path} className="group flex h-full flex-col items-center rounded-3xl border border-sand-dark bg-cream-light px-6 py-9 text-center transition-transform hover:-translate-y-0.5">
+                  <span className="font-heading text-5xl font-light text-gold">{i + 1}</span>
+                  <span className="mt-3 font-heading text-[1.45rem] leading-snug md:text-2xl">{c.title}</span>
+                  <span className="mt-3 text-ink-muted">{c.promise}</span>
+                  <span className="mt-2 text-sm text-gold-dark">{c.stats[0].value} · {c.stats[1].value} {c.stats[1].label}</span>
+                  <span className="mt-5 inline-flex items-center gap-2 font-medium">
+                    Le programme <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+          <p className="mx-auto mt-8 max-w-xl text-center text-sm text-ink-muted">
+            Les deux se suivent naturellement : la première fait comprendre le pilote automatique, la seconde donne des outils. Commandées ensemble, tarif dégressif.
+          </p>
         </div>
-        <p className="mt-10 max-w-2xl text-ink-soft">
-          Les deux conférences se suivent naturellement : la première fait comprendre le pilote automatique, la seconde donne des outils pour reprendre la main. Commandées ensemble, elles bénéficient d’un tarif dégressif.
-        </p>
-      </Section>
+      </section>
 
-      <CtaBand title="Une date en tête ?" text="Semaine bleue, journée des aidants, forum santé, réunion d’équipe : dites-moi votre événement et votre public." primary={{ label: 'Organiser une conférence', to: '/contact?profil=structure' }} />
+      <BookingSection />
     </>
   );
 }

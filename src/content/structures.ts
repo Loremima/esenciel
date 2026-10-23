@@ -9,21 +9,15 @@ import {
   Brain,
   ClipboardList,
   Eye,
-  FileCheck2,
   FilePen,
   FileSignature,
-  FileText,
   Footprints,
   GraduationCap,
-  HeartHandshake,
   MapPin,
   Megaphone,
   Mic,
   PhoneCall,
   Presentation,
-  Search,
-  Sprout,
-  Stethoscope,
   Users,
   type LucideIcon,
 } from 'lucide-react';
@@ -31,55 +25,24 @@ import { CREDENTIALS } from './site';
 
 type Item = { icon: LucideIcon; title: string; text: string };
 
-export const CTA_APPEL = { label: 'Réserver un appel de 20 min', to: '/contact?profil=structure' };
+export const CTA_RDV = { label: 'Prendre rendez-vous', to: '/contact?profil=structure' };
 
 export const preuves: { icon: LucideIcon; text: string }[] = [
   { icon: GraduationCap, text: 'Formée en neuropsychologie du vieillissement' },
-  { icon: BadgeCheck, text: 'Instructrice certifiée MBSR, MBCT et MBCAS' },
-  { icon: Award, text: 'Intervenante du programme Neo Silver' },
-  { icon: MapPin, text: 'Hérault et Aveyron, dans vos locaux' },
+  { icon: BadgeCheck, text: 'Certifiée MBSR, MBCT, MBCAS' },
+  { icon: Award, text: 'Intervenante Neo Silver' },
+  { icon: MapPin, text: 'Hérault et Aveyron' },
 ];
 
-export const douleurs: Item[] = [
-  {
-    icon: Search,
-    title: 'Trouver la bonne personne',
-    text: 'Un intervenant sérieux, qui parle aux seniors sans les infantiliser, et que votre financeur prendra au sérieux.',
-  },
-  {
-    icon: FileText,
-    title: 'Monter le dossier',
-    text: 'Objectifs, compétences psychosociales, indicateurs : la fiche-action vous prend des heures que vous n’avez pas.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Rendre des comptes',
-    text: 'Après l’action, il faut prouver qu’elle a servi. Sans outil d’évaluation, c’est la page blanche.',
-  },
+// « Vous, une salle. Moi, tout le reste. »
+export const cleEnMain: { icon: LucideIcon; title: string }[] = [
+  { icon: FilePen, title: 'La fiche-action rédigée' },
+  { icon: Megaphone, title: 'Le kit d’invitation' },
+  { icon: Presentation, title: 'L’animation sur place' },
+  { icon: ClipboardList, title: 'L’évaluation et le bilan' },
 ];
 
-export const offreCleEnMain: Item[] = [
-  { icon: PhoneCall, title: 'Un premier échange offert', text: '20 minutes pour cerner votre public, vos dates et votre financement.' },
-  {
-    icon: FilePen,
-    title: 'La fiche-action rédigée',
-    text: 'Objectifs, compétences psychosociales, déroulé et indicateurs, prêts à glisser dans votre dossier CFPPA, CARSAT ou contrat local de santé.',
-  },
-  { icon: Megaphone, title: 'De quoi mobiliser votre public', text: 'Un texte d’invitation et une affiche, à imprimer ou à diffuser.' },
-  {
-    icon: Presentation,
-    title: 'Une animation vivante',
-    text: 'Des expériences à vivre et des outils simples, adaptés aux seniors, aux aidants ou aux soignants.',
-  },
-  { icon: ClipboardList, title: 'L’évaluation intégrée', text: 'Émargement, questionnaires avant et après (stress perçu, bien-être) et satisfaction.' },
-  { icon: FileCheck2, title: 'Le bilan écrit', text: 'Un compte rendu chiffré, prêt pour votre rapport au financeur.' },
-];
-
-export const publics: { slug: string; icon: LucideIcon }[] = [
-  { slug: 'seniors', icon: Sprout },
-  { slug: 'aidants', icon: HeartHandshake },
-  { slug: 'professionnels', icon: Stethoscope },
-];
+export const financeurs = ['CFPPA', 'CARSAT', 'MSA', 'Agirc-Arrco', 'Contrat local de santé', 'ARS', 'Plateformes de répit', 'Budget QVT'];
 
 export const echelle: (Item & { meta: string; to: string; cta: string })[] = [
   {
@@ -115,10 +78,10 @@ export const methode: Item[] = [
 ];
 
 export const etapes: Item[] = [
-  { icon: PhoneCall, title: 'On s’appelle', text: '20 minutes, gratuites et sans engagement : votre public, vos dates, votre piste de financement.' },
-  { icon: FileSignature, title: 'Vous recevez la proposition', text: 'Programme adapté, devis et fiche-action prête pour votre dossier.' },
-  { icon: Presentation, title: 'J’interviens', text: 'Dans vos locaux. Je m’occupe du contenu et de l’animation, vous mobilisez le public.' },
-  { icon: BarChart3, title: 'Vous avez votre bilan', text: 'Questionnaires, émargement et compte rendu écrit, prêts pour votre financeur.' },
+  { icon: PhoneCall, title: 'On se parle 20 min', text: '20 minutes, gratuites et sans engagement : votre public, vos dates, votre piste de financement.' },
+  { icon: FileSignature, title: 'Proposition et fiche-action', text: 'Programme adapté, devis et fiche-action prête pour votre dossier.' },
+  { icon: Presentation, title: 'L’intervention chez vous', text: 'Dans vos locaux. Je m’occupe du contenu et de l’animation, vous mobilisez le public.' },
+  { icon: BarChart3, title: 'Le bilan pour le financeur', text: 'Questionnaires, émargement et compte rendu écrit, prêts pour votre financeur.' },
 ];
 
 export const objections = [

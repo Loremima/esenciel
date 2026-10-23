@@ -15,3 +15,14 @@ export const STATIC_ROUTES: string[] = [
   '/confidentialite',
   '/cgv',
 ];
+
+// Pages qui s'ouvrent sur une vidéo : l'en-tête y est transparent tant qu'on n'a pas défilé.
+export const VIDEO_HERO_ROUTES = new Set<string>([
+  '/',
+  '/structures',
+  ...programmes.map((o) => o.path),
+  '/conferences',
+  ...conferences.map((o) => o.path),
+  '/particuliers',
+  '/qui-suis-je',
+]);
