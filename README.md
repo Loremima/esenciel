@@ -14,7 +14,7 @@ npm run lint
 ## Où modifier les contenus
 
 - `src/content/site.ts` : téléphone, e-mail, zone, mentions légales (SIRET, adresse, médiateur), menu.
-- `src/content/offres.ts` : conférences, programmes structures et offres particuliers (textes, durées, tarifs, liens Setmore). Chaque page se construit à partir de ces données.
+- `src/content/offres.ts` : conférences, programmes structures et offres particuliers (textes, durées, tarifs, liens de réservation sutempo). Chaque page se construit à partir de ces données.
 - `public/llms.txt` : résumé du site pour les assistants IA, à mettre à jour si les offres changent.
 - Photo : remplacer `public/images/veronique.webp` (800 × 1000) et `veronique-480.webp` (480 × 600).
 

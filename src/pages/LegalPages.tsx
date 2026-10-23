@@ -97,7 +97,7 @@ export function ConfidentialitePage() {
         <ul>
           <li>{SITE.owner}, seule destinataire de vos messages.</li>
           <li>{LEGAL.host.name} héberge le site, et Resend (Plus Five Five, Inc.) achemine les messages du formulaire jusqu’à la boîte e-mail d’EsenCiel. Leurs serveurs peuvent être situés hors de l’Union européenne ; les transferts sont encadrés par les clauses contractuelles types de la Commission européenne.</li>
-          <li>Setmore, service de réservation en ligne, si vous réservez une séance depuis le site. Sa propre politique de confidentialité s’applique alors.</li>
+          <li>sutempo, service de réservation en ligne, si vous réservez une séance depuis le site. Sa propre politique de confidentialité s’applique alors.</li>
         </ul>
         <p>Vos données ne sont ni vendues ni utilisées à des fins publicitaires.</p>
       </section>
@@ -133,7 +133,7 @@ export function CgvPage() {
       <section>
         <h2>Particuliers : réservation et paiement</h2>
         <ul>
-          <li>Les séances et les pré-inscriptions aux cycles se réservent en ligne (Setmore), par téléphone ou par e-mail.</li>
+          <li>Les séances et les pré-inscriptions aux cycles se réservent en ligne (sutempo), par téléphone ou par e-mail.</li>
           <li>L’inscription à un cycle est confirmée lorsque le groupe est constitué ; le règlement est demandé avant la première séance et peut être échelonné sur demande.</li>
           <li>Les séances individuelles se règlent à la fin de chaque séance.</li>
         </ul>

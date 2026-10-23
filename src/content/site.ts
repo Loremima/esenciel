@@ -12,31 +12,28 @@ export const SITE = {
   phoneHref: 'tel:+33625137250',
   email: 'esenciel.contact@gmail.com',
   // Agenda de réservation en ligne : la seule adresse à changer pour passer sur un autre outil.
-  booking: 'https://esenciel.setmore.com',
+  booking: 'https://sutempo.com/esenciel',
   linkedin: 'https://fr.linkedin.com/in/v%C3%A9ronique-carri%C3%A9',
   plaquette: '/docs/plaquette-esenciel-structures.pdf',
   ogImage: '/og-image.jpg',
 };
 
-// Le premier rendez-vous (20 min, gratuit), proposé dans le bloc « Prendre rendez-vous ».
-// En attendant sutempo, une structure demande à être rappelée (formulaire) et un
-// particulier ouvre l'agenda actuel. Au passage sur sutempo, mettre les deux sur
-// les créneaux en ligne (cta « Choisir mon créneau ») avec les services « découverte » :
-// structures b65a6aed-6cbb-5e65-aa85-e9a419134383, particuliers ad91cf30-bb05-5201-8a0b-cf168c366224.
+// Le premier rendez-vous, proposé dans le bloc « Prendre rendez-vous ». Les deux
+// boutons ouvrent le tunnel de réservation sutempo.
 export const FIRST_MEETING = {
   structure: {
     label: 'Structure',
     info: 'Échange découverte · 20 min · gratuit',
     text: 'Votre public, vos dates, votre financement : on regarde ensemble ce qui est possible.',
-    cta: 'Être rappelé sous 48 h',
-    href: '/contact?profil=structure#formulaire',
+    cta: 'Choisir mon créneau',
+    href: `${SITE.booking}#book`,
   },
   particulier: {
     label: 'Particulier',
     info: 'Séance individuelle ou cycle en groupe',
     text: 'Réservez directement votre séance, ou pré-inscrivez-vous à un cycle.',
-    cta: 'Voir l’agenda',
-    href: SITE.booking,
+    cta: 'Choisir mon créneau',
+    href: `${SITE.booking}#book`,
   },
 };
 
