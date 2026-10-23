@@ -37,13 +37,13 @@ const HomePage: React.FC = () => {
             <div className="welcome-text">
               <h2 className="welcome-title">Bienvenue sur EsenCiel 🌅</h2>
               <p className="welcome-description">
-                Un espace dédié à la pleine conscience au service de votre bien-être authentique.
+                Notre cerveau fonctionne souvent en pilote automatique. C'est utile, jusqu'au jour où la vie change : la retraite, la mémoire qui flanche, un proche à aider, un métier qui épuise.
               </p>
               <p className="welcome-description">
-                Ici, je vous propose des accompagnements et des ressources pour vous aider à cultiver l'équilibre, l'harmonie et la sérénité au quotidien.
+                Formée en psychologie clinique et en neuropsychologie, je vous aide à comprendre ces mécanismes, à les observer, puis à reprendre la main, avec des outils issus de programmes validés scientifiquement.
               </p>
               <p className="welcome-description">
-                Prenez le temps de découvrir, de vous recentrer et d'avancer à votre rythme, afin de vous rapprocher d'un mode de vie plus conscient et plus épanouissant.
+                J'interviens auprès des structures (conférences, ateliers, formations) et des particuliers, dans l'Hérault et l'Aveyron.
               </p>
               <Link to="/qui-suis-je" className="btn btn-outline">
                 Mon approche <ArrowRight size={16} />

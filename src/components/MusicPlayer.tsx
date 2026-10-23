@@ -21,18 +21,6 @@ const MusicPlayer: React.FC = () => {
     audio.addEventListener('pause', handlePause);
     audio.addEventListener('ended', handlePause);
 
-    // This handles autoplay policy
-    const armPlay = () => {
-      if (audio.paused) {
-        audio.muted = false;
-        audio.play().catch(e => console.error("Audio play failed:", e));
-      }
-      window.removeEventListener('pointerdown', armPlay);
-      window.removeEventListener('keydown', armPlay);
-    };
-    window.addEventListener('pointerdown', armPlay, { once: true });
-    window.addEventListener('keydown', armPlay, { once: true });
-
     // Check initial state
     if (!audio.paused) {
       setIsPlaying(true);
@@ -42,8 +30,6 @@ const MusicPlayer: React.FC = () => {
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handlePause);
-      window.removeEventListener('pointerdown', armPlay);
-      window.removeEventListener('keydown', armPlay);
     };
   }, []);
 

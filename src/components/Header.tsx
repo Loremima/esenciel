@@ -19,21 +19,22 @@ const Header: React.FC = () => {
     '/contact-reservation',
     '/accompagnements-individuels',
     '/programmes-pleine-conscience',
-    '/interventions-entreprises'
+    '/interventions-entreprises',
+    '/structures'
   ];
   const isLightHeaderPage = pagesWithLightHeader.includes(location.pathname);
   const shouldUseLightText = isLightHeaderPage && !isScrolled;
 
   const navLinks = [
     { path: '/qui-suis-je', label: 'Qui suis-je' },
+    { path: '/structures', label: 'Structures & financeurs' },
     {
-      label: 'Services',
+      label: 'Particuliers',
       submenu: [
         { path: '/services', label: 'Tous les services' },
         { path: '/accompagnements-individuels', label: 'Accompagnements individuels' },
         { path: '/accompagnements-groupe', label: 'Accompagnements groupe' },
         { path: '/programmes-pleine-conscience', label: 'Programmes de pleine conscience' },
-        { path: '/interventions-entreprises', label: 'Entreprises & collectivités' },
       ]
     },
     // { path: '/blog', label: 'Blog' },

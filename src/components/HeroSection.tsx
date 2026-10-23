@@ -5,34 +5,8 @@ import GlassButton from './GlassButton';
 
 const HeroSection: React.FC = () => {
   const [visibleWords, setVisibleWords] = useState(0);
-  const words = ['Ralenti,', 'Respire,', 'Ressens'];
+  const words = ['Comprendre,', 'Observer,', 'Agir'];
   
-  useEffect(() => {
-    const audio = document.getElementById('site-bgm') as HTMLAudioElement | null;
-    if (!audio) return;
-
-    // Essayer de jouer immédiatement
-    const tryAutoplay = async () => {
-      try {
-        audio.muted = false;
-        audio.volume = 0.3; // Volume modéré
-        await audio.play();
-      } catch (error) {
-        // Si l'autoplay échoue, fallback sur interaction utilisateur
-        const armPlay = () => {
-          audio.muted = false;
-          audio.play().catch(() => { });
-          window.removeEventListener('pointerdown', armPlay);
-          window.removeEventListener('keydown', armPlay);
-        };
-        window.addEventListener('pointerdown', armPlay, { once: true });
-        window.addEventListener('keydown', armPlay, { once: true });
-      }
-    };
-
-    tryAutoplay();
-  }, []);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setVisibleWords(prev => {
@@ -66,11 +40,17 @@ const HeroSection: React.FC = () => {
           ))}
         </div>
         <p className="hero-tagline">
-          Retrouvez votre équilibre naturel par la pleine conscience
+          Piloter son cerveau face aux changements de la vie
+        </p>
+        <p className="hero-specialty">
+          Spécialiste de l'avancée en âge : seniors, aidants et professionnels qui les accompagnent
         </p>
         <div className="actions">
-          <GlassButton to="/qui-suis-je">
-            En savoir plus
+          <GlassButton to="/structures">
+            Vous êtes une structure
+          </GlassButton>
+          <GlassButton to="/services">
+            Vous êtes un particulier
           </GlassButton>
         </div>
       </div>
@@ -164,6 +144,16 @@ const HeroSection: React.FC = () => {
           filter: blur(0);
         }
 
+        .hero-specialty {
+          font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+          line-height: 1.5;
+          color: rgba(255, 252, 234, 0.85);
+          margin: 0;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+          max-width: 560px;
+          text-align: center;
+        }
+
         .actions {
           display: flex;
           gap: clamp(1rem, 3vw, 1.5rem);
@@ -188,6 +178,10 @@ const HeroSection: React.FC = () => {
             gap: clamp(0.3rem, 1.5vw, 0.8rem);
             font-size: clamp(1.4rem, 5vw, 1.8rem);
             margin: 0.5rem 0 clamp(1rem, 3vw, 1.5rem) 0;
+          }
+
+          .hero-specialty {
+            max-width: 380px;
           }
 
           .hero-tagline {

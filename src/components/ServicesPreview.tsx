@@ -30,9 +30,9 @@ const ServicesPreview: React.FC = () => {
     {
       id: 'autres',
       icon: Sparkles,
-      title: 'Entreprises & collectivités',
-      description: 'Ateliers thématiques, retraites et interventions sur mesure pour explorer la pleine conscience sous différents angles.',
-      detailPage: '/interventions-entreprises',
+      title: 'Structures & financeurs',
+      description: 'Conférences, ateliers et formations pour les seniors, les aidants et les professionnels qui les accompagnent.',
+      detailPage: '/structures',
     }
   ];
 
@@ -47,11 +47,11 @@ const ServicesPreview: React.FC = () => {
         {/* Header Centré au-dessus */}
         <div className="text-center max-w-4xl mx-auto mb-12">
           <h2 className="text-[#fffcea] text-5xl md:text-7xl font-bold mb-6 font-heading leading-[0.95] drop-shadow-lg">
-            Mes Services
+            Mes accompagnements
           </h2>
           <div className="w-24 h-1 bg-[#fffcea]/30 mb-8 mx-auto"></div>
           <p className="text-[#fffcea]/90 text-xl font-light leading-relaxed" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.3)' }}>
-            Une approche holistique pour devenir acteur de votre santé et de votre bien-être au quotidien.
+            Comprendre et piloter son cerveau, seul, en groupe ou au sein de votre structure.
           </p>
         </div>
 

@@ -13,6 +13,7 @@ import SanteQualiteVieDetailsPage from './pages/SanteQualiteVieDetailsPage';
 // import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
 import InfosPratiquesPage from './pages/InfosPratiquesPage';
+import StructuresPage from './pages/StructuresPage';
 import PleineConscienceDetailsPage from './pages/PleineConscienceDetailsPage';
 import JeuDuTaoDetailsPage from './pages/JeuDuTaoDetailsPage';
 import GestionStressDetailsPage from './pages/GestionStressDetailsPage';
@@ -50,6 +51,7 @@ function App() {
             <Route path="/ateliers-education-sante" element={<AteliersEducationSanteDetailsPage />} />
             <Route path="/conferences-evenements" element={<ConferencesEvenementsDetailsPage />} />
             {/* <Route path="/blog" element={<BlogPage />} /> */}
+            <Route path="/structures" element={<StructuresPage />} />
             <Route path="/infos-pratiques" element={<InfosPratiquesPage />} />
             <Route path="/contact-reservation" element={<ContactPage />} />
           </Routes>
