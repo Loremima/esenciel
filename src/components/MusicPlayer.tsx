@@ -13,6 +13,10 @@ export default function MusicPlayer() {
   const [minimized, setMinimized] = useState(false);
 
   useEffect(() => () => audio.current?.pause(), []);
+  // Sur téléphone, la bulle démarre réduite pour ne pas masquer le contenu.
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 639px)').matches) setMinimized(true);
+  }, []);
 
   const toggle = async () => {
     if (!audio.current) {
@@ -36,7 +40,7 @@ export default function MusicPlayer() {
   const round = 'grid h-9 w-9 shrink-0 place-items-center rounded-full transition-transform hover:scale-105';
 
   return (
-    <div className="player-in fixed bottom-4 right-4 z-30 flex items-center gap-3 rounded-full border border-white/40 bg-cream/40 py-2 pl-2 pr-2 text-ink shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl md:bottom-8 md:right-8">
+    <div className="player-in fixed bottom-4 right-4 z-30 flex items-center gap-3 rounded-full border border-white/50 bg-cream/75 py-2 pl-2 pr-2 text-ink shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl md:bottom-8 md:right-8">
       <button type="button" onClick={toggle} aria-pressed={playing} aria-label={playing ? 'Mettre la musique en pause' : 'Lancer la musique d’ambiance'} className={`${round} bg-ink text-cream`}>
         {playing ? <Pause aria-hidden size={18} /> : <Play aria-hidden size={18} className="translate-x-px" />}
       </button>

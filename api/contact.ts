@@ -7,13 +7,14 @@
 
 declare const process: { env: Record<string, string | undefined> };
 
-const FIELDS = ['profil', 'nom', 'structure', 'email', 'telephone', 'offre', 'message'] as const;
+const FIELDS = ['profil', 'nom', 'structure', 'email', 'telephone', 'creneau', 'offre', 'message'] as const;
 const LABELS: Record<(typeof FIELDS)[number], string> = {
   profil: 'Profil',
   nom: 'Nom',
   structure: 'Structure',
   email: 'E-mail',
   telephone: 'Téléphone',
+  creneau: 'À rappeler',
   offre: 'Intérêt',
   message: 'Message',
 };

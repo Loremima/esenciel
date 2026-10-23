@@ -26,7 +26,7 @@ export default function OffreStructurePage({ offre }: { offre: OffreStructure })
         ]}
       />
       <PageHero crumbs={crumbs} eyebrow={offre.eyebrow} title={offre.title} lead={offre.promise}>
-        <Button to={contactTo} arrow>Demander un devis</Button>
+        <Button to={contactTo} arrow>Réserver un appel de 20 min</Button>
         <Button to="/structures" variant="secondary">Toute l’offre structures</Button>
       </PageHero>
 
@@ -115,7 +115,7 @@ export default function OffreStructurePage({ offre }: { offre: OffreStructure })
         </div>
       </Section>
 
-      <CtaBand title="Construisons votre action" text="Dites-moi votre public et vos dates : je vous réponds sous 48 heures avec une proposition." primary={{ label: 'Demander un devis', to: contactTo }} />
+      <CtaBand title="Construisons votre action" text="Dites-moi votre public et vos dates : je vous réponds sous 48 heures avec une proposition." primary={{ label: 'Réserver un appel de 20 min', to: contactTo }} />
     </>
   );
 }

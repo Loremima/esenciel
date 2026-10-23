@@ -42,17 +42,20 @@ export default function Header() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
+  // Sur l'accueil, l'en-tête est transparent au-dessus de la vidéo tant qu'on n'a pas défilé.
+  const overlay = pathname === '/' && !scrolled && !open;
+
   const linkCls = ({ isActive }: { isActive: boolean }) =>
-    `relative py-2 text-[0.95rem] transition-colors hover:text-ink ${isActive ? 'text-ink after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-gold' : 'text-ink-soft'}`;
+    `relative py-2 text-[0.95rem] transition-colors ${overlay ? 'text-cream/85 hover:text-cream' : `hover:text-ink ${isActive ? 'text-ink after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-gold' : 'text-ink-soft'}`}`;
 
   return (
-    <header className={`sticky top-0 z-40 border-b transition-colors ${scrolled || open ? 'border-sand-dark/80 bg-cream/95 backdrop-blur' : 'border-transparent bg-cream'}`}>
+    <header className={`sticky top-0 z-40 border-b transition-colors ${overlay ? 'border-transparent bg-transparent' : scrolled || open ? 'border-sand-dark/80 bg-cream/95 backdrop-blur' : 'border-transparent bg-cream'}`}>
       <a href="#contenu" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-cream">
         Aller au contenu
       </a>
       <div className="container-site flex h-[4.5rem] items-center justify-between gap-6">
         <Link to="/" aria-label="EsenCiel, accueil">
-          <Logo />
+          <Logo light={overlay} />
         </Link>
 
         <nav aria-label="Navigation principale" className="hidden items-center gap-7 lg:flex">
@@ -61,14 +64,14 @@ export default function Header() {
               {l.label}
             </NavLink>
           ))}
-          <Link to="/contact" className="rounded-full bg-ink px-5 py-2.5 text-[0.95rem] font-medium text-cream transition-colors hover:bg-ink-soft">
-            Me contacter
+          <Link to="/contact" className={`rounded-full px-5 py-2.5 text-[0.95rem] font-medium transition-colors ${overlay ? 'bg-cream text-ink hover:bg-cream-light' : 'bg-ink text-cream hover:bg-ink-soft'}`}>
+            Réserver un appel
           </Link>
         </nav>
 
         <button
           type="button"
-          className="grid h-11 w-11 place-items-center rounded-full border border-sand-dark text-ink lg:hidden"
+          className={`grid h-11 w-11 place-items-center rounded-full border lg:hidden ${overlay ? 'border-cream/40 text-cream' : 'border-sand-dark text-ink'}`}
           aria-expanded={open}
           aria-controls="menu-mobile"
           onClick={() => setOpen((o) => !o)}
@@ -90,7 +93,7 @@ export default function Header() {
             </NavLink>
           ))}
           <Link to="/contact" className="mt-5 rounded-full bg-ink px-5 py-3.5 text-center font-medium text-cream">
-            Me contacter
+            Réserver un appel
           </Link>
         </nav>
       </div>

@@ -11,7 +11,8 @@ export const SITE = {
   phone: '06 25 13 72 50',
   phoneHref: 'tel:+33625137250',
   email: 'esenciel.contact@gmail.com',
-  setmore: 'https://esenciel.setmore.com',
+  // Agenda de réservation en ligne : la seule adresse à changer pour passer sur un autre outil.
+  booking: 'https://esenciel.setmore.com',
   linkedin: 'https://fr.linkedin.com/in/v%C3%A9ronique-carri%C3%A9',
   plaquette: '/docs/plaquette-esenciel-structures.pdf',
   ogImage: '/og-image.jpg',

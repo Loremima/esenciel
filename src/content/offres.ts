@@ -1,6 +1,8 @@
 // Toutes les offres du site. Les pages lisent ces données : un tarif ou une
 // durée ne se modifie qu'ici.
 
+import { SITE } from './site';
+
 export type Fact = { label: string; value: string };
 export type Step = { title: string; text?: string };
 
@@ -245,7 +247,7 @@ export type OffreParticulier = {
   seo: { title: string; description: string };
 };
 
-const S = 'https://esenciel.setmore.com/services/';
+const S = `${SITE.booking}/services/`;
 
 export const particuliers: OffreParticulier[] = [
   {

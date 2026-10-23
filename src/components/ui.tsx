@@ -152,7 +152,7 @@ export function CtaBand({ title, text, primary }: { title: string; text: string;
         </div>
         <div className="flex flex-wrap gap-3 md:justify-end">
           <Button to={primary?.to ?? '/contact'} variant="light" arrow>
-            {primary?.label ?? 'Échanger sur votre projet'}
+            {primary?.label ?? 'Réserver un appel de 20 min'}
           </Button>
           <a href={SITE.phoneHref} className="inline-flex items-center gap-2 rounded-full border border-cream/40 px-6 py-3 text-[0.95rem] font-medium text-cream transition-colors hover:bg-cream/10">
             <Phone aria-hidden className="h-4 w-4" />

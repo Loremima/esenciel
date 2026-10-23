@@ -53,7 +53,7 @@ export default function ParticuliersPage() {
         title="Les mêmes outils, pour vous"
         lead="Mieux gérer le stress, prévenir la rechute, accueillir l’avancée en âge ou changer une habitude : des cycles en groupe et des séances individuelles, avec réservation en ligne."
       >
-        <Button href={SITE.setmore} arrow>Voir l’agenda et réserver</Button>
+        <Button href={SITE.booking} arrow>Voir l’agenda et réserver</Button>
         <Button to="/contact?profil=particulier" variant="secondary">Poser une question</Button>
       </PageHero>
 

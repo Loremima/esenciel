@@ -62,7 +62,7 @@ export default function ContactPage() {
         crumbs={crumbs}
         eyebrow="Contact"
         title="Parlons de votre projet"
-        lead="Une structure qui réfléchit à une action de prévention, ou une démarche personnelle : écrivez-moi, je vous réponds sous 48 heures."
+        lead="Structure : je vous rappelle sous 48 heures pour un échange de 20 minutes, gratuit et sans engagement. Particulier : je vous réponds, moi aussi, sous 48 heures."
       />
 
       <Section tone="white" className="!pt-10">
@@ -110,6 +110,18 @@ export default function ContactPage() {
                   <div>
                     <label htmlFor="telephone" className={label}>Téléphone <span className="font-normal text-ink-muted">(facultatif)</span></label>
                     <input id="telephone" name="telephone" type="tel" autoComplete="tel" className="field" />
+                  </div>
+                </div>
+
+                <div hidden={profil !== 'structure'}>
+                  <span className={label}>Pour l’appel de 20 minutes, quand vous joindre ?</span>
+                  <div className="flex flex-wrap gap-2">
+                    {['Le matin', 'L’après-midi', 'Peu importe'].map((c) => (
+                      <label key={c} className="cursor-pointer rounded-full border border-sand-dark bg-cream-light px-4 py-2 text-sm text-ink transition-colors has-[:checked]:border-ink has-[:checked]:bg-ink has-[:checked]:text-cream">
+                        <input type="radio" name="creneau" value={c} className="sr-only" />
+                        {c}
+                      </label>
+                    ))}
                   </div>
                 </div>
 
@@ -189,7 +201,7 @@ export default function ContactPage() {
               <CalendarDays aria-hidden className="h-6 w-6 text-gold-dark" />
               <h2 className="mt-3 font-heading text-xl">Particuliers : réservez en ligne</h2>
               <p className="mt-2 text-ink-soft">Séances individuelles et pré-inscriptions aux cycles se réservent directement dans mon agenda.</p>
-              <a href={SITE.setmore} target="_blank" rel="noopener noreferrer" className="link-underline mt-4 inline-block font-medium">Ouvrir l’agenda</a>
+              <a href={SITE.booking} target="_blank" rel="noopener noreferrer" className="link-underline mt-4 inline-block font-medium">Ouvrir l’agenda</a>
             </div>
           </aside>
         </div>
