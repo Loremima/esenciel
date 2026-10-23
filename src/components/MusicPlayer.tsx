@@ -1,147 +1,47 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, Minus, Maximize2 } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Music, Pause } from 'lucide-react';
 
-const MusicPlayer: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+// Musique d'ambiance : rien n'est téléchargé tant que le visiteur ne clique
+// pas. Le lecteur vit dans la mise en page, donc la musique continue d'une
+// page à l'autre.
 
-  useEffect(() => {
-    const audio = document.getElementById('site-bgm') as HTMLAudioElement | null;
-    if (!audio) {
-      console.error("Audio element #site-bgm not found in the DOM.");
-      return;
+const SRC = '/media/ambiance.m4a';
+
+export default function MusicPlayer() {
+  const audio = useRef<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => () => audio.current?.pause(), []);
+
+  const toggle = async () => {
+    if (!audio.current) {
+      audio.current = new Audio(SRC);
+      audio.current.loop = true;
+      audio.current.volume = 0.45;
+      audio.current.addEventListener('pause', () => setPlaying(false));
+      audio.current.addEventListener('play', () => setPlaying(true));
     }
-    audioRef.current = audio;
-
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-    audio.addEventListener('ended', handlePause);
-
-    // Check initial state
-    if (!audio.paused) {
-      setIsPlaying(true);
-    }
-
-    return () => {
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-      audio.removeEventListener('ended', handlePause);
-    };
-  }, []);
-
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(e => console.error("Audio play failed on toggle:", e));
+    if (audio.current.paused) {
+      try {
+        await audio.current.play();
+      } catch {
+        setPlaying(false);
       }
+    } else {
+      audio.current.pause();
     }
   };
 
-
-
   return (
-    <div className={`music-player-bubble ${isMinimized ? 'minimized' : ''}`}>
-      {!isMinimized && (
-        <div className="song-info">
-          <div className="song-title">Beginnings Are Such Delicate Times</div>
-          <div className="song-artist">Hans Zimmer</div>
-        </div>
-      )}
-      <button onClick={togglePlay} className="player-control" aria-label={isPlaying ? "Pause music" : "Play music"}>
-        {isPlaying ? <Pause size={18} /> : <Play size={18} />}
-      </button>
-      <button onClick={() => setIsMinimized(!isMinimized)} className="player-minimize" aria-label={isMinimized ? "Expand music player" : "Minimize music player"}>
-        {isMinimized ? <Maximize2 size={14} /> : <Minus size={14} />}
-      </button>
-
-      <style>{`
-        .music-player-bubble {
-          position: fixed;
-          bottom: 2rem;
-          right: 2rem;
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 0.6rem 1rem;
-          background: rgba(255, 252, 234, 0.25);
-          backdrop-filter: blur(16px) saturate(120%);
-          border-radius: 9999px;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-          border: 1px solid rgba(255,255,255,0.2);
-          color: var(--color-primary-dark);
-          transition: all 0.4s ease;
-          animation: slide-in 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .music-player-bubble.minimized {
-          padding: 0.5rem;
-          gap: 0.5rem;
-          background: rgba(255, 252, 234, 0.05);
-        }
-        @keyframes slide-in {
-          from {
-            transform: translateX(calc(100% + 2rem));
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        .song-info {
-          text-align: left;
-        }
-        .song-title {
-          font-size: 0.9rem;
-          font-weight: 600;
-        }
-        .song-artist {
-          font-size: 0.8rem;
-          opacity: 0.7;
-        }
-        .player-control, .player-close {
-          background: var(--color-primary);
-          color: #fffcea;
-          border: none;
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-        .player-control:hover {
-          background: var(--color-primary-dark);
-          transform: scale(1.08);
-        }
-        .player-minimize {
-          background: rgba(0,0,0,0.06);
-          color: var(--color-primary-dark);
-          border: none;
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-        .player-minimize:hover {
-          background: rgba(0,0,0,0.12);
-          transform: scale(1.05);
-        }
-      `}</style>
-    </div>
+    <button
+      type="button"
+      onClick={toggle}
+      aria-pressed={playing}
+      className="fixed bottom-4 left-4 z-30 flex items-center gap-2 rounded-full border border-sand-dark bg-cream/95 px-3.5 py-2.5 text-sm text-ink-soft shadow-soft backdrop-blur transition-colors hover:text-ink"
+    >
+      {playing ? <Pause aria-hidden className="h-4 w-4" /> : <Music aria-hidden className="h-4 w-4" />}
+      <span className="hidden sm:inline">{playing ? 'Couper la musique' : 'Musique d’ambiance'}</span>
+      <span className="sr-only sm:hidden">{playing ? 'Couper la musique' : 'Lancer la musique d’ambiance'}</span>
+    </button>
   );
-};
-
-export default MusicPlayer;
+}

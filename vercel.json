@@ -1,3 +1,132 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/contact-reservation",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/particuliers",
+      "permanent": true
+    },
+    {
+      "source": "/accompagnements-individuels",
+      "destination": "/particuliers#individuel",
+      "permanent": true
+    },
+    {
+      "source": "/accompagnements-groupe",
+      "destination": "/particuliers#cycle",
+      "permanent": true
+    },
+    {
+      "source": "/programmes-pleine-conscience",
+      "destination": "/particuliers#cycle",
+      "permanent": true
+    },
+    {
+      "source": "/gestion-stress",
+      "destination": "/particuliers/gestion-du-stress",
+      "permanent": true
+    },
+    {
+      "source": "/prevention-rechutes-depressives",
+      "destination": "/particuliers/prevention-rechute-depressive",
+      "permanent": true
+    },
+    {
+      "source": "/bien-vivre-son-avancement-age",
+      "destination": "/particuliers/bien-vivre-son-avancee-en-age",
+      "permanent": true
+    },
+    {
+      "source": "/sante-qualite-vie",
+      "destination": "/particuliers/sante-et-vitalite",
+      "permanent": true
+    },
+    {
+      "source": "/sante-qualite-vie-details",
+      "destination": "/particuliers/sante-et-vitalite",
+      "permanent": true
+    },
+    {
+      "source": "/pleine-conscience",
+      "destination": "/particuliers/pleine-conscience",
+      "permanent": true
+    },
+    {
+      "source": "/jeu-du-tao",
+      "destination": "/particuliers/jeu-du-tao",
+      "permanent": true
+    },
+    {
+      "source": "/interventions-entreprises",
+      "destination": "/structures",
+      "permanent": true
+    },
+    {
+      "source": "/ateliers-education-sante",
+      "destination": "/structures",
+      "permanent": true
+    },
+    {
+      "source": "/conferences-evenements",
+      "destination": "/conferences",
+      "permanent": true
+    },
+    {
+      "source": "/infos-pratiques",
+      "destination": "/qui-suis-je",
+      "permanent": true
+    },
+    {
+      "source": "/politique-confidentialite",
+      "destination": "/confidentialite",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }

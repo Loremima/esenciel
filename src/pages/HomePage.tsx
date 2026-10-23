@@ -1,221 +1,166 @@
-import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import HeroSection from '../components/HeroSection';
-import TestimonialsSection from '../components/TestimonialsSection';
-import ServicesPreview from '../components/ServicesPreview';
-import VideoCTA from '../components/VideoCTA';
+import { ArrowRight, BookOpenCheck, ClipboardCheck, MapPin, Microscope } from 'lucide-react';
+import { ArchMedia, Button, CtaBand, Section, SectionHeader, accentClasses } from '../components/ui';
+import { CREDENTIALS, SITE } from '../content/site';
+import { conferences, programmes } from '../content/offres';
+import { Seo } from '../lib/head';
 
-const HomePage: React.FC = () => {
-  useEffect(() => {
-    // Animation au scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fadeInUp');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+const approche = [
+  { n: '1', title: 'Comprendre', text: 'Comment fonctionnent l’attention, la mémoire, le stress et nos automatismes, à chaque âge de la vie.' },
+  { n: '2', title: 'Observer', text: 'Repérer quand on fonctionne en pilote automatique, dans ses pensées, ses émotions et ses réactions.' },
+  { n: '3', title: 'Agir', text: 'S’entraîner à reprendre la main, et installer des habitudes qui protègent sa santé psychique.' },
+];
 
-    const elements = document.querySelectorAll('.scroll-animate');
-    elements.forEach((el) => observer.observe(el));
+const atouts = [
+  { icon: Microscope, title: 'Le cerveau qui avance en âge', text: 'Formée à la neuropsychologie du vieillissement, j’explique les mécanismes avec des mots simples et des expériences à vivre.' },
+  { icon: BookOpenCheck, title: 'Des méthodes évaluées', text: 'Mes cycles s’appuient sur les programmes MBSR, MBCT et MBCAS, étudiés par la recherche internationale.' },
+  { icon: ClipboardCheck, title: 'Des résultats mesurés', text: 'Questionnaires avant et après, émargement et bilan écrit : de quoi rendre compte à votre financeur.' },
+  { icon: MapPin, title: 'Une intervenante de terrain', text: 'J’interviens dans l’Hérault et l’Aveyron, et pour le programme Neo Silver.' },
+];
 
-    return () => observer.disconnect();
-  }, []);
-
+export default function HomePage() {
   return (
-    <div className="homepage">
-      <HeroSection />
+    <>
+      <Seo
+        title="EsenCiel, Véronique Carrié : piloter son cerveau face aux changements de la vie"
+        description="Conférences, ateliers et cycles de prévention spécialisés dans l’avancée en âge, pour les seniors, les aidants et les soignants. Hérault et Aveyron."
+        path="/"
+      />
 
-      {/* Welcome Section */}
-      <section className="section welcome-section">
-        <div className="container">
-          <div className="welcome-content">
-            <div className="welcome-text">
-              <h2 className="welcome-title">Bienvenue sur EsenCiel 🌅</h2>
-              <p className="welcome-description">
-                Notre cerveau fonctionne souvent en pilote automatique. C'est utile, jusqu'au jour où la vie change : la retraite, la mémoire qui flanche, un proche à aider, un métier qui épuise.
-              </p>
-              <p className="welcome-description">
-                Formée en psychologie clinique et en neuropsychologie du vieillissement, je vous aide à comprendre ces mécanismes, à les observer, puis à reprendre la main, avec des outils issus de programmes validés scientifiquement.
-              </p>
-              <p className="welcome-description">
-                J'interviens auprès des structures (conférences, ateliers, formations) et des particuliers, dans l'Hérault et l'Aveyron.
-              </p>
-              <Link to="/qui-suis-je" className="btn btn-outline">
-                Mon approche <ArrowRight size={16} />
-              </Link>
+      {/* Héros */}
+      <section className="relative overflow-hidden bg-cream pb-16 pt-10 md:pb-24 md:pt-16">
+        <div aria-hidden className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gold-light/25 blur-3xl" />
+        <div className="container-site relative grid items-center gap-12 md:grid-cols-[1.3fr_1fr] md:gap-16">
+          <div className="fade-up">
+            <p className="eyebrow mb-5">Prévention et éducation à la santé · {SITE.zone}</p>
+            <h1 className="h-display">
+              Piloter son cerveau face aux <em className="font-normal italic text-gold-dark">changements</em> de la vie
+            </h1>
+            <p className="lead mt-6 max-w-xl">
+              Conférences, ateliers et cycles de prévention, spécialisés dans l’avancée en âge, pour les seniors, les aidants et les professionnels qui les accompagnent.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button to="/structures" arrow>Vous êtes une structure</Button>
+              <Button to="/particuliers" variant="secondary">Vous êtes un particulier</Button>
             </div>
-            <div className="welcome-video">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="zen-video"
-              >
-                <source src="/hero_video.mp4" type="video/mp4" />
-              </video>
+            <div className="mt-10 flex items-center gap-4 border-t border-sand-dark/80 pt-6">
+              <img src="/images/veronique-480.webp" alt="Véronique Carrié" width={56} height={70} className="h-14 w-14 rounded-full object-cover object-top" />
+              <p className="text-sm leading-snug text-ink-soft">
+                <span className="font-semibold text-ink">Véronique Carrié</span>
+                <br />
+                {CREDENTIALS.short}. {CREDENTIALS.certifications}.
+              </p>
             </div>
           </div>
+          <ArchMedia image="/images/hero-herbes.webp" video="/media/hero-herbes.mp4" alt="Herbes dorées dans la lumière du soir" />
         </div>
       </section>
 
-      {/* Services Preview */}
-      <ServicesPreview />
+      {/* Le constat et les publics */}
+      <Section tone="white">
+        <SectionHeader
+          eyebrow="Le constat"
+          title="Nous vivons une grande partie de nos journées en pilote automatique."
+          intro="Ce pilote nous fait gagner de l’énergie. Mais quand la vie change (l’âge qui avance, un proche qui dépend de nous, un métier qui use), il nous joue des tours. Bonne nouvelle : cela s’apprend."
+        />
+        <div className="grid gap-5 md:grid-cols-3">
+          {programmes.map((p) => {
+            const a = accentClasses[p.accent];
+            return (
+              <Link key={p.slug} to={p.path} className={`group flex flex-col rounded-2xl border ${a.border} ${a.bg} p-7 transition-shadow hover:shadow-soft`}>
+                <span className={`text-sm font-semibold uppercase tracking-wider ${a.text}`}>{p.audience}</span>
+                <p className="mt-4 font-heading text-2xl leading-snug text-ink">{p.quote}</p>
+                <p className="mt-3 flex-1 text-ink-soft">{p.promise}</p>
+                <span className="mt-6 inline-flex items-center gap-2 font-medium text-ink">
+                  {p.title}
+                  <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </Section>
 
-      {/* Testimonials */}
-      <div className="testimonials-homepage-wrapper">
-        <TestimonialsSection />
-      </div>
+      {/* L'approche */}
+      <Section>
+        <SectionHeader eyebrow="L’approche" title="Comprendre, observer, agir" center />
+        <ol className="grid gap-8 md:grid-cols-3 md:gap-10">
+          {approche.map((s) => (
+            <li key={s.n} className="relative">
+              <span aria-hidden className="font-heading text-6xl font-medium text-gold/60">{s.n}</span>
+              <h3 className="mt-2 text-2xl font-medium">{s.title}</h3>
+              <p className="mt-3 text-ink-soft">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
 
-      {/* CTA Section */}
-      <VideoCTA
-        title="Prêt(e) à transformer votre quotidien ?"
-        subtitle="Prenez rendez-vous pour un premier entretien personnalisé. Ensemble, nous définirons l'accompagnement le plus adapté à vos besoins et objectifs."
-        buttonText="Prendre rendez-vous"
-        buttonLink="/contact-reservation"
+      {/* Offre structures */}
+      <Section tone="sand">
+        <SectionHeader
+          eyebrow="Pour les structures"
+          title="On commence souvent par une conférence, puis on va plus loin."
+          intro="CCAS, centres sociaux, résidences autonomie, EHPAD, plateformes de répit, collectivités : je vous propose des actions prêtes à intégrer dans vos dossiers de financement."
+        />
+        <div className="grid gap-5 md:grid-cols-2">
+          {conferences.map((c) => (
+            <Link key={c.slug} to={c.path} className="card group flex flex-col p-7 transition-shadow hover:shadow-lg">
+              <span className="eyebrow">{c.eyebrow}</span>
+              <h3 className="mt-3 text-2xl font-medium leading-snug">{c.title}</h3>
+              <p className="mt-3 flex-1 text-ink-soft">{c.promise}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink">
+                1 h 30 à 2 h · 15 à 50 personnes
+                <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Button to="/structures" arrow>Voir l’offre structures</Button>
+          <Button href={SITE.plaquette} variant="secondary" download>Télécharger la plaquette</Button>
+        </div>
+      </Section>
+
+      {/* Pourquoi moi */}
+      <Section tone="white">
+        <SectionHeader eyebrow="Pourquoi travailler avec moi" title="La rigueur du cerveau, la simplicité du terrain" />
+        <div className="grid gap-x-10 gap-y-9 sm:grid-cols-2">
+          {atouts.map((a) => (
+            <div key={a.title} className="flex gap-5">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gold-light/30 text-gold-dark">
+                <a.icon aria-hidden className="h-5 w-5" />
+              </span>
+              <div>
+                <h3 className="text-xl font-medium">{a.title}</h3>
+                <p className="mt-2 text-ink-soft">{a.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Particuliers et présentation */}
+      <Section>
+        <div className="grid items-center gap-12 md:grid-cols-[1fr_1.3fr]">
+          <img src="/images/veronique.webp" alt="Portrait de Véronique Carrié" width={800} height={1000} loading="lazy" className="mx-auto w-full max-w-sm rounded-3xl object-cover shadow-soft" />
+          <div>
+            <p className="eyebrow mb-3">Qui suis-je</p>
+            <h2 className="h-section">Véronique Carrié</h2>
+            <p className="lead mt-5">
+              J’aide chacun à mieux comprendre son cerveau pour traverser les changements de la vie. Formée en psychologie clinique et en neuropsychologie du vieillissement, instructrice de pleine conscience certifiée, je transmets des outils simples, issus de la recherche, que l’on peut utiliser dès le lendemain.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
+              <Link to="/qui-suis-je" className="link-underline font-medium">Mon parcours</Link>
+              <Link to="/particuliers" className="link-underline font-medium">Cycles et séances pour les particuliers</Link>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <CtaBand
+        title="Un projet pour votre structure ?"
+        text="Parlons-en vingt minutes : votre public, vos contraintes, votre financement. Je vous envoie ensuite une proposition écrite."
       />
-
-      <style>{`
-                 /* GENERAL */
-         .homepage {
-           padding-top: 0;
-         }
-         .section {
-           padding: 6rem 0;
-         }
-         /* Container défini dans globals.css */
-         .btn-outline {
-           display: inline-flex;
-           align-items: center;
-           gap: 0.5rem;
-           padding: 0.75rem 1.5rem;
-           border: 1px solid var(--color-gray-300);
-           color: var(--color-primary);
-           text-decoration: none;
-           border-radius: 0.375rem;
-           font-weight: 500;
-           transition: all 0.2s ease;
-         }
-         .btn-outline:hover {
-           border-color: var(--color-secondary);
-           color: var(--color-secondary);
-         }
-
-                 /* WELCOME SECTION */
-         .welcome-section {
-           background: #fffcea url('/path-to-your-background-image.jpg') no-repeat center center;
-           background-size: cover;
-           padding: 6rem 0;
-           position: relative;
-           z-index: 1;
-         }
-         .welcome-section::before {
-           content: '';
-           position: absolute;
-           top: 0;
-           left: 0;
-           right: 0;
-           bottom: 0;
-           background: rgba(255, 252, 234, 0.85);
-           z-index: -1;
-         }
-         .welcome-content {
-           display: grid;
-           grid-template-columns: 1.8fr 1fr;
-           gap: 4rem;
-           align-items: center;
-           max-width: 1200px;
-           margin: 0 auto;
-         }
-         .welcome-title {
-           font-size: clamp(2.5rem, 5vw, 3.5rem);
-           font-weight: 700;
-           color: var(--color-primary);
-           margin: 0 0 2.5rem 0;
-         }
-         .welcome-intro {
-           font-size: 1.25rem;
-           line-height: 1.6;
-           color: var(--color-primary);
-           margin-bottom: 2rem;
-           padding: 1.5rem 2rem;
-           background: rgba(255, 255, 255, 0.7);
-           border-radius: var(--radius-xl);
-           display: inline-block;
-           position: relative;
-           border-left: 5px solid var(--color-secondary);
-           box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-         }
-         .welcome-description,
-         .welcome-invitation {
-           font-size: 1.15rem;
-           line-height: 1.8;
-           color: var(--color-gray-700);
-           margin-bottom: 1.5rem;
-         }
-         .welcome-invitation {
-           font-style: italic;
-           margin-bottom: 2.5rem;
-         }
-         .welcome-video {
-           border-radius: 1.5rem;
-           overflow: hidden;
-           box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-           aspect-ratio: 9/16;
-           background: var(--color-gray-100);
-           max-width: 300px;
-           margin: 0 auto;
-           border: 3px solid rgba(255, 255, 255, 0.8);
-           transition: all 0.3s ease;
-         }
-         
-         .welcome-video:hover {
-           transform: translateY(-5px);
-           box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-         }
-         .zen-video {
-           width: 100%;
-           height: 100%;
-           object-fit: cover;
-         }
-
-                 /* RESPONSIVE */
-         /* TESTIMONIALS HOMEPAGE SPECIFIC */
-         .testimonials-homepage-wrapper {
-           background: #fffcea;
-         }
-         .testimonials-homepage-wrapper .section-header h2 {
-           color: var(--color-primary) !important;
-           text-shadow: none !important;
-         }
-         .testimonials-homepage-wrapper .section-subtitle {
-           color: var(--color-gray-700) !important;
-           text-shadow: none !important;
-         }
-
-         @media (max-width: 768px) {
-           .welcome-content {
-             grid-template-columns: 1fr;
-             gap: 2rem;
-           }
-           .welcome-video {
-             order: -1;
-             margin-bottom: 2rem;
-             max-width: 250px;
-           }
-           .section {
-             padding: 3rem 0;
-           }
-           /* Container responsive défini dans globals.css */
-         }
-      `}</style>
-    </div>
+    </>
   );
-};
-
-export default HomePage;
+}

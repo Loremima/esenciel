@@ -1,0 +1,17 @@
+import { conferences, particuliers, programmes } from './content/offres';
+
+// Liste des pages prérendues et publiées dans le sitemap.
+export const STATIC_ROUTES: string[] = [
+  '/',
+  '/structures',
+  ...programmes.map((o) => o.path),
+  '/conferences',
+  ...conferences.map((o) => o.path),
+  '/particuliers',
+  ...particuliers.map((o) => o.path),
+  '/qui-suis-je',
+  '/contact',
+  '/mentions-legales',
+  '/confidentialite',
+  '/cgv',
+];

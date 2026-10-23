@@ -1,783 +1,102 @@
-import React, { useEffect, useState } from 'react';
-import { Sparkles, Heart, Award, ArrowRight, CalendarDays } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import ParallaxSection from '../components/ParallaxSection';
+import { Award, GraduationCap, HeartHandshake, Leaf } from 'lucide-react';
+import { Button, CtaBand, PageHero, Section, SectionHeader } from '../components/ui';
+import { SITE } from '../content/site';
+import { Seo, breadcrumbLd } from '../lib/head';
 
-const AboutPage: React.FC = () => {
-  const quotes = [
-    {
-      text: 'Celui qui regarde l\'extérieur rêve, celui qui regarde à l\'intérieur s\'éveille.',
-      author: 'Carl Jung',
-    },
-    {
-      text: 'Connais-toi toi-même et tu connaîtras l\'univers et les dieux.',
-      author: 'Socrate',
-    },
-    {
-      text: 'Entre le stimulus et la réponse, il y a un espace. Dans cet espace se trouve notre pouvoir de choisir notre réponse. Dans notre réponse résident notre croissance et notre liberté.',
-      author: 'Viktor Frankl',
-    },
+const parcours = [
+  { icon: GraduationCap, title: 'Master 1 de psychologie clinique', text: 'Spécialisation en neuropsychologie du vieillissement : le fonctionnement de l’attention, de la mémoire et des émotions quand on avance en âge.' },
+  { icon: Leaf, title: 'Instructrice certifiée MBSR, MBCT et MBCAS', text: 'Les trois programmes de pleine conscience les plus étudiés : gestion du stress, prévention de la rechute dépressive, et avancée en âge.' },
+  { icon: Award, title: 'Formatrice en éducation à la santé', text: 'Certifiée en promotion et éducation à la santé, coach en prévention santé et qualité de vie.' },
+  { icon: HeartHandshake, title: 'Intervenante de terrain', text: 'J’anime des ateliers de prévention pour le programme Neo Silver, et j’interviens dans l’Hérault et l’Aveyron.' },
+];
+
+const valeurs = [
+  { title: 'Rigueur', text: 'Des contenus issus de la recherche, expliqués sans jargon.' },
+  { title: 'Bienveillance', text: 'Chacun avance à son rythme, sans jugement.' },
+  { title: 'Concret', text: 'Des outils que l’on peut utiliser dès le lendemain.' },
+  { title: 'Honnêteté', text: 'Je dis clairement ce que je fais, et ce que je ne fais pas.' },
+];
+
+export default function AboutPage() {
+  const crumbs = [
+    { name: 'Accueil', path: '/' },
+    { name: 'Qui suis-je', path: '/qui-suis-je' },
   ];
-
-  const [currentQuote, setCurrentQuote] = useState(0);
-  const [visibleQuote, setVisibleQuote] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVisibleQuote(false);
-      setTimeout(() => {
-        setCurrentQuote(prev => (prev + 1) % quotes.length);
-        setVisibleQuote(true);
-      }, 600); // durée du fade-out
-    }, 6000); // temps d\'affichage par citation
-
-    return () => clearInterval(interval);
-  }, [quotes.length]);
-  const credentials = [
-    {
-      icon: Heart,
-      title: 'Master 1 en psychologie clinique',
-      description: 'Spécialisation en neuropsychologie du vieillissement',
-      details: 'Approche cognitive',
-    },
-    {
-      icon: Award,
-      title: 'Coach prévention santé - Qualité de vie',
-      description: 'Accompagnement holistique',
-      details: 'Santé- Sérénité - Vitalité'
-    },
-    {
-      icon: Sparkles,
-      title: 'Instructrice de programmes basés sur la pleine conscience',
-      description: 'Mindfulness-Based Interventions',
-      details: 'Certification des programmes Gestion du stress - Prévention des rechutes dépressives (MBCT) - Seniors (MBCAS)'
-    },
-    {
-      icon: Sparkles,
-      title: 'Formatrice en éducation à la santé',
-      description: 'Formation - Prévention - Education',
-      details: 'Certification en Promotion et éducation à la santé'
-    }
-  ];
-
-  const values = [
-    {
-      title: 'Bienveillance',
-      description: 'Agir avec empathie et attention pour soutenir chacun dans son parcours.'
-    },
-    {
-      title: "Respect de l'individualité",
-      description: 'Accompagner chaque personne à son rythme, en tenant compte de ses besoins et de sa singularité.'
-    },
-    {
-      title: 'Ouverture et curiosité',
-      description: 'Explorer différentes approches et outils pour s\'adapter aux besoins uniques de chaque personne.'
-    },
-    {
-      title: 'Authenticité',
-      description: 'Être vrai et sincère dans mes interactions pour créer une relation de confiance.'
-    },
-    {
-      title: 'Responsabilité',
-      description: 'Assurer pleinement mon rôle et mon engagement envers ceux que j\'accompagne.'
-    },
-    {
-      title: 'Honnêteté et intégrité',
-      description: 'Agir avec transparence et éthique dans toutes mes pratiques.'
-    }
-  ];
-
   return (
-    <div className="about-page">
-      {/* Hero Section avec vidéo de fond */}
-      <ParallaxSection
-        videoSrc="/background.mp4"
-        className="hero-about min-h-[60vh]"
-        overlayOpacity={0.4}
+    <>
+      <Seo
+        title="Véronique Carrié, formée en neuropsychologie du vieillissement et instructrice MBSR, MBCT, MBCAS"
+        description="Le parcours de Véronique Carrié : psychologie clinique (Master 1), neuropsychologie du vieillissement, pleine conscience et éducation à la santé. Hérault et Aveyron."
+        path="/qui-suis-je"
+        jsonLd={[breadcrumbLd(crumbs)]}
+      />
+      <PageHero
+        crumbs={crumbs}
+        eyebrow="Qui suis-je"
+        title="Véronique Carrié"
+        lead="J’aide chacun à mieux comprendre son cerveau pour traverser les changements de la vie : l’âge qui avance, le rôle d’aidant, un métier qui épuise."
+        aside={<img src="/images/veronique.webp" alt="Portrait de Véronique Carrié" width={800} height={1000} className="mx-auto w-full max-w-sm rounded-3xl object-cover shadow-soft" />}
       >
-        <div className="hero-content text-center">
-          <div className="hero-text">
-            <h1>Qui suis-je ?</h1>
-            <p className="hero-subtitle">
-              Coach & formatrice Santé et vitalité<br />
-              Intructrice de programmes basés sur la pleine conscience.<br />
-            </p>
-          </div>
-        </div>
-      </ParallaxSection>
+        <Button to="/contact" arrow>Me contacter</Button>
+      </PageHero>
 
-      {/* Intro Section */}
-      <section className="section intro-section">
-        <div className="container intro-container">
-          <div className="intro-image">
-            <img src="/vero.jpg" alt="Véronique Carrié" />
-          </div>
-          <div className="intro-text">
-            <h2>Véronique Carrié</h2>
-            <p> Je m'appelle Véronique Carrié. Ma passion pour l'humain m'a naturellement conduite vers des études en psychologie clinique, avec une spécialité en neuropsychologie. J'ai choisi cette voie afin d'explorer les mécanismes cognitifs et émotionnels qui influencent notre comportement dans le but de favoriser une meilleure qualité de vie.
-            </p>
-            <p>
-              Au fil de mon parcours professionnel en clinique, j'ai constaté que la prévention, l'éducation à la santé et l'accompagnement vers une meilleure connaissance de soi pouvaient transformer profondément les trajectoires de vie. </p>
-            <p><strong>Comprendre le fonctionnement de notre cerveau, c'est comme disposer d'une notice qui nous permet de faire des choix éclairés et d'aligner nos comportements.</strong></p>
-            <p>
-              C'est pourquoi, depuis quelques années, je propose des programmes d'accompagnement intégratifs, alliant les sciences psychologiques, la pleine conscience et l'éducation à la santé, pour encourager des comportements durables et bénéfiques. Mon rôle est de fournir des outils adaptés afin que chacun puisse trouver ses propres solutions, dans un esprit de co‑création et d'exploration. Mon objectif est d'aider les individus à mieux comprendre leurs propres mécanismes et à s'adapter aux changements de la vie. Je suis convaincue que chaque personne porte en elle ses propres ressources. Mon rôle est de remettre l'humain au cœur de ses décisions, en l'aidant à se reconnecter à ce qui fait sens pour lui.
-            </p>
-            <div className="intro-signature">
-              Véronique
-            </div>
-          </div>
-        </div>
-      </section >
-
-      {/* Section combinée Approche, Qualifications, Valeurs */}
-      <ParallaxSection videoSrc="/background.mp4" className="section combined-details py-32" overlayOpacity={0.3}>
-        <div className="container relative z-10">
-          <div className="details-wrapper">
-            {/* Colonne 1: Approche */}
-            <div className="full-width-values">
-              <h2 className="col-title">Mon approche</h2>
-              <div className="philosophy-cards">
-                <div className="philosophy-card">
-                  <p>J'ai développé une vision de la santé et de la qualité de vie, alliant une perspective à la fois holistique et systémique. Plutôt que d'appliquer des solutions toutes faites, je crois fermement que chaque personne porte en elle ses propres ressources. Mon rôle est de remettre l'humain au cœur de ses décisions, en l'aidant à se reconnecter à ce qui fait sens pour lui.</p>
-                  <p>Cette approche repose sur un processus de maturation continue, permettant à chacun d'assimiler ses expériences à son propre rythme. C'est un chemin d'apprentissage et de croissance, où l'autonomie et la responsabilisation sont au cœur du processus. Chacun devient acteur de sa santé et de son bien-être, en apprenant à mieux se connaître et à développer une écoute bienveillante envers soi-même.</p>
-                  <p>Je privilégie une alliance bienveillante, respectueuse de la singularité de chacun, et j'intègre des pratiques alternatives non médicamenteuses, qui permettent d'observer et de dépasser les croyances limitantes.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Colonne 2: Qualifications */}
-            <div className="full-width-values">
-              <h2 className="col-title">Mes Qualifications</h2>
-              <div className="credentials-grid four-cols">
-                {credentials.map((credential, index) => {
-                  const IconComponent = credential.icon;
-                  return (
-                    <div key={index} className="credential-card">
-                      <div className="credential-icon">
-                        <IconComponent size={28} />
-                      </div>
-                      <div className="credential-content">
-                        <h4>{credential.title}</h4>
-                        <p className="credential-description">{credential.description}</p>
-                        <p className="credential-details">{credential.details}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Section Valeurs en pleine largeur */}
-            <div className="full-width-values">
-              <div className="values-header">
-                <h2 className="col-title">Mes Valeurs</h2>
-                <p className="col-subtitle oneline">Les principes qui guident mon accompagnement au quotidien</p>
-              </div>
-              <div className="values-grid values-4-2">
-                {values.map((value, index) => (
-                  <div key={index} className="value-card">
-                    <h3>{value.title}</h3>
-                    <p>{value.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Section Citation en pleine largeur */}
-            <div className="full-width-quote">
-              <div className="quote-section rotating">
-                <blockquote className={`quote-rotating ${visibleQuote ? 'visible' : ''}`}>
-                  « {quotes[currentQuote].text} »
-                  <footer>– {quotes[currentQuote].author}</footer>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ParallaxSection>
-
-      {/* CTA */}
-      < section className="section cta-about" >
-        <div className="container">
-          <div className="cta-content">
-            <h2>Commençons ensemble</h2>
-            <p>
-              Vous souhaitez en savoir plus sur mon approche ou prendre rendez-vous ?
-              Je serai ravie d'échanger avec vous.
-            </p>
-            <div className="cta-actions">
-              <a 
-                href="https://esenciel.setmore.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                Prendre rendez-vous
-                <CalendarDays size={16} />
-              </a>
-              <Link to="/services" className="btn btn-outline">
-                Découvrir mes services
-                <ArrowRight size={18} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section >
-
-      {/* Disclaimer */}
-      < section className="section disclaimer-section" >
-        <div className="container">
+      <Section tone="white">
+        <div className="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed text-ink-soft">
           <p>
-            <strong>Information importante :</strong> Mes programmes de pleine conscience et accompagnements offrent un appui précieux pour vivre pleinement chaque étape de votre vie, pour soutenir votre santé et votre bien-être. Ils ne remplacent en aucun cas un avis et suivi médical ou traitement prescrit par un professionnel de santé. Pour toute question d'ordre médical, veuillez consulter votre médecin.
+            Au fil de mon parcours dans la prévention et l’accompagnement, j’ai vu combien comprendre son propre fonctionnement pouvait changer une trajectoire de vie. Quand on sait pourquoi le cerveau s’emballe, oublie ou se fatigue, on a moins peur, et on peut agir.
+          </p>
+          <p>
+            C’est le cœur d’EsenCiel : <strong className="font-semibold text-ink">comprendre, observer, agir</strong>. J’associe les apports de la neuropsychologie, les pratiques de pleine conscience et l’éducation à la santé pour transmettre des outils simples, que chacun adapte à sa vie.
+          </p>
+          <p>
+            Je travaille surtout avec les structures qui accompagnent l’avancée en âge (CCAS, centres sociaux, résidences, EHPAD, plateformes de répit) et avec les particuliers qui souhaitent avancer en groupe ou en individuel.
           </p>
         </div>
-      </section >
+      </Section>
 
-      <style>{`
-        .invitation-text {
-          font-style: italic;
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-6);
-          font-size: 1.1rem;
-        }
+      <Section>
+        <SectionHeader eyebrow="Formation et expérience" title="Mon parcours" />
+        <div className="grid gap-5 sm:grid-cols-2">
+          {parcours.map((p) => (
+            <div key={p.title} className="card flex gap-5 p-6">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gold-light/30 text-gold-dark">
+                <p.icon aria-hidden className="h-5 w-5" />
+              </span>
+              <div>
+                <h3 className="text-xl font-medium">{p.title}</h3>
+                <p className="mt-2 text-ink-soft">{p.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-8 max-w-3xl text-ink-soft">
+          Mes interventions relèvent de la prévention et de l’éducation à la santé. Je ne pratique ni consultation ni psychothérapie : si votre situation le demande, je vous oriente vers les professionnels de santé adaptés.
+        </p>
+      </Section>
 
-        /* === INTRO SECTION === */
-        .intro-section {
-          background: #fffcea;
-          padding: var(--spacing-20) 0;
-        }
-        .intro-container {
-          display: grid;
-          grid-template-columns: 1fr 2fr;
-          gap: var(--spacing-12);
-          align-items: center;
-        }
-        .intro-image img {
-          width: 100%;
-          height: auto;
-          border-radius: 50%;
-          box-shadow: var(--shadow-xl);
-          border: 6px solid var(--color-white);
-        }
-        .intro-text h2 {
-          color: var(--color-primary);
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
-          margin-bottom: var(--spacing-2);
-        }
-        .intro-subtitle {
-          font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-          font-weight: 600;
-          color: var(--color-secondary-dark);
-          margin-bottom: var(--spacing-6);
-        }
-        .intro-text p {
-          font-size: 1.1rem;
-          line-height: 1.8;
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-4); /* Ajout d'espacement */
-        }
-        .intro-signature {
-          font-family: 'Brush Script MT', cursive, 'Playfair Display', serif;
-          font-style: italic;
-          font-size: 2.2rem;
-          color: var(--color-secondary-dark);
-          text-align: right;
-          margin-top: var(--spacing-8);
-          position: relative;
-          transform: rotate(-2deg);
-        }
-        @media (max-width: 768px) {
-          .intro-container {
-            grid-template-columns: 1fr;
-            text-align: center;
-          }
-          .intro-image {
-            max-width: 250px;
-            margin: 0 auto var(--spacing-8) auto;
-          }
-        }
+      <Section tone="sand">
+        <SectionHeader eyebrow="Ce qui me guide" title="Mes valeurs" />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {valeurs.map((v) => (
+            <div key={v.title} className="border-t-2 border-gold pt-4">
+              <h3 className="text-xl font-medium">{v.title}</h3>
+              <p className="mt-2 text-ink-soft">{v.text}</p>
+            </div>
+          ))}
+        </div>
+        <blockquote className="mx-auto mt-16 max-w-3xl text-center">
+          <p className="font-heading text-2xl italic leading-snug text-ink md:text-3xl">
+            « Entre le stimulus et la réponse, il y a un espace. Dans cet espace se trouve notre pouvoir de choisir notre réponse. »
+          </p>
+          <footer className="mt-4 text-ink-muted">Pensée attribuée à Viktor Frankl</footer>
+        </blockquote>
+      </Section>
 
-        .about-page {
-          padding-top: 0;
-        }
-
-        /* === HERO SECTION AVEC VIDÉO === */
-        .hero-about {
-          position: relative;
-          min-height: 60vh;
-          width: 100%;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .hero-content {
-          position: relative;
-          z-index: 2;
-          text-align: center;
-          color: #fffcea;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 0 2rem;
-        }
-
-        .hero-text h1 {
-          font-size: clamp(3rem, 8vw, 5rem);
-          line-height: 1.1;
-          color: #fffcea;
-          font-weight: 700;
-          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-          margin: 0 0 var(--spacing-6) 0;
-        }
-
-        .hero-subtitle {
-          font-size: clamp(1.2rem, 3vw, 1.6rem);
-          color: rgba(255, 252, 234, 0.9);
-          font-weight: 300;
-          margin: 0;
-          line-height: 1.6;
-          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-          letter-spacing: 0.025em;
-        }
-
-        /* === SECTION COMBINÉE === */
-        .combined-details {
-          padding: var(--spacing-20) 0;
-        }
-
-        .details-wrapper {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--spacing-10);
-          align-items: start;
-        }
-        @media (max-width: 1024px) {
-          .details-wrapper {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-12);
-          }
-        }
-        
-        .philo-col {
-          grid-column: 1 / 2;
-        }
-        .quali-col {
-          grid-column: 2 / 3;
-        }
-        @media (max-width: 1024px) {
-          .philo-col, .quali-col {
-            grid-column: 1 / -1;
-          }
-        }
-
-        .full-width-values,
-        .full-width-quote {
-          grid-column: 1 / -1;
-        }
-
-        .col-title {
-          font-family: var(--font-heading);
-          font-size: 2.2rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: #fffcea;
-          text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-          text-align: center;
-          margin-bottom: var(--spacing-10);
-        }
-        
-        .col-subtitle {
-          color: rgba(255, 252, 234, 0.9);
-          text-align: center;
-          max-width: 300px;
-          margin: -1rem auto 2rem;
-          font-size: 0.95rem;
-          line-height: 1.6;
-        }
-
-        .philosophy-cards {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-12);
-          max-width: 760px;
-          margin: 0 auto;
-        }
-
-        .philosophy-card {
-            padding: var(--spacing-10);
-        }
-
-        .philosophy-card p {
-            margin: 0;
-            font-size: 1.12rem;
-            line-height: 2;
-        }
-        .philosophy-card p + p { margin-top: var(--spacing-6); }
-        
-        .quote-section {
-            margin-top: 0;
-            padding: var(--spacing-6);
-        }
-
-        .quote-section blockquote {
-            font-family: var(--font-heading);
-            font-style: italic;
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-            line-height: 1.7;
-            margin: 0;
-            text-align: center;
-        }
-        .quote-section.rotating .quote-rotating {
-          opacity: 0;
-          transform: translateY(8px);
-          transition: opacity 600ms ease, transform 600ms ease;
-          min-height: 110px;
-          display: grid;
-          place-items: center;
-        }
-        .quote-section.rotating .quote-rotating.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .quote-section footer {
-            margin-top: var(--spacing-4);
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-        }
-
-        .values-header { text-align: center; margin-bottom: var(--spacing-8); }
-        .col-subtitle.oneline { max-width: 800px; margin: 0.5rem auto 0; font-size: 1.15rem; }
-
-        .credentials-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: var(--spacing-6);
-        }
-        .credentials-grid.four-cols { grid-template-columns: repeat(4, 1fr); }
-        @media (max-width: 1024px) { .credentials-grid.four-cols { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 640px) { .credentials-grid.four-cols { grid-template-columns: 1fr; } }
-        
-        .credential-card {
-            position: relative;
-            padding: var(--spacing-5);
-            padding-left: calc(var(--spacing-6) + 44px);
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .credential-icon {
-            position: absolute;
-            top: var(--spacing-5);
-            left: var(--spacing-5);
-            background: rgba(255, 255, 255, 0.15);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .credential-content {
-          text-align: left;
-        }
-        
-        .credential-content h4 {
-            margin: 0 0 2px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-        
-        .credential-description {
-            font-weight: 700;
-            margin: 0 0 2px;
-            font-size: 0.92rem;
-            color: var(--color-secondary-dark);
-        }
-
-        .credential-details {
-            font-size: 0.85rem;
-            margin: 0;
-            line-height: 1.5;
-            opacity: 0.95;
-        }
-
-        .full-width-values {
-          margin-top: var(--spacing-12);
-        }
-        .full-width-quote {
-          margin-top: var(--spacing-8);
-        }
-
-        .values-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: var(--spacing-6);
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        .values-grid.values-4-2 { grid-template-columns: repeat(4, 1fr); }
-        .values-grid.values-4-2 .value-card:nth-last-child(2),
-        .values-grid.values-4-2 .value-card:last-child { grid-column: span 2; }
-        @media (max-width: 1024px) {
-          .values-grid.values-4-2 { grid-template-columns: repeat(2, 1fr); }
-          .values-grid.values-4-2 .value-card:nth-last-child(2),
-          .values-grid.values-4-2 .value-card:last-child { grid-column: auto; }
-        }
-        @media (max-width: 640px) {
-          .values-grid.values-4-2 { grid-template-columns: 1fr; }
-        }
-
-        .value-card {
-          padding: var(--spacing-6);
-          text-align: center;
-          transition: all 0.4s ease;
-        }
-
-        .value-card h3 {
-          font-size: 1.1rem;
-          margin-bottom: var(--spacing-2);
-          font-weight: 600;
-        }
-
-        .value-card p {
-          line-height: 1.6;
-          margin: 0;
-          font-size: 0.9rem;
-        }
-
-        /* Styles for cards on parallax */
-        .parallax-surface .philosophy-card,
-        .parallax-surface .credential-card,
-        .parallax-surface .value-card {
-            background: linear-gradient(135deg,
-              rgba(255, 252, 234, 0.9) 0%,
-              rgba(255, 252, 234, 0.7) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 252, 234, 0.4);
-            border-radius: var(--radius-xl);
-        }
-
-        .parallax-surface .philosophy-card:hover,
-        .parallax-surface .credential-card:hover,
-        .parallax-surface .value-card:hover {
-            background: linear-gradient(135deg,
-              rgba(255, 252, 234, 0.95) 0%,
-              rgba(255, 252, 234, 0.8) 100%);
-            border-color: rgba(255, 252, 234, 0.6);
-        }
-
-        .parallax-surface .philosophy-card p,
-        .parallax-surface .credential-card h4,
-        .parallax-surface .credential-card p,
-        .parallax-surface .value-card h3,
-        .parallax-surface .value-card p {
-            color: var(--color-primary-dark) !important;
-            text-shadow: none !important;
-        }
-        .parallax-surface .credential-icon {
-          color: var(--color-primary-dark);
-        }
-
-        .parallax-surface .credential-card .credential-description {
-            color: var(--color-secondary-dark) !important;
-        }
-        
-        /* === DISCLAIMER SECTION === */
-        .disclaimer-section {
-          background: #fffcea;
-          padding: var(--spacing-10) 0 var(--spacing-16);
-          text-align: center;
-          border-top: 1px solid rgba(0,0,0,0.06);
-        }
-        .disclaimer-section .container {
-          max-width: 900px;
-        }
-        .disclaimer-section p {
-          font-size: 1rem;
-          color: var(--color-gray-700);
-          margin: 0;
-          line-height: 1.9;
-          font-style: italic;
-        }
-        .disclaimer-section strong {
-          color: var(--color-primary);
-          font-style: normal;
-          display: block;
-          margin-bottom: var(--spacing-2);
-          font-size: 1.2rem;
-          font-weight: 650;
-        }
-
-
-        /* === SECTION CTA === */
-        .cta-about {
-          background: #fffcea;
-          color: var(--color-primary);
-          padding: var(--spacing-20) 0;
-          border-bottom: 1px solid rgba(0,0,0,0.06);
-        }
-
-        .cta-content {
-          text-align: center;
-          max-width: 700px;
-          margin: 0 auto;
-        }
-
-        .cta-content h2 {
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
-          font-weight: 700;
-          color: var(--color-primary);
-          margin-bottom: var(--spacing-6);
-        }
-
-        .cta-content p {
-          font-size: clamp(1.2rem, 2.5vw, 1.45rem);
-          color: var(--color-gray-700);
-          margin-bottom: var(--spacing-8);
-          line-height: 1.6;
-          text-align: left;
-        }
-
-        .cta-actions {
-          display: flex;
-          gap: var(--spacing-6);
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-
-        .btn {
-          display: inline-flex;
-          align-items: center;
-          gap: var(--spacing-2);
-          padding: 1rem 2.25rem;
-          border-radius: var(--radius-xl);
-          font-weight: 600;
-          font-size: 1.1rem;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          min-width: 210px;
-          justify-content: center;
-        }
-
-        .btn-primary {
-          background: var(--color-primary);
-          color: #fffcea;
-          border: 2px solid var(--color-primary);
-        }
-
-        .btn-primary:hover {
-          background: var(--color-primary-dark);
-          border-color: var(--color-primary-dark);
-          box-shadow: 0 8px 25px rgba(85, 107, 47, 0.3);
-        }
-
-        .btn-outline {
-          background: transparent;
-          color: var(--color-primary);
-          border: 2px solid var(--color-primary);
-        }
-
-        .btn-outline:hover {
-          background: var(--color-primary);
-          color: #fffcea;
-          box-shadow: 0 8px 25px rgba(85, 107, 47, 0.2);
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 1024px) {
-          .presentation-grid {
-            grid-template-columns: 1fr;
-            gap: var(--spacing-10);
-          }
-          .sidebar-content {
-            position: static;
-          }
-          .values-header {
-            flex-direction: column;
-            gap: var(--spacing-2);
-          }
-        }
-        
-        @media (max-width: 768px) {
-          .values-grid {
-            grid-template-columns: 1fr;
-          }
-          
-          .hero-text h1 {
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
-          }
-
-          .hero-subtitle {
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
-          }
-
-          .presentation,
-          .values,
-          .cta-about {
-            padding: var(--spacing-16) 0;
-          }
-
-          .section-header {
-            margin-bottom: var(--spacing-12);
-          }
-
-          .text-content h2 {
-            font-size: clamp(2rem, 6vw, 2.5rem);
-          }
-
-          .philosophy {
-            padding: var(--spacing-6);
-          }
-
-          .credentials-sidebar {
-            padding: var(--spacing-6);
-          }
-
-          .credential-item {
-            padding: var(--spacing-3);
-          }
-
-          .value-card {
-            padding: var(--spacing-6);
-          }
-
-          .cta-actions {
-            flex-direction: column;
-            align-items: center;
-            gap: var(--spacing-4);
-          }
-
-          .btn {
-            min-width: 250px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .hero-content {
-            padding: 0 1rem;
-          }
-
-          .philosophy blockquote {
-            font-size: 1.1rem;
-          }
-
-          .credential-item {
-            flex-direction: column;
-            text-align: center;
-            gap: var(--spacing-3);
-          }
-        }
-      `}</style>
-    </div >
+      <CtaBand
+        title="Travaillons ensemble"
+        text={`Une structure à accompagner, ou une démarche personnelle ? Écrivez-moi ou appelez le ${SITE.phone}.`}
+        primary={{ label: 'Me contacter', to: '/contact' }}
+      />
+    </>
   );
-};
-
-export default AboutPage;
+}

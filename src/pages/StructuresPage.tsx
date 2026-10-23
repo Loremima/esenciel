@@ -1,256 +1,171 @@
-import React from 'react';
-import { Brain, FlaskConical, ClipboardCheck, MapPin, Eye, Lightbulb, Footprints, Mic2, Phone, Mail, ArrowRight } from 'lucide-react';
-import ParallaxSection from '../components/ParallaxSection';
-import GlassButton from '../components/GlassButton';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Download } from 'lucide-react';
+import { Button, CtaBand, Faq, PageHero, Section, SectionHeader, accentClasses } from '../components/ui';
+import { CREDENTIALS, SITE } from '../content/site';
+import { conferences, programmes } from '../content/offres';
+import { Seo, breadcrumbLd, faqLd } from '../lib/head';
 
-// Page destinée aux structures et financeurs (cible du QR code de la plaquette)
-const StructuresPage: React.FC = () => {
-  const primaryDark = '#1F2937';
+const etapes = [
+  { title: 'Un échange de 20 minutes', text: 'Votre public, vos objectifs, vos contraintes de salle et de calendrier, votre piste de financement.' },
+  { title: 'Une proposition écrite', text: 'Programme adapté, devis, et si besoin la fiche-action à glisser dans votre dossier (CFPPA, CARSAT, contrat local de santé…).' },
+  { title: 'L’intervention', text: 'Dans vos locaux. Je m’occupe du contenu et de l’animation ; vous mobilisez le public.' },
+  { title: 'Le bilan', text: 'Questionnaires avant et après, feuille d’émargement et bilan écrit, prêts pour votre rapport au financeur.' },
+];
 
-  const strengths = [
-    {
-      icon: Brain,
-      title: 'Une expertise du cerveau',
-      description: "Formation universitaire en psychologie clinique (Master 1), spécialisée en neuropsychologie du vieillissement. Je n'anime pas seulement des exercices : j'explique les mécanismes."
-    },
-    {
-      icon: FlaskConical,
-      title: 'Des programmes évalués',
-      description: 'Des pratiques issues de programmes validés scientifiquement (MBSR, MBCT, MBCAS), dont je suis instructrice certifiée.'
-    },
-    {
-      icon: ClipboardCheck,
-      title: 'Une évaluation systématique',
-      description: 'Questionnaires avant et après chaque action, et bilan écrit remis à la structure et au financeur.'
-    },
-    {
-      icon: MapPin,
-      title: 'Une intervenante de terrain',
-      description: "J'interviens dans l'Hérault et l'Aveyron, auprès des seniors, des aidants et des professionnels du soin."
-    }
+const cps = [
+  { famille: 'Compétences cognitives', items: 'Conscience de soi, maîtrise de soi, prise de décision' },
+  { famille: 'Compétences émotionnelles', items: 'Identifier ses émotions, réguler son stress' },
+  { famille: 'Compétences sociales', items: 'Lien social, demander de l’aide, communication, empathie' },
+];
+
+const financeurs = [
+  'Conférence des financeurs de la prévention de la perte d’autonomie (CFPPA)',
+  'CARSAT et MSA (actions collectives « bien vieillir »)',
+  'Caisses de retraite complémentaire (Agirc-Arrco)',
+  'Contrats locaux de santé et ARS',
+  'Plateformes d’accompagnement et de répit',
+  'Budget qualité de vie au travail de l’employeur',
+];
+
+const faq = [
+  { q: 'Combien coûte une intervention ?', a: 'Chaque intervention fait l’objet d’un devis, selon le format, le nombre de séances et le déplacement. Je vous l’envoie après notre premier échange.' },
+  { q: 'Pouvez-vous m’aider à monter un dossier de financement ?', a: 'Oui. Je vous fournis le programme, les objectifs, les compétences psychosociales travaillées, les indicateurs d’évaluation et une fiche-action rédigée. Le dossier reste porté par votre structure.' },
+  { q: 'Quelle est votre formation ?', a: `${CREDENTIALS.short}. ${CREDENTIALS.certifications}. ${CREDENTIALS.health}. ${CREDENTIALS.references}.` },
+  { q: 'Où intervenez-vous ?', a: 'Dans l’Hérault et l’Aveyron, dans vos locaux. Au-delà, contactez-moi : c’est souvent possible.' },
+  { q: 'Combien de participants ?', a: 'De 15 à 50 personnes pour une conférence, de 5 à 12 pour un cycle, pour que chacun puisse pratiquer et échanger.' },
+  { q: 'S’agit-il de soins ou de consultations ?', a: 'Non. Mes interventions relèvent de la prévention et de l’éducation à la santé. Elles ne remplacent pas un suivi médical ou psychologique.' },
+];
+
+export default function StructuresPage() {
+  const crumbs = [
+    { name: 'Accueil', path: '/' },
+    { name: 'Structures & financeurs', path: '/structures' },
   ];
-
-  const approach = [
-    { icon: Lightbulb, title: 'Comprendre', description: 'Comment fonctionnent l’attention, la mémoire, le stress et les émotions.' },
-    { icon: Eye, title: 'Observer', description: 'Repérer ses propres automatismes au quotidien : sortir du pilote automatique.' },
-    { icon: Footprints, title: 'Agir', description: 'Adopter des habitudes qui protègent la santé cognitive et émotionnelle.' }
-  ];
-
-  const conferences = [
-    {
-      title: '« Quand mon cerveau n’en fait qu’à sa tête »',
-      description: "Comprendre les mécanismes qui font fonctionner notre cerveau en pilote automatique, et pourquoi c'est utile… et parfois piégeant. Avec une expérience en direct : lire des noms de couleurs écrits dans une autre couleur.",
-      skills: 'Conscience de soi, compréhension de son fonctionnement'
-    },
-    {
-      title: '« Qui pilote ma vie : ma conscience ou mes automatismes ? »',
-      description: 'Passer de la compréhension à l’action : repérer ses automatismes de pensée, d’émotion et de comportement face au stress, et apprendre à reprendre la main.',
-      skills: 'Maîtrise de soi, régulation du stress et des émotions, prise de décision'
-    }
-  ];
-
-  const audiences = [
-    {
-      title: 'Seniors',
-      question: '« Mon cerveau change, que puis-je faire ? »',
-      offer: 'Programme « Bien vivre son avancée en âge » : 15 séances sur 8 mois, en groupe de 5 à 10 personnes.',
-      vocabulary: 'Prévention, bien vieillir, santé cognitive'
-    },
-    {
-      title: 'Aidants',
-      question: '« Je m’épuise à aider. »',
-      offer: 'Conférences adaptées à la charge mentale de l’aidant, et cycle de régulation du stress construit avec votre structure.',
-      vocabulary: 'Soutien aux aidants, répit, santé mentale'
-    },
-    {
-      title: 'Soignants et professionnels',
-      question: '« Comment je tiens ? »',
-      offer: 'Cycle ou formation « Prendre soin de soi quand on prend soin des autres », sur le lieu de travail.',
-      vocabulary: 'Qualité de vie au travail, prévention de l’épuisement'
-    }
-  ];
-
-  const skillsGrid = [
-    { family: 'Cognitives', skills: 'Conscience de soi, maîtrise de soi, prise de décision' },
-    { family: 'Émotionnelles', skills: 'Identifier ses émotions, les réguler, gérer son stress' },
-    { family: 'Sociales', skills: 'Communication, empathie, lien social' }
-  ];
-
-  const funders = [
-    'Conférences des financeurs de la prévention de la perte d’autonomie (Hérault, Aveyron)',
-    'CARSAT et MSA, actions collectives « bien vieillir »',
-    'ARS Occitanie et contrats locaux de santé',
-    'Budgets qualité de vie au travail et formation des employeurs'
-  ];
-
   return (
-    <div className="structures-page">
-      <ParallaxSection
-        videoSrc="/background.mp4"
-        className="hero-structures min-h-[80vh] pt-28 pb-16"
-        overlayOpacity={0.45}
+    <>
+      <Seo
+        title="Ateliers et conférences de prévention pour CCAS, EHPAD et CFPPA | Véronique Carrié"
+        description="Conférences, cycles et journées de prévention sur le cerveau et l’avancée en âge, pour seniors, aidants et soignants. Évaluation incluse. Hérault et Aveyron."
+        path="/structures"
+        jsonLd={[breadcrumbLd(crumbs), faqLd(faq)]}
+      />
+      <PageHero
+        crumbs={crumbs}
+        eyebrow="Structures & financeurs"
+        title="Des actions de prévention clés en main, pensées pour l’avancée en âge"
+        lead="Pour les CCAS, centres sociaux, résidences autonomie, EHPAD, SAAD, plateformes de répit, collectivités et financeurs de la prévention, dans l’Hérault et l’Aveyron."
       >
-        <div className="hero-content text-center">
-          <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>Piloter son cerveau face aux changements de la vie</h1>
-          <p className="hero-subtitle" style={{ fontSize: 'clamp(1.05rem, 2vw, 1.3rem)' }}>
-            Conférences, ateliers et formations pour les structures, spécialisés dans l'avancée en âge : seniors, aidants et professionnels qui les accompagnent.
-          </p>
-          <p className="text-[#fffcea]/80 text-sm md:text-base mt-4 max-w-3xl mx-auto">
-            Véronique Carrié · Formée en neuropsychologie du vieillissement · Instructrice certifiée MBSR, MBCT, MBCAS · Formatrice en éducation à la santé · Hérault et Aveyron
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <GlassButton to="/contact-reservation" icon={ArrowRight}>
-              Échanger sur votre projet
-            </GlassButton>
-            <a href="tel:+33625137250" className="btn-glass-shared">
-              <span className="btn-glass-shared__text">06 25 13 72 50</span>
-              <Phone size={20} className="btn-glass-shared__icon" />
-            </a>
-          </div>
-        </div>
-      </ParallaxSection>
+        <Button to="/contact?profil=structure" arrow>Échanger sur votre projet</Button>
+        <Button href={SITE.plaquette} variant="secondary" download>
+          <Download aria-hidden className="h-4 w-4" /> Plaquette (PDF)
+        </Button>
+      </PageHero>
 
-      {/* Pourquoi travailler avec moi */}
-      <section className="section bg-[#fffcea]">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading" style={{ color: primaryDark }}>Pourquoi travailler avec moi</h2>
-            <p className="text-stone-600 text-lg font-light leading-relaxed">
-              Des actions de prévention sérieuses, évaluées et adaptées à votre public.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {strengths.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="bg-white/60 rounded-3xl p-8 border border-stone-200/60">
-                <Icon size={28} className="mb-4" style={{ color: primaryDark }} />
-                <h3 className="text-xl font-bold mb-2" style={{ color: primaryDark }}>{title}</h3>
-                <p className="text-stone-600 leading-relaxed">{description}</p>
-              </div>
-            ))}
-          </div>
+      <Section tone="white">
+        <SectionHeader
+          eyebrow="Pour démarrer"
+          title="Deux conférences interactives"
+          intro="Une première porte d’entrée, facile à organiser et à financer, qui donne envie au public d’aller plus loin."
+        />
+        <div className="grid gap-5 md:grid-cols-2">
+          {conferences.map((c) => (
+            <Link key={c.slug} to={c.path} className="card group flex flex-col p-7 transition-shadow hover:shadow-lg">
+              <span className="eyebrow">{c.eyebrow}</span>
+              <h3 className="mt-3 text-2xl font-medium leading-snug">{c.title}</h3>
+              <p className="mt-3 flex-1 text-ink-soft">{c.promise}</p>
+              <span className="mt-5 inline-flex items-center gap-2 font-medium">
+                Programme détaillé <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Approche en 3 temps */}
-      <section className="section bg-white/40">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading" style={{ color: primaryDark }}>L'approche en 3 temps</h2>
-            <p className="text-stone-600 text-lg font-light leading-relaxed">
-              Développer les compétences psychosociales en s'appuyant sur les neurosciences.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {approach.map(({ icon: Icon, title, description }, index) => (
-              <div key={title} className="text-center p-6">
-                <div className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-[#fffcea] border border-stone-200">
-                  <Icon size={24} style={{ color: primaryDark }} />
-                </div>
-                <span className="text-xs font-bold uppercase tracking-[0.3em] text-stone-400">0{index + 1}</span>
-                <h3 className="text-2xl font-bold mt-2 mb-2" style={{ color: primaryDark }}>{title}</h3>
-                <p className="text-stone-600 leading-relaxed">{description}</p>
-              </div>
-            ))}
-          </div>
+      <Section>
+        <SectionHeader eyebrow="Pour aller plus loin" title="Un programme par public" />
+        <div className="grid gap-5 md:grid-cols-3">
+          {programmes.map((p) => {
+            const a = accentClasses[p.accent];
+            const format = p.facts.find((f) => f.label === 'Format')?.value.split('.')[0];
+            return (
+              <Link key={p.slug} to={p.path} className={`group flex flex-col rounded-2xl border ${a.border} bg-cream-light p-7 transition-shadow hover:shadow-soft`}>
+                <span className={`inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider ${a.text}`}>
+                  <span aria-hidden className={`h-2 w-2 rounded-full ${a.dot}`} />
+                  {p.audience}
+                </span>
+                <h3 className="mt-4 text-2xl font-medium leading-snug">{p.title}</h3>
+                <p className="mt-3 flex-1 text-ink-soft">{p.promise}</p>
+                <p className="mt-5 text-sm text-ink-muted">{format}</p>
+                <span className="mt-4 inline-flex items-center gap-2 font-medium">
+                  Voir le programme <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            );
+          })}
         </div>
-      </section>
+      </Section>
 
-      {/* Conférences : porte d'entrée */}
-      <section id="conferences" className="section bg-[#fffcea]">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-stone-400 mb-4 block">Pour commencer</span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading" style={{ color: primaryDark }}>Deux conférences</h2>
-            <p className="text-stone-600 text-lg font-light leading-relaxed">
-              1 h 30 à 2 h, de 15 à 50 personnes, interactives et déclinées pour chaque public.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {conferences.map(({ title, description, skills }) => (
-              <div key={title} className="bg-white/60 rounded-3xl p-8 border border-stone-200/60 flex flex-col">
-                <Mic2 size={28} className="mb-4" style={{ color: primaryDark }} />
-                <h3 className="text-xl font-bold mb-3" style={{ color: primaryDark }}>{title}</h3>
-                <p className="text-stone-600 leading-relaxed mb-6 flex-grow">{description}</p>
-                <p className="text-sm text-stone-500"><strong>Compétences travaillées :</strong> {skills}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Section tone="sand">
+        <SectionHeader eyebrow="Comment ça se passe" title="De votre premier appel au bilan pour le financeur" />
+        <ol className="grid gap-6 md:grid-cols-4">
+          {etapes.map((e, i) => (
+            <li key={e.title} className="rounded-2xl bg-cream-light p-6">
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-ink font-heading text-lg text-cream">{i + 1}</span>
+              <h3 className="mt-4 text-xl font-medium">{e.title}</h3>
+              <p className="mt-2 text-[0.98rem] text-ink-soft">{e.text}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
 
-      {/* Publics */}
-      <ParallaxSection videoSrc="/background.mp4" id="publics" className="section py-24" overlayOpacity={0.5}>
-        <div className="container relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#fffcea] mb-6 font-heading drop-shadow-lg">Trois publics, un même fil rouge</h2>
-            <p className="text-[#fffcea]/90 text-lg font-light leading-relaxed">
-              Les changements liés à l'avancée en âge touchent la personne âgée, ses proches et ceux qui l'accompagnent.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {audiences.map(({ title, question, offer, vocabulary }) => (
-              <div key={title} className="bg-[#fffcea]/95 rounded-3xl p-8 flex flex-col">
-                <h3 className="text-2xl font-bold mb-2" style={{ color: primaryDark }}>{title}</h3>
-                <p className="italic text-stone-500 mb-4">{question}</p>
-                <p className="text-stone-700 leading-relaxed mb-4 flex-grow">{offer}</p>
-                <p className="text-xs uppercase tracking-wider text-stone-400">{vocabulary}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </ParallaxSection>
-
-      {/* Compétences psychosociales + évaluation */}
-      <section className="section bg-[#fffcea]">
-        <div className="container grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+      <Section tone="white">
+        <div className="grid gap-12 md:grid-cols-2 md:gap-16">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading" style={{ color: primaryDark }}>Compétences psychosociales</h2>
-            <p className="text-stone-600 mb-6">Selon le référentiel de Santé publique France (2022).</p>
-            <div className="space-y-4">
-              {skillsGrid.map(({ family, skills }) => (
-                <div key={family} className="bg-white/60 rounded-2xl p-5 border border-stone-200/60">
-                  <h3 className="font-bold mb-1" style={{ color: primaryDark }}>{family}</h3>
-                  <p className="text-stone-600">{skills}</p>
+            <p className="eyebrow mb-3">Le cadre</p>
+            <h2 className="h-section">Les compétences psychosociales</h2>
+            <p className="lead mt-4">
+              Toutes mes actions s’appuient sur le référentiel des compétences psychosociales de Santé publique France (2022), le vocabulaire commun des appels à projets de prévention.
+            </p>
+            <dl className="mt-8 space-y-4">
+              {cps.map((c) => (
+                <div key={c.famille} className="border-l-2 border-gold pl-4">
+                  <dt className="font-semibold">{c.famille}</dt>
+                  <dd className="text-ink-soft">{c.items}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading" style={{ color: primaryDark }}>Évaluation et financements</h2>
-            <p className="text-stone-600 mb-6">
-              Chaque action est évaluée par des questionnaires avant et après (stress perçu, bien-être, satisfaction). Je vous remets un bilan écrit, utilisable pour votre financeur.
-            </p>
-            <h3 className="font-bold mb-3" style={{ color: primaryDark }}>Financements mobilisables</h3>
-            <ul className="space-y-2 text-stone-600 list-disc pl-5 mb-6">
-              {funders.map(funder => <li key={funder}>{funder}</li>)}
+            <p className="eyebrow mb-3">Les financements</p>
+            <h2 className="h-section">Des actions finançables</h2>
+            <p className="lead mt-4">Mes interventions s’intègrent aux dispositifs que vous connaissez déjà :</p>
+            <ul className="mt-8 space-y-3">
+              {financeurs.map((f) => (
+                <li key={f} className="flex gap-3 text-ink-soft">
+                  <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                  {f}
+                </li>
+              ))}
             </ul>
-            <p className="text-stone-700 font-medium">
-              Je peux vous aider à rédiger la fiche-action de votre dossier.
+            <p className="mt-6 text-ink-soft">
+              L’évaluation est comprise : stress perçu (PSS-10), bien-être (WEMWBS court), assiduité, satisfaction et bilan écrit.
             </p>
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Contact direct */}
-      <section className="section bg-white/40">
-        <div className="container max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading" style={{ color: primaryDark }}>Parlons de votre projet</h2>
-          <p className="text-stone-600 text-lg mb-8">
-            Public, nombre de participants, période, financement envisagé : un premier échange suffit pour construire une proposition.
-          </p>
-          <div className="flex flex-col md:flex-row justify-center gap-6 text-lg mb-10" style={{ color: primaryDark }}>
-            <a href="tel:+33625137250" className="inline-flex items-center justify-center gap-2 font-medium hover:opacity-80">
-              <Phone size={20} /> 06 25 13 72 50
-            </a>
-            <a href="mailto:esenciel.contact@gmail.com" className="inline-flex items-center justify-center gap-2 font-medium hover:opacity-80">
-              <Mail size={20} /> esenciel.contact@gmail.com
-            </a>
-          </div>
-          <p className="text-stone-500 text-sm">J'interviens dans l'Hérault et l'Aveyron, et à distance pour certains formats.</p>
+      <Section>
+        <div className="grid gap-10 md:grid-cols-[1fr_1.6fr]">
+          <SectionHeader eyebrow="Questions fréquentes" title="Ce que les structures me demandent" />
+          <Faq items={faq} />
         </div>
-      </section>
-    </div>
-  );
-};
+      </Section>
 
-export default StructuresPage;
+      <CtaBand
+        title="Parlons de votre public"
+        text="Un appel de vingt minutes suffit pour savoir si une conférence ou un cycle a du sens chez vous, et comment le financer."
+        primary={{ label: 'Échanger sur votre projet', to: '/contact?profil=structure' }}
+      />
+    </>
+  );
+}

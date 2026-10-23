@@ -1,1 +1,19 @@
-/*    /index.html   200
+# Anciennes adresses du site (301 permanentes)
+/contact-reservation                 /contact                                         301
+/services                            /particuliers                                    301
+/accompagnements-individuels         /particuliers#individuel                         301
+/accompagnements-groupe              /particuliers#cycle                              301
+/programmes-pleine-conscience        /particuliers#cycle                              301
+/gestion-stress                      /particuliers/gestion-du-stress                  301
+/prevention-rechutes-depressives     /particuliers/prevention-rechute-depressive      301
+/bien-vivre-son-avancement-age       /particuliers/bien-vivre-son-avancee-en-age      301
+/sante-qualite-vie                   /particuliers/sante-et-vitalite                  301
+/sante-qualite-vie-details           /particuliers/sante-et-vitalite                  301
+/pleine-conscience                   /particuliers/pleine-conscience                  301
+/jeu-du-tao                          /particuliers/jeu-du-tao                         301
+/interventions-entreprises           /structures                                      301
+/ateliers-education-sante            /structures                                      301
+/conferences-evenements              /conferences                                     301
+/infos-pratiques                     /qui-suis-je                                     301
+/politique-confidentialite           /confidentialite                                 301
+/blog                                /                                                301
