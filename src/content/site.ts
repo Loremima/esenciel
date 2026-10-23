@@ -18,15 +18,15 @@ export const SITE = {
   ogImage: '/og-image.jpg',
 };
 
-// Le premier rendez-vous, proposé dans le bloc « Prendre rendez-vous ». Les deux
-// boutons ouvrent le tunnel de réservation sutempo.
+// Le premier rendez-vous, proposé dans le bloc « Prendre rendez-vous » : une structure
+// va droit à l'échange découverte sutempo, un particulier choisit sa prestation.
 export const FIRST_MEETING = {
   structure: {
     label: 'Structure',
     info: 'Échange découverte · 20 min · gratuit',
     text: 'Votre public, vos dates, votre financement : on regarde ensemble ce qui est possible.',
     cta: 'Choisir mon créneau',
-    href: `${SITE.booking}#book`,
+    href: `${SITE.booking}?service=b65a6aed-6cbb-5e65-aa85-e9a419134383`,
   },
   particulier: {
     label: 'Particulier',
