@@ -1,20 +1,14 @@
-import { Award, GraduationCap, MapPin, Presentation } from 'lucide-react';
-import { BookingSection, IconSquare, LoopVideo, Title } from '../components/funnel';
-import { MEDIA } from '../content/media';
+import { CREDENTIALS, SITE } from '../content/site';
+import { Opening, Part, PhoneLine, TextLink } from '../components/calm';
 import { Seo, breadcrumbLd } from '../lib/head';
 
-const parcours = [
-  { icon: GraduationCap, title: 'Master 1 de psychologie clinique', text: 'Neuropsychologie du vieillissement' },
-  { icon: Award, title: 'Instructrice certifiée', text: 'MBSR, MBCT, MBCAS' },
-  { icon: Presentation, title: 'Formatrice', text: 'Éducation et promotion de la santé' },
-  { icon: MapPin, title: 'Sur le terrain', text: 'Neo Silver, Hérault, Aveyron' },
-];
+// Qui suis-je répond à une question : « À qui vais-je avoir affaire ? »
 
-const valeurs = [
-  { title: 'Rigueur', text: 'Issu de la recherche' },
-  { title: 'Bienveillance', text: 'Sans jugement' },
-  { title: 'Concret', text: 'Utile dès demain' },
-  { title: 'Honnêteté', text: 'Ce que je fais, et pas' },
+const PARCOURS = [
+  CREDENTIALS.short,
+  CREDENTIALS.certifications,
+  `${CREDENTIALS.health}`,
+  `${CREDENTIALS.references}, dans l’Hérault et l’Aveyron`,
 ];
 
 export default function AboutPage() {
@@ -31,56 +25,36 @@ export default function AboutPage() {
         jsonLd={[breadcrumbLd(crumbs)]}
       />
 
-      <section className="relative -mt-[4.5rem] overflow-hidden bg-night pb-14 pt-28 text-center text-cream md:pb-20 md:pt-32">
-        <LoopVideo media={MEDIA.ciel} className="opacity-55" priority />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-night/30 to-night/95" />
-        <div className="container-site fade-up relative flex flex-col items-center">
-          <img src="/images/veronique.webp" alt="Portrait de Véronique Carrié" width={800} height={1000} className="h-[288px] w-[230px] rounded-arch border-4 border-gold-light/50 object-cover md:h-[360px] md:w-[288px]" />
-          <h1 className="mt-6 font-heading font-light text-cream [font-size:clamp(2.5rem,5vw,3.8rem)]">Véronique Carrié</h1>
-          <p className="mt-3 max-w-md text-cream/85 md:text-lg">Comprendre son cerveau pour traverser les changements de la vie.</p>
-        </div>
-      </section>
+      <Opening title="Véronique Carrié" lead="J’aide à comprendre son cerveau pour traverser les changements de la vie." />
 
-      <section className="bg-cream py-16 md:py-20">
-        <div className="container-site">
-          <Title>Mon parcours</Title>
-          <ul className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-2.5 md:mt-12 md:grid-cols-4 md:gap-5">
-            {parcours.map((p) => (
-              <li key={p.title} className="flex flex-col items-center gap-2.5 rounded-[22px] bg-cream-light px-2.5 py-6 text-center">
-                <IconSquare icon={p.icon} />
-                <span className="text-sm font-semibold leading-tight">{p.title}</span>
-                <span className="text-[0.82rem] leading-tight text-ink-muted">{p.text}</span>
-              </li>
-            ))}
+      <Part title="Mon parcours">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+          <img src="/images/veronique.webp" alt="Portrait de Véronique Carrié" width={800} height={1000} className="h-[250px] w-[200px] shrink-0 rounded-arch object-cover" />
+          <ul className="space-y-3">
+            {PARCOURS.map((p) => <li key={p} className="border-l-2 border-gold pl-4">{p}</li>)}
           </ul>
         </div>
-      </section>
+      </Part>
 
-      <section className="bg-sand px-7 py-16 text-center md:py-20">
-        <span aria-hidden className="block font-heading text-7xl leading-[0.5] text-gold">“</span>
-        <p className="mx-auto mt-4 max-w-2xl font-heading text-[1.65rem] font-light leading-snug md:text-4xl">
-          Quand on sait pourquoi le cerveau s’emballe, oublie ou se fatigue, on a moins peur, et on peut agir.
+      <Part>
+        <blockquote className="font-heading text-[1.7rem] font-light leading-snug text-ink md:text-[2rem]">
+          « Quand on sait pourquoi le cerveau s’emballe, oublie ou se fatigue, on a moins peur, et on peut agir. »
+        </blockquote>
+      </Part>
+
+      <Part title="Ce que je fais, et ce que je ne fais pas">
+        <p>Je conçois et j’anime des conférences et des ateliers de prévention : comprendre comment fonctionnent l’attention, la mémoire, le stress et nos automatismes, puis s’entraîner à reprendre la main.</p>
+        <p className="mt-3">Mes interventions relèvent de la prévention et de l’éducation à la santé. Je ne pratique ni consultation ni psychothérapie : si votre situation le demande, je vous oriente vers les professionnels de santé adaptés.</p>
+      </Part>
+
+      <Part title="Travailler avec moi">
+        <p className="flex flex-col gap-1">
+          <TextLink to="/structures">Vous êtes une structure</TextLink>
+          <TextLink to="/particuliers">Pour vous ou un proche</TextLink>
         </p>
-      </section>
-
-      <section className="bg-cream py-16 md:py-20">
-        <div className="container-site">
-          <Title>Ma façon de faire</Title>
-          <ul className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-2.5 md:mt-12 md:grid-cols-4 md:gap-5">
-            {valeurs.map((v) => (
-              <li key={v.title} className="rounded-[20px] border border-sand-dark px-2 py-5 text-center">
-                <span className="block font-heading text-[1.4rem]">{v.title}</span>
-                <span className="mt-1 block text-[0.82rem] text-ink-muted">{v.text}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="mx-auto mt-10 max-w-xl text-center text-sm text-ink-muted">
-            Mes interventions relèvent de la prévention et de l’éducation à la santé. Je ne pratique ni consultation ni psychothérapie : si votre situation le demande, je vous oriente vers les professionnels de santé adaptés.
-          </p>
-        </div>
-      </section>
-
-      <BookingSection />
+        <p className="mt-6"><PhoneLine /></p>
+        <p className="mt-1 text-ink-muted">{SITE.zone}, et à distance.</p>
+      </Part>
     </>
   );
 }

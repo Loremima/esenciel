@@ -70,7 +70,14 @@ export default function OffreStructurePage({ offre }: { offre: OffreStructure })
         <ul className="list-disc space-y-2 pl-5">
           {LIVRABLES.map((l) => <li key={l}>{l}</li>)}
         </ul>
-        {cps && <p className="mt-5">Compétences psychosociales travaillées : {cps.charAt(0).toLowerCase() + cps.slice(1)}.</p>}
+        {cps && (
+          <>
+            <p className="mt-6 font-medium text-ink">Compétences psychosociales travaillées</p>
+            <ul className="mt-2 list-disc space-y-1 pl-5">
+              {cps.split(/\.\s+/).map((c) => c.replace(/\.+$/, '')).filter(Boolean).map((c) => <li key={c}>{c}</li>)}
+            </ul>
+          </>
+        )}
       </Part>
 
       <Part id="rdv" title="Cette action vous intéresse ?">

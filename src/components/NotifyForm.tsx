@@ -33,8 +33,8 @@ export function NotifyForm({ offre, title, message, light }: { offre: string; ti
       <input id={`nom-${offre}`} name="nom" required autoComplete="given-name" placeholder="Prénom" className="field text-ink" />
       <label className="sr-only" htmlFor={`email-${offre}`}>E-mail</label>
       <input id={`email-${offre}`} name="email" type="email" required autoComplete="email" placeholder="E-mail" className="field text-ink" />
-      <label className={`flex gap-2.5 text-xs ${light ? 'text-ink-muted' : 'text-cream/75'}`}>
-        <input type="checkbox" name="consentement" value="oui" required className="mt-0.5 h-4 w-4 shrink-0 accent-gold" />
+      <label className={`flex gap-3 text-sm ${light ? 'text-ink-muted' : 'text-cream/75'}`}>
+        <input type="checkbox" name="consentement" value="oui" required className="mt-0.5 h-5 w-5 shrink-0 accent-gold" />
         <span>
           J’accepte d’être recontacté·e à ce sujet (<Link to="/confidentialite" className="underline">confidentialité</Link>).
         </span>

@@ -14,7 +14,7 @@ type Crumb = { name: string; path: string };
 /** L'ouverture d'une page : fond nuit, titre, une phrase, au plus un bouton. */
 export function Opening({ title, lead, crumbs, media, children }: { title: ReactNode; lead?: ReactNode; crumbs?: Crumb[]; media?: Media; children?: ReactNode }) {
   return (
-    <section className={`relative -mt-[4.5rem] overflow-hidden bg-night text-cream ${media ? 'flex min-h-[38rem] items-end [height:92svh] md:items-center' : ''}`}>
+    <section className={`relative -mt-[4.5rem] overflow-hidden bg-night text-cream ${media ? 'flex min-h-[28rem] items-end [height:68svh] md:min-h-[34rem] md:items-center' : ''}`}>
       {media && (
         <>
           <LoopVideo media={media} priority />
@@ -23,7 +23,7 @@ export function Opening({ title, lead, crumbs, media, children }: { title: React
       )}
       <div className={`container-site relative max-w-3xl pb-16 pt-32 md:pb-20 md:pt-40 ${media ? 'text-center' : ''}`}>
         {crumbs && (
-          <div className="[&_a]:text-cream/60 [&_a:hover]:text-cream [&_li]:text-cream/60 [&_span]:!text-cream/60">
+          <div className="hidden sm:block [&_a]:text-cream/60 [&_a:hover]:text-cream [&_li]:text-cream/60 [&_span]:!text-cream/60">
             <Breadcrumbs items={crumbs} />
           </div>
         )}
@@ -58,7 +58,7 @@ export function MainButton({ to, children }: { to: string; children: ReactNode }
 
 /** Un lien texte avec une flèche, pour les actions secondaires. */
 export function TextLink({ to, children, light, download }: { to: string; children: ReactNode; light?: boolean; download?: boolean }) {
-  const cls = `group inline-flex items-center gap-1.5 font-medium underline decoration-1 underline-offset-4 ${light ? 'text-cream decoration-cream/40 hover:decoration-cream' : 'text-ink decoration-ink/30 hover:decoration-ink'}`;
+  const cls = `group inline-flex min-h-[44px] items-center gap-1.5 font-medium underline decoration-1 underline-offset-4 ${light ? 'text-cream decoration-cream/40 hover:decoration-cream' : 'text-ink decoration-ink/30 hover:decoration-ink'}`;
   const inner = <>{children}<ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></>;
   if (to.startsWith('/') && !download) return <Link to={to} className={cls}>{inner}</Link>;
   return <a href={to} className={cls} download={download}>{inner}</a>;
@@ -81,7 +81,7 @@ export function Row({ to, title, detail, aside }: { to: string; title: ReactNode
         <span className="block font-heading text-[1.35rem] leading-snug text-ink">{title}</span>
         {detail && <span className="mt-1 block text-ink-soft">{detail}</span>}
       </span>
-      {aside && <span className="shrink-0 text-right text-ink">{aside}</span>}
+      {aside && <span className="shrink-0 whitespace-nowrap text-right text-ink">{aside}</span>}
       <ArrowRight aria-hidden className="h-5 w-5 shrink-0 text-ink-muted transition-transform group-hover:translate-x-1 group-hover:text-ink" />
     </>
   );

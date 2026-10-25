@@ -1,8 +1,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { CheckCircle2, Mail, MapPin, Phone } from 'lucide-react';
-import { BookingCard, IconSquare, Title } from '../components/funnel';
-import { SITE } from '../content/site';
+import { CheckCircle2 } from 'lucide-react';
+import { MainButton, Opening, Part, PhoneLine } from '../components/calm';
+import { FIRST_MEETING, SITE } from '../content/site';
 import { ALL_STRUCTURE_OFFERS, particuliers } from '../content/offres';
 import { Seo, breadcrumbLd } from '../lib/head';
 
@@ -49,7 +49,7 @@ export default function ContactPage() {
     { name: 'Accueil', path: '/' },
     { name: 'Contact', path: '/contact' },
   ];
-  const label = 'mb-1.5 block text-sm font-medium text-ink';
+  const label = 'mb-1.5 block text-[0.98rem] font-medium text-ink';
 
   return (
     <>
@@ -59,41 +59,24 @@ export default function ContactPage() {
         path="/contact"
         jsonLd={[breadcrumbLd(crumbs)]}
       />
-      <section className="bg-sand pb-14 pt-10 md:pb-20 md:pt-16">
-        <div className="container-site">
-          <h1 className="h-display text-center">Prendre <em>rendez-vous</em></h1>
-          <p className="mb-8 mt-3 text-center text-ink-muted">Choisissez ce qui vous correspond.</p>
-          <BookingCard initial={profil} />
-        </div>
-      </section>
+      <Opening title="Me contacter" lead="Le plus simple est de m’appeler. Sinon, écrivez-moi : je réponds sous 48 heures." />
 
-      <section className="bg-cream py-14 md:py-20">
-        <div className="container-site">
-          <Title>Ou directement</Title>
-          <div className="mx-auto mt-7 grid max-w-md grid-cols-2 gap-2.5">
-            <a href={SITE.phoneHref} className="flex flex-col items-center gap-2.5 rounded-[22px] border border-sand-dark bg-cream-light px-2.5 py-6 text-center hover:border-ink/40">
-              <IconSquare icon={Phone} round />
-              <span className="font-semibold">Appeler</span>
-              <span className="text-[0.82rem] text-ink-muted">{SITE.phone}</span>
-            </a>
-            <a href="#formulaire" className="flex flex-col items-center gap-2.5 rounded-[22px] border border-sand-dark bg-cream-light px-2.5 py-6 text-center hover:border-ink/40">
-              <IconSquare icon={Mail} round />
-              <span className="font-semibold">Écrire</span>
-              <span className="text-[0.82rem] text-ink-muted">Réponse sous 48 h</span>
-            </a>
+      <Part title="Par téléphone">
+        <PhoneLine big />
+        <p className="mt-3">Si je ne décroche pas, laissez un message : je vous rappelle.</p>
+        <p className="mt-2 text-ink-muted">{SITE.zone}, et à distance.</p>
+        {profil === 'structure' && (
+          <div className="mt-8 border-t border-sand-dark pt-8">
+            <p className="font-medium text-ink">Vous êtes une structure ?</p>
+            <p className="mt-1 mb-5">Réservez directement un échange de 20 minutes, gratuit.</p>
+            <MainButton to={FIRST_MEETING.structure.href}>Planifier un échange de 20 min</MainButton>
           </div>
-          <p className="mt-7 flex items-center justify-center gap-2 text-sm text-ink-muted">
-            <MapPin aria-hidden className="h-[18px] w-[18px] text-gold-dark" /> J’interviens dans l’Hérault et l’Aveyron
-          </p>
-        </div>
-      </section>
+        )}
+      </Part>
 
-      <section id="formulaire" className="bg-cream pb-16 md:pb-24">
-        <div className="container-site">
-          <Title className="mb-3">Être rappelé, ou m’écrire</Title>
-          <p className="mx-auto mb-8 max-w-md text-center text-ink-muted">Structure : je vous rappelle sous 48 heures pour 20 minutes, gratuites. Particulier : je vous réponds sous 48 heures.</p>
-          <div className="mx-auto max-w-2xl">
-          <div className="card p-6 md:p-9">
+      <Part id="formulaire" title="Par écrit">
+          <div>
+          <div>
             {status === 'sent' ? (
               <div role="status" className="py-10 text-center">
                 <CheckCircle2 aria-hidden className="mx-auto h-12 w-12 text-sage" />
@@ -174,8 +157,8 @@ export default function ContactPage() {
                   <p className="mt-1.5 text-sm text-ink-muted">Inutile de détailler votre santé ici : nous en parlerons de vive voix si besoin.</p>
                 </div>
 
-                <label className="flex gap-3 text-sm text-ink-soft">
-                  <input type="checkbox" name="consentement" value="oui" required className="mt-1 h-4 w-4 shrink-0 accent-ink" />
+                <label className="flex gap-3 text-[0.95rem] text-ink-soft">
+                  <input type="checkbox" name="consentement" value="oui" required className="mt-0.5 h-5 w-5 shrink-0 accent-ink" />
                   <span>
                     J’accepte que mes informations soient utilisées pour répondre à ma demande, comme décrit dans la{' '}
                     <Link to="/confidentialite" className="link-underline">politique de confidentialité</Link>.
@@ -193,17 +176,15 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="w-full rounded-full bg-night px-6 py-3.5 font-medium text-cream transition-colors hover:bg-night/90 disabled:opacity-60 sm:w-auto"
+                  className="w-full rounded-full bg-gold px-7 py-4 font-semibold text-night transition-colors hover:bg-gold-light disabled:opacity-60 sm:w-auto"
                 >
                   {status === 'sending' ? 'Envoi en cours…' : 'Envoyer mon message'}
                 </button>
               </form>
             )}
           </div>
-
           </div>
-        </div>
-      </section>
+      </Part>
     </>
   );
 }

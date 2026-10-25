@@ -20,9 +20,9 @@ const FORMAT: Record<string, string> = {
   'gestion-du-stress': '8 séances en petit groupe',
   'prevention-rechute-depressive': '8 séances en petit groupe, après un entretien',
   'bien-vivre-son-avancee-en-age': '15 séances en petit groupe, sur 8 mois',
-  'jeu-du-tao': 'Une demi-journée, à 3 ou 4',
-  'sante-et-vitalite': 'Seul avec moi, sur place ou à distance',
-  'pleine-conscience': 'Seul avec moi, sur place ou à distance',
+  'jeu-du-tao': 'Une demi-journée, en groupe de 3 ou 4 personnes',
+  'sante-et-vitalite': 'Sur place ou à distance',
+  'pleine-conscience': 'Sur place ou à distance',
 };
 
 const prix = (o: OffreParticulier) => (o.category === 'individuel' ? '90 €, puis 60 €' : o.price.replace(' le cycle', '').replace(' par personne', ''));
@@ -71,8 +71,8 @@ export default function ParticuliersPage() {
         </div>
       </Part>
 
-      <Part large id="formules" title="Avec moi">
-        <p className="font-medium text-ink">Seul avec moi</p>
+      <Part large id="formules" title="Les ateliers et les tarifs">
+        <p className="font-medium text-ink">Séances individuelles</p>
         <ul className="mt-2 border-t border-sand-dark">
           {solo.map((o) => <Row key={o.slug} to={o.path} title={o.title} detail={FORMAT[o.slug]} aside={prix(o)} />)}
         </ul>
@@ -84,7 +84,10 @@ export default function ParticuliersPage() {
       </Part>
 
       <Part large title="Me joindre">
-        <p>Une question, un doute sur ce qui vous conviendrait ? Appelez-moi, ou écrivez-moi.</p>
+        <div className="flex items-center gap-5">
+          <img src="/images/veronique-480.webp" alt="Portrait de Véronique Carrié" width={480} height={600} loading="lazy" className="h-[120px] w-[96px] shrink-0 rounded-arch object-cover" />
+          <p>Une question, un doute sur ce qui vous conviendrait ? Appelez-moi, ou écrivez-moi. C’est moi qui réponds.</p>
+        </div>
         <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-8">
           <PhoneLine big />
           <TextLink to="/contact?profil=particulier">M’écrire</TextLink>

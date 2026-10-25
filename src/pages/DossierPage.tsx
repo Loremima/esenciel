@@ -1,7 +1,7 @@
-import { CREDENTIALS, LEGAL, SITE } from '../content/site';
+import { CREDENTIALS, FIRST_MEETING, LEGAL, SITE } from '../content/site';
 import { ACTIONS } from '../content/actions';
 import { financeurs } from '../content/structures';
-import { Opening, Part, TextLink } from '../components/calm';
+import { Opening, Part, PhoneLine, TextLink } from '../components/calm';
 import { Seo, breadcrumbLd } from '../lib/head';
 
 // Le dossier de financement répond à une question : « Puis-je financer cette intervenante ? »
@@ -27,7 +27,18 @@ export default function DossierPage() {
         crumbs={crumbs}
         title="Dossier de financement"
         lead="Pour la structure qui monte le dossier, et pour le financeur qui l’instruit : l’intervenante, les actions, l’évaluation et les informations administratives."
-      />
+      >
+        <TextLink light to={SITE.plaquette} download>Télécharger la plaquette (PDF)</TextLink>
+      </Opening>
+
+      <section className="border-b border-sand-dark bg-cream">
+        <dl className="container-site grid max-w-[44rem] gap-x-6 gap-y-3 py-8 text-[0.98rem] sm:grid-cols-[11rem_1fr]">
+          <dt className="text-ink-muted">Intervenante</dt><dd className="text-ink">Véronique Carrié, {CREDENTIALS.certifications.charAt(0).toLowerCase() + CREDENTIALS.certifications.slice(1)}</dd>
+          <dt className="text-ink-muted">Référentiel</dt><dd className="text-ink">Compétences psychosociales, Santé publique France</dd>
+          <dt className="text-ink-muted">Évaluation</dt><dd className="text-ink">Avant et après (PSS-10, WEMWBS), émargement, bilan écrit</dd>
+          <dt className="text-ink-muted">SIRET</dt><dd className="text-ink tabular-nums">{LEGAL.siret}</dd>
+        </dl>
+      </section>
 
       <Part title="L’intervenante">
         <p><strong className="font-semibold text-ink">Véronique Carrié.</strong> {CREDENTIALS.short}. {CREDENTIALS.certifications}. {CREDENTIALS.health}. {CREDENTIALS.references}.</p>
@@ -66,11 +77,13 @@ export default function DossierPage() {
         </dl>
       </Part>
 
-      <Part title="Documents">
-        <p className="flex flex-col gap-3">
+      <Part title="Documents et questions">
+        <p className="flex flex-col gap-1">
           <TextLink to={SITE.plaquette} download>Télécharger la plaquette (PDF)</TextLink>
           <TextLink to="/contact?profil=structure&offre=fiche-action">Recevoir une fiche-action type par e-mail</TextLink>
+          <TextLink to={FIRST_MEETING.structure.href}>Planifier un échange de 20 min</TextLink>
         </p>
+        <p className="mt-6">Une question sur un dossier en cours : <PhoneLine /></p>
       </Part>
     </>
   );

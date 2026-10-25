@@ -11,7 +11,7 @@ import { Seo } from '../lib/head';
 function Door({ to, photo, title, text }: { to: string; photo: Photo; title: string; text: string }) {
   return (
     <Link to={to} className="group block">
-      <img src={photo.src} alt={photo.alt} width={1200} height={800} loading="lazy" className="aspect-[3/2] w-full rounded-2xl object-cover" />
+      <img src={photo.src} alt={photo.alt} width={1200} height={800} loading="lazy" className="aspect-[16/9] w-full rounded-2xl object-cover" />
       <span className="mt-5 flex items-center gap-2 font-heading text-[1.6rem] leading-tight text-ink">
         {title} <ArrowRight aria-hidden className="h-5 w-5 transition-transform group-hover:translate-x-1" />
       </span>

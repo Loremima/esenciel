@@ -37,13 +37,13 @@ export default function StructuresPage() {
               key={a.offre.slug}
               to={a.offre.path}
               title={a.offre.title}
-              detail={`${a.type} · ${a.publicCible} · ${a.format}`}
+              detail={<>{a.type} · {a.publicCible} · {a.format}<span className="mt-1 block text-ink sm:hidden">{a.prix}</span></>}
               aside={<span className="hidden text-[0.98rem] sm:block">{a.prix.replace(' la conférence', '').replace(' la séance de 2 h', ' / séance')}</span>}
             />
           ))}
         </ul>
         <p className="mt-5 text-[0.95rem] text-ink-muted">
-          Repères : {REPERES_PRIX.conference}, {REPERES_PRIX.seance}, {REPERES_PRIX.journee}, plus {REPERES_PRIX.km}. Devis précis après notre échange. TVA non applicable.
+          Prix repères, plus {REPERES_PRIX.km} de déplacement. Devis précis après notre échange. TVA non applicable.
         </p>
       </Part>
 
@@ -52,8 +52,11 @@ export default function StructuresPage() {
         <p className="mt-8 border-l-2 border-gold pl-4 text-ink">Vous fournissez une salle, un public et une date. Je m’occupe du reste.</p>
       </Part>
 
-      <Part title="Pour votre financeur">
-        <p>{CREDENTIALS.short}. {CREDENTIALS.certifications}. {CREDENTIALS.health}.</p>
+      <Part title="Votre intervenante">
+        <div className="mb-5 flex items-center gap-5">
+          <img src="/images/veronique-480.webp" alt="Portrait de Véronique Carrié" width={480} height={600} loading="lazy" className="h-[120px] w-[96px] shrink-0 rounded-arch object-cover" />
+          <p><strong className="font-semibold text-ink">Véronique Carrié.</strong> {CREDENTIALS.short}. {CREDENTIALS.certifications}. {CREDENTIALS.health}.</p>
+        </div>
         <p className="mt-3">Chaque action est reliée aux compétences psychosociales et évaluée avant et après. Tout ce qu’un financeur vérifie est réuni sur une page.</p>
         <p className="mt-5"><TextLink to="/structures/dossier">Le dossier de financement</TextLink></p>
       </Part>

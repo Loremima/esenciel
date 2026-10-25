@@ -26,7 +26,7 @@ export default function Footer() {
         </ul>
       </div>
       <div className="border-t border-cream/10">
-        <div className="container-site flex flex-col gap-3 py-6 text-sm text-cream/55 md:flex-row md:items-center md:justify-between">
+        <div className="container-site flex flex-col gap-3 py-6 text-sm text-cream/70 md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} EsenCiel, Véronique Carrié</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             <li><Link className={a} to="/mentions-legales">Mentions légales</Link></li>
