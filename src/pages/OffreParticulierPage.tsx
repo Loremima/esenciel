@@ -4,6 +4,7 @@ import { Button, CtaBand, FactList, PageHero, Section } from '../components/ui';
 import { CREDENTIALS } from '../content/site';
 import { particuliers, type OffreParticulier } from '../content/offres';
 import { Seo, breadcrumbLd, serviceLd } from '../lib/head';
+import { NotifyForm } from '../components/NotifyForm';
 
 export default function OffreParticulierPage({ offre }: { offre: OffreParticulier }) {
   const crumbs = [
@@ -30,7 +31,7 @@ export default function OffreParticulierPage({ offre }: { offre: OffreParticulie
         lead={offre.short}
         aside={<img src={offre.image.src} alt={offre.image.alt} width={600} height={800} className="mx-auto aspect-[4/5] w-full max-w-sm rounded-arch object-cover shadow-soft" />}
       >
-        <Button href={offre.booking} arrow>{offre.bookingLabel}</Button>
+        <Button href={online ? offre.booking : '#dates'} arrow>{offre.bookingLabel}</Button>
         {offre.info && <Button href={offre.info.href} variant="secondary">{offre.info.label}</Button>}
       </PageHero>
 
@@ -67,12 +68,16 @@ export default function OffreParticulierPage({ offre }: { offre: OffreParticulie
               <h2 className="mb-4 font-heading text-2xl">Infos pratiques</h2>
               <FactList facts={facts} />
             </div>
-            <div className="rounded-2xl bg-night p-6 text-cream">
+            <div id="dates" className="scroll-mt-28 rounded-2xl bg-night p-6 text-cream">
               <p className="font-heading text-xl">{online ? 'Réserver' : 'Prochaines dates'}</p>
               <p className="mt-2 text-cream/80">
-                {online ? 'La réservation se fait en ligne, en quelques clics.' : 'Les dates s’ouvrent selon les demandes : laissez-moi un message, je vous préviens.'}
+                {online ? 'La réservation se fait en ligne, en quelques clics.' : 'Laissez votre e-mail : vous êtes prévenu en premier à l’ouverture des inscriptions.'}
               </p>
-              <Button href={offre.booking} variant="light" className="mt-5 w-full" arrow>{offre.bookingLabel}</Button>
+              {online ? (
+                <Button href={offre.booking} variant="light" className="mt-5 w-full" arrow>{offre.bookingLabel}</Button>
+              ) : (
+                <div className="mt-5"><NotifyForm offre={offre.slug} title={offre.title.replace(/[«»]/g, '').trim()} /></div>
+              )}
               {offre.followUp && (
                 <a href={offre.followUp.href} target="_blank" rel="noopener noreferrer" className="mt-4 block text-center text-sm text-cream/80 underline underline-offset-4 hover:text-cream">
                   {offre.followUp.label}

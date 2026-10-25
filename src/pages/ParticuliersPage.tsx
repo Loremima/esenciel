@@ -35,7 +35,7 @@ function GroupRow({ o }: { o: OffreParticulier }) {
         {...(o.booking.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         className="shrink-0 rounded-full bg-night px-4 py-3 text-sm font-semibold text-cream hover:bg-night/90"
       >
-        {o.booking.startsWith('http') ? 'Réserver' : 'Les dates'}
+        {o.booking.startsWith('http') ? 'Réserver' : 'Me prévenir'}
       </a>
     </li>
   );
