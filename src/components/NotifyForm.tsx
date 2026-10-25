@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 /** Liste d'attente d'un cycle : prénom + e-mail, envoyé au formulaire de contact. */
-export function NotifyForm({ offre, title }: { offre: string; title: string }) {
+export function NotifyForm({ offre, title, message }: { offre: string; title: string; message?: string }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -13,7 +13,7 @@ export function NotifyForm({ offre, title }: { offre: string; title: string }) {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, profil: 'particulier', offre, message: `Liste d’attente : prévenez-moi des prochaines dates du cycle ${title}.` }),
+        body: JSON.stringify({ ...data, profil: 'particulier', offre, message: message ?? `Liste d’attente : prévenez-moi des prochaines dates du cycle ${title}.` }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus('sent');
