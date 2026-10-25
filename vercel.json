@@ -78,12 +78,17 @@
     },
     {
       "source": "/conferences-evenements",
-      "destination": "/structures#actions",
+      "destination": "/structures",
       "permanent": true
     },
     {
       "source": "/conferences",
-      "destination": "/structures#actions",
+      "destination": "/structures",
+      "permanent": false
+    },
+    {
+      "source": "/conferences/:slug",
+      "destination": "/structures/:slug",
       "permanent": false
     },
     {

@@ -16,12 +16,14 @@ export const STATIC_ROUTES: string[] = [
   '/cgv',
 ];
 
-// Pages qui s'ouvrent sur une vidéo : l'en-tête y est transparent tant qu'on n'a pas défilé.
+// Pages qui s'ouvrent sur fond nuit : l'en-tête y est transparent tant qu'on n'a pas défilé.
 export const VIDEO_HERO_ROUTES = new Set<string>([
   '/',
   '/structures',
+  '/structures/dossier',
   ...programmes.map((o) => o.path),
   ...conferences.map((o) => o.path),
   '/particuliers',
+  ...particuliers.map((o) => o.path),
   '/qui-suis-je',
 ]);

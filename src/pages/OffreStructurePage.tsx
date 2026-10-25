@@ -1,24 +1,21 @@
-import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ClipboardCheck, Download, Landmark, Puzzle } from 'lucide-react';
-import { SITE } from '../content/site';
-import { ALL_STRUCTURE_OFFERS, type OffreStructure } from '../content/offres';
-import { BookingSection, HeroVideo, IconSquare, Title } from '../components/funnel';
-import { AUDIENCE_MEDIA, MEDIA } from '../content/media';
+import { FIRST_MEETING } from '../content/site';
+import type { OffreStructure } from '../content/offres';
+import { LIVRABLES, actionOf } from '../content/actions';
+import { MainButton, Opening, Part, PhoneLine, Steps, TextLink } from '../components/calm';
 import { Seo, breadcrumbLd, serviceLd } from '../lib/head';
 
+// Une fiche action répond à une question : « Est-ce la bonne action pour mon public ? »
+
 export default function OffreStructurePage({ offre }: { offre: OffreStructure }) {
-  const isConf = offre.kind === 'conference';
-  const parent = { name: 'Structures', path: '/structures' };
   const name = offre.title.replace(/[«»]/g, '').trim();
-  const crumbs = [{ name: 'Accueil', path: '/' }, parent, { name, path: offre.path }];
-  const media = AUDIENCE_MEDIA[offre.slug]?.media ?? MEDIA.ciel;
-  const fact = (label: string) => offre.facts.find((f) => f.label === label)?.value;
-  const dossier = [
-    { icon: Puzzle, label: 'Compétences psychosociales', value: fact('Compétences psychosociales') },
-    { icon: ClipboardCheck, label: 'Évaluation', value: fact('Évaluation') },
-    { icon: Landmark, label: 'Financements', value: fact('Financements possibles') },
+  const crumbs = [
+    { name: 'Accueil', path: '/' },
+    { name: 'Structures', path: '/structures' },
+    { name, path: offre.path },
   ];
-  const others = ALL_STRUCTURE_OFFERS.filter((o) => o.slug !== offre.slug && o.kind === offre.kind);
+  const a = actionOf(offre.slug);
+  const cps = offre.facts.find((f) => f.label === 'Compétences psychosociales')?.value;
+  const rdv = FIRST_MEETING.structure.href;
 
   return (
     <>
@@ -32,118 +29,61 @@ export default function OffreStructurePage({ offre }: { offre: OffreStructure })
         ]}
       />
 
-      <HeroVideo media={media} eyebrow={offre.eyebrow} title={offre.title} lead={offre.promise} />
+      <Opening crumbs={crumbs} title={offre.title} lead={offre.promise}>
+        <MainButton to={rdv}>Planifier un échange de 20 min</MainButton>
+      </Opening>
 
-      {/* En bref */}
-      <section className="border-b border-sand-dark bg-cream">
-        <dl className="container-site grid max-w-3xl grid-cols-3 gap-2 py-8 text-center">
-          {offre.stats.map((s) => (
-            <div key={s.label} className="flex flex-col-reverse items-center">
-              <dt className="mt-1 text-[0.8rem] leading-tight text-ink-muted md:text-sm">{s.label}</dt>
-              <dd className="font-heading text-[1.6rem] leading-none text-gold-dark md:text-4xl">{s.value}</dd>
-            </div>
+      {a && (
+        <section className="border-b border-sand-dark bg-cream">
+          <dl className="container-site grid max-w-[44rem] gap-4 py-8 text-[0.98rem] sm:grid-cols-3">
+            <div><dt className="text-ink-muted">Public</dt><dd className="mt-1 text-ink">{a.publicCible}</dd></div>
+            <div><dt className="text-ink-muted">Format</dt><dd className="mt-1 text-ink">{a.type}, {a.format}</dd></div>
+            <div><dt className="text-ink-muted">Repère de prix</dt><dd className="mt-1 text-ink">{a.prix}</dd></div>
+          </dl>
+        </section>
+      )}
+
+      <Part title="Ce que les participants y gagnent">
+        <ul className="space-y-3">
+          {offre.objectifs.slice(0, 3).map((o) => (
+            <li key={o} className="border-l-2 border-gold pl-4">{o}</li>
           ))}
-        </dl>
-      </section>
+        </ul>
+      </Part>
 
-      {/* Ce que le public y gagne */}
-      <section className="bg-cream py-16 md:py-20">
-        <div className="container-site">
-          <Title>{isConf ? 'Ce que votre public en retire' : 'Ce que les participants y gagnent'}</Title>
-          <ul className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-3 md:mt-12 md:grid-cols-4 md:gap-5">
-            {offre.gains.map((g) => (
-              <li key={g.label} className="flex flex-col items-center gap-4 rounded-3xl bg-cream-light px-3 py-6 text-center">
-                <IconSquare icon={g.icon} />
-                <span className="max-w-[9rem] text-[0.95rem] font-semibold leading-snug">{g.label}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Déroulé */}
-      <section className="bg-sand py-16 md:py-20">
-        <div className="container-site">
-          <Title>{isConf ? 'Le déroulé' : 'Les séances'}</Title>
-          <ol className="mx-auto mt-8 flex max-w-xl flex-col gap-2.5">
-            {offre.deroule.map((s, i) => (
-              <li key={s.title} className="flex items-center gap-4 rounded-2xl bg-cream-light px-4 py-3.5 text-left">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-night font-heading text-cream">{i + 1}</span>
-                <span className="flex-1">
-                  <span className="block font-medium leading-snug">{s.title}</span>
-                  {s.text && <span className="block text-sm text-ink-muted">{s.text}</span>}
-                </span>
-              </li>
-            ))}
-          </ol>
-          {offre.note && <p className="mx-auto mt-6 max-w-xl text-center text-sm text-ink-muted">{offre.note}</p>}
-        </div>
-      </section>
-
-      {offre.declinaisons && (
-        <section className="bg-cream py-16 md:py-20">
-          <div className="container-site">
-            <Title>Adaptée à votre public</Title>
-            <ul className="mx-auto mt-8 grid max-w-4xl gap-3 md:grid-cols-3 md:gap-5">
+      <Part title="Le déroulé">
+        <Steps items={offre.deroule} />
+        {offre.declinaisons && (
+          <>
+            <p className="mt-8 font-medium text-ink">Une version pour chaque public</p>
+            <dl className="mt-3 space-y-2">
               {offre.declinaisons.map((d) => (
-                <li key={d.label} className="rounded-3xl border border-sand-dark bg-cream-light p-6 text-center">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">{d.label}</p>
-                  <p className="mt-2 text-ink-soft">{d.value}</p>
-                </li>
+                <div key={d.label}><dt className="inline font-medium text-ink">{d.label} : </dt><dd className="inline">{d.value}</dd></div>
               ))}
-            </ul>
-          </div>
-        </section>
-      )}
+            </dl>
+          </>
+        )}
+        {offre.note && <p className="mt-8 text-[0.98rem] text-ink-muted">{offre.note}</p>}
+      </Part>
 
-      {/* Pour le dossier de financement */}
-      <section className={`${offre.declinaisons ? 'bg-sand' : 'bg-cream'} py-16 md:py-20`}>
-        <div className="container-site">
-          <Title>Pour votre dossier</Title>
-          <ul className="mx-auto mt-8 flex max-w-2xl flex-col gap-3">
-            {dossier.filter((d) => d.value).map((d) => (
-              <li key={d.label} className="flex items-start gap-4 rounded-3xl border border-sand-dark bg-cream-light p-5 text-left">
-                <IconSquare icon={d.icon} soft />
-                <span>
-                  <span className="block font-semibold">{d.label}</span>
-                  <span className="mt-0.5 block text-[0.95rem] text-ink-muted">{d.value}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-center text-sm text-ink-muted">{fact('Tarif')}</p>
+      <Part title="Évaluation et documents remis">
+        <ul className="list-disc space-y-2 pl-5">
+          {LIVRABLES.map((l) => <li key={l}>{l}</li>)}
+        </ul>
+        {cps && <p className="mt-5">Compétences psychosociales travaillées : {cps.charAt(0).toLowerCase() + cps.slice(1)}.</p>}
+      </Part>
+
+      <Part id="rdv" title="Cette action vous intéresse ?">
+        <p>On en parle 20 minutes : votre public, vos dates, votre financement. Je vous envoie ensuite le devis et la fiche-action.</p>
+        <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+          <MainButton to={rdv}>Planifier un échange de 20 min</MainButton>
+          <PhoneLine />
         </div>
-      </section>
-
-      {others.length > 0 && (
-        <section className="bg-cream pb-6 pt-14">
-          <div className="container-site flex flex-col items-center gap-3 text-center">
-            <p className="text-sm text-ink-muted">{isConf ? 'L’autre conférence' : 'Les autres programmes'}</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {others.map((o) => (
-                <Link key={o.slug} to={o.path} className="inline-flex items-center gap-2 rounded-full border border-sand-dark bg-cream-light px-5 py-2.5 text-sm font-medium hover:border-ink/40">
-                  {isConf ? o.title.replace(/[«»]/g, '').trim() : AUDIENCE_MEDIA[o.slug]?.label ?? o.title} <ArrowRight aria-hidden className="h-4 w-4" />
-                </Link>
-              ))}
-            </div>
-            <Link to="/structures#actions" className="mt-2 inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink">
-              <ArrowLeft aria-hidden className="h-4 w-4" /> Toutes les actions
-            </Link>
-          </div>
-        </section>
-      )}
-
-      <BookingSection lock initial="structure" title={<>Parlons de <em>votre projet</em></>} />
-
-      {/* Barre d'action sur mobile */}
-      <div className="sticky bottom-0 z-30 flex gap-2 border-t border-sand-dark bg-cream/95 p-3 backdrop-blur md:hidden">
-        <a href={SITE.plaquette} download className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-night/80 px-4 py-3.5 text-sm font-semibold">
-          <Download aria-hidden className="h-4 w-4" /> Plaquette
-        </a>
-        <a href="#rdv" className="inline-flex flex-[1.6] items-center justify-center rounded-full bg-night px-4 py-3.5 text-sm font-semibold text-cream">
-          Prendre rendez-vous
-        </a>
-      </div>
+        <p className="mt-6 flex flex-col gap-3 sm:flex-row sm:gap-8">
+          <TextLink to={`/contact?profil=structure&offre=${offre.slug}`}>Recevoir la fiche-action par e-mail</TextLink>
+          <TextLink to="/structures#actions">Toutes les actions</TextLink>
+        </p>
+      </Part>
     </>
   );
 }

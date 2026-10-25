@@ -6,7 +6,8 @@ export const SITE = {
   url: 'https://esenciel.net',
   owner: 'Véronique Carrié',
   tagline: 'Prendre soin de son cerveau, à chaque âge de la vie',
-  specialty: "Spécialiste de l'avancée en âge : seniors, aidants et professionnels qui les accompagnent",
+  // La phrase qui nomme le marché, sous le slogan.
+  market: 'Conférences et ateliers de prévention pour les seniors, les aidants et les structures qui les accompagnent',
   zone: 'Hérault et Aveyron',
   phone: '06 25 13 72 50',
   phoneHref: 'tel:+33625137250',
@@ -19,6 +20,8 @@ export const SITE = {
     tenantId: '4f7bfab4-3f73-436e-979c-6728916e6620',
     widgetKey: 'pk_6cf7314ddd537ecb_IZ3GN_zYqXLp2BOoiq6Mv1OYJkpgHTQSewsXhzCQbDQ',
   },
+  // La séance découverte des programmes de pleine conscience : réservable même quand aucun cycle n'a de date.
+  decouverte: 'https://esenciel.sutempo.com/?service=ad91cf30-bb05-5201-8a0b-cf168c366224',
   linkedin: 'https://fr.linkedin.com/in/v%C3%A9ronique-carri%C3%A9',
   plaquette: '/docs/plaquette-esenciel-structures.pdf',
   ogImage: '/og-image.jpg',
@@ -68,36 +71,9 @@ export const LEGAL = {
   updated: '23 octobre 2026',
 };
 
-// Le menu de chaque espace (voir src/lib/espace.ts).
-export const NAV = {
-  commun: [
-    { to: '/structures', label: 'Structures' },
-    { to: '/particuliers', label: 'Pour vous ou un proche' },
-    { to: '/qui-suis-je', label: 'Qui suis-je' },
-  ],
-  structures: [
-    { to: '/structures', label: 'L’offre' },
-    { to: '/structures#actions', label: 'Les actions' },
-    { to: '/structures/dossier', label: 'Dossier de financement' },
-    { to: '/qui-suis-je', label: 'Qui suis-je' },
-  ],
-  particuliers: [
-    { to: '/particuliers', label: 'Par où commencer' },
-    { to: '/particuliers#gratuits', label: 'Ateliers gratuits' },
-    { to: '/particuliers#formules', label: 'Tarifs' },
-    { to: '/qui-suis-je', label: 'Qui suis-je' },
-  ],
-};
-
-// Le lien pour passer d'un espace à l'autre.
-export const SWITCH = {
-  structures: { label: 'Vous êtes un particulier ?', to: '/particuliers' },
-  particuliers: { label: 'Vous êtes une structure ?', to: '/structures' },
-};
-
-// L'appel à l'action de l'en-tête, selon l'espace.
-export const HEADER_CTA = {
-  commun: { label: 'Me contacter', to: '/contact' },
-  structures: { label: 'Échange de 20 min', to: '/structures#rdv' },
-  particuliers: { label: 'Appelez-moi', to: 'tel:+33625137250' },
-};
+// Le menu, le même sur tout le site. Le bouton Contact s'ajoute à droite.
+export const NAV = [
+  { to: '/structures', label: 'Structures' },
+  { to: '/particuliers', label: 'Pour vous ou un proche' },
+  { to: '/qui-suis-je', label: 'Qui suis-je' },
+];

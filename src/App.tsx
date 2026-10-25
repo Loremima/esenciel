@@ -9,7 +9,6 @@ import HomePage from './pages/HomePage';
 import StructuresPage from './pages/StructuresPage';
 import OffreStructurePage from './pages/OffreStructurePage';
 import DossierPage from './pages/DossierPage';
-import { espaceOf } from './lib/espace';
 import ParticuliersPage from './pages/ParticuliersPage';
 import OffreParticulierPage from './pages/OffreParticulierPage';
 import AboutPage from './pages/AboutPage';
@@ -49,10 +48,10 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean
   }
 }
 
-// La musique d'ambiance reste côté particuliers : côté structures, elle ferait moins sérieux.
+// La musique d'ambiance : seulement sur l'accueil et côté particuliers.
 function AmbientMusic() {
   const { pathname } = useLocation();
-  return espaceOf(pathname) === 'structures' ? null : <MusicPlayer />;
+  return pathname === '/' || pathname.startsWith('/particuliers') ? <MusicPlayer /> : null;
 }
 
 export default function App() {
@@ -69,7 +68,7 @@ export default function App() {
               <Route key={o.path} path={o.path} element={<OffreStructurePage offre={o} />} />
             ))}
             <Route path="/structures/dossier" element={<DossierPage />} />
-            <Route path="/conferences" element={<Navigate to="/structures#actions" replace />} />
+            <Route path="/conferences" element={<Navigate to="/structures" replace />} />
             {conferences.map((o) => (
               <Route key={o.path} path={o.path} element={<OffreStructurePage offre={o} />} />
             ))}

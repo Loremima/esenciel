@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { HEADER_CTA, NAV, SWITCH } from '../content/site';
-import { espaceOf } from '../lib/espace';
+import { NAV } from '../content/site';
 import { VIDEO_HERO_ROUTES } from '../routes';
 
 export function Logo({ light = false }: { light?: boolean }) {
@@ -27,18 +26,9 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname, hash } = useLocation();
-  const espace = espaceOf(pathname);
-  const nav = NAV[espace];
-  const cta = HEADER_CTA[espace];
-  const sw = espace === 'commun' ? null : SWITCH[espace];
-  const isActive = (to: string) => {
-    const [p, h] = to.split('#');
-    return h ? pathname === p && hash === `#${h}` : pathname === p && !hash;
-  };
-  const CtaLink = ({ className }: { className: string }) =>
-    cta.to.startsWith('tel:') || cta.to.includes('#')
-      ? <a href={cta.to} className={className}>{cta.label}</a>
-      : <Link to={cta.to} className={className}>{cta.label}</Link>;
+  // Une rubrique reste active sur toutes ses pages (une fiche action allume « Structures »).
+  const isActive = (to: string) => pathname === to || pathname.startsWith(`${to}/`);
+  const CtaLink = ({ className }: { className: string }) => <Link to="/contact" className={className}>Contact</Link>;
 
   useEffect(() => setOpen(false), [pathname, hash]);
 
@@ -68,24 +58,17 @@ export default function Header() {
         Aller au contenu
       </a>
       <div className="container-site flex h-[4.5rem] items-center justify-between gap-6">
-        <span className="flex items-center gap-4">
-          <Link to="/" title="Accueil">
-            <Logo light={overlay} />
-          </Link>
-          {espace !== 'commun' && (
-            <span className={`hidden rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] lg:inline-block ${overlay ? 'border-cream/40 text-cream/90' : 'border-gold/50 text-gold-dark'}`}>
-              {espace === 'structures' ? 'Espace structures' : 'Pour vous ou un proche'}
-            </span>
-          )}
-        </span>
+        <Link to="/" title="Accueil">
+          <Logo light={overlay} />
+        </Link>
 
         <nav aria-label="Navigation principale" className="hidden items-center gap-6 md:flex">
-          {nav.map((l) => (
+          {NAV.map((l) => (
             <Link key={l.to} to={l.to} className={linkCls(isActive(l.to))}>
               {l.label}
             </Link>
           ))}
-          <CtaLink className={`rounded-full px-5 py-2.5 text-[0.95rem] font-semibold transition-colors ${overlay ? 'bg-cream text-night hover:bg-cream-light' : 'bg-night text-cream hover:bg-night/90'}`} />
+          <CtaLink className={`rounded-full border px-5 py-2 text-[0.95rem] font-medium transition-colors ${overlay ? 'border-cream/50 text-cream hover:bg-cream/10' : 'border-ink/40 text-ink hover:bg-night hover:text-cream'}`} />
         </nav>
 
         <button
@@ -102,7 +85,7 @@ export default function Header() {
 
       <div id="menu-mobile" hidden={!open} className="border-t border-sand-dark/80 bg-cream md:hidden">
         <nav aria-label="Navigation mobile" className="container-site flex flex-col py-4">
-          {nav.map((l) => (
+          {NAV.map((l) => (
             <Link
               key={l.to}
               to={l.to}
@@ -111,12 +94,7 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
-          <CtaLink className="mt-5 rounded-full bg-night px-5 py-4 text-center font-semibold text-cream" />
-          {sw && (
-            <Link to={sw.to} className="mt-4 py-2 text-center text-ink-muted underline underline-offset-4">
-              {sw.label}
-            </Link>
-          )}
+          <CtaLink className="mt-5 rounded-full border border-ink/40 px-5 py-4 text-center font-medium text-ink" />
         </nav>
       </div>
     </header>

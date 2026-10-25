@@ -56,7 +56,7 @@ const FINANCEMENTS_CONF = 'Budget propre de la structure, CFPPA (actions collect
 export const conferences: OffreStructure[] = [
   {
     slug: 'quand-mon-cerveau-n-en-fait-qu-a-sa-tete',
-    path: '/conferences/quand-mon-cerveau-n-en-fait-qu-a-sa-tete',
+    path: '/structures/quand-mon-cerveau-n-en-fait-qu-a-sa-tete',
     kind: 'conference',
     eyebrow: 'Conférence interactive',
     title: '« Quand mon cerveau n’en fait qu’à sa tête »',
@@ -106,7 +106,7 @@ export const conferences: OffreStructure[] = [
   },
   {
     slug: 'qui-pilote-ma-vie',
-    path: '/conferences/qui-pilote-ma-vie',
+    path: '/structures/qui-pilote-ma-vie',
     kind: 'conference',
     eyebrow: 'Conférence interactive',
     title: '« Qui pilote ma vie : ma conscience ou mes automatismes ? »',
@@ -318,6 +318,8 @@ export type OffreParticulier = {
   price: string;
   booking: string;
   bookingLabel: string;
+  /** Cycle ou atelier en groupe : on propose aussi d'être prévenu des prochaines dates. */
+  waitlist?: boolean;
   followUp?: { label: string; href: string };
   info?: { label: string; href: string };
   image: { src: string; alt: string };
@@ -327,8 +329,6 @@ export type OffreParticulier = {
 
 // Lien direct vers une prestation sutempo (sans effet tant que sutempo ne le gère pas : la page s'ouvre simplement).
 const S = (id: string) => `${SITE.booking}/?service=${id}`;
-// Cycles en groupe : sur demande tant qu'aucune date n'est ouverte sur sutempo.
-const D = (slug: string) => `/particuliers/${slug}#dates`;
 
 export const particuliers: OffreParticulier[] = [
   {
@@ -352,8 +352,9 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel' },
     ],
     price: '330 € le cycle',
-    booking: D('gestion-du-stress'),
-    bookingLabel: 'Être prévenu des dates',
+    booking: SITE.decouverte,
+    bookingLabel: 'Réserver une séance découverte',
+    waitlist: true,
     image: { src: '/images/vague.webp', alt: 'Une vague maîtrisée par une surfeuse' },
     seo: {
       title: 'Cycle gestion du stress par la pleine conscience (MBSR) | Véronique Carrié',
@@ -381,8 +382,9 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel ou à distance' },
     ],
     price: '330 € le cycle',
-    booking: D('prevention-rechute-depressive'),
-    bookingLabel: 'Être prévenu des dates',
+    booking: SITE.decouverte,
+    bookingLabel: 'Réserver une séance découverte',
+    waitlist: true,
     image: { src: '/images/lever-soleil.webp', alt: 'Lever de soleil sur une étendue d’eau calme' },
     note: 'Ce cycle est une démarche de prévention. Il ne remplace pas un suivi médical : il se fait en dehors des périodes de crise et en accord avec votre médecin si vous êtes suivi.',
     seo: {
@@ -411,8 +413,9 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel' },
     ],
     price: '420 € le cycle',
-    booking: D('bien-vivre-son-avancee-en-age'),
-    bookingLabel: 'Être prévenu des dates',
+    booking: SITE.decouverte,
+    bookingLabel: 'Réserver une séance découverte',
+    waitlist: true,
     image: { src: '/images/arbre.webp', alt: 'Un arbre aux racines profondes' },
     seo: {
       title: 'Cycle MBCAS « Bien vivre son avancée en âge » pour seniors | Véronique Carrié',
@@ -500,8 +503,9 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel' },
     ],
     price: '70 € par personne',
-    booking: D('jeu-du-tao'),
-    bookingLabel: 'Être prévenu des dates',
+    booking: S('41bb978a-aba7-597b-bb24-f2bef249dca5'),
+    bookingLabel: 'Voir les dates et réserver',
+    waitlist: true,
     image: { src: '/images/jeu-du-tao.webp', alt: 'Plateau du Jeu du Tao' },
     seo: {
       title: 'Jeu du Tao santé et mieux-être en petit groupe | Véronique Carrié',
