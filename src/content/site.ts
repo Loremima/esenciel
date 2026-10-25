@@ -13,6 +13,8 @@ export const SITE = {
   email: 'esenciel.contact@gmail.com',
   // Agenda de réservation en ligne : la seule adresse à changer pour passer sur un autre outil.
   booking: 'https://esenciel.sutempo.com',
+  // Le module de réservation sutempo, affiché dans le site (offre Pro).
+  bookingFrame: 'https://sutempo.com/widget/frame?tenant=4f7bfab4-3f73-436e-979c-6728916e6620&locale=fr',
   linkedin: 'https://fr.linkedin.com/in/v%C3%A9ronique-carri%C3%A9',
   plaquette: '/docs/plaquette-esenciel-structures.pdf',
   ogImage: '/og-image.jpg',

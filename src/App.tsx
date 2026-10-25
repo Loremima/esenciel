@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MusicPlayer from './components/MusicPlayer';
+import BookingDialog from './components/BookingDialog';
 import { Button } from './components/ui';
 import HomePage from './pages/HomePage';
 import StructuresPage from './pages/StructuresPage';
@@ -79,6 +80,7 @@ export default function App() {
       </main>
       <Footer />
       <MusicPlayer />
+      <BookingDialog />
     </>
   );
 }
