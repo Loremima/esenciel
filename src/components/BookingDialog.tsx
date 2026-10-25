@@ -118,7 +118,7 @@ export default function BookingDialog() {
             <X aria-hidden className="h-5 w-5" />
           </button>
         </div>
-        {open && widgetKey && !failed && <div key={open.key} ref={slot} style={WIDGET_TOKENS} className="min-h-[60vh] flex-1 overflow-y-auto px-5 py-6 md:px-8" />}
+        {open && widgetKey && !failed && <div key={open.key} ref={slot} style={WIDGET_TOKENS} className="booking-slot min-h-[60vh] flex-1 overflow-y-auto px-5 py-6 md:px-8" />}
         {open && (!widgetKey || failed) && <iframe src={frame.toString()} title="Réservation en ligne" allow="payment" className="min-h-[70vh] w-full flex-1 border-0" />}
       </div>
     </dialog>
