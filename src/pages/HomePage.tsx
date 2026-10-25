@@ -1,221 +1,124 @@
-import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import HeroSection from '../components/HeroSection';
-import TestimonialsSection from '../components/TestimonialsSection';
-import ServicesPreview from '../components/ServicesPreview';
-import VideoCTA from '../components/VideoCTA';
+import { CREDENTIALS, FIRST_MEETING, SITE } from '../content/site';
+import { MEDIA } from '../content/media';
+import { methode } from '../content/structures';
+import { Band, Btn, Checks, CtaBand, Hero, Kicker, TextLink } from '../components/calm';
+import { ColorTest } from '../components/ColorTest';
+import { Seo } from '../lib/head';
 
-const HomePage: React.FC = () => {
-  useEffect(() => {
-    // Animation au scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fadeInUp');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+// L'accueil, la page vitrine : un titre court, les preuves, deux portes, la méthode, Véronique.
 
-    const elements = document.querySelectorAll('.scroll-animate');
-    elements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
-  }, []);
-
+function Signature() {
   return (
-    <div className="homepage">
-      <HeroSection />
+    <Link to="/qui-suis-je" className="group inline-flex items-center gap-3">
+      <img src="/images/veronique-480.webp" alt="" width={480} height={600} className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-white/30" />
+      <span className="leading-tight">
+        <span className="block font-heading text-[1.15rem] text-cream group-hover:text-gold-light">Véronique Carrié</span>
+        <span className="block text-[0.92rem] text-cream/75">Instructrice certifiée MBSR, MBCT et MBCAS</span>
+      </span>
+    </Link>
+  );
+}
 
-      {/* Welcome Section */}
-      <section className="section welcome-section">
-        <div className="container">
-          <div className="welcome-content">
-            <div className="welcome-text">
-              <h2 className="welcome-title">Bienvenue sur EsenCiel 🌅</h2>
-              <p className="welcome-description">
-                Un espace dédié à la pleine conscience au service de votre bien-être authentique.
-              </p>
-              <p className="welcome-description">
-                Ici, je vous propose des accompagnements et des ressources pour vous aider à cultiver l'équilibre, l'harmonie et la sérénité au quotidien.
-              </p>
-              <p className="welcome-description">
-                Prenez le temps de découvrir, de vous recentrer et d'avancer à votre rythme, afin de vous rapprocher d'un mode de vie plus conscient et plus épanouissant.
-              </p>
-              <Link to="/qui-suis-je" className="btn btn-outline">
-                Mon approche <ArrowRight size={16} />
-              </Link>
-            </div>
-            <div className="welcome-video">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="zen-video"
-              >
-                <source src="/hero_video.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-      </section>
+function Door({ to, dark, kicker, title, points, note, cta }: { to: string; dark?: boolean; kicker: string; title: string; points: string[]; note: string; cta: string }) {
+  return (
+    <Link to={to} className={`group flex flex-col rounded-[2rem] p-7 transition-transform hover:-translate-y-1 md:p-10 ${dark ? 'glow-night text-cream' : 'glass-light text-ink'}`}>
+      <span className={`text-[0.8rem] font-semibold uppercase tracking-[0.16em] ${dark ? 'text-gold-light' : 'text-gold-dark'}`}>{kicker}</span>
+      <span className={`mt-4 font-heading font-light leading-[1.08] [font-size:clamp(1.9rem,3vw,2.5rem)] ${dark ? 'text-cream' : 'text-ink'}`}>{title}</span>
+      <span className={`mt-6 flex-1 text-[1.06rem] ${dark ? 'text-cream/85' : 'text-ink-soft'}`}><Checks light={dark} items={points} /></span>
+      <span className={`mt-8 flex flex-wrap items-center justify-between gap-4 border-t pt-6 ${dark ? 'border-cream/15' : 'border-sand-dark'}`}>
+        <span className={dark ? 'text-cream/70' : 'text-ink-muted'}>{note}</span>
+        <span className={`inline-flex items-center gap-2 font-semibold ${dark ? 'text-gold-light' : 'text-ink'}`}>
+          {cta} <ArrowRight aria-hidden className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+        </span>
+      </span>
+    </Link>
+  );
+}
 
-      {/* Services Preview */}
-      <ServicesPreview />
-
-      {/* Testimonials */}
-      <div className="testimonials-homepage-wrapper">
-        <TestimonialsSection />
-      </div>
-
-      {/* CTA Section */}
-      <VideoCTA
-        title="Prêt(e) à transformer votre quotidien ?"
-        subtitle="Prenez rendez-vous pour un premier entretien personnalisé. Ensemble, nous définirons l'accompagnement le plus adapté à vos besoins et objectifs."
-        buttonText="Prendre rendez-vous"
-        buttonLink="/contact-reservation"
+export default function HomePage() {
+  return (
+    <>
+      <Seo
+        title="EsenCiel, Véronique Carrié : prendre soin de son cerveau, à chaque âge de la vie"
+        description={`${SITE.market}, dans l’Hérault, l’Aveyron et à distance. ${CREDENTIALS.certifications}.`}
+        path="/"
       />
 
-      <style>{`
-                 /* GENERAL */
-         .homepage {
-           padding-top: 0;
-         }
-         .section {
-           padding: 6rem 0;
-         }
-         /* Container défini dans globals.css */
-         .btn-outline {
-           display: inline-flex;
-           align-items: center;
-           gap: 0.5rem;
-           padding: 0.75rem 1.5rem;
-           border: 1px solid var(--color-gray-300);
-           color: var(--color-primary);
-           text-decoration: none;
-           border-radius: 0.375rem;
-           font-weight: 500;
-           transition: all 0.2s ease;
-         }
-         .btn-outline:hover {
-           border-color: var(--color-secondary);
-           color: var(--color-secondary);
-         }
+      <Hero
+        kicker={SITE.tagline}
+        title={<>Votre cerveau, <em>mode d’emploi.</em></>}
+        lead={`${SITE.market}.`}
+        actions={
+          <>
+            <Btn to="/structures">Je suis une structure</Btn>
+            <Btn to="/particuliers" variant="outline" light>Pour moi ou un proche</Btn>
+          </>
+        }
+        media={MEDIA.ciel}
+        full
+        note={<Signature />}
+      />
 
-                 /* WELCOME SECTION */
-         .welcome-section {
-           background: #fffcea url('/path-to-your-background-image.jpg') no-repeat center center;
-           background-size: cover;
-           padding: 6rem 0;
-           position: relative;
-           z-index: 1;
-         }
-         .welcome-section::before {
-           content: '';
-           position: absolute;
-           top: 0;
-           left: 0;
-           right: 0;
-           bottom: 0;
-           background: rgba(255, 252, 234, 0.85);
-           z-index: -1;
-         }
-         .welcome-content {
-           display: grid;
-           grid-template-columns: 1.8fr 1fr;
-           gap: 4rem;
-           align-items: center;
-           max-width: 1200px;
-           margin: 0 auto;
-         }
-         .welcome-title {
-           font-size: clamp(2.5rem, 5vw, 3.5rem);
-           font-weight: 700;
-           color: var(--color-primary);
-           margin: 0 0 2.5rem 0;
-         }
-         .welcome-intro {
-           font-size: 1.25rem;
-           line-height: 1.6;
-           color: var(--color-primary);
-           margin-bottom: 2rem;
-           padding: 1.5rem 2rem;
-           background: rgba(255, 255, 255, 0.7);
-           border-radius: var(--radius-xl);
-           display: inline-block;
-           position: relative;
-           border-left: 5px solid var(--color-secondary);
-           box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-         }
-         .welcome-description,
-         .welcome-invitation {
-           font-size: 1.15rem;
-           line-height: 1.8;
-           color: var(--color-gray-700);
-           margin-bottom: 1.5rem;
-         }
-         .welcome-invitation {
-           font-style: italic;
-           margin-bottom: 2.5rem;
-         }
-         .welcome-video {
-           border-radius: 1.5rem;
-           overflow: hidden;
-           box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-           aspect-ratio: 9/16;
-           background: var(--color-gray-100);
-           max-width: 300px;
-           margin: 0 auto;
-           border: 3px solid rgba(255, 255, 255, 0.8);
-           transition: all 0.3s ease;
-         }
-         
-         .welcome-video:hover {
-           transform: translateY(-5px);
-           box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-         }
-         .zen-video {
-           width: 100%;
-           height: 100%;
-           object-fit: cover;
-         }
+      <Band tone="light" kicker="Deux façons de travailler ensemble" title="Pour qui ?">
+        <div className="reveal grid gap-5 md:grid-cols-2">
+          <Door
+            to="/structures"
+            dark
+            kicker="Structures"
+            title="Des actions de prévention prêtes à déposer."
+            points={['Conférences et cycles pour seniors, aidants et soignants', 'La fiche-action rédigée pour votre dossier', 'L’évaluation et le bilan pour votre financeur']}
+            note="Dès 350 €"
+            cta="Voir l’offre"
+          />
+          <Door
+            to="/particuliers"
+            kicker="Particuliers"
+            title="Des ateliers pour garder un cerveau en forme."
+            points={['Garder sa mémoire après 60 ans', 'Apaiser le stress, mieux dormir', 'Souffler quand on aide un proche']}
+            note="Séance découverte gratuite"
+            cta="Trouver mon atelier"
+          />
+        </div>
+      </Band>
 
-                 /* RESPONSIVE */
-         /* TESTIMONIALS HOMEPAGE SPECIFIC */
-         .testimonials-homepage-wrapper {
-           background: #fffcea;
-         }
-         .testimonials-homepage-wrapper .section-header h2 {
-           color: var(--color-primary) !important;
-           text-shadow: none !important;
-         }
-         .testimonials-homepage-wrapper .section-subtitle {
-           color: var(--color-gray-700) !important;
-           text-shadow: none !important;
-         }
+      <Band tone="night">
+        <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <Kicker light>La méthode</Kicker>
+            <h2 className="mt-3 font-heading font-light leading-[1.05] text-cream [font-size:clamp(2.2rem,4.2vw,3.4rem)]">Sortir du pilote <em className="italic text-gold-light">automatique.</em></h2>
+            <ol className="mt-10 space-y-7">
+              {methode.map((m, i) => (
+                <li key={m.title} className="grid grid-cols-[3.2rem_1fr] gap-4">
+                  <span className="font-heading text-[2.2rem] leading-none text-gold-light">{String(i + 1).padStart(2, '0')}</span>
+                  <span>
+                    <span className="block font-heading text-[1.45rem] text-cream">{m.title}</span>
+                    <span className="mt-1 block text-[1.04rem] text-cream/75">{m.text}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className="reveal"><ColorTest /></div>
+        </div>
+      </Band>
 
-         @media (max-width: 768px) {
-           .welcome-content {
-             grid-template-columns: 1fr;
-             gap: 2rem;
-           }
-           .welcome-video {
-             order: -1;
-             margin-bottom: 2rem;
-             max-width: 250px;
-           }
-           .section {
-             padding: 3rem 0;
-           }
-           /* Container responsive défini dans globals.css */
-         }
-      `}</style>
-    </div>
+      <Band>
+        <div className="grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+          <img src="/images/veronique.webp" alt="Portrait de Véronique Carrié" width={800} height={1000} loading="lazy" className="mx-auto aspect-[4/5] w-full max-w-sm rounded-[2rem] object-cover" />
+          <div>
+            <blockquote className="font-heading font-light leading-[1.15] text-ink [font-size:clamp(1.8rem,3.2vw,2.6rem)] [text-wrap:balance]">
+              « Quand on sait pourquoi le cerveau s’emballe, oublie ou se fatigue, on a moins peur, et on peut agir. »
+            </blockquote>
+            <p className="mt-6 text-[1.06rem] text-ink-soft"><strong className="font-semibold text-ink">Véronique Carrié.</strong> {CREDENTIALS.short}. {CREDENTIALS.certifications}.</p>
+            <p className="mt-4"><TextLink to="/qui-suis-je">Mon parcours</TextLink></p>
+          </div>
+        </div>
+      </Band>
+
+      <CtaBand title="Un projet, une question ?" text="Structures : 20 minutes au téléphone pour regarder votre projet. Particuliers : appelez-moi, tout simplement." primary={{ to: FIRST_MEETING.structure.href, label: 'Réserver 20 min' }} />
+    </>
   );
-};
-
-export default HomePage;
+}
