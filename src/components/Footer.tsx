@@ -1,11 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import type { ReactNode } from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Logo } from './Header';
 import { SITE } from '../content/site';
 import { conferences, particuliers, programmes } from '../content/offres';
+import { espaceOf } from '../lib/espace';
+
+function Col({ title, desktop, children }: { title: string; desktop?: boolean; children: ReactNode }) {
+  return (
+    <div className={desktop ? 'hidden md:block' : ''}>
+      <p className="mb-4 font-heading text-lg">{title}</p>
+      <ul className="space-y-2.5 text-[0.95rem] text-cream/75">{children}</ul>
+    </div>
+  );
+}
 
 export default function Footer() {
-  const col = 'space-y-2.5 text-[0.95rem] text-cream/75';
+  const espace = espaceOf(useLocation().pathname);
   const a = 'transition-colors hover:text-cream';
   return (
     <footer className="bg-night-deep text-cream">
@@ -30,34 +41,44 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
-          <p className="mb-4 font-heading text-lg">Structures</p>
-          <ul className={col}>
-            <li><Link className={a} to="/structures">Structures & financeurs</Link></li>
-            {programmes.map((p) => (
-              <li key={p.slug}><Link className={a} to={p.path}>Programme {p.audience?.toLowerCase()}</Link></li>
-            ))}
+        {espace !== 'particuliers' && (
+          <Col title={espace === 'structures' ? 'Espace structures' : 'Structures'}>
+            <li><Link className={a} to="/structures">L’offre pour les structures</Link></li>
+            <li><a className={a} href="/structures#actions">Les actions</a></li>
+            <li><Link className={a} to="/structures/dossier">Dossier de financement</Link></li>
             <li><a className={a} href={SITE.plaquette} download>Plaquette (PDF)</a></li>
-          </ul>
-        </div>
-
-        <div className="hidden md:block">
-          <p className="mb-4 font-heading text-lg">Conférences</p>
-          <ul className={col}>
-            {conferences.map((c) => (
-              <li key={c.slug}><Link className={a} to={c.path}>{c.title.replace(/[«»]/g, '').trim()}</Link></li>
+          </Col>
+        )}
+        {espace === 'structures' && (
+          <Col title="Les actions" desktop>
+            {[...conferences, ...programmes].map((o) => (
+              <li key={o.slug}><Link className={a} to={o.path}>{o.title.replace(/[«»]/g, '').trim()}</Link></li>
             ))}
-          </ul>
-        </div>
-
-        <div className="hidden md:block">
-          <p className="mb-4 font-heading text-lg">Particuliers</p>
-          <ul className={col}>
+          </Col>
+        )}
+        {espace !== 'structures' && (
+          <Col title="Pour vous ou un proche">
+            <li><Link className={a} to="/particuliers">Par où commencer</Link></li>
+            <li><a className={a} href="/particuliers#gratuits">Ateliers gratuits près de chez vous</a></li>
+            <li><a className={a} href="/particuliers#formules">Tarifs</a></li>
+          </Col>
+        )}
+        {espace === 'particuliers' && (
+          <Col title="Ateliers et séances" desktop>
             {particuliers.map((p) => (
               <li key={p.slug}><Link className={a} to={p.path}>{p.title}</Link></li>
             ))}
-          </ul>
-        </div>
+          </Col>
+        )}
+        {espace !== 'commun' && (
+          <Col title={espace === 'structures' ? 'Vous êtes un particulier ?' : 'Vous êtes une structure ?'}>
+            <li>
+              <Link className={a} to={espace === 'structures' ? '/particuliers' : '/structures'}>
+                {espace === 'structures' ? 'Ateliers pour vous ou un proche' : 'L’offre pour les structures'}
+              </Link>
+            </li>
+          </Col>
+        )}
       </div>
 
       <div className="border-t border-cream/10">

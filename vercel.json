@@ -78,8 +78,13 @@
     },
     {
       "source": "/conferences-evenements",
-      "destination": "/conferences",
+      "destination": "/structures#actions",
       "permanent": true
+    },
+    {
+      "source": "/conferences",
+      "destination": "/structures#actions",
+      "permanent": false
     },
     {
       "source": "/infos-pratiques",

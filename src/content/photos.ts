@@ -19,4 +19,8 @@ export const PHOTOS = {
   stress: { src: pexels(5992866), alt: 'Une femme retraitée, les yeux fermés, respire calmement' },
   // Ateliers gratuits près de chez vous.
   atelierGratuit: { src: pexels(36883131), alt: 'Des femmes retraitées qui partagent un moment convivial en atelier' },
+  // Une conférence : une participante lève la main.
+  conference: { src: pexels(5756569), alt: 'Une participante lève la main pendant une conférence' },
+  // Les équipes soignantes, en pause.
+  soignants: { src: pexels(6129442), alt: 'Des soignantes discutent pendant une pause' },
 } satisfies Record<string, Photo>;

@@ -8,7 +8,7 @@ import { Seo, breadcrumbLd, serviceLd } from '../lib/head';
 
 export default function OffreStructurePage({ offre }: { offre: OffreStructure }) {
   const isConf = offre.kind === 'conference';
-  const parent = isConf ? { name: 'Conférences', path: '/conferences' } : { name: 'Structures & financeurs', path: '/structures' };
+  const parent = { name: 'Structures', path: '/structures' };
   const name = offre.title.replace(/[«»]/g, '').trim();
   const crumbs = [{ name: 'Accueil', path: '/' }, parent, { name, path: offre.path }];
   const media = AUDIENCE_MEDIA[offre.slug]?.media ?? MEDIA.ciel;
@@ -49,7 +49,7 @@ export default function OffreStructurePage({ offre }: { offre: OffreStructure })
       {/* Ce que le public y gagne */}
       <section className="bg-cream py-16 md:py-20">
         <div className="container-site">
-          <Title>{isConf ? 'Ce que votre public en retire' : `Ce que vos ${(AUDIENCE_MEDIA[offre.slug]?.label ?? 'participants').toLowerCase()} y gagnent`}</Title>
+          <Title>{isConf ? 'Ce que votre public en retire' : 'Ce que les participants y gagnent'}</Title>
           <ul className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-3 md:mt-12 md:grid-cols-4 md:gap-5">
             {offre.gains.map((g) => (
               <li key={g.label} className="flex flex-col items-center gap-4 rounded-3xl bg-cream-light px-3 py-6 text-center">
@@ -126,14 +126,14 @@ export default function OffreStructurePage({ offre }: { offre: OffreStructure })
                 </Link>
               ))}
             </div>
-            <Link to={parent.path} className="mt-2 inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink">
-              <ArrowLeft aria-hidden className="h-4 w-4" /> {isConf ? 'Toutes les conférences' : 'Toute l’offre structures'}
+            <Link to="/structures#actions" className="mt-2 inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink">
+              <ArrowLeft aria-hidden className="h-4 w-4" /> Toutes les actions
             </Link>
           </div>
         </section>
       )}
 
-      <BookingSection />
+      <BookingSection lock initial="structure" title={<>Parlons de <em>votre projet</em></>} />
 
       {/* Barre d'action sur mobile */}
       <div className="sticky bottom-0 z-30 flex gap-2 border-t border-sand-dark bg-cream/95 p-3 backdrop-blur md:hidden">

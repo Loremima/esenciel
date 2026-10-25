@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Info } from 'lucide-react';
-import { Button, CtaBand, FactList, PageHero, Section } from '../components/ui';
-import { CREDENTIALS } from '../content/site';
+import { Breadcrumbs, Button, CtaBand, FactList, Section } from '../components/ui';
+import { CREDENTIALS, SITE } from '../content/site';
 import { particuliers, type OffreParticulier } from '../content/offres';
 import { Seo, breadcrumbLd, serviceLd } from '../lib/head';
 import { NotifyForm } from '../components/NotifyForm';
@@ -9,11 +9,12 @@ import { NotifyForm } from '../components/NotifyForm';
 export default function OffreParticulierPage({ offre }: { offre: OffreParticulier }) {
   const crumbs = [
     { name: 'Accueil', path: '/' },
-    { name: 'Particuliers', path: '/particuliers' },
+    { name: 'Pour vous ou un proche', path: '/particuliers' },
     { name: offre.title, path: offre.path },
   ];
   const others = particuliers.filter((o) => o.slug !== offre.slug && o.category === offre.category).slice(0, 2);
-  const facts = [...offre.facts, { label: 'Tarif', value: offre.price }];
+  const facts = [...offre.facts, ...(offre.method ? [{ label: 'Méthode', value: offre.method }] : []), { label: 'Tarif', value: offre.price }];
+  const kicker = offre.category === 'individuel' ? 'Seul avec moi' : offre.category === 'atelier' ? 'Atelier en petit groupe' : 'Cycle en petit groupe';
   const online = offre.booking.startsWith('http');
 
   return (
@@ -24,33 +25,38 @@ export default function OffreParticulierPage({ offre }: { offre: OffreParticulie
         path={offre.path}
         jsonLd={[breadcrumbLd(crumbs), serviceLd({ name: offre.title, description: offre.definition, path: offre.path, price: offre.price })]}
       />
-      <PageHero
-        crumbs={crumbs}
-        eyebrow={offre.method}
-        title={offre.title}
-        lead={offre.short}
-        aside={<img src={offre.image.src} alt={offre.image.alt} width={600} height={800} className="mx-auto aspect-[4/5] w-full max-w-sm rounded-arch object-cover shadow-soft" />}
-      >
-        <Button href={online ? offre.booking : '#dates'} arrow>{offre.bookingLabel}</Button>
-        {offre.info && <Button href={offre.info.href} variant="secondary">{offre.info.label}</Button>}
-      </PageHero>
+      <section className="bg-night pb-14 pt-8 text-cream md:pb-20 md:pt-12">
+        <div className="container-site grid items-center gap-10 md:grid-cols-[1.25fr_1fr] md:gap-14">
+          <div>
+            <div className="[&_a]:text-cream/70 [&_li]:text-cream/70 [&_span]:!text-cream/60"><Breadcrumbs items={crumbs} /></div>
+            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold-light">{kicker}</p>
+            <h1 className="mt-3 font-heading text-[2.5rem] font-light leading-[1.05] text-cream md:text-[3.4rem]">{offre.title}</h1>
+            <p className="mt-5 max-w-xl text-[1.15rem] leading-relaxed text-cream/90">{offre.short}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href={online ? offre.booking : '#dates'} variant="light" arrow className="!px-7 !py-4 !text-base">{offre.bookingLabel}</Button>
+              <Button href={SITE.phoneHref} variant="ghost" className="!text-cream !text-base">Ou appelez-moi : {SITE.phone}</Button>
+            </div>
+          </div>
+          <img src={offre.image.src} alt={offre.image.alt} width={600} height={800} className="mx-auto aspect-[4/5] w-full max-w-xs rounded-arch object-cover md:max-w-sm" />
+        </div>
+      </section>
 
       <Section tone="white">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
           <div>
             <h2 className="h-section">De quoi s’agit-il ?</h2>
-            <p className="lead mt-5">{offre.definition}</p>
+            <p className="mt-5 text-[1.15rem] leading-relaxed text-ink-soft">{offre.definition}</p>
 
             <h2 className="h-section mt-14">Pour qui ?</h2>
-            <p className="mt-5 text-lg text-ink-soft">{offre.pourQui}</p>
+            <p className="mt-5 text-[1.15rem] leading-relaxed text-ink-soft">{offre.pourQui}</p>
 
             <h2 className="h-section mt-14">Le chemin</h2>
             <ol className="mt-6 grid gap-4 sm:grid-cols-2">
               {offre.deroule.map((s, i) => (
                 <li key={s.title} className="rounded-2xl border border-sand-dark/70 bg-cream p-5">
                   <span className="font-heading text-2xl text-gold-dark">{i + 1}</span>
-                  <p className="mt-1 font-medium text-ink">{s.title}</p>
-                  {s.text && <p className="mt-1 text-ink-soft">{s.text}</p>}
+                  <p className="mt-1 text-[1.08rem] font-medium text-ink">{s.title}</p>
+                  {s.text && <p className="mt-1 text-[1.06rem] text-ink-soft">{s.text}</p>}
                 </li>
               ))}
             </ol>

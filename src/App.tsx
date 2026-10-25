@@ -1,5 +1,5 @@
 import { Component, useEffect, type ReactNode } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MusicPlayer from './components/MusicPlayer';
@@ -8,7 +8,8 @@ import { Button } from './components/ui';
 import HomePage from './pages/HomePage';
 import StructuresPage from './pages/StructuresPage';
 import OffreStructurePage from './pages/OffreStructurePage';
-import ConferencesPage from './pages/ConferencesPage';
+import DossierPage from './pages/DossierPage';
+import { espaceOf } from './lib/espace';
 import ParticuliersPage from './pages/ParticuliersPage';
 import OffreParticulierPage from './pages/OffreParticulierPage';
 import AboutPage from './pages/AboutPage';
@@ -48,6 +49,12 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean
   }
 }
 
+// La musique d'ambiance reste côté particuliers : côté structures, elle ferait moins sérieux.
+function AmbientMusic() {
+  const { pathname } = useLocation();
+  return espaceOf(pathname) === 'structures' ? null : <MusicPlayer />;
+}
+
 export default function App() {
   return (
     <>
@@ -61,7 +68,8 @@ export default function App() {
             {programmes.map((o) => (
               <Route key={o.path} path={o.path} element={<OffreStructurePage offre={o} />} />
             ))}
-            <Route path="/conferences" element={<ConferencesPage />} />
+            <Route path="/structures/dossier" element={<DossierPage />} />
+            <Route path="/conferences" element={<Navigate to="/structures#actions" replace />} />
             {conferences.map((o) => (
               <Route key={o.path} path={o.path} element={<OffreStructurePage offre={o} />} />
             ))}
@@ -79,7 +87,7 @@ export default function App() {
         </ErrorBoundary>
       </main>
       <Footer />
-      <MusicPlayer />
+      <AmbientMusic />
       <BookingDialog />
     </>
   );

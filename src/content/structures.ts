@@ -50,7 +50,7 @@ export const echelle: (Item & { meta: string; to: string; cta: string })[] = [
     title: 'La conférence',
     meta: '1 h 30 à 2 h · 15 à 50 personnes',
     text: 'Le plus simple pour commencer : un format court, facile à financer, qui donne envie d’aller plus loin.',
-    to: '/conferences',
+    to: '/structures#actions',
     cta: 'Les 2 conférences',
   },
   {
@@ -58,7 +58,7 @@ export const echelle: (Item & { meta: string; to: string; cta: string })[] = [
     title: 'Le cycle',
     meta: '6 à 15 séances · 5 à 12 personnes',
     text: 'Pour installer de vraies habitudes, avec un groupe qui se soutient d’une séance à l’autre.',
-    to: '/structures#programmes',
+    to: '/structures#actions',
     cta: 'Les 3 programmes',
   },
   {
@@ -104,3 +104,15 @@ export const objections = [
   },
   { q: 'Où intervenez-vous ?', a: 'Dans l’Hérault et l’Aveyron, dans vos locaux. Au-delà, contactez-moi : c’est souvent possible.' },
 ];
+
+// Repères de prix affichés sur la page Structures.
+// À VALIDER PAR VÉRONIQUE (tarifs proposés le 23/10, pas encore confirmés).
+export const REPERES_PRIX = {
+  conference: '350 € la conférence',
+  seance: '160 € la séance de 2 h',
+  journee: '800 € la journée',
+  km: '0,45 € par km',
+};
+
+// Ce que je prends en charge, et ce qui reste à la structure.
+export const votrePart = ['Une salle', 'Un public', 'Une date'];

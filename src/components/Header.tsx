@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { NAV } from '../content/site';
+import { HEADER_CTA, NAV, SWITCH } from '../content/site';
+import { espaceOf } from '../lib/espace';
 import { VIDEO_HERO_ROUTES } from '../routes';
 
 export function Logo({ light = false }: { light?: boolean }) {
@@ -25,9 +26,21 @@ export function Logo({ light = false }: { light?: boolean }) {
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+  const espace = espaceOf(pathname);
+  const nav = NAV[espace];
+  const cta = HEADER_CTA[espace];
+  const sw = espace === 'commun' ? null : SWITCH[espace];
+  const isActive = (to: string) => {
+    const [p, h] = to.split('#');
+    return h ? pathname === p && hash === `#${h}` : pathname === p && !hash;
+  };
+  const CtaLink = ({ className }: { className: string }) =>
+    cta.to.startsWith('tel:') || cta.to.includes('#')
+      ? <a href={cta.to} className={className}>{cta.label}</a>
+      : <Link to={cta.to} className={className}>{cta.label}</Link>;
 
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => setOpen(false), [pathname, hash]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -46,8 +59,8 @@ export default function Header() {
   // Au-dessus d'une vidéo, l'en-tête est transparent tant qu'on n'a pas défilé.
   const overlay = VIDEO_HERO_ROUTES.has(pathname.replace(/\/$/, '') || '/') && !scrolled && !open;
 
-  const linkCls = ({ isActive }: { isActive: boolean }) =>
-    `relative py-2 text-[0.95rem] transition-colors ${overlay ? 'text-cream/85 hover:text-cream' : `hover:text-ink ${isActive ? 'text-ink after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-gold' : 'text-ink-soft'}`}`;
+  const linkCls = (active: boolean) =>
+    `relative py-2 text-[0.95rem] transition-colors ${overlay ? 'text-cream/85 hover:text-cream' : `hover:text-ink ${active ? 'text-ink after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-gold' : 'text-ink-soft'}`}`;
 
   return (
     <header className={`sticky top-0 z-40 border-b transition-colors ${overlay ? 'border-transparent bg-transparent' : scrolled || open ? 'border-sand-dark/80 bg-cream/95 backdrop-blur' : 'border-transparent bg-cream'}`}>
@@ -55,19 +68,24 @@ export default function Header() {
         Aller au contenu
       </a>
       <div className="container-site flex h-[4.5rem] items-center justify-between gap-6">
-        <Link to="/" title="Accueil">
-          <Logo light={overlay} />
-        </Link>
-
-        <nav aria-label="Navigation principale" className="hidden items-center gap-7 md:flex">
-          {NAV.map((l) => (
-            <NavLink key={l.to} to={l.to} className={linkCls}>
-              {l.label}
-            </NavLink>
-          ))}
-          <Link to="/contact" className={`rounded-full px-5 py-2.5 text-[0.95rem] font-semibold transition-colors ${overlay ? 'bg-cream text-night hover:bg-cream-light' : 'bg-night text-cream hover:bg-night/90'}`}>
-            Prendre rendez-vous
+        <span className="flex items-center gap-4">
+          <Link to="/" title="Accueil">
+            <Logo light={overlay} />
           </Link>
+          {espace !== 'commun' && (
+            <span className={`hidden rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] lg:inline-block ${overlay ? 'border-cream/40 text-cream/90' : 'border-gold/50 text-gold-dark'}`}>
+              {espace === 'structures' ? 'Espace structures' : 'Pour vous ou un proche'}
+            </span>
+          )}
+        </span>
+
+        <nav aria-label="Navigation principale" className="hidden items-center gap-6 md:flex">
+          {nav.map((l) => (
+            <Link key={l.to} to={l.to} className={linkCls(isActive(l.to))}>
+              {l.label}
+            </Link>
+          ))}
+          <CtaLink className={`rounded-full px-5 py-2.5 text-[0.95rem] font-semibold transition-colors ${overlay ? 'bg-cream text-night hover:bg-cream-light' : 'bg-night text-cream hover:bg-night/90'}`} />
         </nav>
 
         <button
@@ -84,18 +102,21 @@ export default function Header() {
 
       <div id="menu-mobile" hidden={!open} className="border-t border-sand-dark/80 bg-cream md:hidden">
         <nav aria-label="Navigation mobile" className="container-site flex flex-col py-4">
-          {NAV.map((l) => (
-            <NavLink
+          {nav.map((l) => (
+            <Link
               key={l.to}
               to={l.to}
-              className={({ isActive }) => `border-b border-sand-dark/60 py-4 text-center font-heading text-2xl ${isActive ? 'text-gold-dark' : 'text-ink'}`}
+              className={`border-b border-sand-dark/60 py-4 text-center font-heading text-2xl ${isActive(l.to) ? 'text-gold-dark' : 'text-ink'}`}
             >
               {l.label}
-            </NavLink>
+            </Link>
           ))}
-          <Link to="/contact" className="mt-5 rounded-full bg-night px-5 py-4 text-center font-semibold text-cream">
-            Prendre rendez-vous
-          </Link>
+          <CtaLink className="mt-5 rounded-full bg-night px-5 py-4 text-center font-semibold text-cream" />
+          {sw && (
+            <Link to={sw.to} className="mt-4 py-2 text-center text-ink-muted underline underline-offset-4">
+              {sw.label}
+            </Link>
+          )}
         </nav>
       </div>
     </header>

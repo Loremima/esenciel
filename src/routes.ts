@@ -4,8 +4,8 @@ import { conferences, particuliers, programmes } from './content/offres';
 export const STATIC_ROUTES: string[] = [
   '/',
   '/structures',
+  '/structures/dossier',
   ...programmes.map((o) => o.path),
-  '/conferences',
   ...conferences.map((o) => o.path),
   '/particuliers',
   ...particuliers.map((o) => o.path),
@@ -21,7 +21,6 @@ export const VIDEO_HERO_ROUTES = new Set<string>([
   '/',
   '/structures',
   ...programmes.map((o) => o.path),
-  '/conferences',
   ...conferences.map((o) => o.path),
   '/particuliers',
   '/qui-suis-je',

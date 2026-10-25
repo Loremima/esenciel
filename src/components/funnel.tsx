@@ -263,7 +263,7 @@ export function VeroniqueIntro() {
 type Profil = keyof typeof FIRST_MEETING;
 
 /** Choix du premier rendez-vous. Les créneaux s'ouvrent dans l'agenda en ligne. */
-export function BookingCard({ initial = 'structure' }: { initial?: Profil }) {
+export function BookingCard({ initial = 'structure', lock }: { initial?: Profil; lock?: boolean }) {
   const [profil, setProfil] = useState<Profil>(initial);
   useEffect(() => setProfil(initial), [initial]);
   const m = FIRST_MEETING[profil];
@@ -272,7 +272,7 @@ export function BookingCard({ initial = 'structure' }: { initial?: Profil }) {
 
   return (
     <div className="mx-auto w-full max-w-md rounded-[28px] bg-cream-light p-5 text-left shadow-soft md:p-7">
-      <div role="radiogroup" aria-label="Vous êtes" className="grid grid-cols-2 gap-1 rounded-full bg-sand p-1">
+      {!lock && <div role="radiogroup" aria-label="Vous êtes" className="grid grid-cols-2 gap-1 rounded-full bg-sand p-1">
         {(Object.keys(FIRST_MEETING) as Profil[]).map((k) => (
           <button
             key={k}
@@ -285,8 +285,8 @@ export function BookingCard({ initial = 'structure' }: { initial?: Profil }) {
             {FIRST_MEETING[k].label}
           </button>
         ))}
-      </div>
-      <p className="mt-5 flex items-center justify-center gap-2 text-center text-sm font-semibold text-gold-dark">
+      </div>}
+      <p className={`${lock ? '' : 'mt-5 '}flex items-center justify-center gap-2 text-center text-sm font-semibold text-gold-dark`}>
         <Clock aria-hidden className="h-4 w-4" /> {m.info}
       </p>
       <p className="mt-3 text-center text-ink-muted">{m.text}</p>
@@ -306,12 +306,12 @@ export function BookingCard({ initial = 'structure' }: { initial?: Profil }) {
   );
 }
 
-export function BookingSection({ initial = 'structure', tone = 'sand' }: { initial?: Profil; tone?: 'sand' | 'cream' }) {
+export function BookingSection({ initial = 'structure', tone = 'sand', lock, title }: { initial?: Profil; tone?: 'sand' | 'cream'; lock?: boolean; title?: ReactNode }) {
   return (
     <section id="rdv" className={`${tone === 'sand' ? 'bg-sand' : 'bg-cream'} py-14 md:py-20`}>
       <div className="container-site">
-        <Title className="mb-7">Prendre <em>rendez-vous</em></Title>
-        <BookingCard initial={initial} />
+        <Title className="mb-7">{title ?? <>Prendre <em>rendez-vous</em></>}</Title>
+        <BookingCard initial={initial} lock={lock} />
       </div>
     </section>
   );

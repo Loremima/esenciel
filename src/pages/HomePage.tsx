@@ -1,65 +1,66 @@
+import { Link } from 'react-router-dom';
 import { CREDENTIALS } from '../content/site';
 import { objections } from '../content/structures';
-import { Link } from 'react-router-dom';
-import { BookingSection, HeroVideo, MethodBand, ProofGrid, VeroniqueIntro } from '../components/funnel';
+import { HeroVideo } from '../components/funnel';
 import { DoorCard } from '../components/doors';
 import { MEDIA } from '../content/media';
 import { PHOTOS } from '../content/photos';
 import { Seo, faqLd } from '../lib/head';
 
+// L'accueil est un carrefour : il dit qui je suis en une phrase, puis envoie
+// chaque visiteur vers son espace (structures ou particuliers).
 export default function HomePage() {
   return (
     <>
       <Seo
         title="EsenCiel, Véronique Carrié : prendre soin de son cerveau, à chaque âge de la vie"
-        description={`Conférences et ateliers de prévention clés en main pour seniors, aidants et soignants, dans l’Hérault et l’Aveyron. ${CREDENTIALS.certifications}.`}
+        description={`Actions de prévention pour les structures et ateliers pour les particuliers : cerveau, stress et avancée en âge, dans l’Hérault et l’Aveyron. ${CREDENTIALS.certifications}.`}
         path="/"
         jsonLd={[faqLd(objections)]}
       />
 
       <HeroVideo
-        full
         media={MEDIA.ciel}
         kicker="EsenCiel"
         title={<>Prendre soin de son cerveau, <em>à chaque âge</em> de la vie</>}
-        lead="Ateliers et conférences dans l’Hérault et l’Aveyron, avec Véronique Carrié."
-      >
-        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          <Link to="/structures" className="btn bg-cream text-night hover:bg-cream-light">Je travaille dans une structure</Link>
-          <Link to="/particuliers" className="btn border border-cream/60 text-cream hover:bg-cream/10">Pour moi ou un proche</Link>
-        </div>
-      </HeroVideo>
+        lead="J’aide à comprendre son cerveau pour sortir du pilote automatique, dans l’Hérault, l’Aveyron et à distance."
+      />
 
-      <ProofGrid />
-
-      <section className="bg-cream py-16 md:py-24">
+      <section className="bg-cream pb-16 pt-12 md:pb-24 md:pt-16">
         <div className="container-site">
-          <h2 className="h-section text-center">Vous venez <em>pour qui ?</em></h2>
-          <div className="mx-auto mt-9 grid max-w-5xl gap-5 md:mt-12 md:grid-cols-2 md:gap-7">
+          <h2 className="h-section text-center">Vous êtes…</h2>
+          <div className="mx-auto mt-8 grid max-w-5xl gap-5 md:mt-10 md:grid-cols-2 md:gap-7">
             <DoorCard
               to="/structures"
               photo={PHOTOS.structureGroupe}
-              kicker="Structures"
-              title="Vous accompagnez des seniors, des aidants ou des soignants"
-              text="CCAS, centre social, résidence, EHPAD, plateforme de répit : je conçois et j’anime l’action de prévention, et je vous fournis la fiche-action et le bilan pour votre financeur."
-              cta="Voir l’offre pour les structures"
+              kicker="Une structure"
+              title="CCAS, centre social, résidence, EHPAD, plateforme de répit"
+              text="Des actions de prévention pour vos seniors, vos aidants et vos équipes, avec la fiche-action et le bilan pour votre financeur."
+              cta="Espace structures"
             />
             <DoorCard
               to="/particuliers"
               photo={PHOTOS.particulierCouple}
-              kicker="Pour vous ou un proche"
-              title="Garder un cerveau en forme et l’esprit serein"
-              text="Après 60 ans, quand on accompagne un proche, ou quand le stress déborde : des ateliers en petit groupe, dont certains gratuits, et des séances individuelles."
+              kicker="Un particulier"
+              title="Pour vous ou pour un proche"
+              text="Garder un cerveau en forme après 60 ans, souffler quand on accompagne un proche, retrouver du calme face au stress."
               cta="Trouver mon atelier"
             />
           </div>
         </div>
       </section>
 
-      <MethodBand />
-      <div className="pt-16 md:pt-24 bg-cream" />
-      <VeroniqueIntro />
-      <BookingSection />
+      <section className="bg-sand py-14 md:py-20">
+        <div className="container-site flex max-w-4xl flex-col items-center gap-8 text-center md:flex-row md:text-left">
+          <img src="/images/veronique-480.webp" alt="Portrait de Véronique Carrié" width={480} height={600} loading="lazy" className="h-[220px] w-[176px] shrink-0 rounded-arch object-cover md:h-[260px] md:w-[208px]" />
+          <div>
+            <h2 className="font-heading text-[2rem] font-light leading-tight">Véronique Carrié</h2>
+            <p className="mt-3 text-[1.06rem] text-ink-soft">{CREDENTIALS.short}. {CREDENTIALS.certifications}.</p>
+            <p className="mt-3 text-[1.06rem] text-ink-soft">Ma méthode tient en trois mots : <strong className="font-semibold text-ink">comprendre</strong> comment fonctionne son cerveau, <strong className="font-semibold text-ink">observer</strong> ses automatismes, <strong className="font-semibold text-ink">agir</strong> pour reprendre la main.</p>
+            <Link to="/qui-suis-je" className="link-underline mt-5 inline-block font-medium">Mon parcours</Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

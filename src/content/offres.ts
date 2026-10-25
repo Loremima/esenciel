@@ -364,7 +364,7 @@ export const particuliers: OffreParticulier[] = [
     slug: 'prevention-rechute-depressive',
     path: '/particuliers/prevention-rechute-depressive',
     category: 'cycle',
-    title: 'Prévention de la rechute dépressive',
+    title: 'Après une dépression, garder l’équilibre',
     method: 'Programme MBCT',
     short: 'Huit séances pour changer sa relation aux pensées et prévenir la rechute.',
     definition: 'Un cycle en groupe fondé sur le programme MBCT (Mindfulness-Based Cognitive Therapy), qui associe pratiques de pleine conscience et apports de la psychologie cognitive. Son efficacité pour réduire le risque de rechute dépressive a été évaluée par de nombreuses études.',

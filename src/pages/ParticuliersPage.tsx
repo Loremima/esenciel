@@ -1,40 +1,39 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone } from 'lucide-react';
 import { particuliers, type OffreParticulier } from '../content/offres';
-import { BookingSection, HeroVideo, LoopVideo, Title } from '../components/funnel';
+import { BookingSection, HeroVideo, Title } from '../components/funnel';
+import { NotifyForm } from '../components/NotifyForm';
 import { MEDIA } from '../content/media';
 import { PHOTOS, type Photo } from '../content/photos';
-import { SITE } from '../content/site';
-import { NotifyForm } from '../components/NotifyForm';
+import { CREDENTIALS, SITE } from '../content/site';
 import { Seo, breadcrumbLd } from '../lib/head';
 
-// Noms courts et repères affichés dans les listes (le détail est sur chaque page).
-const CARD: Record<string, { name: string; sub: string; price: string; video?: keyof typeof MEDIA }> = {
-  'gestion-du-stress': { name: 'Retrouver du calme face au stress', sub: '8 séances en groupe', price: '330 €' },
-  'prevention-rechute-depressive': { name: 'Après une dépression, garder l’équilibre', sub: '8 séances en groupe', price: '330 €' },
-  'bien-vivre-son-avancee-en-age': { name: 'Bien vivre son avancée en âge', sub: '15 séances en groupe', price: '420 €' },
-  'jeu-du-tao': { name: 'Jeu du Tao', sub: '3 à 4 personnes · une demi-journée', price: '70 €' },
-  'sante-et-vitalite': { name: 'Santé et vitalité', sub: 'Séance seule · 90 € puis 60 €', price: '', video: 'bougie' },
-  'pleine-conscience': { name: 'Pleine conscience', sub: 'Séance seule · 90 € puis 60 €', price: '' },
-};
+// L'espace particuliers s'organise par situation vécue, pas par méthode :
+// on choisit ce qu'on vit, puis on trouve la formule et son prix.
 
-type Filtre = 'tout' | 'groupe' | 'individuel';
-
-// Les trois portes d'entrée, par situation vécue plutôt que par méthode.
 const SITUATIONS: { photo: Photo; title: string; text: string; to: string }[] = [
   { photo: PHOTOS.cerveauForme, title: 'Je veux garder un cerveau en forme', text: 'Après 60 ans : la mémoire, l’attention, et accueillir les changements de l’âge avec plus de sérénité.', to: '/particuliers/bien-vivre-son-avancee-en-age' },
   { photo: PHOTOS.aidant, title: 'J’accompagne un proche', text: 'Souffler, comprendre ce qui se passe, et ne pas s’épuiser. Souvent gratuit pour vous.', to: '#gratuits' },
   { photo: PHOTOS.stress, title: 'Le stress déborde', text: 'Retrouver du calme, mieux dormir, ne plus ruminer, pas à pas et en petit groupe.', to: '/particuliers/gestion-du-stress' },
 ];
 
+// Ce que l'on achète, dit simplement.
+const FORMAT: Record<string, string> = {
+  'gestion-du-stress': '8 séances en petit groupe',
+  'prevention-rechute-depressive': '8 séances en petit groupe, après un entretien',
+  'bien-vivre-son-avancee-en-age': '15 séances en petit groupe, sur 8 mois',
+  'jeu-du-tao': 'Une demi-journée, à 3 ou 4',
+  'sante-et-vitalite': 'Séances seul avec moi, en présentiel ou à distance',
+  'pleine-conscience': 'Séances seul avec moi, en présentiel ou à distance',
+};
+
 function SituationCard({ photo, title, text, to }: (typeof SITUATIONS)[number]) {
   const inner = (
     <>
       <img src={photo.src} alt={photo.alt} width={1200} height={800} loading="lazy" className="aspect-[3/2] w-full object-cover" />
       <span className="flex flex-1 flex-col p-5 md:p-6">
-        <span className="font-heading text-[1.6rem] font-light leading-tight">{title}</span>
-        <span className="mt-2 flex-1 text-[1.1rem] leading-relaxed text-ink-soft">{text}</span>
+        <span className="font-heading text-[1.65rem] font-light leading-tight">{title}</span>
+        <span className="mt-2 flex-1 text-[1.12rem] leading-relaxed text-ink-soft">{text}</span>
         <span className="mt-4 inline-flex items-center gap-2 text-[1.06rem] font-semibold text-night">
           Voir <ArrowRight aria-hidden className="h-5 w-5 transition-transform group-hover:translate-x-1" />
         </span>
@@ -45,69 +44,36 @@ function SituationCard({ photo, title, text, to }: (typeof SITUATIONS)[number]) 
   return to.startsWith('#') ? <a href={to} className={cls}>{inner}</a> : <Link to={to} className={cls}>{inner}</Link>;
 }
 
-function GroupRow({ o }: { o: OffreParticulier }) {
-  const c = CARD[o.slug];
+function FormuleRow({ o }: { o: OffreParticulier }) {
   return (
-    <li className="flex items-center gap-3.5 rounded-[22px] border border-sand-dark bg-cream-light p-3 text-left">
-      <Link to={o.path} className="flex min-w-0 flex-1 items-center gap-3.5">
-        <img src={o.image.src.replace('.webp', '-144.webp')} alt="" width={144} height={144} loading="lazy" className="h-[72px] w-[72px] shrink-0 rounded-2xl object-cover" />
-        <span className="min-w-0">
-          <span className="block text-[1.12rem] font-semibold leading-tight">{c.name}</span>
-          <span className="block text-base text-ink-muted">{c.sub}</span>
-          <span className="mt-1 inline-block font-heading text-lg text-gold-dark">{c.price}</span>
+    <li>
+      <Link to={o.path} className="group flex items-center gap-4 border-b border-sand-dark py-5 text-left">
+        <span className="min-w-0 flex-1">
+          <span className="block font-heading text-[1.45rem] leading-snug">{o.title}</span>
+          <span className="mt-1 block text-[1.06rem] text-ink-soft">{FORMAT[o.slug] ?? o.short}</span>
+        </span>
+        <span className="w-28 shrink-0 text-right">
+          <span className="block font-heading text-[1.3rem] text-gold-dark">{o.category === 'individuel' ? '90 €, puis 60 €' : o.price.replace(' le cycle', '').replace(' par personne', '')}</span>
+          <span className="mt-1 inline-flex items-center gap-1 text-[0.98rem] font-semibold text-night">Voir <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
         </span>
       </Link>
-      <a
-        href={o.booking}
-        {...(o.booking.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-        className="shrink-0 rounded-full bg-night px-4 py-3 text-base font-semibold text-cream hover:bg-night/90"
-      >
-        {o.booking.startsWith('http') ? 'Réserver' : 'Me prévenir'}
-      </a>
     </li>
   );
 }
 
-function SoloCard({ o }: { o: OffreParticulier }) {
-  const c = CARD[o.slug];
-  return (
-    <Link to={o.path} className="group relative flex h-[260px] flex-col justify-end overflow-hidden rounded-[22px] text-center text-cream md:h-[340px]">
-      {c.video ? (
-        <LoopVideo media={MEDIA[c.video]} />
-      ) : (
-        <img src={o.image.src} alt="" width={600} height={800} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-      )}
-      <span aria-hidden className="absolute inset-0 bg-gradient-to-b from-night/0 from-30% to-night/90" />
-      <span className="relative p-4 md:p-6">
-        <span className="block font-heading text-xl leading-tight md:text-2xl">{c.name}</span>
-        <span className="mt-1.5 block text-base text-gold-light">{c.sub}</span>
-        <span className="mt-2 hidden items-center gap-1.5 text-sm text-cream/85 md:inline-flex">
-          Découvrir <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </span>
-      </span>
-    </Link>
-  );
-}
-
 export default function ParticuliersPage() {
-  const [filtre, setFiltre] = useState<Filtre>('tout');
   const crumbs = [
     { name: 'Accueil', path: '/' },
-    { name: 'Particuliers', path: '/particuliers' },
+    { name: 'Pour vous ou un proche', path: '/particuliers' },
   ];
   const groupe = particuliers.filter((o) => o.category !== 'individuel');
   const solo = particuliers.filter((o) => o.category === 'individuel');
-  const filtres: { id: Filtre; label: string }[] = [
-    { id: 'tout', label: 'Tout' },
-    { id: 'groupe', label: 'En groupe' },
-    { id: 'individuel', label: 'Individuel' },
-  ];
 
   return (
     <>
       <Seo
         title="Ateliers pour garder un cerveau en forme après 60 ans, aidants et stress | Véronique Carrié"
-        description="Gestion du stress, prévention de la rechute dépressive, bien vivre son avancée en âge, séances individuelles et Jeu du Tao. Hérault, Aveyron et à distance."
+        description="Ateliers en petit groupe et séances individuelles : garder un cerveau en forme après 60 ans, souffler quand on accompagne un proche, retrouver du calme. Hérault, Aveyron et à distance."
         path="/particuliers"
         jsonLd={[breadcrumbLd(crumbs)]}
       />
@@ -132,7 +98,7 @@ export default function ParticuliersPage() {
         </div>
       </section>
 
-      <section id="gratuits" className="bg-night py-14 text-cream md:py-20">
+      <section id="gratuits" className="scroll-mt-20 bg-night py-14 text-cream md:py-20">
         <div className="container-site grid max-w-5xl items-center gap-8 md:grid-cols-2 md:gap-12">
           <img src={PHOTOS.atelierGratuit.src} alt={PHOTOS.atelierGratuit.alt} width={1200} height={800} loading="lazy" className="aspect-[4/3] w-full rounded-[22px] object-cover" />
           <div>
@@ -148,52 +114,29 @@ export default function ParticuliersPage() {
         </div>
       </section>
 
-      <div className="bg-cream pt-14 md:pt-20">
-        <Title>Tous les ateliers et séances</Title>
-      </div>
-
-      <div className="bg-cream pt-6">
-        <div role="tablist" aria-label="Filtrer les offres" className="container-site flex justify-center gap-2">
-          {filtres.map((f) => (
-            <button
-              key={f.id}
-              type="button"
-              role="tab"
-              aria-selected={filtre === f.id}
-              onClick={() => setFiltre(f.id)}
-              className={`rounded-full px-4 py-2.5 text-sm font-semibold transition-colors sm:px-5 ${filtre === f.id ? 'bg-night text-cream' : 'border border-sand-dark text-ink hover:border-ink/40'}`}
-            >
-              {f.label}
-            </button>
-          ))}
+      <section id="formules" className="scroll-mt-20 bg-cream py-14 md:py-20">
+        <div className="container-site max-w-3xl">
+          <Title>Les formules <em>et les tarifs</em></Title>
+          <h3 className="mt-10 text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark">En petit groupe</h3>
+          <ul className="mt-2">{groupe.map((o) => <FormuleRow key={o.slug} o={o} />)}</ul>
+          <h3 className="mt-10 text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark">Seul avec moi</h3>
+          <ul className="mt-2">{solo.map((o) => <FormuleRow key={o.slug} o={o} />)}</ul>
+          <p className="mt-6 text-[1.02rem] text-ink-muted">Les séances seul avec moi : 90 € la première, puis 60 €. Les cycles en groupe ouvrent dès qu’il y a assez d’inscrits : laissez votre e-mail sur la page du cycle.</p>
         </div>
-      </div>
+      </section>
 
-      {filtre !== 'individuel' && (
-        <section id="cycle" className={`bg-cream pt-10 md:pt-14 ${filtre === 'groupe' ? 'pb-16 md:pb-20' : 'pb-4'}`}>
-          <div className="container-site">
-            <Title>En petit groupe</Title>
-            <ul className="mx-auto mt-7 grid max-w-4xl gap-2.5 md:grid-cols-2 md:gap-4">
-              {groupe.map((o) => <GroupRow key={o.slug} o={o} />)}
-            </ul>
+      <section className="bg-sand py-14 md:py-16">
+        <div className="container-site flex max-w-3xl flex-col items-center gap-6 text-center md:flex-row md:text-left">
+          <img src="/images/veronique-480.webp" alt="Portrait de Véronique Carrié" width={480} height={600} loading="lazy" className="h-[180px] w-[144px] shrink-0 rounded-arch object-cover" />
+          <div>
+            <p className="font-heading text-[1.6rem] font-light leading-snug">« Quand on sait pourquoi le cerveau s’emballe, oublie ou se fatigue, on a moins peur, et on peut agir. »</p>
+            <p className="mt-3 text-[1.02rem] text-ink-soft">Véronique Carrié. {CREDENTIALS.certifications}. <Link to="/qui-suis-je" className="link-underline">Mon parcours</Link></p>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {filtre !== 'groupe' && (
-        <section id="individuel" className="bg-cream pb-16 pt-10 md:pb-20 md:pt-14">
-          <div className="container-site">
-            <Title>En individuel</Title>
-            <div className="mx-auto mt-7 grid max-w-4xl grid-cols-2 gap-2.5 md:gap-5">
-              {solo.map((o) => <SoloCard key={o.slug} o={o} />)}
-            </div>
-            <p className="mt-4 text-center text-base text-ink-muted">En présentiel ou à distance.</p>
-          </div>
-        </section>
-      )}
-
-      <BookingSection initial="particulier" />
-      <p className="bg-sand pb-10 text-center text-sm text-ink-muted">
+      <BookingSection lock initial="particulier" tone="cream" title={<>Une question ? <em>Parlons-en</em></>} />
+      <p className="bg-cream pb-10 text-center text-[0.95rem] text-ink-muted">
         <span className="container-site block max-w-xl">Mes séances relèvent de la prévention et de l’éducation à la santé. Elles ne remplacent pas un suivi médical ou psychologique.</span>
       </p>
     </>

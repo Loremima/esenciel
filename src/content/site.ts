@@ -68,8 +68,36 @@ export const LEGAL = {
   updated: '23 octobre 2026',
 };
 
-export const NAV = [
-  { to: '/structures', label: 'Structures' },
-  { to: '/particuliers', label: 'Particuliers' },
-  { to: '/qui-suis-je', label: 'Qui suis-je' },
-];
+// Le menu de chaque espace (voir src/lib/espace.ts).
+export const NAV = {
+  commun: [
+    { to: '/structures', label: 'Structures' },
+    { to: '/particuliers', label: 'Pour vous ou un proche' },
+    { to: '/qui-suis-je', label: 'Qui suis-je' },
+  ],
+  structures: [
+    { to: '/structures', label: 'L’offre' },
+    { to: '/structures#actions', label: 'Les actions' },
+    { to: '/structures/dossier', label: 'Dossier de financement' },
+    { to: '/qui-suis-je', label: 'Qui suis-je' },
+  ],
+  particuliers: [
+    { to: '/particuliers', label: 'Par où commencer' },
+    { to: '/particuliers#gratuits', label: 'Ateliers gratuits' },
+    { to: '/particuliers#formules', label: 'Tarifs' },
+    { to: '/qui-suis-je', label: 'Qui suis-je' },
+  ],
+};
+
+// Le lien pour passer d'un espace à l'autre.
+export const SWITCH = {
+  structures: { label: 'Vous êtes un particulier ?', to: '/particuliers' },
+  particuliers: { label: 'Vous êtes une structure ?', to: '/structures' },
+};
+
+// L'appel à l'action de l'en-tête, selon l'espace.
+export const HEADER_CTA = {
+  commun: { label: 'Me contacter', to: '/contact' },
+  structures: { label: 'Échange de 20 min', to: '/structures#rdv' },
+  particuliers: { label: 'Appelez-moi', to: 'tel:+33625137250' },
+};
