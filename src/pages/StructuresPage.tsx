@@ -57,7 +57,7 @@ export default function StructuresPage() {
       />
 
       <Band tone="light" kicker="Les formats" title="Trois formats, un prix clair." intro={`Prix repères, plus ${REPERES_PRIX.km}. TVA non applicable. Devis précis après notre échange.`}>
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="rail gap-5 md:grid-cols-2 lg:grid-cols-3">
           {FORMATS.map((f) => {
             const dark = Boolean(f.highlight);
             return (
@@ -65,8 +65,8 @@ export default function StructuresPage() {
                 {f.highlight && <span className="absolute right-6 top-6 rounded-full bg-gold px-3 py-1 text-[0.8rem] font-semibold text-night">{f.highlight}</span>}
                 <p className={`font-heading text-[1.6rem] ${dark ? 'text-cream' : 'text-ink'}`}>{f.name}</p>
                 <p className={`mt-1 ${dark ? 'text-cream/75' : 'text-ink-soft'}`}>{f.pitch}</p>
-                <p className="mt-6 flex items-baseline gap-2">
-                  <span className={`font-heading text-[3rem] leading-none ${dark ? 'text-gold-light' : 'text-ink'}`}>{f.price}</span>
+                <p className="mt-6 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  <span className={`whitespace-nowrap font-heading text-[3rem] leading-none ${dark ? 'text-gold-light' : 'text-ink'}`}>{f.price}</span>
                   <span className={dark ? 'text-cream/70' : 'text-ink-muted'}>{f.unit}</span>
                 </p>
                 <p className={`mt-3 text-[0.95rem] ${dark ? 'text-cream/70' : 'text-ink-muted'}`}>{f.meta}</p>
@@ -83,7 +83,7 @@ export default function StructuresPage() {
       </Band>
 
       <Band id="actions" kicker="Le catalogue" title="Cinq actions prêtes à l’emploi.">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="rail gap-5 md:grid-cols-2 lg:grid-cols-3">
           {ACTIONS.map((a) => (
             <Link key={a.offre.slug} to={a.offre.path} className="reveal group flex flex-col rounded-3xl border border-sand-dark bg-cream-light p-6 transition-transform hover:-translate-y-1 md:p-7">
               <span className="w-fit rounded-full bg-night px-3 py-1 text-[0.8rem] font-semibold text-cream">{a.type}</span>

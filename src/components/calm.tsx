@@ -61,7 +61,7 @@ export function Kicker({ children, light }: { children: ReactNode; light?: boole
 const H1 = 'font-heading font-light leading-[1.02] [font-size:clamp(2.6rem,5.8vw,4.6rem)] [letter-spacing:-0.02em] [text-wrap:balance] [&_em]:italic [&_em]:text-gold-light';
 
 /** Ouverture en deux colonnes : le message à gauche, un visuel ou une carte à droite. */
-export function Hero({ kicker, title, lead, actions, aside, crumbs, media, full }: { kicker?: string; title: ReactNode; lead?: ReactNode; actions?: ReactNode; aside?: ReactNode; crumbs?: Crumb[]; media?: Media; full?: boolean }) {
+export function Hero({ kicker, title, lead, actions, aside, crumbs, media, full, note }: { kicker?: string; title: ReactNode; lead?: ReactNode; actions?: ReactNode; aside?: ReactNode; crumbs?: Crumb[]; media?: Media; full?: boolean; note?: ReactNode }) {
   return (
     <section className={`relative -mt-[4.5rem] overflow-hidden text-cream ${media ? 'bg-night' : 'glow-night'} ${full ? 'flex min-h-[100svh] items-end' : ''}`}>
       {media && (
@@ -70,7 +70,7 @@ export function Hero({ kicker, title, lead, actions, aside, crumbs, media, full 
           <div aria-hidden className={`absolute inset-0 ${full ? 'bg-gradient-to-t from-night via-night/40 to-night/10' : 'bg-gradient-to-r from-night via-night/85 to-night/30'}`} />
         </>
       )}
-      <div className={`container-site relative grid items-end gap-10 pb-14 pt-28 md:pb-20 md:pt-36 ${aside ? 'lg:grid-cols-[1.15fr_1fr] lg:gap-16' : ''} ${aside && !full ? 'lg:items-center' : ''}`}>
+      <div className={`container-site relative grid items-end gap-10 pt-28 md:pb-20 md:pt-36 ${full ? 'pb-24' : 'pb-14'} ${aside ? 'lg:grid-cols-[1.15fr_1fr] lg:gap-16' : ''} ${aside && !full ? 'lg:items-center' : ''}`}>
         <div className="min-w-0">
           {crumbs && (
             <div className="mb-4 hidden sm:block [&_a]:text-cream/60 [&_a:hover]:text-cream [&_li]:text-cream/60 [&_span]:!text-cream/60">
@@ -80,7 +80,8 @@ export function Hero({ kicker, title, lead, actions, aside, crumbs, media, full 
           {kicker && <Kicker light>{kicker}</Kicker>}
           <h1 className={`${H1} ${kicker ? 'mt-4' : ''} text-cream`}>{title}</h1>
           {lead && <p className="mt-6 max-w-xl text-[1.12rem] leading-relaxed text-cream/85 md:text-[1.2rem]">{lead}</p>}
-          {actions && <div className="mt-8 flex flex-wrap items-center gap-3">{actions}</div>}
+          {actions && <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">{actions}</div>}
+          {note && <div className="mt-10">{note}</div>}
         </div>
         {aside && <div className="min-w-0">{aside}</div>}
       </div>
@@ -165,17 +166,18 @@ export function CtaBand({ title, text, primary }: { title: ReactNode; text?: Rea
   return (
     <section className="bg-cream pb-16 md:pb-24">
       <div className="container-site">
-        <div className="relative overflow-hidden rounded-[2rem] bg-night p-3 text-cream md:p-6">
+        <div className="relative overflow-hidden rounded-[2rem] bg-night text-cream">
           <img src="/images/hero-plein-ecran.webp" alt="" aria-hidden loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-          <div className="glass relative grid items-center gap-8 rounded-[1.6rem] bg-night/40 px-6 py-10 md:grid-cols-[1.4fr_1fr] md:px-12 md:py-14">
-          <div>
-            <h2 className="font-heading font-light leading-[1.08] text-cream [font-size:clamp(2rem,3.8vw,3rem)] [text-wrap:balance]">{title}</h2>
-            {text && <p className="mt-4 max-w-lg text-[1.08rem] text-cream/80">{text}</p>}
-          </div>
-          <div className="flex flex-wrap gap-3 md:justify-end">
-            <Btn to={primary.to}>{primary.label}</Btn>
-            <CallBtn light label="Appeler" />
-          </div>
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-night/90 via-night/60 to-night/20" />
+          <div className="relative grid items-center gap-8 px-6 py-12 md:grid-cols-[1.4fr_1fr] md:px-14 md:py-20">
+            <div>
+              <h2 className="font-heading font-light leading-[1.08] text-cream [font-size:clamp(2rem,3.8vw,3rem)] [text-wrap:balance]">{title}</h2>
+              {text && <p className="mt-4 max-w-lg text-[1.08rem] text-cream/85">{text}</p>}
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap md:justify-end">
+              <Btn to={primary.to}>{primary.label}</Btn>
+              <CallBtn light label="Appeler" />
+            </div>
           </div>
         </div>
       </div>

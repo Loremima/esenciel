@@ -9,22 +9,16 @@ import { Seo } from '../lib/head';
 
 // L'accueil, la page vitrine : un titre court, les preuves, deux portes, la méthode, Véronique.
 
-const PREUVES = ['Formée en neuropsychologie du vieillissement', 'Certifiée MBSR, MBCT et MBCAS', 'Intervenante Neo Silver', 'Hérault, Aveyron et visio'];
 
-function HeroCard() {
+function Signature() {
   return (
-    <div className="glass mx-auto w-full max-w-sm rounded-[1.75rem] p-5 lg:ml-auto">
-      <div className="flex items-center gap-4">
-        <img src="/images/veronique-480.webp" alt="Portrait de Véronique Carrié" width={480} height={600} className="h-20 w-16 shrink-0 rounded-2xl object-cover" />
-        <span className="leading-snug">
-          <span className="block font-heading text-[1.3rem] text-cream">Véronique Carrié</span>
-          <span className="block text-[0.92rem] text-cream/75">Votre intervenante</span>
-        </span>
-      </div>
-      <ul className="mt-5 space-y-2 border-t border-white/15 pt-4 text-[0.95rem] text-cream/90">
-        {PREUVES.map((p) => <li key={p} className="flex items-center gap-2.5"><span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold-light" />{p}</li>)}
-      </ul>
-    </div>
+    <Link to="/qui-suis-je" className="group inline-flex items-center gap-3">
+      <img src="/images/veronique-480.webp" alt="" width={480} height={600} className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-white/30" />
+      <span className="leading-tight">
+        <span className="block font-heading text-[1.15rem] text-cream group-hover:text-gold-light">Véronique Carrié</span>
+        <span className="block text-[0.92rem] text-cream/75">Instructrice certifiée MBSR, MBCT et MBCAS</span>
+      </span>
+    </Link>
   );
 }
 
@@ -65,7 +59,7 @@ export default function HomePage() {
         }
         media={MEDIA.ciel}
         full
-        aside={<HeroCard />}
+        note={<Signature />}
       />
 
       <Band tone="light" kicker="Deux façons de travailler ensemble" title="Pour qui ?">

@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
-import { Btn, Card, Hero, Kicker, PhoneLine } from '../components/calm';
+import { Btn, Hero, PhoneLine } from '../components/calm';
 import { FIRST_MEETING, SITE } from '../content/site';
 import { ALL_STRUCTURE_OFFERS, particuliers } from '../content/offres';
 import { Seo, breadcrumbLd } from '../lib/head';
@@ -59,30 +59,37 @@ export default function ContactPage() {
         path="/contact"
         jsonLd={[breadcrumbLd(crumbs)]}
       />
-      <Hero title={<>Parlons-en.</>} lead="Le plus simple est de m’appeler. Sinon, écrivez-moi : je réponds sous 48 heures." crumbs={crumbs} />
+      <Hero title={<>Parlons-en.</>} lead="Réservez un créneau, écrivez-moi ou appelez. Je réponds sous 48 heures." crumbs={crumbs} />
 
-      <section id="formulaire" className="scroll-mt-20 bg-cream py-16 md:py-24">
-        <div className="container-site grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-16">
-          <aside className="space-y-5">
-            <Card>
-              <Kicker>Par téléphone</Kicker>
-              <p className="mt-3"><PhoneLine big /></p>
-              <p className="mt-2 text-ink-soft">Si je ne décroche pas, laissez un message : je vous rappelle.</p>
-            </Card>
-            <Card dark>
-              <Kicker light>Vous êtes une structure ?</Kicker>
-              <p className="mt-3 text-cream/85">20 minutes au téléphone, gratuites, à réserver en ligne.</p>
-              <div className="mt-5"><Btn to={FIRST_MEETING.structure.href}>Réserver 20 min</Btn></div>
-            </Card>
-            <Card>
-              <Kicker>Particulier ?</Kicker>
-              <p className="mt-3 text-ink-soft">La séance découverte est offerte, en visio.</p>
-              <div className="mt-5"><Btn to={SITE.decouverte} variant="outline">Séance découverte</Btn></div>
-            </Card>
-            <p className="text-ink-muted">{SITE.zone}, et à distance.</p>
-          </aside>
-          <div className="rounded-[2rem] border border-sand-dark bg-cream-light p-6 md:p-10">
-            <h2 className="mb-8 font-heading text-[2rem] font-light text-ink">Par écrit</h2>
+      <section className="glow-cream py-16 md:py-20">
+        <div className="container-site">
+          <p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-gold-dark">Le plus rapide</p>
+          <h2 className="mt-3 font-heading font-light leading-[1.1] text-ink [font-size:clamp(2rem,3.6vw,2.8rem)]">Réservez directement un créneau.</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {[
+              { k: 'Vous êtes une structure', t: '20 minutes au téléphone, gratuites, pour parler de votre projet.', to: FIRST_MEETING.structure.href, b: 'Réserver 20 min' },
+              { k: 'Pour vous ou un proche', t: 'La séance découverte est offerte, en visio. On choisit ensemble.', to: SITE.decouverte, b: 'Séance découverte' },
+            ].map((o) => (
+              <div key={o.k} className="glass-light flex flex-col rounded-[2rem] p-7 md:p-9">
+                <p className="font-heading text-[1.7rem] leading-tight text-ink">{o.k}</p>
+                <p className="mt-3 flex-1 text-[1.06rem] text-ink-soft">{o.t}</p>
+                <div className="mt-7"><Btn to={o.to}>{o.b}</Btn></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="formulaire" className="scroll-mt-24 bg-cream py-16 md:py-24">
+        <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
+          <div>
+            <p className="text-[0.8rem] font-semibold uppercase tracking-[0.16em] text-gold-dark">Sinon</p>
+            <h2 className="mt-3 font-heading font-light leading-[1.1] text-ink [font-size:clamp(2rem,3.6vw,2.8rem)]">Écrivez-moi, ou appelez.</h2>
+            <p className="mt-4 text-[1.06rem] text-ink-soft">Je réponds sous 48 heures. Si je ne décroche pas, laissez un message : je vous rappelle.</p>
+            <p className="mt-6"><PhoneLine big /></p>
+            <p className="mt-2 text-ink-muted">{SITE.zone}, et à distance.</p>
+          </div>
+          <div className="min-w-0">
             {status === 'sent' ? (
               <div role="status" className="py-10 text-center">
                 <CheckCircle2 aria-hidden className="mx-auto h-12 w-12 text-sage" />

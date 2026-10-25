@@ -57,11 +57,11 @@ export default function Header() {
     `relative py-2 text-[0.95rem] transition-colors ${overlay ? 'text-cream/85 hover:text-cream' : `hover:text-ink ${active ? 'text-ink after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-gold' : 'text-ink-soft'}`}`;
 
   return (
-    <header className="sticky top-0 z-40 px-3 pt-3">
+    <header className={`sticky top-0 z-40 transition-colors lg:bg-transparent lg:px-3 lg:pt-3 lg:backdrop-blur-none ${open ? 'bg-cream' : overlay ? 'bg-transparent' : 'bg-cream/85 backdrop-blur-xl'}`}>
       <a href="#contenu" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-full focus:bg-night focus:px-4 focus:py-2 focus:text-cream">
         Aller au contenu
       </a>
-      <div className={`mx-auto flex h-[3.75rem] max-w-6xl items-center justify-between gap-6 rounded-full pl-4 pr-2 transition-colors sm:pl-6 ${overlay ? 'glass' : 'glass-light'}`}>
+      <div className={`mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between gap-6 px-5 sm:px-8 lg:h-[3.75rem] lg:rounded-full lg:pl-6 lg:pr-2 ${overlay ? 'lg:glass' : 'lg:glass-light'}`}>
         <Link to="/" title="Accueil">
           <Logo light={overlay} />
         </Link>
@@ -78,29 +78,31 @@ export default function Header() {
 
         <button
           type="button"
-          className={`grid h-11 w-11 place-items-center rounded-full lg:hidden ${overlay ? 'bg-white/10 text-cream' : 'bg-ink/5 text-ink'}`}
+          className={`-mr-2 grid h-11 w-11 place-items-center lg:hidden ${overlay ? 'text-cream' : 'text-ink'}`}
           aria-expanded={open}
           aria-controls="menu-mobile"
           onClick={() => setOpen((o) => !o)}
         >
-          {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+          {open ? <X className="h-6 w-6" strokeWidth={1.6} aria-hidden /> : <Menu className="h-6 w-6" strokeWidth={1.6} aria-hidden />}
           <span className="sr-only">{open ? 'Fermer le menu' : 'Ouvrir le menu'}</span>
         </button>
       </div>
 
-      <div id="menu-mobile" hidden={!open} className="glass-light mx-auto mt-2 max-w-6xl rounded-3xl lg:hidden">
-        <nav aria-label="Navigation mobile" className="flex flex-col px-5 py-4">
+      <div id="menu-mobile" hidden={!open} className="fixed inset-x-0 bottom-0 top-[4.5rem] overflow-y-auto bg-cream lg:hidden">
+        <nav aria-label="Navigation mobile" className="flex min-h-full flex-col px-5 pb-8 pt-4 sm:px-8">
           {NAV.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className={`border-b border-sand-dark/60 py-4 text-center font-heading text-2xl ${isActive(l.to) ? 'text-gold-dark' : 'text-ink'}`}
+              className={`border-b border-sand-dark/60 py-5 font-heading text-[2rem] leading-tight ${isActive(l.to) ? 'text-gold-dark' : 'text-ink'}`}
             >
               {l.label}
             </Link>
           ))}
-          <Link to="/contact" className="border-b border-sand-dark/60 py-4 text-center font-heading text-2xl text-ink">Contact</Link>
-          <CtaLink className="mt-5 rounded-full bg-gold px-5 py-4 text-center font-semibold text-night" />
+          <Link to="/contact" className={`border-b border-sand-dark/60 py-5 font-heading text-[2rem] leading-tight ${isActive('/contact') ? 'text-gold-dark' : 'text-ink'}`}>Contact</Link>
+          <div className="mt-auto pt-10">
+            <CtaLink className="block rounded-full bg-gold px-5 py-4 text-center font-semibold text-night" />
+          </div>
         </nav>
       </div>
     </header>

@@ -64,7 +64,7 @@ function Selecteur() {
 
   return (
     <div>
-      <div role="tablist" aria-label="Ce qui vous amène" className="flex flex-wrap gap-2">
+      <div role="tablist" aria-label="Ce qui vous amène" className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0">
         {BESOINS.map((x) => (
           <button
             key={x.id}
@@ -74,7 +74,7 @@ function Selecteur() {
             aria-selected={x.id === id}
             aria-controls="besoin-panel"
             onClick={() => setId(x.id)}
-            className={`min-h-[48px] rounded-full px-5 text-[1rem] font-semibold transition-colors ${x.id === id ? 'bg-night text-cream' : 'glass-light text-ink hover:bg-white'}`}
+            className={`min-h-[48px] shrink-0 whitespace-nowrap rounded-full px-5 text-[1rem] font-semibold transition-colors ${x.id === id ? 'bg-night text-cream' : 'glass-light text-ink hover:bg-white'}`}
           >
             {x.label}
           </button>
@@ -184,9 +184,10 @@ export default function ParticuliersPage() {
 
       <section id="gratuits" className="scroll-mt-24 bg-cream pb-16 md:pb-24">
         <div className="container-site">
-          <div className="relative overflow-hidden rounded-[2rem] bg-night p-3 md:p-6">
+          <div className="relative overflow-hidden rounded-[2rem] bg-night">
             <img src={PHOTOS.atelierGratuit.src} alt="" aria-hidden loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-            <div className="glass relative grid items-center gap-8 rounded-[1.6rem] bg-night/60 p-6 text-cream md:grid-cols-2 md:gap-14 md:p-12">
+            <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/80 to-night/50" />
+            <div className="relative grid items-center gap-8 px-6 py-12 text-cream md:grid-cols-2 md:gap-14 md:px-14 md:py-16">
               <div>
                 <Kicker light>Ateliers gratuits</Kicker>
                 <h2 className="mt-3 font-heading font-light leading-[1.08] text-cream [font-size:clamp(2rem,3.6vw,2.9rem)]">Près de chez vous, et gratuits.</h2>
