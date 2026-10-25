@@ -26,4 +26,5 @@ export const VIDEO_HERO_ROUTES = new Set<string>([
   '/particuliers',
   ...particuliers.map((o) => o.path),
   '/qui-suis-je',
+  '/contact',
 ]);

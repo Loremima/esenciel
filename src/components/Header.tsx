@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { NAV } from '../content/site';
+import { FIRST_MEETING, NAV, SITE } from '../content/site';
 import { VIDEO_HERO_ROUTES } from '../routes';
 
 export function Logo({ light = false }: { light?: boolean }) {
@@ -28,7 +28,11 @@ export default function Header() {
   const { pathname, hash } = useLocation();
   // Une rubrique reste active sur toutes ses pages (une fiche action allume « Structures »).
   const isActive = (to: string) => pathname === to || pathname.startsWith(`${to}/`);
-  const CtaLink = ({ className }: { className: string }) => <Link to="/contact" className={className}>Contact</Link>;
+  // Le bouton principal ouvre la réservation sutempo : séance découverte côté particuliers, appel de 20 min sinon.
+  const perso = pathname.startsWith('/particuliers');
+  const CtaLink = ({ className }: { className: string }) => (
+    <a href={perso ? SITE.decouverte : FIRST_MEETING.structure.href} className={className}>{perso ? 'Séance découverte' : 'Réserver 20 min'}</a>
+  );
 
   useEffect(() => setOpen(false), [pathname, hash]);
 
@@ -53,27 +57,28 @@ export default function Header() {
     `relative py-2 text-[0.95rem] transition-colors ${overlay ? 'text-cream/85 hover:text-cream' : `hover:text-ink ${active ? 'text-ink after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-gold' : 'text-ink-soft'}`}`;
 
   return (
-    <header className={`sticky top-0 z-40 border-b transition-colors ${overlay ? 'border-transparent bg-transparent' : scrolled || open ? 'border-sand-dark/80 bg-cream/95 backdrop-blur' : 'border-transparent bg-cream'}`}>
+    <header className="sticky top-0 z-40 px-3 pt-3">
       <a href="#contenu" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-full focus:bg-night focus:px-4 focus:py-2 focus:text-cream">
         Aller au contenu
       </a>
-      <div className="container-site flex h-[4.5rem] items-center justify-between gap-6">
+      <div className={`mx-auto flex h-[3.75rem] max-w-6xl items-center justify-between gap-6 rounded-full pl-4 pr-2 transition-colors sm:pl-6 ${overlay ? 'glass' : 'glass-light'}`}>
         <Link to="/" title="Accueil">
           <Logo light={overlay} />
         </Link>
 
-        <nav aria-label="Navigation principale" className="hidden items-center gap-6 md:flex">
+        <nav aria-label="Navigation principale" className="hidden items-center gap-6 lg:flex">
           {NAV.map((l) => (
             <Link key={l.to} to={l.to} className={linkCls(isActive(l.to))}>
               {l.label}
             </Link>
           ))}
-          <CtaLink className={`rounded-full border px-5 py-2 text-[0.95rem] font-medium transition-colors ${overlay ? 'border-cream/50 text-cream hover:bg-cream/10' : 'border-ink/40 text-ink hover:bg-night hover:text-cream'}`} />
+          <Link to="/contact" className={linkCls(isActive('/contact'))}>Contact</Link>
+          <CtaLink className="rounded-full bg-gold px-5 py-2.5 text-[0.95rem] font-semibold text-night transition-colors hover:bg-gold-light" />
         </nav>
 
         <button
           type="button"
-          className={`grid h-11 w-11 place-items-center rounded-full border md:hidden ${overlay ? 'border-cream/40 text-cream' : 'border-sand-dark text-ink'}`}
+          className={`grid h-11 w-11 place-items-center rounded-full lg:hidden ${overlay ? 'bg-white/10 text-cream' : 'bg-ink/5 text-ink'}`}
           aria-expanded={open}
           aria-controls="menu-mobile"
           onClick={() => setOpen((o) => !o)}
@@ -83,8 +88,8 @@ export default function Header() {
         </button>
       </div>
 
-      <div id="menu-mobile" hidden={!open} className="border-t border-sand-dark/80 bg-cream md:hidden">
-        <nav aria-label="Navigation mobile" className="container-site flex flex-col py-4">
+      <div id="menu-mobile" hidden={!open} className="glass-light mx-auto mt-2 max-w-6xl rounded-3xl lg:hidden">
+        <nav aria-label="Navigation mobile" className="flex flex-col px-5 py-4">
           {NAV.map((l) => (
             <Link
               key={l.to}
@@ -94,7 +99,8 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
-          <CtaLink className="mt-5 rounded-full border border-ink/40 px-5 py-4 text-center font-medium text-ink" />
+          <Link to="/contact" className="border-b border-sand-dark/60 py-4 text-center font-heading text-2xl text-ink">Contact</Link>
+          <CtaLink className="mt-5 rounded-full bg-gold px-5 py-4 text-center font-semibold text-night" />
         </nav>
       </div>
     </header>

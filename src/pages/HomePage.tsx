@@ -3,32 +3,34 @@ import { ArrowRight } from 'lucide-react';
 import { CREDENTIALS, FIRST_MEETING, SITE } from '../content/site';
 import { MEDIA } from '../content/media';
 import { methode } from '../content/structures';
-import { Band, Btn, Checks, CtaBand, Hero, TextLink } from '../components/calm';
-import { LoopVideo } from '../components/funnel';
+import { Band, Btn, Checks, CtaBand, Hero, Kicker, TextLink } from '../components/calm';
+import { ColorTest } from '../components/ColorTest';
 import { Seo } from '../lib/head';
 
 // L'accueil, la page vitrine : un titre court, les preuves, deux portes, la méthode, Véronique.
 
 const PREUVES = ['Formée en neuropsychologie du vieillissement', 'Certifiée MBSR, MBCT et MBCAS', 'Intervenante Neo Silver', 'Hérault, Aveyron et visio'];
 
-function HeroVisual() {
+function HeroCard() {
   return (
-    <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] bg-night-deep shadow-2xl lg:ml-auto">
-      <LoopVideo media={MEDIA.herbes} priority />
-      <div className="absolute inset-x-4 bottom-4 flex items-center gap-4 rounded-2xl bg-night/80 p-3 pr-5 backdrop-blur">
-        <img src="/images/veronique-480.webp" alt="Portrait de Véronique Carrié" width={480} height={600} className="h-16 w-14 shrink-0 rounded-xl object-cover" />
-        <span className="min-w-0 leading-snug">
-          <span className="block font-heading text-[1.15rem] text-cream">Véronique Carrié</span>
-          <span className="block text-[0.9rem] text-cream/75">{CREDENTIALS.certifications}</span>
+    <div className="glass mx-auto w-full max-w-sm rounded-[1.75rem] p-5 lg:ml-auto">
+      <div className="flex items-center gap-4">
+        <img src="/images/veronique-480.webp" alt="Portrait de Véronique Carrié" width={480} height={600} className="h-20 w-16 shrink-0 rounded-2xl object-cover" />
+        <span className="leading-snug">
+          <span className="block font-heading text-[1.3rem] text-cream">Véronique Carrié</span>
+          <span className="block text-[0.92rem] text-cream/75">Votre intervenante</span>
         </span>
       </div>
+      <ul className="mt-5 space-y-2 border-t border-white/15 pt-4 text-[0.95rem] text-cream/90">
+        {PREUVES.map((p) => <li key={p} className="flex items-center gap-2.5"><span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold-light" />{p}</li>)}
+      </ul>
     </div>
   );
 }
 
 function Door({ to, dark, kicker, title, points, note, cta }: { to: string; dark?: boolean; kicker: string; title: string; points: string[]; note: string; cta: string }) {
   return (
-    <Link to={to} className={`group flex flex-col rounded-[2rem] p-7 transition-transform hover:-translate-y-1 md:p-10 ${dark ? 'bg-night text-cream' : 'border border-sand-dark bg-cream-light text-ink'}`}>
+    <Link to={to} className={`group flex flex-col rounded-[2rem] p-7 transition-transform hover:-translate-y-1 md:p-10 ${dark ? 'glow-night text-cream' : 'glass-light text-ink'}`}>
       <span className={`text-[0.8rem] font-semibold uppercase tracking-[0.16em] ${dark ? 'text-gold-light' : 'text-gold-dark'}`}>{kicker}</span>
       <span className={`mt-4 font-heading font-light leading-[1.08] [font-size:clamp(1.9rem,3vw,2.5rem)] ${dark ? 'text-cream' : 'text-ink'}`}>{title}</span>
       <span className={`mt-6 flex-1 text-[1.06rem] ${dark ? 'text-cream/85' : 'text-ink-soft'}`}><Checks light={dark} items={points} /></span>
@@ -61,17 +63,13 @@ export default function HomePage() {
             <Btn to="/particuliers" variant="outline" light>Pour moi ou un proche</Btn>
           </>
         }
-        aside={<HeroVisual />}
+        media={MEDIA.ciel}
+        full
+        aside={<HeroCard />}
       />
 
-      <section className="border-b border-sand-dark bg-cream">
-        <ul className="container-site grid grid-cols-2 gap-x-6 gap-y-3 py-6 text-[0.95rem] text-ink-soft md:flex md:justify-between">
-          {PREUVES.map((p) => <li key={p} className="flex items-center gap-2"><span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />{p}</li>)}
-        </ul>
-      </section>
-
-      <Band kicker="Deux façons de travailler ensemble" title="Pour qui ?">
-        <div className="grid gap-5 md:grid-cols-2">
+      <Band tone="light" kicker="Deux façons de travailler ensemble" title="Pour qui ?">
+        <div className="reveal grid gap-5 md:grid-cols-2">
           <Door
             to="/structures"
             dark
@@ -92,16 +90,25 @@ export default function HomePage() {
         </div>
       </Band>
 
-      <Band tone="night" kicker="La méthode" title="Sortir du pilote automatique.">
-        <ol className="grid gap-10 md:grid-cols-3">
-          {methode.map((m, i) => (
-            <li key={m.title} className="border-t border-cream/20 pt-6">
-              <span className="font-heading text-[2.6rem] leading-none text-gold-light">{String(i + 1).padStart(2, '0')}</span>
-              <p className="mt-4 font-heading text-[1.6rem] text-cream">{m.title}</p>
-              <p className="mt-2 text-[1.06rem] text-cream/75">{m.text}</p>
-            </li>
-          ))}
-        </ol>
+      <Band tone="night">
+        <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <Kicker light>La méthode</Kicker>
+            <h2 className="mt-3 font-heading font-light leading-[1.05] text-cream [font-size:clamp(2.2rem,4.2vw,3.4rem)]">Sortir du pilote <em className="italic text-gold-light">automatique.</em></h2>
+            <ol className="mt-10 space-y-7">
+              {methode.map((m, i) => (
+                <li key={m.title} className="grid grid-cols-[3.2rem_1fr] gap-4">
+                  <span className="font-heading text-[2.2rem] leading-none text-gold-light">{String(i + 1).padStart(2, '0')}</span>
+                  <span>
+                    <span className="block font-heading text-[1.45rem] text-cream">{m.title}</span>
+                    <span className="mt-1 block text-[1.04rem] text-cream/75">{m.text}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className="reveal"><ColorTest /></div>
+        </div>
       </Band>
 
       <Band>

@@ -11,17 +11,15 @@ import { Seo, breadcrumbLd } from '../lib/head';
 
 function Partage() {
   return (
-    <div className="grid gap-4 rounded-[2rem] bg-cream-light p-6 text-ink shadow-2xl sm:grid-cols-[0.8fr_1.2fr] md:p-8">
-      <div>
-        <Kicker>Vous fournissez</Kicker>
-        <ul className="mt-4 space-y-3 font-heading text-[1.5rem] leading-tight">
-          {votrePart.map((v) => <li key={v}>{v}</li>)}
-        </ul>
-      </div>
-      <div className="rounded-2xl bg-night p-5 text-cream md:p-6">
+    <div className="glass mx-auto w-full max-w-lg rounded-[2rem] p-6 text-cream md:p-8 lg:ml-auto">
+      <Kicker light>Vous fournissez</Kicker>
+      <ul className="mt-4 flex flex-wrap gap-2">
+        {votrePart.map((v) => <li key={v} className="rounded-full bg-white/10 px-4 py-2 font-heading text-[1.2rem] ring-1 ring-white/20">{v}</li>)}
+      </ul>
+      <div className="mt-7 border-t border-white/15 pt-6">
         <Kicker light>Je m’occupe du reste</Kicker>
-        <div className="mt-4 text-[1rem] text-cream/90">
-          <Checks light items={['La fiche-action rédigée', 'L’affiche et le texte d’invitation', 'L’animation sur place', 'L’évaluation et le bilan']} />
+        <div className="mt-4 text-[1.02rem] text-cream/90">
+          <Checks light items={['La fiche-action rédigée', 'L’affiche et le texte d’invitation', 'L’animation sur place', 'L’évaluation et le bilan écrit']} />
         </div>
       </div>
     </div>
@@ -58,12 +56,12 @@ export default function StructuresPage() {
         aside={<Partage />}
       />
 
-      <Band kicker="Les formats" title="Trois formats, un prix clair." intro={`Prix repères, plus ${REPERES_PRIX.km}. TVA non applicable. Devis précis après notre échange.`}>
+      <Band tone="light" kicker="Les formats" title="Trois formats, un prix clair." intro={`Prix repères, plus ${REPERES_PRIX.km}. TVA non applicable. Devis précis après notre échange.`}>
         <div className="grid gap-5 lg:grid-cols-3">
           {FORMATS.map((f) => {
             const dark = Boolean(f.highlight);
             return (
-              <div key={f.name} className={`relative flex flex-col rounded-[2rem] p-7 md:p-8 ${dark ? 'bg-night text-cream shadow-2xl lg:-my-4 lg:py-12' : 'border border-sand-dark bg-cream-light text-ink'}`}>
+              <div key={f.name} className={`relative flex flex-col rounded-[2rem] p-7 md:p-8 ${dark ? 'glow-night text-cream shadow-2xl lg:-my-4 lg:py-12' : 'glass-light text-ink'}`}>
                 {f.highlight && <span className="absolute right-6 top-6 rounded-full bg-gold px-3 py-1 text-[0.8rem] font-semibold text-night">{f.highlight}</span>}
                 <p className={`font-heading text-[1.6rem] ${dark ? 'text-cream' : 'text-ink'}`}>{f.name}</p>
                 <p className={`mt-1 ${dark ? 'text-cream/75' : 'text-ink-soft'}`}>{f.pitch}</p>
@@ -84,10 +82,10 @@ export default function StructuresPage() {
         </div>
       </Band>
 
-      <Band id="actions" tone="light" kicker="Le catalogue" title="Cinq actions prêtes à l’emploi.">
+      <Band id="actions" kicker="Le catalogue" title="Cinq actions prêtes à l’emploi.">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {ACTIONS.map((a) => (
-            <Link key={a.offre.slug} to={a.offre.path} className="group flex flex-col rounded-3xl border border-sand-dark bg-cream p-6 transition-transform hover:-translate-y-1 md:p-7">
+            <Link key={a.offre.slug} to={a.offre.path} className="reveal group flex flex-col rounded-3xl border border-sand-dark bg-cream-light p-6 transition-transform hover:-translate-y-1 md:p-7">
               <span className="w-fit rounded-full bg-night px-3 py-1 text-[0.8rem] font-semibold text-cream">{a.type}</span>
               <span className="mt-5 font-heading text-[1.45rem] leading-snug text-ink">{a.offre.title.replace(/[«»]/g, '').trim()}</span>
               <span className="mt-3 flex-1 text-ink-soft">{a.offre.promise}</span>
@@ -100,7 +98,7 @@ export default function StructuresPage() {
               </span>
             </Link>
           ))}
-          <div className="flex flex-col justify-between rounded-3xl bg-night p-6 text-cream md:p-7">
+          <div className="reveal glow-night flex flex-col justify-between rounded-3xl p-6 text-cream md:p-7">
             <span>
               <span className="w-fit rounded-full bg-gold px-3 py-1 text-[0.8rem] font-semibold text-night">Sur mesure</span>
               <span className="mt-5 block font-heading text-[1.6rem] leading-snug">Un autre public, un autre besoin ?</span>
@@ -121,7 +119,7 @@ export default function StructuresPage() {
             Chaque action est reliée aux compétences psychosociales de Santé publique France, évaluée avant et après, et suivie d’un bilan écrit. Tout ce qu’un financeur vérifie est réuni sur une page.
           </p>
           <ul className="flex flex-wrap content-start gap-2">
-            {financeurs.map((f) => <li key={f} className="rounded-full border border-cream/25 px-4 py-2 text-[0.95rem] text-cream/90">{f}</li>)}
+            {financeurs.map((f) => <li key={f} className="glass rounded-full px-4 py-2 text-[0.95rem] text-cream/90">{f}</li>)}
           </ul>
         </div>
       </Band>

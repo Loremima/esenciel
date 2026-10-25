@@ -59,9 +59,53 @@
   .link-underline {
     @apply underline decoration-gold decoration-2 underline-offset-4 transition-colors hover:text-gold-dark;
   }
+  /* Verre façon Apple : flou, saturation, liseré clair et reflet en haut. */
+  .glass {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 20px 50px -20px rgba(5, 10, 20, 0.55);
+  }
+  .glass-light {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.5));
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 20px 50px -24px rgba(27, 35, 51, 0.28);
+  }
+  /* Halos de couleur derrière le verre (fond nuit). */
+  .glow-night {
+    background:
+      radial-gradient(40rem 28rem at 85% 10%, rgba(201, 151, 58, 0.28), transparent 60%),
+      radial-gradient(36rem 30rem at 5% 95%, rgba(84, 120, 190, 0.3), transparent 60%),
+      #121A2B;
+  }
+  /* Halos clairs (fond crème), pour que le verre clair se voie. */
+  .glow-cream {
+    background:
+      radial-gradient(38rem 26rem at 90% 0%, rgba(232, 196, 122, 0.35), transparent 60%),
+      radial-gradient(34rem 26rem at 0% 100%, rgba(150, 175, 220, 0.3), transparent 60%),
+      #F6F1E7;
+  }
   .field {
     @apply w-full rounded-xl border border-sand-dark bg-cream-light px-4 py-3 text-base text-ink placeholder:text-ink-muted/70 focus:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold/40;
   }
+}
+
+/* Apparition douce au défilement, sans JavaScript (navigateurs récents seulement). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 22%;
+    }
+  }
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(28px) scale(0.98); }
+  to { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

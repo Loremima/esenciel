@@ -20,8 +20,8 @@ export function Btn({ to, children, variant = 'primary', light, download }: { to
     variant === 'primary'
       ? 'bg-gold text-night hover:bg-gold-light'
       : light
-        ? 'border border-cream/40 text-cream hover:bg-cream/10'
-        : 'border border-ink/30 text-ink hover:border-ink hover:bg-night hover:text-cream';
+        ? 'glass text-cream hover:bg-white/20'
+        : 'glass-light text-ink hover:bg-white';
   const cls = `${base} ${look}`;
   if (isInternal(to) && !download) return <Link to={to} className={cls}>{children}</Link>;
   return <a href={to} className={cls} download={download}>{children}</a>;
@@ -30,7 +30,7 @@ export function Btn({ to, children, variant = 'primary', light, download }: { to
 /** Le bouton « Appeler », avec le numéro visible. */
 export function CallBtn({ light, label }: { light?: boolean; label?: string }) {
   return (
-    <a href={SITE.phoneHref} className={`inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border px-6 text-[0.98rem] font-semibold transition-colors ${light ? 'border-cream/40 text-cream hover:bg-cream/10' : 'border-ink/30 text-ink hover:border-ink'}`}>
+    <a href={SITE.phoneHref} className={`inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border px-6 text-[0.98rem] font-semibold transition-colors ${light ? 'glass text-cream hover:bg-white/20' : 'glass-light text-ink hover:bg-white'}`}>
       <Phone aria-hidden className="h-4 w-4" /> {label ?? SITE.phone}
     </a>
   );
@@ -61,16 +61,16 @@ export function Kicker({ children, light }: { children: ReactNode; light?: boole
 const H1 = 'font-heading font-light leading-[1.02] [font-size:clamp(2.6rem,5.8vw,4.6rem)] [letter-spacing:-0.02em] [text-wrap:balance] [&_em]:italic [&_em]:text-gold-light';
 
 /** Ouverture en deux colonnes : le message à gauche, un visuel ou une carte à droite. */
-export function Hero({ kicker, title, lead, actions, aside, crumbs, media }: { kicker?: string; title: ReactNode; lead?: ReactNode; actions?: ReactNode; aside?: ReactNode; crumbs?: Crumb[]; media?: Media }) {
+export function Hero({ kicker, title, lead, actions, aside, crumbs, media, full }: { kicker?: string; title: ReactNode; lead?: ReactNode; actions?: ReactNode; aside?: ReactNode; crumbs?: Crumb[]; media?: Media; full?: boolean }) {
   return (
-    <section className="relative -mt-[4.5rem] overflow-hidden bg-night text-cream">
+    <section className={`relative -mt-[4.5rem] overflow-hidden text-cream ${media ? 'bg-night' : 'glow-night'} ${full ? 'flex min-h-[100svh] items-end' : ''}`}>
       {media && (
         <>
           <LoopVideo media={media} priority />
-          <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-night via-night/85 to-night/30" />
+          <div aria-hidden className={`absolute inset-0 ${full ? 'bg-gradient-to-t from-night via-night/40 to-night/10' : 'bg-gradient-to-r from-night via-night/85 to-night/30'}`} />
         </>
       )}
-      <div className={`container-site relative grid items-center gap-10 pb-14 pt-28 md:pb-20 md:pt-36 ${aside ? 'lg:grid-cols-[1.15fr_1fr] lg:gap-16' : ''}`}>
+      <div className={`container-site relative grid items-end gap-10 pb-14 pt-28 md:pb-20 md:pt-36 ${aside ? 'lg:grid-cols-[1.15fr_1fr] lg:gap-16' : ''} ${aside && !full ? 'lg:items-center' : ''}`}>
         <div className="min-w-0">
           {crumbs && (
             <div className="mb-4 hidden sm:block [&_a]:text-cream/60 [&_a:hover]:text-cream [&_li]:text-cream/60 [&_span]:!text-cream/60">
@@ -90,7 +90,7 @@ export function Hero({ kicker, title, lead, actions, aside, crumbs, media }: { k
 
 /** Une section pleine largeur avec un titre court, aligné à gauche. */
 export function Band({ title, kicker, intro, id, tone = 'cream', side, children }: { title?: ReactNode; kicker?: string; intro?: ReactNode; id?: string; tone?: 'cream' | 'light' | 'night'; side?: ReactNode; children?: ReactNode }) {
-  const tones = { cream: 'bg-cream text-ink', light: 'bg-cream-light text-ink', night: 'bg-night text-cream' };
+  const tones = { cream: 'bg-cream text-ink', light: 'glow-cream text-ink', night: 'glow-night text-cream' };
   const dark = tone === 'night';
   return (
     <section id={id} className={`scroll-mt-20 py-16 md:py-24 ${tones[tone]}`}>
@@ -124,8 +124,9 @@ export function Part({ title, id, large, children }: { title?: ReactNode; id?: s
 }
 
 /** Carte. */
-export function Card({ children, dark, className = '' }: { children: ReactNode; dark?: boolean; className?: string }) {
-  return <div className={`rounded-3xl p-6 md:p-8 ${dark ? 'bg-night text-cream' : 'border border-sand-dark bg-cream-light text-ink'} ${className}`}>{children}</div>;
+export function Card({ children, dark, glass, className = '' }: { children: ReactNode; dark?: boolean; glass?: boolean; className?: string }) {
+  const look = glass ? (dark ? 'glass text-cream' : 'glass-light text-ink') : dark ? 'glow-night text-cream' : 'border border-sand-dark bg-cream-light text-ink';
+  return <div className={`rounded-3xl p-6 md:p-8 ${look} ${className}`}>{children}</div>;
 }
 
 /** Liste à coches. */
@@ -164,7 +165,9 @@ export function CtaBand({ title, text, primary }: { title: ReactNode; text?: Rea
   return (
     <section className="bg-cream pb-16 md:pb-24">
       <div className="container-site">
-        <div className="grid items-center gap-8 rounded-[2rem] bg-night px-6 py-12 text-cream md:grid-cols-[1.4fr_1fr] md:px-14 md:py-16">
+        <div className="relative overflow-hidden rounded-[2rem] bg-night p-3 text-cream md:p-6">
+          <img src="/images/hero-plein-ecran.webp" alt="" aria-hidden loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="glass relative grid items-center gap-8 rounded-[1.6rem] bg-night/40 px-6 py-10 md:grid-cols-[1.4fr_1fr] md:px-12 md:py-14">
           <div>
             <h2 className="font-heading font-light leading-[1.08] text-cream [font-size:clamp(2rem,3.8vw,3rem)] [text-wrap:balance]">{title}</h2>
             {text && <p className="mt-4 max-w-lg text-[1.08rem] text-cream/80">{text}</p>}
@@ -172,6 +175,7 @@ export function CtaBand({ title, text, primary }: { title: ReactNode; text?: Rea
           <div className="flex flex-wrap gap-3 md:justify-end">
             <Btn to={primary.to}>{primary.label}</Btn>
             <CallBtn light label="Appeler" />
+          </div>
           </div>
         </div>
       </div>
@@ -183,14 +187,14 @@ export function CtaBand({ title, text, primary }: { title: ReactNode; text?: Rea
 export function SideCard({ price, priceNote, facts, action, children }: { price: string; priceNote?: string; facts: { label: string; value: string }[]; action: ReactNode; children?: ReactNode }) {
   return (
     <aside className="lg:sticky lg:top-24">
-      <Card>
+      <Card glass>
         <p className="font-heading text-[2.2rem] leading-none text-ink">{price}</p>
         {priceNote && <p className="mt-2 text-[0.95rem] text-ink-muted">{priceNote}</p>}
-        <dl className="mt-6 divide-y divide-sand-dark border-y border-sand-dark text-[0.98rem]">
+        <dl className="mt-6 divide-y divide-ink/10 border-y border-ink/10 text-[0.98rem]">
           {facts.map((f) => (
-            <div key={f.label} className="flex justify-between gap-4 py-3">
-              <dt className="shrink-0 text-ink-muted">{f.label}</dt>
-              <dd className="text-right text-ink">{f.value}</dd>
+            <div key={f.label} className="py-3">
+              <dt className="text-[0.85rem] text-ink-muted">{f.label}</dt>
+              <dd className="mt-0.5 text-ink">{f.value}</dd>
             </div>
           ))}
         </dl>
