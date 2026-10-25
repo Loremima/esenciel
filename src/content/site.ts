@@ -31,7 +31,7 @@ export const FIRST_MEETING = {
   particulier: {
     label: 'Particulier',
     info: 'Séance individuelle ou cycle en groupe',
-    text: 'Réservez directement votre séance, ou pré-inscrivez-vous à un cycle.',
+    text: 'Réservez directement votre séance individuelle, ou demandez les prochaines dates d’un cycle.',
     cta: 'Choisir mon créneau',
     href: `${SITE.booking}#book`,
   },

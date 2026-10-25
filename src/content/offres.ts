@@ -327,6 +327,8 @@ export type OffreParticulier = {
 
 // Lien direct vers une prestation sutempo (sans effet tant que sutempo ne le gère pas : la page s'ouvre simplement).
 const S = (id: string) => `${SITE.booking}/?service=${id}`;
+// Cycles en groupe : sur demande tant qu'aucune date n'est ouverte sur sutempo.
+const D = (slug: string) => `/contact?profil=particulier&offre=${slug}#formulaire`;
 
 export const particuliers: OffreParticulier[] = [
   {
@@ -350,8 +352,8 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel' },
     ],
     price: '330 € le cycle',
-    booking: S('308f462f-65b4-534d-b97d-cd873c6573d1'),
-    bookingLabel: 'Me pré-inscrire',
+    booking: D('gestion-du-stress'),
+    bookingLabel: 'Demander les prochaines dates',
     image: { src: '/images/vague.webp', alt: 'Une vague maîtrisée par une surfeuse' },
     seo: {
       title: 'Cycle gestion du stress par la pleine conscience (MBSR) | Véronique Carrié',
@@ -379,8 +381,8 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel ou à distance' },
     ],
     price: '330 € le cycle',
-    booking: S('9d3dc0df-daf1-5a3e-8b47-bcb04999b6b6'),
-    bookingLabel: 'Me pré-inscrire',
+    booking: D('prevention-rechute-depressive'),
+    bookingLabel: 'Demander les prochaines dates',
     image: { src: '/images/lever-soleil.webp', alt: 'Lever de soleil sur une étendue d’eau calme' },
     note: 'Ce cycle est une démarche de prévention. Il ne remplace pas un suivi médical : il se fait en dehors des périodes de crise et en accord avec votre médecin si vous êtes suivi.',
     seo: {
@@ -409,8 +411,8 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel' },
     ],
     price: '420 € le cycle',
-    booking: S('5ea9cace-aced-5bb6-a5e4-a622ae76cbcd'),
-    bookingLabel: 'Me pré-inscrire',
+    booking: D('bien-vivre-son-avancee-en-age'),
+    bookingLabel: 'Demander les prochaines dates',
     image: { src: '/images/arbre.webp', alt: 'Un arbre aux racines profondes' },
     seo: {
       title: 'Cycle MBCAS « Bien vivre son avancée en âge » pour seniors | Véronique Carrié',
@@ -498,8 +500,8 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel' },
     ],
     price: '70 € par personne',
-    booking: S('41bb978a-aba7-597b-bb24-f2bef249dca5'),
-    bookingLabel: 'Voir les dates',
+    booking: D('jeu-du-tao'),
+    bookingLabel: 'Demander les prochaines dates',
     image: { src: '/images/jeu-du-tao.webp', alt: 'Plateau du Jeu du Tao' },
     seo: {
       title: 'Jeu du Tao santé et mieux-être en petit groupe | Véronique Carrié',

@@ -30,8 +30,12 @@ function GroupRow({ o }: { o: OffreParticulier }) {
           <span className="mt-1 inline-block font-heading text-lg text-gold-dark">{c.price}</span>
         </span>
       </Link>
-      <a href={o.booking} target="_blank" rel="noopener noreferrer" className="shrink-0 rounded-full bg-night px-4 py-3 text-sm font-semibold text-cream hover:bg-night/90">
-        Réserver
+      <a
+        href={o.booking}
+        {...(o.booking.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        className="shrink-0 rounded-full bg-night px-4 py-3 text-sm font-semibold text-cream hover:bg-night/90"
+      >
+        {o.booking.startsWith('http') ? 'Réserver' : 'Les dates'}
       </a>
     </li>
   );

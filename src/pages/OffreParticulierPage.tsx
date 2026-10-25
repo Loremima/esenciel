@@ -13,6 +13,7 @@ export default function OffreParticulierPage({ offre }: { offre: OffreParticulie
   ];
   const others = particuliers.filter((o) => o.slug !== offre.slug && o.category === offre.category).slice(0, 2);
   const facts = [...offre.facts, { label: 'Tarif', value: offre.price }];
+  const online = offre.booking.startsWith('http');
 
   return (
     <>
@@ -67,8 +68,10 @@ export default function OffreParticulierPage({ offre }: { offre: OffreParticulie
               <FactList facts={facts} />
             </div>
             <div className="rounded-2xl bg-night p-6 text-cream">
-              <p className="font-heading text-xl">Réserver</p>
-              <p className="mt-2 text-cream/80">La réservation se fait en ligne, en quelques clics.</p>
+              <p className="font-heading text-xl">{online ? 'Réserver' : 'Prochaines dates'}</p>
+              <p className="mt-2 text-cream/80">
+                {online ? 'La réservation se fait en ligne, en quelques clics.' : 'Les dates s’ouvrent selon les demandes : laissez-moi un message, je vous préviens.'}
+              </p>
               <Button href={offre.booking} variant="light" className="mt-5 w-full" arrow>{offre.bookingLabel}</Button>
               {offre.followUp && (
                 <a href={offre.followUp.href} target="_blank" rel="noopener noreferrer" className="mt-4 block text-center text-sm text-cream/80 underline underline-offset-4 hover:text-cream">
