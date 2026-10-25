@@ -503,8 +503,9 @@ export const particuliers: OffreParticulier[] = [
       { label: 'Lieu', value: 'En présentiel' },
     ],
     price: '70 € par personne',
-    booking: S('41bb978a-aba7-597b-bb24-f2bef249dca5'),
-    bookingLabel: 'Voir les dates et réserver',
+    // Pas encore de date sur sutempo : sur demande. Quand une session existe, remettre S('41bb978a-aba7-597b-bb24-f2bef249dca5').
+    booking: '/contact?profil=particulier&offre=jeu-du-tao',
+    bookingLabel: 'Demander une date',
     waitlist: true,
     image: { src: '/images/jeu-du-tao.webp', alt: 'Plateau du Jeu du Tao' },
     seo: {
