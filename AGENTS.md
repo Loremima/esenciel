@@ -21,7 +21,7 @@ Ce dépôt est le site esenciel.net de Véronique Carrié (EsenCiel). Véronique
 
 1. `npm install` puis `npm run build` doit réussir (il vérifie les types et prérend toutes les pages).
 2. `npm run lint` ne doit pas signaler d'erreur.
-3. Travaille sur une branche et ouvre une pull request : jamais de push direct sur `main`, car `main` part en ligne tout de suite sur Vercel. La PR donne une adresse de prévisualisation Vercel que Véronique peut regarder sur son téléphone avant de fusionner.
+3. Véronique pousse directement sur `main` (choix validé par Lorenzo). Attention : `main` part en ligne tout de suite sur Vercel, donc ne pousse qu'un changement qui construit sans erreur, et décris-le clairement dans le message de commit. Pour un gros changement, propose plutôt une branche et une pull request, qui donne une adresse d'aperçu Vercel.
 
 ## À ne jamais faire
 
