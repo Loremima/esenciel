@@ -48,7 +48,6 @@ export default function HomePage() {
       />
 
       <Hero
-        kicker={SITE.tagline}
         title={<>Votre cerveau, <em>mode d’emploi.</em></>}
         lead={`${SITE.market}.`}
         actions={
