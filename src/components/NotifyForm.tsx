@@ -40,8 +40,8 @@ export function NotifyForm({ offre, title, message, light }: { offre: string; ti
         </span>
       </label>
       {status === 'error' && <p role="alert" className={`text-sm ${light ? 'text-gold-dark' : 'text-gold-light'}`}>L’envoi n’a pas marché. Appelez-moi ou réessayez.</p>}
-      <button type="submit" disabled={status === 'sending'} className={`w-full rounded-full px-6 py-3 font-medium disabled:opacity-60 ${light ? 'border border-ink/40 text-ink hover:bg-night hover:text-cream' : 'bg-cream text-ink hover:bg-cream-light'}`}>
-        {status === 'sending' ? 'Envoi…' : 'Prévenez-moi des dates'}
+      <button type="submit" disabled={status === 'sending'} className={`w-full rounded-full px-6 py-3 font-medium disabled:opacity-60 ${light ? 'border border-ink/40 text-ink hover:bg-night hover:text-cream' : 'bg-gold text-night hover:bg-gold-light'}`}>
+        {status === 'sending' ? 'Envoi…' : 'Me prévenir'}
       </button>
     </form>
   );

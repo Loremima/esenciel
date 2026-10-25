@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
-import { MainButton, Opening, Part, PhoneLine } from '../components/calm';
+import { Btn, Card, Hero, Kicker, PhoneLine } from '../components/calm';
 import { FIRST_MEETING, SITE } from '../content/site';
 import { ALL_STRUCTURE_OFFERS, particuliers } from '../content/offres';
 import { Seo, breadcrumbLd } from '../lib/head';
@@ -59,24 +59,30 @@ export default function ContactPage() {
         path="/contact"
         jsonLd={[breadcrumbLd(crumbs)]}
       />
-      <Opening title="Me contacter" lead="Le plus simple est de m’appeler. Sinon, écrivez-moi : je réponds sous 48 heures." />
+      <Hero title={<>Parlons-en.</>} lead="Le plus simple est de m’appeler. Sinon, écrivez-moi : je réponds sous 48 heures." crumbs={crumbs} />
 
-      <Part title="Par téléphone">
-        <PhoneLine big />
-        <p className="mt-3">Si je ne décroche pas, laissez un message : je vous rappelle.</p>
-        <p className="mt-2 text-ink-muted">{SITE.zone}, et à distance.</p>
-        {profil === 'structure' && (
-          <div className="mt-8 border-t border-sand-dark pt-8">
-            <p className="font-medium text-ink">Vous êtes une structure ?</p>
-            <p className="mt-1 mb-5">Réservez directement un échange de 20 minutes, gratuit.</p>
-            <MainButton to={FIRST_MEETING.structure.href}>Planifier un échange de 20 min</MainButton>
-          </div>
-        )}
-      </Part>
-
-      <Part id="formulaire" title="Par écrit">
-          <div>
-          <div>
+      <section id="formulaire" className="scroll-mt-20 bg-cream py-16 md:py-24">
+        <div className="container-site grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-16">
+          <aside className="space-y-5">
+            <Card>
+              <Kicker>Par téléphone</Kicker>
+              <p className="mt-3"><PhoneLine big /></p>
+              <p className="mt-2 text-ink-soft">Si je ne décroche pas, laissez un message : je vous rappelle.</p>
+            </Card>
+            <Card dark>
+              <Kicker light>Vous êtes une structure ?</Kicker>
+              <p className="mt-3 text-cream/85">20 minutes au téléphone, gratuites, à réserver en ligne.</p>
+              <div className="mt-5"><Btn to={FIRST_MEETING.structure.href}>Réserver 20 min</Btn></div>
+            </Card>
+            <Card>
+              <Kicker>Particulier ?</Kicker>
+              <p className="mt-3 text-ink-soft">La séance découverte est offerte, en visio.</p>
+              <div className="mt-5"><Btn to={SITE.decouverte} variant="outline">Séance découverte</Btn></div>
+            </Card>
+            <p className="text-ink-muted">{SITE.zone}, et à distance.</p>
+          </aside>
+          <div className="rounded-[2rem] border border-sand-dark bg-cream-light p-6 md:p-10">
+            <h2 className="mb-8 font-heading text-[2rem] font-light text-ink">Par écrit</h2>
             {status === 'sent' ? (
               <div role="status" className="py-10 text-center">
                 <CheckCircle2 aria-hidden className="mx-auto h-12 w-12 text-sage" />
@@ -178,13 +184,13 @@ export default function ContactPage() {
                   disabled={status === 'sending'}
                   className="w-full rounded-full bg-gold px-7 py-4 font-semibold text-night transition-colors hover:bg-gold-light disabled:opacity-60 sm:w-auto"
                 >
-                  {status === 'sending' ? 'Envoi en cours…' : 'Envoyer mon message'}
+                  {status === 'sending' ? 'Envoi en cours…' : 'Envoyer'}
                 </button>
               </form>
             )}
           </div>
-          </div>
-      </Part>
+        </div>
+      </section>
     </>
   );
 }

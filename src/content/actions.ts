@@ -23,3 +23,32 @@ export const LIVRABLES = [
   'Les questionnaires avant et après, et la feuille d’émargement',
   'Un bilan écrit pour votre financeur',
 ];
+
+/** Les trois formats, présentés comme des offres. Prix À VALIDER PAR VÉRONIQUE (voir REPERES_PRIX). */
+export const FORMATS = [
+  {
+    name: 'Conférence',
+    price: '350 €',
+    unit: 'la conférence',
+    pitch: 'Pour lancer la dynamique.',
+    meta: '1 h 30 à 2 h · 15 à 50 personnes',
+    features: ['2 thèmes au choix', 'Une version par public', 'Affiche et texte d’invitation', 'Questionnaire de satisfaction'],
+  },
+  {
+    name: 'Cycle',
+    price: '160 €',
+    unit: 'la séance de 2 h',
+    pitch: 'Pour installer de vraies habitudes.',
+    meta: '6 à 15 séances · 5 à 12 personnes',
+    features: ['Seniors, aidants ou soignants', 'Fiche-action rédigée', 'Évaluation avant et après', 'Bilan écrit pour le financeur'],
+    highlight: 'Le plus complet',
+  },
+  {
+    name: 'Journée équipe',
+    price: '800 €',
+    unit: 'la journée',
+    pitch: 'Pour prévenir l’épuisement des soignants.',
+    meta: '1 jour ou 2 demi-journées · 6 à 12 professionnels',
+    features: ['Sur le temps de travail', 'Dans vos locaux', 'Démarche qualité de vie au travail', 'Bilan écrit'],
+  },
+];

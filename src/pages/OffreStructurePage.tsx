@@ -1,10 +1,11 @@
 import { FIRST_MEETING } from '../content/site';
 import type { OffreStructure } from '../content/offres';
 import { LIVRABLES, actionOf } from '../content/actions';
-import { MainButton, Opening, Part, PhoneLine, Steps, TextLink } from '../components/calm';
+import { Btn, CallBtn, Checks, CtaBand, Hero, Kicker, SideCard, Steps, TextLink } from '../components/calm';
 import { Seo, breadcrumbLd, serviceLd } from '../lib/head';
 
 // Une fiche action répond à une question : « Est-ce la bonne action pour mon public ? »
+// Le contenu à gauche, la carte « Réserver 20 min » à droite.
 
 export default function OffreStructurePage({ offre }: { offre: OffreStructure }) {
   const name = offre.title.replace(/[«»]/g, '').trim();
@@ -16,6 +17,7 @@ export default function OffreStructurePage({ offre }: { offre: OffreStructure })
   const a = actionOf(offre.slug);
   const cps = offre.facts.find((f) => f.label === 'Compétences psychosociales')?.value;
   const rdv = FIRST_MEETING.structure.href;
+  const [price, ...rest] = (a?.prix ?? 'Sur devis').split(/ (?=la |par )|, ou /);
 
   return (
     <>
@@ -29,68 +31,82 @@ export default function OffreStructurePage({ offre }: { offre: OffreStructure })
         ]}
       />
 
-      <Opening crumbs={crumbs} title={offre.title} lead={offre.promise}>
-        <MainButton to={rdv}>Planifier un échange de 20 min</MainButton>
-      </Opening>
-
-      {a && (
-        <section className="border-b border-sand-dark bg-cream">
-          <dl className="container-site grid max-w-[44rem] gap-4 py-8 text-[0.98rem] sm:grid-cols-3">
-            <div><dt className="text-ink-muted">Public</dt><dd className="mt-1 text-ink">{a.publicCible}</dd></div>
-            <div><dt className="text-ink-muted">Format</dt><dd className="mt-1 text-ink">{a.type}, {a.format}</dd></div>
-            <div><dt className="text-ink-muted">Repère de prix</dt><dd className="mt-1 text-ink">{a.prix}</dd></div>
-          </dl>
-        </section>
-      )}
-
-      <Part title="Ce que les participants y gagnent">
-        <ul className="space-y-3">
-          {offre.objectifs.slice(0, 3).map((o) => (
-            <li key={o} className="border-l-2 border-gold pl-4">{o}</li>
-          ))}
-        </ul>
-      </Part>
-
-      <Part title="Le déroulé">
-        <Steps items={offre.deroule} />
-        {offre.declinaisons && (
+      <Hero
+        crumbs={crumbs}
+        kicker={a?.type ?? 'Action de prévention'}
+        title={offre.title}
+        lead={offre.promise}
+        actions={
           <>
-            <p className="mt-8 font-medium text-ink">Une version pour chaque public</p>
-            <dl className="mt-3 space-y-2">
-              {offre.declinaisons.map((d) => (
-                <div key={d.label}><dt className="inline font-medium text-ink">{d.label} : </dt><dd className="inline">{d.value}</dd></div>
-              ))}
-            </dl>
+            <Btn to={rdv}>Réserver 20 min</Btn>
+            <Btn to={`/contact?profil=structure&offre=${offre.slug}`} variant="outline" light>La fiche-action</Btn>
           </>
-        )}
-        {offre.note && <p className="mt-8 text-[0.98rem] text-ink-muted">{offre.note}</p>}
-      </Part>
+        }
+      />
 
-      <Part title="Évaluation et documents remis">
-        <ul className="list-disc space-y-2 pl-5">
-          {LIVRABLES.map((l) => <li key={l}>{l}</li>)}
-        </ul>
-        {cps && (
-          <>
-            <p className="mt-6 font-medium text-ink">Compétences psychosociales travaillées</p>
-            <ul className="mt-2 list-disc space-y-1 pl-5">
-              {cps.split(/\.\s+/).map((c) => c.replace(/\.+$/, '')).filter(Boolean).map((c) => <li key={c}>{c}</li>)}
-            </ul>
-          </>
-        )}
-      </Part>
+      <section className="bg-cream py-16 md:py-24">
+        <div className="container-site grid gap-12 lg:grid-cols-[1fr_22rem] lg:gap-16">
+          <div className="min-w-0 space-y-14 text-[1.06rem] leading-relaxed text-ink-soft">
+            <div>
+              <Kicker>Ce que les participants y gagnent</Kicker>
+              <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+                {offre.objectifs.slice(0, 3).map((o, i) => (
+                  <li key={o} className="rounded-3xl border border-sand-dark bg-cream-light p-5">
+                    <span className="font-heading text-[2rem] leading-none text-gold-dark">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="mt-3 block text-ink">{o}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-      <Part id="rdv" title="Cette action vous intéresse ?">
-        <p>On en parle 20 minutes : votre public, vos dates, votre financement. Je vous envoie ensuite le devis et la fiche-action.</p>
-        <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
-          <MainButton to={rdv}>Planifier un échange de 20 min</MainButton>
-          <PhoneLine />
+            <div>
+              <Kicker>Le déroulé</Kicker>
+              <div className="mt-6"><Steps row two items={offre.deroule} /></div>
+              {offre.declinaisons && (
+                <div className="mt-10 rounded-3xl bg-cream-light p-6">
+                  <p className="font-semibold text-ink">Une version pour chaque public</p>
+                  <dl className="mt-3 space-y-2">
+                    {offre.declinaisons.map((d) => (
+                      <div key={d.label}><dt className="inline font-medium text-ink">{d.label} : </dt><dd className="inline">{d.value}</dd></div>
+                    ))}
+                  </dl>
+                </div>
+              )}
+              {offre.note && <p className="mt-6 text-[0.98rem] text-ink-muted">{offre.note}</p>}
+            </div>
+
+            <div className="grid gap-10 md:grid-cols-2">
+              <div>
+                <Kicker>Ce que vous recevez</Kicker>
+                <div className="mt-5"><Checks items={LIVRABLES} /></div>
+              </div>
+              {cps && (
+                <div>
+                  <Kicker>Compétences psychosociales</Kicker>
+                  <div className="mt-5">
+                    <Checks items={cps.split(/\.\s+/).map((c) => c.replace(/\.+$/, '')).filter(Boolean)} />
+                  </div>
+                </div>
+              )}
+            </div>
+            <p><TextLink to="/structures#actions">Toutes les actions</TextLink></p>
+          </div>
+
+          <SideCard
+            price={price}
+            priceNote={[...rest, 'repère, hors déplacement'].join(' · ')}
+            facts={a ? [{ label: 'Public', value: a.publicCible }, { label: 'Format', value: a.format }] : []}
+            action={
+              <>
+                <Btn to={rdv}>Réserver 20 min</Btn>
+                <CallBtn label="Appeler" />
+              </>
+            }
+          />
         </div>
-        <p className="mt-6 flex flex-col gap-3 sm:flex-row sm:gap-8">
-          <TextLink to={`/contact?profil=structure&offre=${offre.slug}`}>Recevoir la fiche-action par e-mail</TextLink>
-          <TextLink to="/structures#actions">Toutes les actions</TextLink>
-        </p>
-      </Part>
+      </section>
+
+      <CtaBand title="Cette action vous intéresse ?" text="20 minutes pour regarder votre public, vos dates et votre financement. Devis et fiche-action ensuite." primary={{ to: rdv, label: 'Réserver 20 min' }} />
     </>
   );
 }

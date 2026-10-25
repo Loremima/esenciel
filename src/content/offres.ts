@@ -353,7 +353,7 @@ export const particuliers: OffreParticulier[] = [
     ],
     price: '330 € le cycle',
     booking: SITE.decouverte,
-    bookingLabel: 'Réserver une séance découverte',
+    bookingLabel: 'Séance découverte',
     waitlist: true,
     image: { src: '/images/vague.webp', alt: 'Une vague maîtrisée par une surfeuse' },
     seo: {
@@ -383,7 +383,7 @@ export const particuliers: OffreParticulier[] = [
     ],
     price: '330 € le cycle',
     booking: SITE.decouverte,
-    bookingLabel: 'Réserver une séance découverte',
+    bookingLabel: 'Séance découverte',
     waitlist: true,
     image: { src: '/images/lever-soleil.webp', alt: 'Lever de soleil sur une étendue d’eau calme' },
     note: 'Ce cycle est une démarche de prévention. Il ne remplace pas un suivi médical : il se fait en dehors des périodes de crise et en accord avec votre médecin si vous êtes suivi.',
@@ -414,7 +414,7 @@ export const particuliers: OffreParticulier[] = [
     ],
     price: '420 € le cycle',
     booking: SITE.decouverte,
-    bookingLabel: 'Réserver une séance découverte',
+    bookingLabel: 'Séance découverte',
     waitlist: true,
     image: { src: '/images/arbre.webp', alt: 'Un arbre aux racines profondes' },
     seo: {
@@ -444,8 +444,8 @@ export const particuliers: OffreParticulier[] = [
     ],
     price: '90 € la première séance, puis 60 €',
     booking: S('4773db06-b14b-5da8-bebb-2a498f8b1bc0'),
-    bookingLabel: 'Réserver la première séance',
-    followUp: { label: 'Réserver une séance de suivi', href: S('32a576a0-ba10-5e78-9454-e982edfba4bf') },
+    bookingLabel: 'Réserver',
+    followUp: { label: 'Séance de suivi', href: S('32a576a0-ba10-5e78-9454-e982edfba4bf') },
     image: { src: '/images/coucher-soleil.webp', alt: 'Coucher de soleil sur les collines' },
     seo: {
       title: 'Accompagnement individuel santé et vitalité | Véronique Carrié',
@@ -474,8 +474,8 @@ export const particuliers: OffreParticulier[] = [
     ],
     price: '90 € la première séance, puis 60 €',
     booking: S('e802cf69-f709-51d5-ae99-b300615737d8'),
-    bookingLabel: 'Réserver la première séance',
-    followUp: { label: 'Réserver une séance de suivi', href: S('ced6b624-a871-5f74-b8f2-5740bd46c69f') },
+    bookingLabel: 'Réserver',
+    followUp: { label: 'Séance de suivi', href: S('ced6b624-a871-5f74-b8f2-5740bd46c69f') },
     image: { src: '/images/pas-sable.webp', alt: 'Des pas lents sur le sable mouillé' },
     seo: {
       title: 'Initiation individuelle à la pleine conscience | Véronique Carrié',
